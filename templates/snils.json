@@ -1,0 +1,10 @@
+{
+  "number": "Страховой номер (XXX-XXX-XXX XX)",
+  "surname": "Фамилия",
+  "name": "Имя",
+  "patronymic": "Отчество",
+  "date_of_birth": "DD.MM.YYYY",
+  "place_of_birth": "Место рождения",
+  "gender": "Пол (мужской/женский)",
+  "registration_date": "Дата регистрации в системе"
+}

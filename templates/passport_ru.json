@@ -1,0 +1,17 @@
+{
+  "series": "4 цифры",
+  "number": "6 цифр",
+  "surname": "Фамилия",
+  "name": "Имя",
+  "patronymic": "Отчество",
+  "gender": "МУЖ/ЖЕН",
+  "date_of_birth": "DD.MM.YYYY",
+  "place_of_birth": "Место рождения",
+  "issued_by": "Наименование органа, выдавшего паспорт",
+  "date_of_issue": "DD.MM.YYYY",
+  "division_code": "Код подразделения (XXX-XXX)",
+  "mrz": {
+    "line1": "Первая строка машиночитаемой зоны",
+    "line2": "Вторая строка машиночитаемой зоны"
+  }
+}

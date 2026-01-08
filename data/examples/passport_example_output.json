@@ -1,0 +1,17 @@
+{
+  "series": "6525",
+  "number": "274789",
+  "surname": "МАЛЫШЕВ",
+  "name": "ГЕОРГИЙ",
+  "patronymic": "ВАЛЕНТИНОВИЧ",
+  "gender": "МУЖ",
+  "date_of_birth": "07.03.2005",
+  "place_of_birth": "Г. УФА РЕСП. БАШКОРТОСТАН РОССИЯ",
+  "issued_by": "ГУ МВД РОССИИ ПО СВЕРДЛОВСКОЙ ОБЛАСТИ",
+  "date_of_issue": "28.05.2025",
+  "division_code": "660-001",
+  "mrz": {
+    "line1": "PNRUSMALY4EV<<GEORGIQ<VALENTINOVI3<<<<<<<<<<",
+    "line2": "6522747890RUS0503073M<<<<<<<5250528660001<02"
+  }
+}

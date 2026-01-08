@@ -4,6 +4,7 @@ import re
 import string
 from pathlib import Path
 from datetime import datetime
+from difflib import SequenceMatcher
 
 # Настройки
 BASE_DIR = Path(__file__).parent.parent
@@ -39,9 +40,12 @@ def calculate_metrics(reference, candidate):
     cand_flat = flatten_dict(candidate)
     
     all_keys = set(ref_flat.keys()) | set(cand_flat.keys())
-    tp = 0 
-    fp = 0 
-    fn = 0 
+    
+    # Strict (Raw) Counters
+    tp_raw = 0; fp_raw = 0; fn_raw = 0
+    
+    # Clean (Fuzzy) Counters
+    tp_clean = 0; fp_clean = 0; fn_clean = 0
     
     comparison = []
 
@@ -52,32 +56,70 @@ def calculate_metrics(reference, candidate):
         ref_val = normalize_string(ref_raw)
         cand_val = normalize_string(cand_raw)
         
-        status = "unknown"
-        match_type = "neutral" # for coloring: match, mismatch, extra, missing
+        # --- Strict Match Logic (Raw) ---
+        is_strict_match = False
+        if ref_val == cand_val:
+            is_strict_match = True
+        elif not ref_val and not cand_val:
+             is_strict_match = True # Both empty
 
-        if ref_val and cand_val:
-            if ref_val == cand_val:
-                tp += 1
-                status = "Match"
-                match_type = "match"
-            else:
-                fp += 1
-                fn += 1
-                status = "Mismatch"
-                match_type = "mismatch"
+        if is_strict_match:
+            tp_raw += 1
+        else:
+            # If mismatch
+            if ref_val and cand_val:
+                fp_raw += 1; fn_raw += 1
+            elif ref_val and not cand_val:
+                fn_raw += 1
+            elif not ref_val and cand_val:
+                fp_raw += 1
+        
+        # --- Fuzzy Match Logic (Clean) ---
+        # "Fuzzy 85% for numbers/codes" - we apply to all fields for simplicity/robustness
+        is_clean_match = False
+        similarity = 0.0
+        
+        if is_strict_match:
+            is_clean_match = True
+            similarity = 1.0
+        elif ref_val and cand_val:
+            similarity = SequenceMatcher(None, ref_val, cand_val).ratio()
+            if similarity >= 0.85:
+                is_clean_match = True
+        elif not ref_val and not cand_val:
+            is_clean_match = True
+            similarity = 1.0
+            
+        if is_clean_match:
+            tp_clean += 1
+        else:
+             if ref_val and cand_val:
+                fp_clean += 1; fn_clean += 1
+             elif ref_val and not cand_val:
+                fn_clean += 1
+             elif not ref_val and cand_val:
+                fp_clean += 1
+                
+        # Status for Display
+        status = "unknown"
+        match_type = "neutral"
+        
+        if is_strict_match:
+            if not ref_val: status = "Match (Empty)"
+            else: status = "Match (Exact)"
+            match_type = "match"
+        elif is_clean_match:
+            status = f"Match (Fuzzy {int(similarity*100)}%)"
+            match_type = "match" # Considered a match in Clean metrics
+        elif ref_val and cand_val:
+            status = f"Mismatch (Sim: {int(similarity*100)}%)"
+            match_type = "mismatch"
         elif ref_val and not cand_val:
-            fn += 1
-            status = "Missing in Candidate"
+            status = "Missing"
             match_type = "missing"
         elif not ref_val and cand_val:
-            fp += 1
-            status = "Extra in Candidate"
+            status = "Extra"
             match_type = "extra"
-        else:
-             # Both are empty/falsy -> This is a correct match for "empty"
-             tp += 1
-             status = "Match (Empty)"
-             match_type = "match"
 
         comparison.append({
             "key": key,
@@ -87,18 +129,25 @@ def calculate_metrics(reference, candidate):
             "type": match_type
         })
 
+    def calc_stats(tp, fp, fn, total):
+        acc = tp / total if total > 0 else 0
+        prec = tp / (tp + fp) if (tp + fp) > 0 else 0
+        rec = tp / (tp + fn) if (tp + fn) > 0 else 0
+        f1 = 2 * (prec * rec) / (prec + rec) if (prec + rec) > 0 else 0
+        return round(acc, 2), round(prec, 2), round(rec, 2), round(f1, 2)
+
     total_keys = len(all_keys)
-    accuracy = tp / total_keys if total_keys > 0 else 0
     
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    acc_raw, prec_raw, rec_raw, f1_raw = calc_stats(tp_raw, fp_raw, fn_raw, total_keys)
+    acc_clean, prec_clean, rec_clean, f1_clean = calc_stats(tp_clean, fp_clean, fn_clean, total_keys)
     
     return {
-        "accuracy": round(accuracy, 2),
-        "precision": round(precision, 2),
-        "recall": round(recall, 2),
-        "f1": round(f1, 2),
+        "raw": {
+            "accuracy": acc_raw, "precision": prec_raw, "recall": rec_raw, "f1": f1_raw
+        },
+        "clean": {
+             "accuracy": acc_clean, "precision": prec_clean, "recall": rec_clean, "f1": f1_clean
+        },
         "comparison": comparison
     }
 
@@ -114,24 +163,27 @@ def generate_html_report(all_results):
     for doc, res_list in all_results.items():
         for res in res_list:
             m_name = res['model']
+            metrics = res['metrics']
+            
             if m_name not in model_stats:
-                model_stats[m_name] = {"accs": [], "times": []}
-            model_stats[m_name]["accs"].append(res['metrics']['accuracy'])
+                model_stats[m_name] = {"clean_f1s": [], "times": []}
+            
+            # Using Clean F1 for the main chart as it represents "LLM Success"
+            model_stats[m_name]["clean_f1s"].append(metrics['clean']['f1'])
             model_stats[m_name]["times"].append(res.get('elapsed', 0))
             
             flat_results.append({
                 "model": m_name,
                 "document": doc,
-                "accuracy": res['metrics']['accuracy'],
-                "precision": res['metrics']['precision'],
-                "recall": res['metrics']['recall'],
-                "f1": res['metrics']['f1'],
+                "raw_f1": metrics['raw']['f1'],
+                "clean_f1": metrics['clean']['f1'],
+                "clean_acc": metrics['clean']['accuracy'],
                 "time": res.get('elapsed', 0)
             })
 
     # Prepare Chart Data
     labels = doc_names
-    datasets_acc = []
+    datasets_f1 = []
     avg_times = []
     model_labels = []
     
@@ -145,9 +197,9 @@ def generate_html_report(all_results):
     i = 0
     for m_name, stats in model_stats.items():
         color = colors[i % len(colors)]
-        datasets_acc.append({
+        datasets_f1.append({
             "label": m_name,
-            "data": stats["accs"],
+            "data": stats["clean_f1s"],
             "backgroundColor": color
         })
         avg_time = sum(stats["times"]) / len(stats["times"]) if stats["times"] else 0
@@ -170,6 +222,8 @@ def generate_html_report(all_results):
             th {{ background-color: #f8f9fa; font-weight: 600; }}
             tr:last-child td {{ border-bottom: none; }}
             .metric {{ font-weight: bold; color: #2a52be; }}
+            .metric-raw {{ color: #d63384; }} /* Pink/Red for Raw/Strict */
+            .metric-clean {{ color: #198754; }} /* Green for Clean/Fuzzy */
             
             /* Comparison Table Styles */
             .match {{ background-color: #d4edda; color: #155724; }}
@@ -190,6 +244,8 @@ def generate_html_report(all_results):
     <body>
         <div class="container">
             <h1>Benchmark Report - {timestamp}</h1>
+            <p><strong>Clean F1 (Green):</strong> Success of LLM (Fuzzy Match > 85%). <br>
+            <strong>Raw F1 (Pink):</strong> Exact Match (OCR Quality Indicator).</p>
 
             <div class="chart-container">
                 <canvas id="accChart"></canvas>
@@ -209,12 +265,11 @@ def generate_html_report(all_results):
         html += """
         <table>
             <tr>
-                <th style="width: 15%">Model</th>
-                <th style="width: 8%">Acc</th>
-                <th style="width: 8%">Prec</th>
-                <th style="width: 8%">Rec</th>
-                <th style="width: 8%">F1</th>
-                <th style="width: 8%">Time (s)</th>
+                <th style="width: 20%">Model</th>
+                <th style="width: 10%">Clean F1 (LLM)</th>
+                <th style="width: 10%">Raw F1 (OCR)</th>
+                <th style="width: 10%">Clean Acc</th>
+                <th style="width: 10%">Time (s)</th>
                 <th>Field Analysis</th>
             </tr>
         """
@@ -235,10 +290,9 @@ def generate_html_report(all_results):
             html += f"""
             <tr>
                 <td><strong>{res['model']}</strong></td>
-                <td class="metric">{m['accuracy']}</td>
-                <td>{m['precision']}</td>
-                <td>{m['recall']}</td>
-                <td>{m['f1']}</td>
+                <td class="metric metric-clean">{m['clean']['f1']}</td>
+                <td class="metric metric-raw">{m['raw']['f1']}</td>
+                <td>{m['clean']['accuracy']}</td>
                 <td>{res.get('elapsed', 0)}</td>
                 <td>
                     <details>
@@ -270,10 +324,9 @@ def generate_html_report(all_results):
                 <tr>
                     <th>Rank</th>
                     <th>Model</th>
-                    <th>Avg Accuracy</th>
-                    <th>Avg Precision</th>
-                    <th>Avg Recall</th>
-                    <th>Avg F1-Score</th>
+                    <th>Avg Clean F1 (LLM Success)</th>
+                    <th>Avg Raw F1 (OCR Quality)</th>
+                    <th>Avg Clean Acc</th>
                     <th>Avg Time (s)</th>
                 </tr>
     """
@@ -285,19 +338,17 @@ def generate_html_report(all_results):
         if m_name not in model_aggregates:
             model_aggregates[m_name] = {
                 "count": 0,
-                "accuracy": 0.0,
-                "precision": 0.0,
-                "recall": 0.0,
-                "f1": 0.0,
+                "clean_f1": 0.0,
+                "raw_f1": 0.0,
+                "clean_acc": 0.0,
                 "time": 0.0
             }
         
         agg = model_aggregates[m_name]
         agg["count"] += 1
-        agg["accuracy"] += res['accuracy']
-        agg["precision"] += res['precision']
-        agg["recall"] += res['recall']
-        agg["f1"] += res['f1']
+        agg["clean_f1"] += res['clean_f1']
+        agg["raw_f1"] += res['raw_f1']
+        agg["clean_acc"] += res['clean_acc']
         agg["time"] += res['time']
 
     # Calculate averages
@@ -307,25 +358,23 @@ def generate_html_report(all_results):
         if count > 0:
             summary_list.append({
                 "model": m_name,
-                "avg_accuracy": round(agg["accuracy"] / count, 2),
-                "avg_precision": round(agg["precision"] / count, 2),
-                "avg_recall": round(agg["recall"] / count, 2),
-                "avg_f1": round(agg["f1"] / count, 2),
+                "avg_clean_f1": round(agg["clean_f1"] / count, 2),
+                "avg_raw_f1": round(agg["raw_f1"] / count, 2),
+                "avg_clean_acc": round(agg["clean_acc"] / count, 2),
                 "avg_time": round(agg["time"] / count, 2)
             })
 
-    # Sort by Avg Accuracy DESC
-    sorted_summary = sorted(summary_list, key=lambda x: x['avg_accuracy'], reverse=True)
+    # Sort by Avg Clean F1 DESC
+    sorted_summary = sorted(summary_list, key=lambda x: x['avg_clean_f1'], reverse=True)
     
     for idx, row in enumerate(sorted_summary, 1):
         html += f"""
         <tr>
             <td>{idx}</td>
             <td>{row['model']}</td>
-            <td class="metric">{row['avg_accuracy']}</td>
-            <td>{row['avg_precision']}</td>
-            <td>{row['avg_recall']}</td>
-            <td>{row['avg_f1']}</td>
+            <td class="metric metric-clean">{row['avg_clean_f1']}</td>
+            <td class="metric metric-raw">{row['avg_raw_f1']}</td>
+            <td>{row['avg_clean_acc']}</td>
             <td>{row['avg_time']}</td>
         </tr>
         """
@@ -343,13 +392,13 @@ def generate_html_report(all_results):
                 type: 'bar',
                 data: {{
                     labels: {json.dumps(labels)},
-                    datasets: {json.dumps(datasets_acc)}
+                    datasets: {json.dumps(datasets_f1)}
                 }},
                 options: {{
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {{
-                        title: {{ display: true, text: 'Accuracy by Model per Document' }}
+                        title: {{ display: true, text: 'Clean F1 Score (LLM Success) by Model' }}
                     }},
                     scales: {{
                         y: {{ beginAtZero: true, max: 1.0 }}
@@ -423,7 +472,6 @@ def main():
     for data in results_data:
         doc_name = data.get("doc_name")
         if not doc_name or doc_name not in references:
-             # Fallback or skip if doc_name is missing/unknown (shouldn't happen with new script)
              continue
              
         model_name = data.get("model", "unknown")

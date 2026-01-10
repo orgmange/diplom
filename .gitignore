@@ -1,6 +1,3 @@
 __pycache__/
-*.pyc
-reports/
-data/ocr/
 data/images/
 .gemini/

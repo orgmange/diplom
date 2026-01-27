@@ -26,6 +26,8 @@ def normalize_string(s):
 def flatten_dict(d, parent_key='', sep='_'):
     """Преобразует вложенный словарь в плоский."""
     items = []
+    if d is None:
+        return {}
     for k, v in d.items():
         new_key = f"{parent_key}{sep}{k}" if parent_key else k
         if isinstance(v, dict):
@@ -37,7 +39,7 @@ def flatten_dict(d, parent_key='', sep='_'):
 def calculate_metrics(reference, candidate):
     """Считает метрики и генерирует детальное сравнение полей."""
     ref_flat = flatten_dict(reference)
-    cand_flat = flatten_dict(candidate)
+    cand_flat = flatten_dict(candidate) if candidate else {}
     
     all_keys = set(ref_flat.keys()) | set(cand_flat.keys())
     
@@ -154,58 +156,37 @@ def calculate_metrics(reference, candidate):
 def generate_html_report(all_results):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    model_stats = {}
     doc_names = sorted(list(all_results.keys()))
     
-    # Collect data for charts and summary
-    flat_results = []
-
+    # 1. RAG vs No-RAG Comparison Data
+    # Structure: model_name -> { "rag": float, "no_rag": float }
+    rag_comparison_data = {}
+    
     for doc, res_list in all_results.items():
         for res in res_list:
             m_name = res['model']
-            metrics = res['metrics']
+            use_rag = res.get('use_rag', False)
+            f1_score = res['metrics']['clean']['f1']
             
-            if m_name not in model_stats:
-                model_stats[m_name] = {"clean_f1s": [], "times": []}
+            if m_name not in rag_comparison_data:
+                rag_comparison_data[m_name] = {"rag_scores": [], "no_rag_scores": []}
             
-            # Using Clean F1 for the main chart as it represents "LLM Success"
-            model_stats[m_name]["clean_f1s"].append(metrics['clean']['f1'])
-            model_stats[m_name]["times"].append(res.get('elapsed', 0))
-            
-            flat_results.append({
-                "model": m_name,
-                "document": doc,
-                "raw_f1": metrics['raw']['f1'],
-                "clean_f1": metrics['clean']['f1'],
-                "clean_acc": metrics['clean']['accuracy'],
-                "time": res.get('elapsed', 0)
-            })
+            if use_rag:
+                rag_comparison_data[m_name]["rag_scores"].append(f1_score)
+            else:
+                rag_comparison_data[m_name]["no_rag_scores"].append(f1_score)
 
-    # Prepare Chart Data
-    labels = doc_names
-    datasets_f1 = []
-    avg_times = []
-    model_labels = []
+    # Calculate averages
+    rag_labels = []
+    rag_means = []
+    no_rag_means = []
     
-    colors = [
-        'rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 
-        'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 
-        'rgba(153, 102, 255, 0.7)', 'rgba(255, 159, 64, 0.7)',
-        'rgba(199, 199, 199, 0.7)'
-    ]
-    
-    i = 0
-    for m_name, stats in model_stats.items():
-        color = colors[i % len(colors)]
-        datasets_f1.append({
-            "label": m_name,
-            "data": stats["clean_f1s"],
-            "backgroundColor": color
-        })
-        avg_time = sum(stats["times"]) / len(stats["times"]) if stats["times"] else 0
-        avg_times.append(avg_time)
-        model_labels.append(m_name)
-        i += 1
+    for m_name, data in rag_comparison_data.items():
+        rag_labels.append(m_name)
+        rag_avg = sum(data["rag_scores"]) / len(data["rag_scores"]) if data["rag_scores"] else 0
+        no_rag_avg = sum(data["no_rag_scores"]) / len(data["no_rag_scores"]) if data["no_rag_scores"] else 0
+        rag_means.append(round(rag_avg, 2))
+        no_rag_means.append(round(no_rag_avg, 2))
 
     html = f"""
     <html>
@@ -216,14 +197,17 @@ def generate_html_report(all_results):
             body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #f4f4f9; color: #333; }}
             h1, h2, h3 {{ color: #444; }}
             .container {{ max-width: 1400px; margin: 0 auto; }}
-            .chart-container {{ position: relative; height: 350px; width: 100%; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+            .chart-container {{ position: relative; height: 400px; width: 100%; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
             table {{ border-collapse: collapse; width: 100%; margin-bottom: 20px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
             th, td {{ padding: 10px 12px; text-align: left; border-bottom: 1px solid #ddd; vertical-align: top; }}
             th {{ background-color: #f8f9fa; font-weight: 600; }}
             tr:last-child td {{ border-bottom: none; }}
             .metric {{ font-weight: bold; color: #2a52be; }}
-            .metric-raw {{ color: #d63384; }} /* Pink/Red for Raw/Strict */
-            .metric-clean {{ color: #198754; }} /* Green for Clean/Fuzzy */
+            .metric-raw {{ color: #d63384; }}
+            .metric-clean {{ color: #198754; }}
+            .rag-tag {{ display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }}
+            .rag-on {{ background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }}
+            .rag-off {{ background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }}
             
             /* Comparison Table Styles */
             .match {{ background-color: #d4edda; color: #155724; }}
@@ -244,15 +228,9 @@ def generate_html_report(all_results):
     <body>
         <div class="container">
             <h1>Benchmark Report - {timestamp}</h1>
-            <p><strong>Clean F1 (Green):</strong> Success of LLM (Fuzzy Match > 85%). <br>
-            <strong>Raw F1 (Pink):</strong> Exact Match (OCR Quality Indicator).</p>
-
-            <div class="chart-container">
-                <canvas id="accChart"></canvas>
-            </div>
             
             <div class="chart-container">
-                <canvas id="timeChart"></canvas>
+                <canvas id="ragChart"></canvas>
             </div>
 
             <hr>
@@ -261,20 +239,25 @@ def generate_html_report(all_results):
     # Per Document Section
     for doc_name in doc_names:
         results = all_results[doc_name]
+        # Sort results: Model name -> RAG false -> RAG true
+        results.sort(key=lambda x: (x['model'], x.get('use_rag', False)))
+        
         html += f"<h2>Document: {doc_name}</h2>"
         html += """
         <table>
             <tr>
-                <th style="width: 20%">Model</th>
+                <th style="width: 15%">Model</th>
+                <th style="width: 10%">Mode</th>
                 <th style="width: 10%">Clean F1 (LLM)</th>
                 <th style="width: 10%">Raw F1 (OCR)</th>
-                <th style="width: 10%">Clean Acc</th>
                 <th style="width: 10%">Time (s)</th>
                 <th>Field Analysis</th>
             </tr>
         """
         for res in results:
             m = res['metrics']
+            use_rag = res.get('use_rag', False)
+            rag_html = '<span class="rag-tag rag-on">RAG</span>' if use_rag else '<span class="rag-tag rag-off">No-RAG</span>'
             
             comp_rows = ""
             for row in m['comparison']:
@@ -290,10 +273,10 @@ def generate_html_report(all_results):
             html += f"""
             <tr>
                 <td><strong>{res['model']}</strong></td>
+                <td>{rag_html}</td>
                 <td class="metric metric-clean">{m['clean']['f1']}</td>
                 <td class="metric metric-raw">{m['raw']['f1']}</td>
-                <td>{m['clean']['accuracy']}</td>
-                <td>{res.get('elapsed', 0)}</td>
+                <td>{res.get('elapsed', 0):.2f}</td>
                 <td>
                     <details>
                         <summary>Show Comparison</summary>
@@ -322,60 +305,22 @@ def generate_html_report(all_results):
             <h2>Global Summary (Average Across All Documents)</h2>
             <table>
                 <tr>
-                    <th>Rank</th>
                     <th>Model</th>
-                    <th>Avg Clean F1 (LLM Success)</th>
-                    <th>Avg Raw F1 (OCR Quality)</th>
-                    <th>Avg Clean Acc</th>
-                    <th>Avg Time (s)</th>
+                    <th>Avg Clean F1 (No-RAG)</th>
+                    <th>Avg Clean F1 (RAG)</th>
+                    <th>Gain</th>
                 </tr>
     """
     
-    # Aggregate results by model
-    model_aggregates = {}
-    for res in flat_results:
-        m_name = res['model']
-        if m_name not in model_aggregates:
-            model_aggregates[m_name] = {
-                "count": 0,
-                "clean_f1": 0.0,
-                "raw_f1": 0.0,
-                "clean_acc": 0.0,
-                "time": 0.0
-            }
-        
-        agg = model_aggregates[m_name]
-        agg["count"] += 1
-        agg["clean_f1"] += res['clean_f1']
-        agg["raw_f1"] += res['raw_f1']
-        agg["clean_acc"] += res['clean_acc']
-        agg["time"] += res['time']
-
-    # Calculate averages
-    summary_list = []
-    for m_name, agg in model_aggregates.items():
-        count = agg["count"]
-        if count > 0:
-            summary_list.append({
-                "model": m_name,
-                "avg_clean_f1": round(agg["clean_f1"] / count, 2),
-                "avg_raw_f1": round(agg["raw_f1"] / count, 2),
-                "avg_clean_acc": round(agg["clean_acc"] / count, 2),
-                "avg_time": round(agg["time"] / count, 2)
-            })
-
-    # Sort by Avg Clean F1 DESC
-    sorted_summary = sorted(summary_list, key=lambda x: x['avg_clean_f1'], reverse=True)
-    
-    for idx, row in enumerate(sorted_summary, 1):
+    for i, model in enumerate(rag_labels):
+        gain = rag_means[i] - no_rag_means[i]
+        gain_color = "green" if gain >= 0 else "red"
         html += f"""
         <tr>
-            <td>{idx}</td>
-            <td>{row['model']}</td>
-            <td class="metric metric-clean">{row['avg_clean_f1']}</td>
-            <td class="metric metric-raw">{row['avg_raw_f1']}</td>
-            <td>{row['avg_clean_acc']}</td>
-            <td>{row['avg_time']}</td>
+            <td>{model}</td>
+            <td>{no_rag_means[i]}</td>
+            <td>{rag_means[i]}</td>
+            <td style="color: {gain_color}; font-weight: bold;">{gain:+.2f}</td>
         </tr>
         """
     
@@ -387,41 +332,36 @@ def generate_html_report(all_results):
     html += f"""
         </div>
         <script>
-            const ctxAcc = document.getElementById('accChart').getContext('2d');
-            new Chart(ctxAcc, {{
+            const ctxRag = document.getElementById('ragChart').getContext('2d');
+            new Chart(ctxRag, {{
                 type: 'bar',
                 data: {{
-                    labels: {json.dumps(labels)},
-                    datasets: {json.dumps(datasets_f1)}
+                    labels: {json.dumps(rag_labels)},
+                    datasets: [
+                        {{
+                            label: 'No-RAG (Avg Clean F1)',
+                            data: {json.dumps(no_rag_means)},
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }},
+                        {{
+                            label: 'RAG (Avg Clean F1)',
+                            data: {json.dumps(rag_means)},
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }}
+                    ]
                 }},
                 options: {{
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {{
-                        title: {{ display: true, text: 'Clean F1 Score (LLM Success) by Model' }}
+                        title: {{ display: true, text: 'RAG vs No-RAG Performance Impact' }}
                     }},
                     scales: {{
                         y: {{ beginAtZero: true, max: 1.0 }}
-                    }}
-                }}
-            }});
-
-            const ctxTime = document.getElementById('timeChart').getContext('2d');
-            new Chart(ctxTime, {{
-                type: 'bar',
-                data: {{
-                    labels: {json.dumps(model_labels)},
-                    datasets: [{{
-                        label: 'Average Execution Time (s)',
-                        data: {json.dumps(avg_times)},
-                        backgroundColor: 'rgba(75, 192, 192, 0.7)'
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {{
-                        title: {{ display: true, text: 'Average Execution Time per Model (Seconds)' }}
                     }}
                 }}
             }});
@@ -470,19 +410,21 @@ def main():
             return
 
     for data in results_data:
-        doc_name = data.get("doc_name")
+        doc_name = data.get("document") # Note: Key changed from "doc_name" to "document" in inference script
         if not doc_name or doc_name not in references:
              continue
              
         model_name = data.get("model", "unknown")
-        parsed_json = data.get("parsed_json", {})
+        parsed_json = data.get("predicted_data", {}) # Note: Key changed to "predicted_data"
+        use_rag = data.get("use_rag", False)
         
         metrics_data = calculate_metrics(references[doc_name], parsed_json)
         
         res_entry = {
             "model": model_name,
+            "use_rag": use_rag,
             "metrics": metrics_data,
-            "elapsed": data.get("elapsed", 0)
+            "elapsed": data.get("duration_seconds", 0) # Note: Key changed
         }
 
         if doc_name not in all_results:

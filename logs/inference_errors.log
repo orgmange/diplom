@@ -1,1 +1,138 @@
 [2026-01-08 21:02:25.147474] qwen2.5:1.5b - паспорт мой.png - Exception: 404 Client Error: Not Found for url: http://192.168.0.15:11434/api/generate
+[2026-01-26 14:11:01.781729] gemma3:1b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b097ce0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.782071] qwen2.5:1.5b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bc4a0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.782429] ministral-3:3b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bcb30>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.782801] gemma3:4b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bd1f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.783224] ministral:8b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e63418530>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.783546] qwen2.5:7b - prava2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0977d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.784218] gemma3:1b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bc4a0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.784554] qwen2.5:1.5b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bdd90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.784873] ministral-3:3b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0be6c0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.785301] gemma3:4b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b097aa0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.785670] ministral:8b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0be1e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.785992] qwen2.5:7b - svid2.jpeg - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bdd90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.786628] gemma3:1b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bcd70>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.787022] qwen2.5:1.5b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bd6d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.787566] ministral-3:3b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b097fe0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.787983] gemma3:4b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0befc0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.788389] ministral:8b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bc080>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:11:01.788782] qwen2.5:7b - snils2.png - Exception: HTTPConnectionPool(host='127.0.0.1', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e3b0bdb50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2026-01-26 14:19:08.360537] gemma3:1b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.365139] qwen2.5:1.5b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.372897] ministral-3:3b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.377795] gemma3:4b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.382041] ministral:8b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.384113] qwen2.5:7b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.386047] gemma3:1b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.386999] qwen2.5:1.5b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.387942] ministral-3:3b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.388812] gemma3:4b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.389717] ministral:8b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.390730] qwen2.5:7b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.392563] gemma3:1b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.393618] qwen2.5:1.5b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.394682] ministral-3:3b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.395617] gemma3:4b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.396568] ministral:8b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.397573] qwen2.5:7b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.399485] gemma3:1b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.400520] qwen2.5:1.5b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.401462] ministral-3:3b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.402414] gemma3:4b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.403521] ministral:8b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:19:08.404526] qwen2.5:7b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.369450] gemma3:1b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.371343] qwen2.5:1.5b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.372385] ministral-3:3b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.373447] gemma3:4b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.374483] ministral:8b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.375461] qwen2.5:7b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.377600] gemma3:1b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.378594] qwen2.5:1.5b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.379596] ministral-3:3b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.380636] gemma3:4b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.381646] ministral:8b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.382615] qwen2.5:7b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.384887] gemma3:1b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.385899] qwen2.5:1.5b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.386882] ministral-3:3b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.387894] gemma3:4b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.388898] ministral:8b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.389845] qwen2.5:7b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.391797] gemma3:1b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.392762] qwen2.5:1.5b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.393758] ministral-3:3b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.394687] gemma3:4b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.395615] ministral:8b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:43:02.396718] qwen2.5:7b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:47:28.561053] qwen2.5:1.5b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:05.936567] ministral:8b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:05.938508] qwen2.5:7b - passport2.jpg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:07.834035] qwen2.5:1.5b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:19.271298] ministral:8b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:19.273445] qwen2.5:7b - prava2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:21.936569] qwen2.5:1.5b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:30.894623] ministral:8b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:30.896998] qwen2.5:7b - svid2.jpeg - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:32.943349] qwen2.5:1.5b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:40.426461] ministral:8b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 14:50:40.428607] qwen2.5:7b - snils2.png - Exception: 404 Client Error: Not Found for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 15:22:23.419875] ministral-3:3b - prava2.png - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 15:22:41.477351] gemma3:4b - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-26 15:24:14.636794] qwen3:4b - passport2.jpg - JSON Parse Error
+Raw Response: {}
+
+[2026-01-26 15:29:59.304151] ministral-3:8b - passport2.jpg - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-26 15:33:06.006496] qwen3:8b - passport2.jpg - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 10:25:08.907558] gemma3:1b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 11:35:52.042588] gemma3:1b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 11:38:15.559063] qwen3:1.7b (No-RAG) - prava2.png - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 11:42:44.820981] qwen3:4b (RAG) - prava2.png - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 11:49:20.036083] qwen3:8b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 11:52:06.891189] qwen3:8b (RAG) - snils2.png - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 13:12:00.881661] gemma3:1b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 13:12:09.829812] qwen3:1.7b (No-RAG) - passport2.jpg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 13:14:24.356535] qwen3:1.7b (No-RAG) - prava2.png - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 13:16:58.797319] qwen3:1.7b (RAG) - snils2.png - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 13:17:28.578411] gemma3:4b (RAG) - prava2.png - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 13:18:41.027164] qwen3:4b (RAG) - passport2.jpg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 13:25:27.828500] ministral-3:8b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 14:32:39.174942] qwen3:1.7b (RAG) - passport2.jpg - Exception: HTTPConnectionPool(host='172.26.208.1', port=11434): Read timed out. (read timeout=120)
+[2026-01-27 14:33:59.338513] ministral-3:3b (No-RAG) - passport2.jpg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 14:34:29.102043] gemma3:4b (RAG) - prava2.png - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 14:44:08.386472] ministral-3:8b (RAG) - prava2.png - JSON Parse Error
+Raw Response: [PREFIX][/THINK]<pad><SPECIAL_22>[AVAILABLE_TOOLS]<SPECIAL_31>[INST]<SPECIAL_21>
+
+[2026-01-27 14:44:09.192946] ministral-3:8b (No-RAG) - svid2.jpeg - JSON Parse Error
+Raw Response: [IMG_END]<SPECIAL_27><SPECIAL_27>[MIDDLE][PREFIX]<SPECIAL_20><SPECIAL_27><SPECIAL_22><SPECIAL_23>[TOOL_CONTENT][AVAILABLE_TOOLS][ARGS]<SPECIAL_21><SPECIAL_36>[PREFIX]<SPECIAL_26>
+
+[2026-01-27 14:45:27.828053] qwen3:8b (RAG) - passport2.jpg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate
+[2026-01-27 14:48:00.890704] qwen3:8b (RAG) - prava2.png - JSON Parse Error
+Raw Response: Based on the structure of the example provided and the input text, here's the mapping of the fields:
+
+1. **Surname**: `АНАШКИН`  
+2. **Name and Patronymic**: `АНАТОЛИЙ ДМИТРИЕВИЧ`  
+3. **Date of Birth**: `07.11.1960`  
+4. **Place of Birth**: `КЕМЕРОВСКАЯ ОБЛ.`  
+5. **Date of Issue**: `04.06.2014`  
+6. **Date of Expiry**: `04.06.2024`  
+7. **Issued By**: `ГИБДД 4203`  
+8. **Number**: `42 17 619190`  
+9. **Region**: `КЕМЕРОВСКАЯ ОБЛ.`  
+10. **Categories**: `A, A1, В, B1, M`  
+
+### Explanation:
+- **Line 1**: Surname (`АНАШКИН`).  
+- **Line 2**: Name and Patronymic (`АНАТОЛИЙ ДМИТРИЕВИЧ`).  
+- **Line 3**: Date of Birth (`07.11.1960`).  
+- **Line 4**: Place of Birth (`КЕМЕРОВСКАЯ ОБЛ.`).  
+- **Line 5**: Date of Issue (`04.06.2014`).  
+- **Line 6**: Date of Expiry (`04.06.2024`).  
+- **Line 7**: Issued By (`ГИБДД 4203`).  
+- **Line 8**: Number (`42 17 619190`).  
+- **Line 9**: Region (`КЕМЕРОВСКАЯ ОБЛ.`).  
+- **Line 10**: Categories (`A, A1, В, B1, M`).  
+
+This mapping assumes the number is on the line after the "Issued By" field (line 7), even though the input text shows an empty line. The categories are listed on the final line.
+
+[2026-01-27 14:48:35.937743] qwen3:8b (RAG) - svid2.jpeg - Exception: 500 Server Error: Internal Server Error for url: http://172.26.208.1:11434/api/generate

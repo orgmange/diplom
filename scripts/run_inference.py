@@ -8,10 +8,22 @@ from difflib import SequenceMatcher
 import numpy as np
 
 # --- Configuration ---
-OLLAMA_HOST = "http://192.168.0.15:11434"
+def load_env():
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                if "=" in line and not line.startswith("#"):
+                    key, value = line.strip().split("=", 1)
+                    os.environ[key] = value
+
+load_env()
+
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
 DATA_DIR = "data"
 OCR_DIR = os.path.join(DATA_DIR, "ocr")
 REFERENCES_DIR = os.path.join(DATA_DIR, "references")
+TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
 VECTOR_STORE_PATH = os.path.join(DATA_DIR, "rag", "vector_store.json")
 OUTPUT_DIR = "tests/model_outputs"
 LOG_DIR = "logs"
@@ -21,11 +33,12 @@ os.makedirs(LOG_DIR, exist_ok=True)
 # List of models to test
 MODELS = [
     "gemma3:1b",
-    "qwen2.5:1.5b",
+    "qwen3:1.7b",
     "ministral-3:3b",
     "gemma3:4b",
-    "ministral:8b",
-    "qwen2.5:7b"
+    "qwen3:4b",
+    "ministral-3:8b",
+    "qwen3:8b"
 ]
 
 def get_embedding(text):
@@ -105,6 +118,39 @@ def load_reference(image_filename):
             return json.load(f)
     return None
 
+def get_schema_hint(image_filename, reference_data):
+    """
+    Loads the appropriate JSON schema template based on the filename.
+    If no template matches, falls back to the structure of the reference data.
+    """
+    lower_name = image_filename.lower()
+    template_path = None
+    
+    if "паспорт" in lower_name or "passport" in lower_name:
+        template_path = os.path.join(TEMPLATES_DIR, "passport_ru.json")
+    elif "права" in lower_name or "prava" in lower_name:
+        template_path = os.path.join(TEMPLATES_DIR, "driver_license_ru.json")
+    elif "свидетельство" in lower_name or "svid" in lower_name:
+        template_path = os.path.join(TEMPLATES_DIR, "birth_certificate_ru.json")
+    elif "снилс" in lower_name or "snils" in lower_name:
+        template_path = os.path.join(TEMPLATES_DIR, "snils.json")
+
+    if template_path and os.path.exists(template_path):
+        with open(template_path, "r", encoding="utf-8") as tf:
+            return json.dumps(json.load(tf), indent=2, ensure_ascii=False)
+    
+    # Fallback to reference structure if no template found
+    if reference_data:
+        # Create a "dummy" schema by removing values from reference
+        def clear_values(d):
+            if isinstance(d, dict):
+                return {k: clear_values(v) for k, v in d.items()}
+            return "" # Placeholder for value
+        
+        return json.dumps(clear_values(reference_data), indent=2, ensure_ascii=False)
+        
+    return "{}"
+
 def clean_json_string(json_string):
     """
     Heuristic to extract valid JSON from a potentially messy LLM response.
@@ -182,8 +228,10 @@ def run_inference():
 
     print(f"Found {len(ocr_files)} OCR files to process.")
 
-    for i, ocr_file in enumerate(ocr_files):
-        image_filename = ocr_file.replace("-clean", "") # Assuming OCR text file matches image filename + -clean
+    # Pre-load tasks and calculate RAG context once
+    tasks = []
+    for ocr_file in ocr_files:
+        image_filename = ocr_file.replace("-clean", "")
         ocr_path = os.path.join(OCR_DIR, ocr_file)
         
         with open(ocr_path, "r", encoding="utf-8") as f:
@@ -191,93 +239,136 @@ def run_inference():
             
         reference_data = load_reference(image_filename)
         if not reference_data:
-            print(f"Skipping {image_filename}: No reference data found.")
-            continue
+             print(f"Warning: No reference data found for {image_filename}. Accuracy will be 0.0.")
 
-        print(f"Processing {image_filename} ({i+1}/{len(ocr_files)})...")
-        
-        # --- RAG: Get Embedding and Retrieve Context ---
-        rag_context = ""
+        # Load Schema Hint
+        schema_hint = get_schema_hint(image_filename, reference_data)
+
+        # --- RAG: Get Embedding and Find Similar Doc ---
+        similar_doc = None
         if vector_store:
             embedding = get_embedding(ocr_text)
             similar_doc = find_most_similar(embedding, vector_store)
             
             if similar_doc:
-                print(f"  RAG: Found similar example: {similar_doc['doc_type']}")
-                rag_context = (
-                    "Here is an example of how to extract data from a similar document.\n"
-                    "EXAMPLE INPUT:\n"
-                    f"{similar_doc['example_input']}\n\n"
-                    "EXAMPLE OUTPUT:\n"
-                    f"{similar_doc['example_output']}\n\n"
-                    "Now, extract data from the following text in the same JSON format:\n"
-                )
-            else:
-                 rag_context = "Extract the following data into a structured JSON format.\n"
-        else:
-             rag_context = "Extract the following data into a structured JSON format.\n"
+                print(f"  RAG for {image_filename}: Found similar example: {similar_doc['doc_type']}")
 
+        tasks.append({
+            "filename": image_filename,
+            "text": ocr_text,
+            "reference": reference_data,
+            "similar_doc": similar_doc,
+            "schema_hint": schema_hint
+        })
 
-        for model in MODELS:
-            print(f"  Running model: {model}")
+    # Main loop: Iterate Models -> Tasks -> (RAG vs No RAG)
+    for model in MODELS:
+        print(f"\n--- Running Model: {model} ---")
+        
+        # Optional: Preload model (send empty request) to warm it up
+        try:
+            requests.post(f"{OLLAMA_HOST}/api/generate", json={"model": model}, timeout=1)
+        except:
+            pass 
+
+        for i, task in enumerate(tasks):
+            print(f"  Processing {task['filename']} ({i+1}/{len(tasks)})...")
             
-            prompt = (
-                f"You are a helpful AI assistant that extracts structured data from OCR text of Russian identity documents.\n"
-                f"{rag_context}"
-                f"INPUT TEXT:{ocr_text}\n\n"
-                f"Return ONLY the valid JSON object. Do not include any other text."
-            )
+            # Test two modes: With RAG and Without RAG
+            modes = [False, True] 
             
-            start_time = datetime.now()
-            try:
-                response = requests.post(
-                    f"{OLLAMA_HOST}/api/generate",
-                    json={
-                        "model": model,
-                        "prompt": prompt,
-                        "stream": False,
-                        "options": {
-                            "temperature": 0.1 # Low temperature for more deterministic output
-                        }
-                    },
-                    timeout=120 # Increased timeout for larger models
-                )
-                response.raise_for_status()
-                result_json = response.json()
-                raw_response = result_json["response"]
-                duration = (datetime.now() - start_time).total_seconds()
+            for use_rag in modes:
+                mode_label = "RAG" if use_rag else "No-RAG"
                 
-                parsed_json = clean_json_string(raw_response)
+                # --- Construct Prompt ---
+                prompt = ""
                 
-                if parsed_json:
-                    accuracy = calculate_accuracy(parsed_json, reference_data)
-                    status = "success"
+                if use_rag:
+                    # RAG Mode: Rely on the example from vector store
+                    rag_context_str = ""
+                    if task['similar_doc']:
+                        rag_context_str = (
+                            "Here is an example of how to extract data from a similar document.\n"
+                            "EXAMPLE INPUT:\n"
+                            f"{task['similar_doc']['example_input']}\n\n"
+                            "EXAMPLE OUTPUT:\n"
+                            f"{task['similar_doc']['example_output']}\n\n"
+                        )
+                    else:
+                        # Fallback if RAG fails to find doc: act like basic extractor
+                        rag_context_str = "Extract the following data into a structured JSON format.\n"
+
+                    prompt = (
+                        f"You are a helpful AI assistant that extracts structured data from OCR text of Russian identity documents.\n"
+                        f"{rag_context_str}"
+                        f"INPUT TEXT:\n{task['text']}\n\n"
+                        f"Now, extract data from the text above. Return ONLY the valid JSON object. Do not include any other text."
+                    )
                 else:
-                    accuracy = 0.0
-                    status = "json_parse_error"
+                    # No-RAG Mode: Rely on explicit Schema Hint (Classic approach)
+                    prompt = (
+                        f"You are a helpful AI assistant that parses OCR data into JSON.\n"
+                        f"Here is the OCR text from a document:\n"
+                        f"---\n{task['text']}\n---\n\n"
+                        f"Please extract data and return ONLY a valid JSON object matching this structure:\n"
+                        f"{task['schema_hint']}\n\n"
+                        f"Do not include markdown formatting (```json ... ```). Just the raw JSON."
+                    )
+                
+                start_time = datetime.now()
+                try:
+                    response = requests.post(
+                        f"{OLLAMA_HOST}/api/generate",
+                        json={
+                            "model": model,
+                            "prompt": prompt,
+                            "stream": False,
+                            "options": {
+                                "temperature": 0.1 
+                            }
+                        },
+                        timeout=120 
+                    )
+                    response.raise_for_status()
+                    result_json = response.json()
+                    raw_response = result_json["response"]
+                    duration = (datetime.now() - start_time).total_seconds()
+                    
+                    parsed_json = clean_json_string(raw_response)
+                    
+                    if parsed_json:
+                        if task['reference']:
+                            accuracy = calculate_accuracy(parsed_json, task['reference'])
+                        else:
+                            accuracy = 0.0
+                        status = "success"
+                    else:
+                        accuracy = 0.0
+                        status = "json_parse_error"
+                        with open(os.path.join(LOG_DIR, "inference_errors.log"), "a", encoding="utf-8") as log:
+                            log.write(f"[{datetime.now()}] {model} ({mode_label}) - {task['filename']} - JSON Parse Error\nRaw Response: {raw_response}\n\n")
+
+                    result_entry = {
+                        "model": model,
+                        "document": task['filename'],
+                        "use_rag": use_rag,  # New field to distinguish results
+                        "duration_seconds": duration,
+                        "accuracy": accuracy,
+                        "status": status,
+                        "timestamp": datetime.now().isoformat(),
+                        "predicted_data": parsed_json
+                    }
+                    
+                    all_results.append(result_entry)
+                    
+                    # Incremental Save
+                    with open(results_file, "w", encoding="utf-8") as f:
+                        json.dump(all_results, f, ensure_ascii=False, indent=2)
+
+                except Exception as e:
+                    print(f"  Error with model {model} ({mode_label}) on {task['filename']}: {e}")
                     with open(os.path.join(LOG_DIR, "inference_errors.log"), "a", encoding="utf-8") as log:
-                        log.write(f"[{datetime.now()}] {model} - {image_filename} - JSON Parse Error\nRaw Response: {raw_response}\n\n")
-
-                result_entry = {
-                    "model": model,
-                    "document": image_filename,
-                    "duration_seconds": duration,
-                    "accuracy": accuracy,
-                    "status": status,
-                    "timestamp": datetime.now().isoformat(),
-                    "predicted_data": parsed_json
-                }
-                
-                all_results.append(result_entry)
-                
-                # Incremental Save
-                with open(results_file, "w", encoding="utf-8") as f:
-                    json.dump(all_results, f, ensure_ascii=False, indent=2)
-
-            except Exception as e:
-                print(f"  Error with model {model}: {e}")
-                with open(os.path.join(LOG_DIR, "inference_errors.log"), "a", encoding="utf-8") as log:
-                    log.write(f"[{datetime.now()}] {model} - {image_filename} - Exception: {str(e)}\n")
+                        log.write(f"[{datetime.now()}] {model} ({mode_label}) - {task['filename']} - Exception: {str(e)}\n")
 
     print(f"\nInference complete. Results saved to {results_file}")
 

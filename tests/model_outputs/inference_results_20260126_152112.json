@@ -1,0 +1,621 @@
+[
+  {
+    "model": "gemma3:1b",
+    "document": "passport2.jpg",
+    "duration_seconds": 0.791693,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:21:14.552520",
+    "predicted_data": {
+      "document_type": "ID-card",
+      "document_number": "1234567890",
+      "date_of_birth": "1990-01-01",
+      "name": "Иванов Иван",
+      "surname": "Иванов",
+      "gender": "Male",
+      "address": "ул. Ленина, 10, Москва",
+      "city": "Москва",
+      "country": "Россия",
+      "signature": "Иванов И.И.",
+      "other_details": "Valid ID document"
+    }
+  },
+  {
+    "model": "gemma3:1b",
+    "document": "prava2.png",
+    "duration_seconds": 1.061766,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:21:15.614460",
+    "predicted_data": {
+      "number": "42 17 619190",
+      "surname": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "B",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "gemma3:1b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 1.373601,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:21:16.988246",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "зянов",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г.Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": ""
+      },
+      "mother": {
+        "fio": "Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": ""
+      },
+      "act_record": {
+        "number": "370",
+        "date": "20.04.2003"
+      },
+      "registration_place": "Отдел ЗАГС адм. Кировского района г.Казани Республики Татарстан",
+      "series": "II-РУ",
+      "number": "602386"
+    }
+  },
+  {
+    "model": "gemma3:1b",
+    "document": "snils2.png",
+    "duration_seconds": 0.723267,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:21:17.711744",
+    "predicted_data": {
+      "person": {
+        "name": "СЕРГЕЕВНА",
+        "gender": "женский",
+        "date_of_birth": "21.01.2011",
+        "address": "БАИГУЛОВО, Козловский ЧУВАШСКАЯ РЕСПУБЛИКА",
+        "birth_place": "КОЗЛОВСКИЙ",
+        "registration_number": "163-648-56496"
+      }
+    }
+  },
+  {
+    "model": "qwen3:1.7b",
+    "document": "passport2.jpg",
+    "duration_seconds": 40.467718,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:02.765756",
+    "predicted_data": {
+      "name": "Андрей",
+      "surname": "Смирнов",
+      "patronymic": "Петрович",
+      "date_of_birth": "01.01.1990",
+      "place_of_birth": "Москва",
+      "gender": "мужской",
+      "citizenship": "Россия",
+      "issuing_authority": "Государственное учреждение",
+      "expiration_date": "01.01.2025"
+    }
+  },
+  {
+    "model": "qwen3:1.7b",
+    "document": "prava2.png",
+    "duration_seconds": 3.954041,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:06.720212",
+    "predicted_data": {
+      "number": "42 17 619190",
+      "surname": "АНАШКИН",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "A",
+        "A1",
+        "B",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "qwen3:1.7b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 4.724216,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:11.444689",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "Фанисович",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г. Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": "татарин"
+      },
+      "mother": {
+        "fio": "Нигмедзянова Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": "татарка"
+      },
+      "act_record": {
+        "number": "509",
+        "date": "05.05.2003"
+      },
+      "registration_place": "Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан",
+      "series": "II-РУ",
+      "number": "509"
+    }
+  },
+  {
+    "model": "qwen3:1.7b",
+    "document": "snils2.png",
+    "duration_seconds": 7.668915,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:19.114049",
+    "predicted_data": {
+      "child": {
+        "surname": "Колпакова",
+        "name": "Надежда",
+        "patronymic": "Сергеевна",
+        "date_of_birth": "2 ноября 1995 года",
+        "place_of_birth": "Баигулово, Козловский, Чувашия Республика"
+      },
+      "father": {
+        "fio": "Колпакова Сергеевна",
+        "citizenship": "гражданка Российской Федерации",
+        "nationality": ""
+      },
+      "mother": {
+        "fio": "Надежда Сергеевна",
+        "citizenship": "гражданка Российской Федерации",
+        "nationality": ""
+      },
+      "act_record": {
+        "number": "163-648-56496",
+        "date": "21 января 2011 года"
+      },
+      "registration_place": "4",
+      "series": "4",
+      "number": "163-648-56496"
+    }
+  },
+  {
+    "model": "ministral-3:3b",
+    "document": "passport2.jpg",
+    "duration_seconds": 1.770876,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:21.886764",
+    "predicted_data": {
+      "error": "No valid Russian identity document text provided for OCR extraction."
+    }
+  },
+  {
+    "model": "ministral-3:3b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 11.200194,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:34.620158",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "Фанисович",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г. Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": "татарин"
+      },
+      "mother": {
+        "fio": "Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": ""
+      },
+      "act_record": {
+        "number": "370",
+        "date": "05.05.2003"
+      },
+      "registration_place": "Отдел ЗАГС административного Кировского района г. Казани Республики Татарстан"
+    }
+  },
+  {
+    "model": "ministral-3:3b",
+    "document": "snils2.png",
+    "duration_seconds": 0.794546,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:35.415013",
+    "predicted_data": {
+      "holder": {
+        "surname": "Колпакова",
+        "name": "Надежда",
+        "patronymic": "Сергеевна",
+        "date_of_birth": "2 ноября 1995 года",
+        "place_of_birth": "Баигулово, Козловский, Чувашская Республика"
+      },
+      "registration": {
+        "date": "21 января 2011 года"
+      }
+    }
+  },
+  {
+    "model": "gemma3:4b",
+    "document": "passport2.jpg",
+    "duration_seconds": 2.686168,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:39.103073",
+    "predicted_data": {
+      "series": "77-1234567",
+      "number": "89123456789",
+      "name": "Иванов Иван Иванович",
+      "date_of_birth": "15.08.1990",
+      "place_of_birth": "Москва",
+      "gender": "М",
+      "series_of_pasport": "77-1234567",
+      "number_of_pasport": "991234567891"
+    }
+  },
+  {
+    "model": "gemma3:4b",
+    "document": "prava2.png",
+    "duration_seconds": 1.967287,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:41.070797",
+    "predicted_data": {
+      "number": "42 17 619190",
+      "surname": "АНАШКИН",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "A",
+        "A1",
+        "B",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "gemma3:4b",
+    "document": "snils2.png",
+    "duration_seconds": 7.986592,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:22:49.464039",
+    "predicted_data": {
+      "child": {
+        "surname": "Колпакова",
+        "name": "Надежда",
+        "patronymic": "Сергеевна",
+        "date_of_birth": "2 ноября 1995 года",
+        "place_of_birth": "БАИГУЛОВО, ЧУВАШСКАЯ РЕСПУБЛИКА"
+      },
+      "father": {
+        "fio": null,
+        "citizenship": null,
+        "nationality": null
+      },
+      "mother": {
+        "fio": null,
+        "citizenship": null,
+        "nationality": null
+      },
+      "act_record": {
+        "number": null,
+        "date": "21 января 2011 года"
+      },
+      "registration_place": "Дата регистрации",
+      "series": null,
+      "number": null
+    }
+  },
+  {
+    "model": "qwen3:4b",
+    "document": "passport2.jpg",
+    "duration_seconds": 84.171306,
+    "accuracy": 0.0,
+    "status": "json_parse_error",
+    "timestamp": "2026-01-26T15:24:14.636842",
+    "predicted_data": {}
+  },
+  {
+    "model": "qwen3:4b",
+    "document": "prava2.png",
+    "duration_seconds": 80.391828,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:25:35.029010",
+    "predicted_data": {
+      "surname": "АНАШКИН",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "license_number": "42 17 619190",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "A",
+        "A1",
+        "В",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "qwen3:4b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 60.667806,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:26:35.697209",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "Фанисович",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г.Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": "татарин"
+      },
+      "mother": {
+        "fio": "Нигмедзянова Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": "татарка"
+      },
+      "act_record": {
+        "number": "370",
+        "date": "05.05.2003"
+      },
+      "registration_place": "Отдел ЗАГС адм. Кировского района г.Казани Республики Татарстан",
+      "series": "I-КБ",
+      "number": "781872"
+    }
+  },
+  {
+    "model": "qwen3:4b",
+    "document": "snils2.png",
+    "duration_seconds": 68.261138,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:27:43.958768",
+    "predicted_data": {
+      "child": {
+        "surname": "КОЛПАКОВА",
+        "name": "НАДЕЖДА",
+        "patronymic": "СЕРГЕЕВНА",
+        "date_of_birth": "2 ноября 1995 года",
+        "place_of_birth": "БАИГУЛОВО, КОЗЛОВСКИЙ, ЧУВАШСКАЯ РЕСПУБЛИКА"
+      },
+      "father": {
+        "fio": "",
+        "citizenship": "",
+        "nationality": ""
+      },
+      "mother": {
+        "fio": "",
+        "citizenship": "",
+        "nationality": ""
+      },
+      "act_record": {
+        "number": "163-648-56496",
+        "date": "21 января 2011 года"
+      },
+      "registration_place": "",
+      "series": "",
+      "number": "163-648-56496"
+    }
+  },
+  {
+    "model": "ministral-3:8b",
+    "document": "prava2.png",
+    "duration_seconds": 39.686988,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:30:38.991278",
+    "predicted_data": {
+      "number": "42 17 619190",
+      "surname": "АНАШКИН",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "A",
+        "A1",
+        "B",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "ministral-3:8b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 6.884424,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:30:45.876360",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "Фанисович",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г. Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": "татарин"
+      },
+      "mother": {
+        "fio": "Нигмедзянова Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": "татарка"
+      },
+      "act_record": {
+        "number": "370",
+        "date": "05.05.2003"
+      },
+      "registration_place": "Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан",
+      "series": "II-КБ",
+      "number": "781872"
+    }
+  },
+  {
+    "model": "ministral-3:8b",
+    "document": "snils2.png",
+    "duration_seconds": 4.72355,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:30:50.600831",
+    "predicted_data": {
+      "insurance_certificate": {
+        "type": "Страховое свидетельство обязательного пенсионного страхования",
+        "number": "163-648-56496",
+        "person": {
+          "surname": "КОЛПАКОВА",
+          "name": "НАДЕЖДА",
+          "patronymic": "СЕРГЕЕВНА",
+          "date_of_birth": "2 ноября 1995 года",
+          "place_of_birth": "БАИГУЛОВО, КОЗЛОВСКИЙ, ЧУВАШСКАЯ РЕСПУБЛИКА",
+          "gender": "женский"
+        },
+        "registration_date": "21 января 2011 года"
+      }
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "document": "prava2.png",
+    "duration_seconds": 33.151978,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:33:39.159210",
+    "predicted_data": {
+      "number": "42 17 619190",
+      "surname": "АНАШКИН",
+      "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",
+      "date_of_birth": "07.11.1960",
+      "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+      "date_of_issue": "04.06.2014",
+      "date_of_expiry": "04.06.2024",
+      "issued_by": "ГИБДД 4203",
+      "region": "КЕМЕРОВСКАЯ ОБЛ.",
+      "categories": [
+        "A",
+        "A1",
+        "B",
+        "B1",
+        "M"
+      ]
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "document": "svid2.jpeg",
+    "duration_seconds": 38.523154,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:34:17.683552",
+    "predicted_data": {
+      "child": {
+        "surname": "Нигмедзянов",
+        "name": "Ильназ",
+        "patronymic": "Фанисович",
+        "date_of_birth": "20.04.2003",
+        "place_of_birth": "г. Казань, Республика Татарстан, Российская Федерация"
+      },
+      "father": {
+        "fio": "Пигмедзянов Фанис Фирдавилович",
+        "citizenship": "гражданин России",
+        "nationality": "татарин"
+      },
+      "mother": {
+        "fio": "Нигмедзянова Альбина Фирдавильевна",
+        "citizenship": "гражданка России",
+        "nationality": "татарка"
+      },
+      "act_record": {
+        "number": "370",
+        "date": "05.05.2003"
+      },
+      "registration_place": "Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан",
+      "series": "II",
+      "number": "509"
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "document": "snils2.png",
+    "duration_seconds": 37.506237,
+    "accuracy": 0.0,
+    "status": "success",
+    "timestamp": "2026-01-26T15:34:55.190349",
+    "predicted_data": {
+      "child": {
+        "surname": "КОЛПАКОВА",
+        "name": "НАДЕЖДА",
+        "patronymic": "СЕРГЕЕВНА",
+        "date_of_birth": "2 ноября 1995 года",
+        "place_of_birth": "БАИГУЛОВО, КОЗЛОВСКИЙ, ЧУВАШСКАЯ РЕСПУБЛИКА"
+      },
+      "act_record": {
+        "number": "163-648-56496",
+        "date": "21 января 2011 года"
+      },
+      "series": "4"
+    }
+  }
+]

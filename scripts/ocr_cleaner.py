@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 # --- Configuration ---
-SOURCE_DIR = "документы для тестирвания моделей"
+SOURCE_DIR = os.path.join("data", "ocr")
 MIN_CONFIDENCE = 0
 
 

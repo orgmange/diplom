@@ -6,8 +6,18 @@ from typing import List
 from pathlib import Path
 
 # --- Configuration ---
-SOURCE_DIR = "документы для тестирвания моделей"
-API_KEY = "YOUR_API_KEY_HERE"  # Placeholder
+def load_env():
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                if "=" in line and not line.startswith("#"):
+                    key, value = line.strip().split("=", 1)
+                    os.environ[key] = value
+
+load_env()
+SOURCE_DIR = os.path.join("data", "ocr")
+API_KEY = os.environ.get("OCR_API_KEY", "YOUR_API_KEY_HERE")
 BASE_URL = "https://ocrbot.ru/api/v1"
 USE_MOCK = False  # Set to False to use real API
 
@@ -143,8 +153,9 @@ def main():
     for i, img in enumerate(candidates):
         print(f"{i + 1}. {img.name}")
     
-    print("\nEnter the numbers of images to process (comma separated, e.g. '1,3') or 'all':")
-    choice = input("> ").strip().lower()
+    # Automated selection for agent
+    choice = 'all'
+    print(f"\nAutomated selection: {choice}")
     
     selected_images = []
     if choice == 'all':

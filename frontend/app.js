@@ -190,8 +190,8 @@ async function runSearch() {
 
         results.forEach(res => {
             const scorePercent = (res.score * 100).toFixed(1) + "%";
-            // Используем raw_text или cleaned_text для превью, так как поле text было изменено в VectorService
-            const previewText = res.raw_text || res.cleaned_text || "Нет текста для превью";
+            // Проверяем все возможные поля текста для совместимости со старыми и новыми индексами
+            const previewText = res.raw_text || res.cleaned_text || res.text || "Нет текста для превью";
             resultsDiv.appendChild(renderResultItem(res.filename, previewText, scorePercent));
         });
     } catch (error) {

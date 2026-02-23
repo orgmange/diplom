@@ -187,6 +187,7 @@ class VectorService:
                 "filename": res.payload.get("filename"),
                 "raw_text": res.payload.get("raw_text"),
                 "cleaned_text": res.payload.get("cleaned_text"),
+                "text": res.payload.get("text"), # Backward compatibility
                 "json_output": res.payload.get("json_output"),
                 "score": res.score
             }

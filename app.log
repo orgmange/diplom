@@ -1,0 +1,25 @@
+INFO:     Started server process [8490]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-02-21 15:34:38,387 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-02-21 15:34:38,392 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:34728 - "GET /api/v1/status HTTP/1.1" 200 OK
+2026-02-21 15:34:46,363 - diplom - INFO - Accessing root index.html
+INFO:     127.0.0.1:47030 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47030 - "GET /styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47040 - "GET /app.js HTTP/1.1" 200 OK
+2026-02-21 15:34:46,391 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:47040 - "GET /api/v1/status HTTP/1.1" 200 OK
+2026-02-21 15:34:51,753 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-02-21 15:34:51,774 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2026-02-21 15:34:51,777 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:47054 - "POST /api/v1/rag/search HTTP/1.1" 200 OK
+2026-02-21 15:35:16,544 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-02-21 15:35:17,399 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2026-02-21 15:35:17,402 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:48802 - "POST /api/v1/rag/search HTTP/1.1" 200 OK
+2026-02-21 15:35:52,952 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-02-21 15:35:52,970 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2026-02-21 15:35:52,973 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:48806 - "POST /api/v1/rag/search HTTP/1.1" 200 OK

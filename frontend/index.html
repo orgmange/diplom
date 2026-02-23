@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diplom OCR & RAG System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Система обработки документов</h1>
+        
+        <div class="status-panel">
+            <h2>Статус системы</h2>
+            <div id="status-display">Загрузка...</div>
+            <button onclick="updateStatus()">Обновить</button>
+        </div>
+
+        <div class="control-panel">
+            <div class="card">
+                <h3>1. OCR (Распознавание)</h3>
+                <p>Сканирует папку data/ocr на новые изображения и отправляет их на распознавание.</p>
+                <button onclick="runOCR()">Запустить OCR</button>
+                <div id="ocr-result" class="result-box"></div>
+            </div>
+
+            <div class="card">
+                <h3>2. Очистка (Cleaning)</h3>
+                <p>Обрабатывает XML-файлы, удаляет шум и структурирует текст.</p>
+                <button onclick="runClean()">Очистить данные</button>
+                <div id="clean-result" class="result-box"></div>
+            </div>
+
+            <div class="card">
+                <h3>3. Индексация (RAG)</h3>
+                <p>Векторизует данные и примеры для поиска.</p>
+                <div class="btn-group">
+                    <button onclick="runIndex()">Индексировать OCR</button>
+                    <button onclick="runIndexExamples()" class="secondary">Индексировать примеры</button>
+                </div>
+                <div id="index-result" class="result-box"></div>
+            </div>
+
+            <div class="card full-width">
+                <h3>4. Структурирование (LLM)</h3>
+                <p>Преобразование OCR-текста в JSON с помощью выбранной модели и RAG.</p>
+                <div class="config-row">
+                    <div class="model-select">
+                        <label for="model-selector">Модель Ollama:</label>
+                        <select id="model-selector">
+                            <option value="llama3:latest">llama3:latest</option>
+                        </select>
+                        <button onclick="updateModels()" class="small-btn">🔄</button>
+                    </div>
+                    <div class="filename-select">
+                        <input type="text" id="filename-input" placeholder="Имя файла (например: passport2.jpg-clean)">
+                        <button onclick="runStructure()">Запустить структурирование</button>
+                    </div>
+                </div>
+                <div id="structure-result" class="result-box json-view"></div>
+            </div>
+        </div>
+
+        <div class="search-panel">
+            <h2>Поиск по документам</h2>
+            <div class="search-box">
+                <input type="text" id="search-query" placeholder="Введите запрос (например: паспортные данные)...">
+                <button onclick="runSearch()">Найти</button>
+            </div>
+            <div id="search-results" class="results-list"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

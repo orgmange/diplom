@@ -1,0 +1,17 @@
+{
+  "series": "4218",
+  "number": "127156",
+  "surname": "КОРНЕЙЧУК",
+  "name": "СЕМЕН",
+  "patronymic": "ДМИТРИЕВИЧ",
+  "gender": "МУЖ",
+  "date_of_birth": "16.01.1995",
+  "place_of_birth": "г. ДЗЕРЖИНСК ДОНЕЦКАЯ ОБЛАСТЬ",
+  "issued_by": "УМВД РОССИИ ПО ЛИПЕЦКОЙ ОБЛАСТИ",
+  "date_of_issue": "30.05.2018",
+  "division_code": "480-005",
+  "mrz": {
+    "line1": "PNRUSKORNEQ3UK<<SEMEN<DMITRIEVI3<<<<<<<<<<<",
+    "line2": "71563RUS9501164M<<<<<<<8180530480005<04"
+  }
+}

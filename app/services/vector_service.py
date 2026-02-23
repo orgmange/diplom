@@ -40,9 +40,11 @@ class VectorService:
             )
 
     def vectorize_text(self, text: str) -> List[float]:
+        # Ограничиваем длину текста, чтобы не превысить контекст модели эмбеддингов
+        truncated_text = text[:3000]
         response = self.ollama_client.embeddings(
             model=settings.EMBEDDING_MODEL,
-            prompt=text
+            prompt=truncated_text
         )
         return response['embedding']
 

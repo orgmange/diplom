@@ -22,50 +22,31 @@ class StructuringService:
         return self._ollama_client
 
     def get_available_models(self) -> List[str]:
-        """Возвращает список доступных моделей Ollama."""
+        """Возвращает список доступных моделей Ollama. Пробрасывает ошибку при неудаче."""
         try:
+            # В ollama-python 0.6.1 list() возвращает ListResponse с атрибутом models
             response = self.ollama_client.list()
-            # Модели могут быть в ключе 'models'
-            models_info = response.get('models', [])
-            return [m['name'] for m in models_info]
+            return [m.model for m in response.models]
         except Exception as e:
             logger.error(f"Error listing models: {e}")
-            return ["llama3:latest", "phi3:latest"]  # Fallback
+            raise e
 
     def build_prompt(self, target_text: str, examples: List[Dict]) -> str:
         """Формирует промпт с примерами (few-shot) для LLM."""
         prompt = "You are an expert in extracting structured data from OCR text. "
-        prompt += "Your task is to convert the OCR text into a VALID JSON object.
-
-"
+        prompt += "Your task is to convert the OCR text into a VALID JSON object.\n\n"
         
         if examples:
-            prompt += "### EXAMPLES OF EXTRACTION:
-
-"
+            prompt += "### EXAMPLES OF EXTRACTION:\n\n"
             for i, ex in enumerate(examples):
-                prompt += f"--- EXAMPLE {i+1} ---
-"
-                prompt += f"OCR INPUT:
-{ex.get('cleaned_text')}
-
-"
-                prompt += f"JSON OUTPUT:
-{ex.get('json_output')}
-
-"
-            prompt += "--- END OF EXAMPLES ---
-
-"
+                prompt += f"--- EXAMPLE {i+1} ---\n"
+                prompt += f"OCR INPUT:\n{ex.get('cleaned_text')}\n\n"
+                prompt += f"JSON OUTPUT:\n{ex.get('json_output')}\n\n"
+            prompt += "--- END OF EXAMPLES ---\n\n"
 
         prompt += "Now, process the following OCR text and return ONLY the JSON object. "
-        prompt += "If a field is missing, use an empty string or null. Ensure the output is valid JSON.
-
-"
-        prompt += f"### TARGET OCR TEXT:
-{target_text}
-
-"
+        prompt += "If a field is missing, use an empty string or null. Ensure the output is valid JSON.\n\n"
+        prompt += f"### TARGET OCR TEXT:\n{target_text}\n\n"
         prompt += "### FINAL JSON OUTPUT:"
         
         return prompt

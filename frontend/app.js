@@ -26,10 +26,11 @@ async function updateStatus() {
 }
 
 async function updateModels() {
+    const selector = document.getElementById("model-selector");
     try {
         const response = await fetch(`${API_URL}/rag/models`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
-        const selector = document.getElementById("model-selector");
         if (selector) {
             selector.innerHTML = "";
             data.models.forEach(model => {
@@ -41,6 +42,7 @@ async function updateModels() {
         }
     } catch (error) {
         console.error("Error fetching models:", error);
+        if (selector) selector.innerHTML = `<option value="">Ошибка загрузки: ${error.message}</option>`;
     }
 }
 
@@ -188,7 +190,9 @@ async function runSearch() {
 
         results.forEach(res => {
             const scorePercent = (res.score * 100).toFixed(1) + "%";
-            resultsDiv.appendChild(renderResultItem(res.filename, res.text, scorePercent));
+            // Используем raw_text или cleaned_text для превью, так как поле text было изменено в VectorService
+            const previewText = res.raw_text || res.cleaned_text || "Нет текста для превью";
+            resultsDiv.appendChild(renderResultItem(res.filename, previewText, scorePercent));
         });
     } catch (error) {
         resultsDiv.innerText = "Ошибка поиска: " + error.message;

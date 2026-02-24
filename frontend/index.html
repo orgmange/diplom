@@ -19,14 +19,14 @@
         <div class="control-panel">
             <div class="card">
                 <h3>1. OCR (Распознавание)</h3>
-                <p>Сканирует папку data/ocr на новые изображения и отправляет их на распознавание.</p>
+                <p>Сканирует папки data/docs/*/image и отправляет новые изображения на распознавание.</p>
                 <button onclick="runOCR()">Запустить OCR</button>
                 <div id="ocr-result" class="result-box"></div>
             </div>
 
             <div class="card">
                 <h3>2. Очистка (Cleaning)</h3>
-                <p>Обрабатывает XML-файлы, удаляет шум и структурирует текст.</p>
+                <p>Обрабатывает XML-файлы из data/docs/*/xml и создает clean-файлы в data/docs/*/clean.</p>
                 <button onclick="runClean()">Очистить данные</button>
                 <div id="clean-result" class="result-box"></div>
             </div>
@@ -53,6 +53,9 @@
                         <button onclick="updateModels()" class="small-btn">🔄</button>
                     </div>
                     <div class="filename-select">
+                        <label class="reindex-checkbox">
+                            <input type="checkbox" id="reindex-checkbox"> Переиндексировать всё для этой модели
+                        </label>
                         <input type="text" id="filename-input" placeholder="Имя файла (например: passport2.jpg-clean)">
                         <button onclick="runStructure()">Запустить структурирование</button>
                     </div>
@@ -63,6 +66,13 @@
 
         <div class="search-panel">
             <h2>Поиск по документам</h2>
+            <div class="search-config">
+                <label for="search-model-selector">Модель для поиска:</label>
+                <select id="search-model-selector">
+                    <option value="">(по умолчанию)</option>
+                </select>
+                <button onclick="updateSearchModels()" class="small-btn">🔄</button>
+            </div>
             <div class="search-box">
                 <input type="text" id="search-query" placeholder="Введите запрос (например: паспортные данные)...">
                 <button onclick="runSearch()">Найти</button>

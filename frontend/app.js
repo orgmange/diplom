@@ -26,25 +26,35 @@ async function updateStatus() {
 }
 
 async function updateModels() {
-    const selector = document.getElementById("model-selector");
+    const selectors = [
+        document.getElementById("model-selector"),
+        document.getElementById("search-model-selector")
+    ].filter(s => !!s);
     try {
         const response = await fetch(`${API_URL}/rag/models`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
-        if (selector) {
-            selector.innerHTML = "";
+        selectors.forEach(selector => {
+            const currentVal = selector.value;
+            selector.innerHTML = selector.id === "search-model-selector" ? '<option value="">(по умолчанию)</option>' : "";
             data.models.forEach(model => {
                 const opt = document.createElement("option");
                 opt.value = model;
                 opt.innerText = model;
+                if (model === currentVal) opt.selected = true;
                 selector.appendChild(opt);
             });
-        }
+        });
     } catch (error) {
         console.error("Error fetching models:", error);
-        if (selector) selector.innerHTML = `<option value="">Ошибка загрузки: ${error.message}</option>`;
+        selectors.forEach(selector => {
+            selector.innerHTML = `<option value="">Ошибка: ${error.message}</option>`;
+        });
     }
 }
+
+// Псевдоним для совместимости
+async function updateSearchModels() { await updateModels(); }
 
 async function runOCR() {
     const btn = document.querySelector("button[onclick='runOCR()']");
@@ -56,12 +66,13 @@ async function runOCR() {
     try {
         const response = await fetch(`${API_URL}/ocr/scan`, { method: "POST" });
         const data = await response.json();
+        const processedFiles = Array.isArray(data.processed_files) ? data.processed_files : [];
         resultDiv.innerHTML = "";
         
-        if (data.processed_files.length === 0) {
+        if (processedFiles.length === 0) {
             resultDiv.innerText = "Новых изображений не найдено.";
         } else {
-            data.processed_files.forEach(file => {
+            processedFiles.forEach(file => {
                 resultDiv.appendChild(renderResultItem(file, "Задача на распознавание создана и завершена.", "OK"));
             });
         }
@@ -84,12 +95,13 @@ async function runClean() {
     try {
         const response = await fetch(`${API_URL}/ocr/clean`, { method: "POST" });
         const data = await response.json();
+        const cleanedFiles = Array.isArray(data.cleaned_files) ? data.cleaned_files : [];
         resultDiv.innerHTML = "";
         
-        if (data.cleaned_files.length === 0) {
+        if (cleanedFiles.length === 0) {
             resultDiv.innerText = "Новых XML для очистки не найдено.";
         } else {
-            data.cleaned_files.forEach(file => {
+            cleanedFiles.forEach(file => {
                 resultDiv.appendChild(renderResultItem(file.filename, file.snippet, "Cleaned"));
             });
         }
@@ -143,6 +155,7 @@ async function runIndexExamples() {
 async function runStructure() {
     const filename = document.getElementById("filename-input").value;
     const model = document.getElementById("model-selector").value;
+    const reindex = document.getElementById("reindex-checkbox").checked;
     const resultDiv = document.getElementById("structure-result");
     
     if (!filename) {
@@ -150,13 +163,21 @@ async function runStructure() {
         return;
     }
     
-    resultDiv.innerText = `Поиск примеров и структурирование с помощью ${model}...`;
+    let msg = `Структурирование с помощью ${model}...`;
+    if (reindex) {
+        msg = `🔄 Очистка базы и полная переиндексация с ${model}... ` + msg;
+    }
+    resultDiv.innerText = msg;
 
     try {
         const response = await fetch(`${API_URL}/rag/structure`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ filename: filename, model_name: model })
+            body: JSON.stringify({ 
+                filename: filename, 
+                model_name: model,
+                reindex: reindex 
+            })
         });
         const data = await response.json();
         
@@ -164,21 +185,24 @@ async function runStructure() {
         resultDiv.innerHTML = `<pre class="json-code">${JSON.stringify(data, null, 2)}</pre>`;
     } catch (error) {
         resultDiv.innerText = "Ошибка структурирования: " + error.message;
+    } finally {
+        updateStatus();
     }
 }
 
 async function runSearch() {
     const query = document.getElementById("search-query").value;
+    const model = document.getElementById("search-model-selector")?.value;
     if (!query) return;
 
     const resultsDiv = document.getElementById("search-results");
-    resultsDiv.innerHTML = "Поиск по смыслу...";
+    resultsDiv.innerHTML = `Поиск по смыслу (модель: ${model || "default"})...`;
 
     try {
         const response = await fetch(`${API_URL}/rag/search`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query: query, limit: 5 })
+            body: JSON.stringify({ query: query, limit: 5, model: model || undefined })
         });
         const results = await response.json();
 
@@ -223,7 +247,7 @@ function renderBenchmarkTable(containerId, group) {
                     <th>Ожидали</th>
                     <th>Предсказали</th>
                     <th>Шаблон</th>
-                    <th>Скор</th>
+                    <th>Схожесть</th>
                     <th>Статус</th>
                 </tr>
             </thead>
@@ -274,9 +298,11 @@ async function runEmbeddingBenchmark() {
         const report = await response.json();
         summary.innerHTML = `
             Модель: <b>${report.embedding_model}</b><br>
+            Подготовлено тестов: xml=${report.prepared.prepared_xml}, clean=${report.prepared.prepared_clean}<br>
             Индексировано: raw=${report.indexed.raw_count}, clean=${report.indexed.clean_count}, total=${report.indexed.total_count}<br>
             Raw accuracy: ${(report.raw_tests.accuracy * 100).toFixed(1)}% (${report.raw_tests.correct}/${report.raw_tests.total})<br>
-            Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})
+            Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})<br>
+            Общий результат: ${(report.overall.accuracy * 100).toFixed(1)}% (${report.overall.correct}/${report.overall.total})
         `;
         renderBenchmarkTable("benchmark-raw", report.raw_tests);
         renderBenchmarkTable("benchmark-clean", report.clean_tests);

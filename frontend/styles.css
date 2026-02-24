@@ -67,6 +67,20 @@ button:disabled {
     gap: 10px;
 }
 
+.search-config {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+.search-config select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
 #search-query {
     flex: 1;
     padding: 10px;
@@ -118,6 +132,21 @@ button:disabled {
 .small-btn {
     padding: 5px 10px;
     font-size: 0.8em;
+}
+
+.reindex-checkbox {
+    font-size: 0.85em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 2px;
+}
+
+.reindex-checkbox input {
+    margin: 0;
 }
 
 .full-width {

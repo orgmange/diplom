@@ -153,3 +153,41 @@ button:disabled {
 .secondary:hover {
     background: #5a6268;
 }
+
+.benchmark-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    margin-top: 12px;
+}
+
+.benchmark-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+}
+
+.benchmark-table th,
+.benchmark-table td {
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+.benchmark-table thead {
+    background: #f1f3f5;
+}
+
+.ok-row {
+    background: #eefaf1;
+}
+
+.bad-row {
+    background: #fff1f1;
+}
+
+@media (min-width: 1024px) {
+    .benchmark-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

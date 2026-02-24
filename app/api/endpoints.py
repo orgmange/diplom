@@ -5,12 +5,14 @@ from app.services.ocr_service import OCRService
 from app.services.cleaner_service import CleanerService
 from app.services.vector_service import VectorService
 from app.services.structuring_service import StructuringService
+from app.services.benchmark_service import BenchmarkService
 
 router = APIRouter()
 ocr_service = OCRService()
 cleaner_service = CleanerService()
 vector_service = VectorService()
 structuring_service = StructuringService(vector_service)
+benchmark_service = BenchmarkService(vector_service)
 
 class SearchQuery(BaseModel):
     query: str
@@ -26,11 +28,59 @@ class StatusResponse(BaseModel):
     cleaned_files: int
     vectorized_count: int
 
+
+class BenchmarkRunRequest(BaseModel):
+    embedding_model: str
+
+
+class BenchmarkItemResponse(BaseModel):
+    filename: str
+    expected_type: str | None
+    predicted_type: str | None
+    predicted_filename: str | None
+    score: float | None
+    is_correct: bool
+
+
+class BenchmarkGroupResponse(BaseModel):
+    total: int
+    correct: int
+    accuracy: float
+    items: List[BenchmarkItemResponse]
+
+
+class BenchmarkIndexedResponse(BaseModel):
+    raw_count: int
+    clean_count: int
+    total_count: int
+    raw_files: List[str]
+    clean_files: List[str]
+
+
+class BenchmarkRunResponse(BaseModel):
+    embedding_model: str
+    indexed: BenchmarkIndexedResponse
+    raw_tests: BenchmarkGroupResponse
+    clean_tests: BenchmarkGroupResponse
+
 @router.get("/rag/models", response_model=Dict[str, List[str]])
 def list_models():
     """Список доступных моделей Ollama."""
     models = structuring_service.get_available_models()
     return {"models": models}
+
+
+@router.get("/rag/benchmark/models", response_model=Dict[str, List[str]])
+def list_benchmark_models():
+    """Список embedding-моделей для тестирования."""
+    models = vector_service.list_embedding_models()
+    return {"models": models}
+
+
+@router.post("/rag/benchmark/run", response_model=BenchmarkRunResponse)
+def run_benchmark(request: BenchmarkRunRequest):
+    """Запускает полный цикл тестирования retrieval для embedding-модели."""
+    return benchmark_service.run(request.embedding_model)
 
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])
 def index_examples():

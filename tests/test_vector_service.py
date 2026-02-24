@@ -7,15 +7,13 @@ from qdrant_client.http import models
 @pytest.fixture
 def vector_service(mocker):
     service = VectorService()
-    # Mocking Ollama client
     mock_ollama = MagicMock()
     mock_ollama.embeddings.return_value = {"embedding": [0.1, 0.2, 0.3]}
     mocker.patch.object(service, '_ollama_client', mock_ollama)
-    
-    # Mocking Qdrant client
+
     mock_qdrant = MagicMock()
     mocker.patch.object(service, '_client', mock_qdrant)
-    
+
     return service, mock_ollama, mock_qdrant
 
 def test_vectorize_text(vector_service):
@@ -27,7 +25,6 @@ def test_vectorize_text(vector_service):
 
 def test_ensure_collection_not_found(vector_service):
     service, _, mock_qdrant = vector_service
-    # Simulation of collection not found error
     mock_qdrant.get_collection.side_effect = Exception("Not found")
     
     service.ensure_collection()
@@ -37,8 +34,7 @@ def test_ensure_collection_not_found(vector_service):
 
 def test_search(vector_service):
     service, _, mock_qdrant = vector_service
-    
-    # Мокаем query_points
+
     mock_result = MagicMock()
     mock_point = MagicMock()
     mock_point.payload = {"filename": "doc1", "raw_text": "Raw content", "cleaned_text": "Clean content"}
@@ -54,3 +50,27 @@ def test_search(vector_service):
     assert results[0]["raw_text"] == "Raw content"
     assert results[0]["score"] == 0.99
     mock_qdrant.query_points.assert_called_once()
+
+
+def test_list_embedding_models(vector_service):
+    service, mock_ollama, _ = vector_service
+    mock_ollama.list.return_value = {
+        "models": [
+            {"name": "nomic-embed-text:latest"},
+            {"name": "qwen3-embedding:0.6b"},
+            {"name": "gemma3:1b"},
+        ]
+    }
+    models = service.list_embedding_models()
+    assert models == ["nomic-embed-text:latest", "qwen3-embedding:0.6b"]
+
+
+def test_reset_collection(vector_service):
+    service, _, mock_qdrant = vector_service
+    service.reset_collection()
+    mock_qdrant.delete_collection.assert_called_once()
+
+
+def test_get_embedding_size(vector_service):
+    service, _, _ = vector_service
+    assert service.get_embedding_size() == 3

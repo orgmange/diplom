@@ -199,5 +199,96 @@ async function runSearch() {
     }
 }
 
-// Initial load
+function renderBenchmarkTable(containerId, group) {
+    const el = document.getElementById(containerId);
+    if (!group || !group.items || group.items.length === 0) {
+        el.innerText = "Нет данных";
+        return;
+    }
+    const rows = group.items.map(item => `
+        <tr class="${item.is_correct ? "ok-row" : "bad-row"}">
+            <td>${item.filename}</td>
+            <td>${item.expected_type || "-"}</td>
+            <td>${item.predicted_type || "-"}</td>
+            <td>${item.predicted_filename || "-"}</td>
+            <td>${item.score !== null && item.score !== undefined ? Number(item.score).toFixed(4) : "-"}</td>
+            <td>${item.is_correct ? "OK" : "ERR"}</td>
+        </tr>
+    `).join("");
+    el.innerHTML = `
+        <table class="benchmark-table">
+            <thead>
+                <tr>
+                    <th>Файл</th>
+                    <th>Ожидали</th>
+                    <th>Предсказали</th>
+                    <th>Шаблон</th>
+                    <th>Скор</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+        </table>
+    `;
+}
+
+async function updateBenchmarkModels() {
+    const selector = document.getElementById("embedding-model-selector");
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/models`);
+        const data = await response.json();
+        selector.innerHTML = "";
+        data.models.forEach(model => {
+            const opt = document.createElement("option");
+            opt.value = model;
+            opt.innerText = model;
+            selector.appendChild(opt);
+        });
+    } catch (error) {
+        selector.innerHTML = `<option value="">Ошибка загрузки: ${error.message}</option>`;
+    }
+}
+
+async function runEmbeddingBenchmark() {
+    const btn = document.getElementById("run-benchmark-btn");
+    const selector = document.getElementById("embedding-model-selector");
+    const summary = document.getElementById("benchmark-summary");
+    const rawBox = document.getElementById("benchmark-raw");
+    const cleanBox = document.getElementById("benchmark-clean");
+    const embeddingModel = selector.value;
+    if (!embeddingModel) {
+        alert("Выбери embedding-модель");
+        return;
+    }
+    btn.disabled = true;
+    btn.innerText = "Тестируется...";
+    summary.innerText = "Запуск пайплайна...";
+    rawBox.innerText = "";
+    cleanBox.innerText = "";
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/run`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ embedding_model: embeddingModel })
+        });
+        const report = await response.json();
+        summary.innerHTML = `
+            Модель: <b>${report.embedding_model}</b><br>
+            Индексировано: raw=${report.indexed.raw_count}, clean=${report.indexed.clean_count}, total=${report.indexed.total_count}<br>
+            Raw accuracy: ${(report.raw_tests.accuracy * 100).toFixed(1)}% (${report.raw_tests.correct}/${report.raw_tests.total})<br>
+            Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})
+        `;
+        renderBenchmarkTable("benchmark-raw", report.raw_tests);
+        renderBenchmarkTable("benchmark-clean", report.clean_tests);
+        updateStatus();
+    } catch (error) {
+        summary.innerText = `Ошибка бенчмарка: ${error.message}`;
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Запустить бенчмарк";
+    }
+}
+
 updateStatus();
+updateModels();
+updateBenchmarkModels();

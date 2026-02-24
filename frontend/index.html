@@ -69,6 +69,33 @@
             </div>
             <div id="search-results" class="results-list"></div>
         </div>
+
+        <div class="search-panel">
+            <h2>Бенчмарк Embedding</h2>
+            <p>Полный цикл: очистка коллекции, индексация raw/clean шаблонов и проверка на raw/clean тестах.</p>
+            <div class="config-row">
+                <div class="model-select">
+                    <label for="embedding-model-selector">Embedding-модель:</label>
+                    <select id="embedding-model-selector">
+                        <option value="">Загрузка...</option>
+                    </select>
+                </div>
+                <div class="filename-select">
+                    <button id="run-benchmark-btn" onclick="runEmbeddingBenchmark()">Запустить бенчмарк</button>
+                </div>
+            </div>
+            <div id="benchmark-summary" class="result-box"></div>
+            <div class="benchmark-grid">
+                <div>
+                    <h3>Raw тесты</h3>
+                    <div id="benchmark-raw" class="result-box"></div>
+                </div>
+                <div>
+                    <h3>Clean тесты</h3>
+                    <div id="benchmark-clean" class="result-box"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>

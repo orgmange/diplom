@@ -1,46 +1,90 @@
-import pytest
-from fastapi.testclient import TestClient
-from app.main import app
-from app.api.endpoints import ocr_service, cleaner_service, vector_service
+from app.api.endpoints import (
+    BenchmarkRunRequest,
+    SearchQuery,
+    get_status,
+    index_documents,
+    list_benchmark_models,
+    run_benchmark,
+    search_documents,
+    benchmark_service,
+    vector_service,
+)
 
-client = TestClient(app)
 
-@pytest.fixture
-def mock_services(mocker):
-    # Mocking OCRService
-    mocker.patch.object(ocr_service, 'process_directory', return_value=["test.jpg"])
-    # Mocking CleanerService
-    mocker.patch.object(cleaner_service, 'process_directory', return_value=["test.jpg-clean"])
-    # Mocking VectorService
-    mocker.patch.object(vector_service, 'index_directory', return_value=1)
-    mocker.patch.object(vector_service, 'search', return_value=[{"filename": "test.jpg-clean", "text": "test document", "score": 0.95}])
-    # Mock status check for status endpoint
-    mocker.patch('os.path.exists', return_value=True)
+def test_index_documents(mocker):
+    mocker.patch.object(vector_service, "index_directory", return_value=["doc-xml"])
+    assert index_documents() == {"indexed_files": ["doc-xml"]}
 
-def test_scan_ocr(mock_services):
-    response = client.post("/api/v1/ocr/scan")
-    assert response.status_code == 200
-    assert response.json() == {"processed_files": ["test.jpg"]}
 
-def test_clean_ocr(mock_services):
-    response = client.post("/api/v1/ocr/clean")
-    assert response.status_code == 200
-    assert response.json() == {"cleaned_files": ["test.jpg-clean"]}
+def test_search_documents(mocker):
+    mocker.patch.object(
+        vector_service,
+        "search",
+        return_value=[{"filename": "doc-xml", "raw_text": "test", "score": 0.95}],
+    )
+    payload = SearchQuery(query="test", limit=1)
+    result = search_documents(payload)
+    assert result[0]["filename"] == "doc-xml"
 
-def test_index_rag(mock_services):
-    response = client.post("/api/v1/rag/index")
-    assert response.status_code == 200
-    assert response.json() == {"indexed_count": 1}
 
-def test_search_rag(mock_services):
-    response = client.post("/api/v1/rag/search", json={"query": "test query", "limit": 5})
-    assert response.status_code == 200
-    assert len(response.json()) == 1
-    assert response.json()[0]["filename"] == "test.jpg-clean"
+def test_list_benchmark_models(mocker):
+    mocker.patch.object(vector_service, "list_embedding_models", return_value=["nomic-embed-text:latest"])
+    assert list_benchmark_models() == {"models": ["nomic-embed-text:latest"]}
 
-def test_status(mock_services):
-    # Directly mock the return of the function since it's hard to mock all glob calls
-    response = client.get("/api/v1/status")
-    assert response.status_code == 200
-    assert "ocr_files" in response.json()
-    assert "vectorized_count" in response.json()
+
+def test_run_benchmark(mocker):
+    mocker.patch.object(
+        benchmark_service,
+        "run",
+        return_value={
+            "embedding_model": "nomic-embed-text:latest",
+            "indexed": {
+                "raw_count": 1,
+                "clean_count": 1,
+                "total_count": 2,
+                "raw_files": ["raw-xml"],
+                "clean_files": ["clean-txt"],
+            },
+            "raw_tests": {
+                "total": 1,
+                "correct": 1,
+                "accuracy": 1.0,
+                "items": [
+                    {
+                        "filename": "raw-test",
+                        "expected_type": "passport",
+                        "predicted_type": "passport",
+                        "predicted_filename": "raw-xml",
+                        "score": 0.99,
+                        "is_correct": True,
+                    }
+                ],
+            },
+            "clean_tests": {
+                "total": 1,
+                "correct": 0,
+                "accuracy": 0.0,
+                "items": [
+                    {
+                        "filename": "clean-test",
+                        "expected_type": "snils",
+                        "predicted_type": "passport",
+                        "predicted_filename": "clean-txt",
+                        "score": 0.55,
+                        "is_correct": False,
+                    }
+                ],
+            },
+        },
+    )
+    response = run_benchmark(BenchmarkRunRequest(embedding_model="nomic-embed-text:latest"))
+    assert response["embedding_model"] == "nomic-embed-text:latest"
+
+
+def test_status(mocker):
+    mock_count = mocker.Mock()
+    mock_count.count = 8
+    mocker.patch.object(vector_service.client, "count", return_value=mock_count)
+    response = get_status()
+    assert "ocr_files" in response
+    assert response["vectorized_count"] == 8

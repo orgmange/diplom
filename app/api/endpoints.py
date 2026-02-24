@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any
 from app.services.ocr_service import OCRService
@@ -17,11 +17,13 @@ benchmark_service = BenchmarkService(vector_service)
 class SearchQuery(BaseModel):
     query: str
     limit: int = 5
+    model: str | None = None
 
 class StructureRequest(BaseModel):
     filename: str  # Имя файла из data/ocr
     model_name: str = "llama3:latest"
     use_raw_for_search: bool = True
+    reindex: bool = False
 
 class StatusResponse(BaseModel):
     ocr_files: int
@@ -57,11 +59,39 @@ class BenchmarkIndexedResponse(BaseModel):
     clean_files: List[str]
 
 
+class BenchmarkPreparedResponse(BaseModel):
+    prepared_xml: int
+    prepared_clean: int
+
+
+class BenchmarkOverallResponse(BaseModel):
+    total: int
+    correct: int
+    accuracy: float
+
+
 class BenchmarkRunResponse(BaseModel):
     embedding_model: str
+    prepared: BenchmarkPreparedResponse
     indexed: BenchmarkIndexedResponse
+    overall: BenchmarkOverallResponse
     raw_tests: BenchmarkGroupResponse
     clean_tests: BenchmarkGroupResponse
+
+
+@router.post("/ocr/scan", response_model=Dict[str, List[str]])
+def scan_ocr():
+    """Сканирует data/docs/*/image и запускает OCR для новых изображений."""
+    processed = ocr_service.process_docs_directory()
+    return {"processed_files": processed}
+
+
+@router.post("/ocr/clean", response_model=Dict[str, List[Dict[str, str]]])
+def clean_ocr():
+    """Очищает XML-файлы из data/docs/*/xml в data/docs/*/clean."""
+    cleaned = cleaner_service.process_docs_directory()
+    return {"cleaned_files": cleaned}
+
 
 @router.get("/rag/models", response_model=Dict[str, List[str]])
 def list_models():
@@ -97,7 +127,7 @@ def index_documents():
 @router.post("/rag/search", response_model=List[Dict[str, Any]])
 def search_documents(query: SearchQuery):
     """Ищет документы по смыслу."""
-    results = vector_service.search(query.query, query.limit)
+    results = vector_service.search(query.query, query.limit, embedding_model=query.model)
     return results
 
 @router.post("/rag/structure", response_model=Dict[str, Any])
@@ -124,11 +154,16 @@ def structure_document(request: StructureRequest):
         with open(xml_path, "r", encoding="utf-8") as f:
             raw_text = f.read().strip()
             
-    # 2. Выполняем структурирование
+    # 2. Переиндексация при необходимости
+    if request.reindex:
+        vector_service.reindex_all(embedding_model=request.model_name)
+            
+    # 3. Выполняем структурирование
     result = structuring_service.structure(
         raw_text=raw_text if request.use_raw_for_search else cleaned_text,
         cleaned_text=cleaned_text,
-        model_name=request.model_name
+        model_name=request.model_name,
+        embedding_model=request.model_name
     )
     
     return result
@@ -136,16 +171,24 @@ def structure_document(request: StructureRequest):
 @router.get("/status", response_model=StatusResponse)
 def get_status():
     """Возвращает текущую статистику."""
-    # Count files (simple implementation)
-    ocr_files = len(list(ocr_service.processed_files)) if hasattr(ocr_service, 'processed_files') else 0
-    # Re-check directories
-    import os
     from app.core.config import settings
-    
-    ocr_count = len(list(settings.OCR_DIR.glob("*-xml"))) if settings.OCR_DIR.exists() else 0
-    clean_count = len(list(settings.OCR_DIR.glob("*-clean"))) if settings.OCR_DIR.exists() else 0
-    
-    # Check Qdrant count
+
+    ocr_count = 0
+    clean_count = 0
+    if settings.DOCS_DIR.exists():
+        for doc_dir in settings.DOCS_DIR.iterdir():
+            if not doc_dir.is_dir():
+                continue
+            xml_dir = doc_dir / "xml"
+            clean_dir = doc_dir / "clean"
+            if xml_dir.exists():
+                ocr_count += len([path for path in xml_dir.iterdir() if path.is_file()])
+            if clean_dir.exists():
+                clean_count += len([path for path in clean_dir.iterdir() if path.is_file()])
+    elif settings.OCR_DIR.exists():
+        ocr_count = len(list(settings.OCR_DIR.glob("*-xml")))
+        clean_count = len(list(settings.OCR_DIR.glob("*-clean")))
+
     try:
         count_res = vector_service.client.count(collection_name=settings.COLLECTION_NAME)
         vec_count = count_res.count

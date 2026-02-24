@@ -105,6 +105,11 @@ class VectorService:
                 return doc_type
         return None
 
+    def _iter_doc_dirs(self) -> List[Path]:
+        if not settings.DOCS_DIR.exists():
+            return []
+        return sorted(path for path in settings.DOCS_DIR.iterdir() if path.is_dir())
+
     def _upsert_points(self, points: List[models.PointStruct]):
         if not points:
             return
@@ -224,6 +229,62 @@ class VectorService:
         self._upsert_points(points)
         return indexed
 
+    def index_docs_directory(self, embedding_model: Optional[str] = None) -> List[str]:
+        """Индексирует данные из data/docs/*/xml и data/docs/*/clean."""
+        self.ensure_collection()
+        indexed: List[str] = []
+        points: List[models.PointStruct] = []
+        for doc_dir in self._iter_doc_dirs():
+            doc_type = doc_dir.name
+            xml_dir = doc_dir / "xml"
+            clean_dir = doc_dir / "clean"
+            if xml_dir.exists():
+                for xml_path in sorted(path for path in xml_dir.iterdir() if path.is_file()):
+                    raw_text = xml_path.read_text(encoding="utf-8").strip()
+                    if not raw_text:
+                        continue
+                    vector = self.vectorize_text(raw_text, embedding_model=embedding_model)
+                    points.append(
+                        models.PointStruct(
+                            id=self.generate_id(f"docs_raw_{doc_type}_{xml_path.name}"),
+                            vector=vector,
+                            payload={
+                                "filename": f"{doc_type}/{xml_path.name}",
+                                "raw_text": raw_text,
+                                "cleaned_text": "",
+                                "is_example": False,
+                                "is_cleaned": False,
+                                "source_mode": "raw",
+                                "doc_type": doc_type,
+                            },
+                        )
+                    )
+                    indexed.append(f"{doc_type}/{xml_path.name}")
+            if clean_dir.exists():
+                for clean_path in sorted(path for path in clean_dir.iterdir() if path.is_file()):
+                    clean_text = clean_path.read_text(encoding="utf-8").strip()
+                    if not clean_text:
+                        continue
+                    vector = self.vectorize_text(clean_text, embedding_model=embedding_model)
+                    points.append(
+                        models.PointStruct(
+                            id=self.generate_id(f"docs_clean_{doc_type}_{clean_path.name}"),
+                            vector=vector,
+                            payload={
+                                "filename": f"{doc_type}/{clean_path.name}",
+                                "raw_text": "",
+                                "cleaned_text": clean_text,
+                                "is_example": False,
+                                "is_cleaned": True,
+                                "source_mode": "clean",
+                                "doc_type": doc_type,
+                            },
+                        )
+                    )
+                    indexed.append(f"{doc_type}/{clean_path.name}")
+        self._upsert_points(points)
+        return indexed
+
     def _merge_filters(
         self,
         only_examples: bool,
@@ -239,6 +300,23 @@ class VectorService:
         if not must_conditions:
             return query_filter
         return models.Filter(must=must_conditions)
+
+    def reindex_all(self, embedding_model: Optional[str] = None) -> Dict[str, Any]:
+        """Полностью очищает и переиндексирует все данные (примеры, OCR и документы)."""
+        vector_size = self.get_embedding_size(embedding_model=embedding_model)
+        self.reset_collection(vector_size=vector_size)
+        
+        indexed_examples = self.index_examples(embedding_model=embedding_model)
+        indexed_ocr = self.index_directory(embedding_model=embedding_model)
+        indexed_docs = self.index_docs_directory(embedding_model=embedding_model)
+        
+        return {
+            "embedding_model": embedding_model or settings.EMBEDDING_MODEL,
+            "indexed_examples": len(indexed_examples),
+            "indexed_ocr": len(indexed_ocr),
+            "indexed_docs": len(indexed_docs),
+            "total": len(indexed_examples) + len(indexed_ocr) + len(indexed_docs)
+        }
 
     def search(
         self,

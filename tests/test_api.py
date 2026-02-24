@@ -1,12 +1,16 @@
 from app.api.endpoints import (
     BenchmarkRunRequest,
     SearchQuery,
+    clean_ocr,
     get_status,
     index_documents,
     list_benchmark_models,
     run_benchmark,
+    scan_ocr,
     search_documents,
     benchmark_service,
+    cleaner_service,
+    ocr_service,
     vector_service,
 )
 
@@ -38,12 +42,21 @@ def test_run_benchmark(mocker):
         "run",
         return_value={
             "embedding_model": "nomic-embed-text:latest",
+            "prepared": {
+                "prepared_xml": 0,
+                "prepared_clean": 0,
+            },
             "indexed": {
                 "raw_count": 1,
                 "clean_count": 1,
                 "total_count": 2,
                 "raw_files": ["raw-xml"],
                 "clean_files": ["clean-txt"],
+            },
+            "overall": {
+                "total": 2,
+                "correct": 1,
+                "accuracy": 0.5,
             },
             "raw_tests": {
                 "total": 1,
@@ -88,3 +101,17 @@ def test_status(mocker):
     response = get_status()
     assert "ocr_files" in response
     assert response["vectorized_count"] == 8
+
+
+def test_scan_ocr(mocker):
+    mocker.patch.object(ocr_service, "process_docs_directory", return_value=["passport/a.jpg"])
+    assert scan_ocr() == {"processed_files": ["passport/a.jpg"]}
+
+
+def test_clean_ocr(mocker):
+    mocker.patch.object(
+        cleaner_service,
+        "process_docs_directory",
+        return_value=[{"filename": "a.jpg-clean", "snippet": "text"}],
+    )
+    assert clean_ocr() == {"cleaned_files": [{"filename": "a.jpg-clean", "snippet": "text"}]}

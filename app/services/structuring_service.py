@@ -108,27 +108,49 @@ class StructuringService:
         Основной метод: ищет похожий пример, строит промпт и вызывает LLM.
         """
         # 1. Поиск наиболее похожего примера по сырому тексту
-        logger.info(f"Searching for examples for raw text (len={len(raw_text)})")
-        examples = self.vector_service.search(
+        logger.info(f"Searching for examples using model: {embedding_model or 'default'}")
+        
+        # Берем 3 примера, чтобы выбрать лучший по doc_type или отсечь шум
+        all_results = self.vector_service.search(
             raw_text,
-            limit=1,
+            limit=3,
             only_examples=True,
             embedding_model=embedding_model,
         )
         
+        # Фильтруем по порогу сходства
+        threshold = 0.4
+        examples = [r for r in all_results if r.get('score', 0) >= threshold]
+        
         doc_type = None
         if examples:
-            doc_type = examples[0].get('doc_type')
-            logger.info(f"Found best example: {examples[0].get('filename')} (type: {doc_type})")
+            # Берем тип из самого релевантного примера
+            best_match = examples[0]
+            doc_type = best_match.get('doc_type')
+            logger.info(f"RAG Match: {best_match.get('filename')} (type: {doc_type}, score: {best_match.get('score'):.4f})")
+            
+            # Оставляем только 1 лучший пример для Few-Shot промпта, 
+            # чтобы не раздувать контекст и не путать модель разными типами
+            examples = [best_match]
         else:
-            # Пытаемся определить тип документа по тексту, если RAG не помог
-            doc_type = self.vector_service._detect_doc_type(cleaned_text[:100])
-            logger.warning(f"No examples found. Detected type from text: {doc_type}")
+            if all_results:
+                logger.warning(f"Best RAG match below threshold: {all_results[0].get('filename')} (score: {all_results[0].get('score'):.4f})")
+            else:
+                logger.warning("No examples found in vector store.")
+            
+            # Fallback: определяем тип по тексту
+            doc_type = self.vector_service._detect_doc_type(cleaned_text[:200])
+            logger.info(f"Fallback detection: {doc_type}")
 
         # 2. Формирование промпта и схемы
         truncated_cleaned = cleaned_text[:8000]
         prompt = self.build_prompt(truncated_cleaned, examples)
         schema = self._get_schema_for_type(doc_type)
+        
+        if schema:
+            logger.info(f"Using structured output schema for type: {doc_type}")
+        else:
+            logger.warning(f"No schema found for type: {doc_type}. Falling back to generic JSON.")
         
         if schema:
             logger.info(f"Using structured output schema for type: {doc_type}")

@@ -1,0 +1,124 @@
+<node type="RIL_PAGE" W="2133" H="1200">
+    <node type="RIL_SECTION_HEADER" X="872" Y="332" W="718" H="58" cnf="80">
+        <node type="RIL_TEXTLINE" X="860" Y="320" W="740" H="74" angle="-0.000000000" cnf="89">
+            <node type="RIL_WORD" X="860" Y="320" W="341" H="74">&#1042;&#1054;&#1044;&#1048;&#1058;&#1045;&#1051;&#1068;&#1057;&#1050;&#1054;&#1045;</node>
+            <node type="RIL_WORD" X="1230" Y="320" W="370" H="74">&#1059;&#1044;&#1054;&#1057;&#1058;&#1054;&#1042;&#1045;&#1056;&#1045;&#1053;&#1048;&#1045;</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="883" Y="922" W="225" H="36" cnf="73">
+        <node type="RIL_TEXTLINE" X="872" Y="916" W="48" H="40" angle="0.000000000" cnf="99">
+            <node type="RIL_WORD" X="872" Y="916" W="48" H="40">9.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="881" Y="823" W="348" H="60" cnf="72">
+        <node type="RIL_TEXTLINE" X="940" Y="814" W="288" H="40" angle="-0.924045444" cnf="99">
+            <node type="RIL_WORD" X="940" Y="814" W="185" H="40">&#1048;&#1056;&#1050;&#1059;&#1058;&#1057;&#1050;&#1040;&#1071;</node>
+            <node type="RIL_WORD" X="1145" Y="814" W="82" H="40">&#1054;&#1041;&#1051;.</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="942" Y="850" W="246" H="36" angle="-0.971021831" cnf="99">
+            <node type="RIL_WORD" X="942" Y="850" W="164" H="36">IRKUTSKAIA</node>
+            <node type="RIL_WORD" X="1122" Y="850" W="65" H="36">OBL.</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="874" Y="820" W="40" H="36" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="874" Y="820" W="40" H="36">8.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="880" Y="789" W="270" H="30" cnf="68">
+        <node type="RIL_TEXTLINE" X="932" Y="782" W="222" H="36" angle="-0.924045265" cnf="99">
+            <node type="RIL_WORD" X="932" Y="782" W="37" H="36">38</node>
+            <node type="RIL_WORD" X="987" Y="782" W="37" H="36">28</node>
+            <node type="RIL_WORD" X="1043" Y="782" W="111" H="36">755642</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="872" Y="784" W="46" H="36" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="872" Y="784" W="46" H="36">5.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="873" Y="417" W="203" H="59" cnf="67">
+        <node type="RIL_TEXTLINE" X="932" Y="408" W="148" H="36" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="932" Y="408" W="148" H="36">&#1041;&#1040;&#1041;&#1050;&#1048;&#1053;</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="936" Y="444" W="116" H="30" angle="0.000000000" cnf="99">
+            <node type="RIL_WORD" X="936" Y="444" W="116" H="30">BABKIN</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="866" Y="410" W="42" H="38" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="866" Y="410" W="42" H="38">1.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="878" Y="558" W="347" H="97" cnf="66">
+        <node type="RIL_TEXTLINE" X="938" Y="588" W="288" H="34" angle="0.000000000" cnf="99">
+            <node type="RIL_WORD" X="938" Y="588" W="185" H="34">&#1048;&#1056;&#1050;&#1059;&#1058;&#1057;&#1050;&#1040;&#1071;</node>
+            <node type="RIL_WORD" X="1143" Y="588" W="82" H="34">&#1054;&#1041;&#1051;.</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="940" Y="620" W="244" H="34" angle="-0.707319379" cnf="98">
+            <node type="RIL_WORD" X="940" Y="620" W="76" H="34">IRKUT</node>
+            <node type="RIL_WORD" X="1031" Y="620" W="76" H="34">SKAIA</node>
+            <node type="RIL_WORD" X="1123" Y="620" W="61" H="34">OBL.</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="938" Y="552" W="174" H="34" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="938" Y="552" W="174" H="34">24.09.1998</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="868" Y="554" W="44" H="34" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="868" Y="554" W="44" H="34">3.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="875" Y="487" W="420" H="59" cnf="64">
+        <node type="RIL_TEXTLINE" X="936" Y="476" W="360" H="40" angle="-0.753848255" cnf="99">
+            <node type="RIL_WORD" X="936" Y="476" W="112" H="40">&#1040;&#1056;&#1058;&#1045;&#1052;</node>
+            <node type="RIL_WORD" X="1071" Y="476" W="225" H="40">&#1044;&#1052;&#1048;&#1058;&#1056;&#1048;&#1045;&#1042;&#1048;&#1063;</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="938" Y="512" W="298" H="34" angle="-0.774220169" cnf="98">
+            <node type="RIL_WORD" X="938" Y="512" W="87" H="34">ARTEM</node>
+            <node type="RIL_WORD" X="1043" Y="512" W="192" H="34">DMITRIEVICH</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="868" Y="484" W="42" H="32" angle="-0.000000000" cnf="99">
+            <node type="RIL_WORD" X="868" Y="484" W="42" H="32">2.</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="881" Y="668" W="541" H="31" cnf="58">
+        <node type="RIL_TEXTLINE" X="870" Y="664" W="246" H="38" angle="-0.000000000" cnf="96">
+            <node type="RIL_WORD" X="870" Y="664" W="52" H="38">4a)</node>
+            <node type="RIL_WORD" X="940" Y="664" W="175" H="38">27.09.2016</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="1182" Y="652" W="242" H="44" angle="-0.774220169" cnf="99">
+            <node type="RIL_WORD" X="1182" Y="652" W="51" H="44">4b)</node>
+            <node type="RIL_WORD" X="1251" Y="652" W="172" H="44">27.09.2026</node>
+        </node>
+    </node>
+    <node type="RIL_LIST_ITEM" X="880" Y="711" W="259" H="59" cnf="50">
+        <node type="RIL_TEXTLINE" X="872" Y="704" W="270" H="40" angle="-1.101706147" cnf="88">
+            <node type="RIL_WORD" X="872" Y="704" W="57" H="40">4c)</node>
+            <node type="RIL_WORD" X="949" Y="704" W="96" H="40">&#1043;&#1048;&#1041;&#1044;&#1044;</node>
+            <node type="RIL_WORD" X="1064" Y="704" W="77" H="40">3818</node>
+        </node>
+        <node type="RIL_TEXTLINE" X="938" Y="738" W="166" H="32" angle="-0.806929410" cnf="99">
+            <node type="RIL_WORD" X="938" Y="738" W="83" H="32">GIBDD</node>
+            <node type="RIL_WORD" X="1037" Y="738" W="66" H="32">3818</node>
+        </node>
+    </node>
+    <node type="RIL_TEXTLINE" X="598" Y="320" W="124" H="62" angle="-0.000000000" cnf="99">
+        <node type="RIL_WORD" X="598" Y="320" W="124" H="62">RUS</node>
+    </node>
+    <node type="RIL_TEXTLINE" X="512" Y="944" W="38" H="38" angle="-0.000000000" cnf="99">
+        <node type="RIL_WORD" X="512" Y="944" W="38" H="38">7.</node>
+    </node>
+    <node type="RIL_TEXTLINE" X="510" Y="890" W="38" H="36" angle="-0.000000000" cnf="99">
+        <node type="RIL_WORD" X="510" Y="890" W="38" H="36">6.</node>
+    </node>
+    <node type="RIL_TABLE" X="949" Y="907" W="158" H="54">
+        <node type="RIL_TABLE_CELL" X="994" Y="908" W="68" H="51" pts="1062.99_908.745;1062.99_960.016;994.953_960.016;994.953_908.745;" coords="1_0;">
+            <node type="RIL_TEXTLINE" X="1002" Y="913" W="54" H="40" angle="-0.000000000" cnf="61">
+                <node type="RIL_WORD" X="1002" Y="913" W="54" H="40">&#1042;1</node>
+            </node>
+        </node>
+        <node type="RIL_TABLE_CELL" X="1062" Y="908" W="43" H="51" pts="1106.52_908.745;1106.52_960.016;1062.99_960.016;1062.99_908.745;" coords="2_0;">
+            <node type="RIL_TEXTLINE" X="1067" Y="912" W="34" H="40" angle="-0.000000000" cnf="60">
+                <node type="RIL_WORD" X="1067" Y="912" W="34" H="40">&#1052;</node>
+            </node>
+        </node>
+        <node type="RIL_TABLE_CELL" X="950" Y="908" W="44" H="51" pts="994.953_908.745;994.953_960.016;950.432_960.016;950.432_908.745;" coords="0_0;">
+            <node type="RIL_TEXTLINE" X="953" Y="915" W="32" H="38" angle="-0.000000000" cnf="61">
+                <node type="RIL_WORD" X="953" Y="915" W="32" H="38">B</node>
+            </node>
+        </node>
+    </node>
+</node>

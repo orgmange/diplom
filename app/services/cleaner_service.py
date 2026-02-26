@@ -82,6 +82,43 @@ class CleanerService:
         except ET.ParseError:
             return ""
 
+    def _iter_doc_dirs(self) -> List[Path]:
+        if not settings.DOCS_DIR.exists():
+            return []
+        return sorted(path for path in settings.DOCS_DIR.iterdir() if path.is_dir())
+
+    def process_docs_directory(self) -> List[Dict[str, str]]:
+        """
+        Сканирует data/docs/*/xml и создает data/docs/*/clean.
+        Возвращает список объектов с информацией об обработанных файлах.
+        """
+        processed: List[Dict[str, str]] = []
+        for doc_dir in self._iter_doc_dirs():
+            xml_dir = doc_dir / "xml"
+            clean_dir = doc_dir / "clean"
+            if not xml_dir.exists():
+                continue
+            clean_dir.mkdir(parents=True, exist_ok=True)
+            xml_files = sorted(path for path in xml_dir.iterdir() if path.is_file())
+            for xml_path in xml_files:
+                clean_filename = xml_path.name.replace("-xml", "-clean")
+                clean_path = clean_dir / clean_filename
+                if clean_path.exists():
+                    continue
+                try:
+                    content = self.parse_xml_bytes(xml_path.read_bytes())
+                    if content:
+                        clean_path.write_text(content, encoding="utf-8")
+                        processed.append(
+                            {
+                                "filename": f"{doc_dir.name}/{clean_filename}",
+                                "snippet": content[:100] + "..." if len(content) > 100 else content,
+                            }
+                        )
+                except Exception as e:
+                    print(f"Error cleaning {xml_path.name}: {e}")
+        return processed
+
     def process_directory(self) -> List[Dict[str, str]]:
         """
         Сканирует директорию на наличие *-xml файлов и создает *-clean версии.

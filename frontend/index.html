@@ -33,78 +33,73 @@
 
             <div class="card">
                 <h3>3. Индексация (RAG)</h3>
-                <p>Векторизует данные и примеры для поиска.</p>
+                <p>Векторизует примеры (Few-shot) для поиска. Основные документы индексируются через блок Конфигурации.</p>
                 <div class="btn-group">
-                    <button onclick="runIndex()">Индексировать OCR</button>
                     <button onclick="runIndexExamples()" class="secondary">Индексировать примеры</button>
                 </div>
                 <div id="index-result" class="result-box"></div>
             </div>
 
             <div class="card full-width">
-                <h3>4. Структурирование (LLM)</h3>
-                <p>Преобразование OCR-текста в JSON с помощью выбранной модели и RAG.</p>
+                <h3>4. Конфигурация RAG и Моделей</h3>
+                <p>Выбор модели для эмбеддингов и генерации. Нажмите "Переиндексировать всё", чтобы очистить базу и создать новые векторы через выбранную модель.</p>
                 <div class="config-row">
                     <div class="model-select">
-                        <label for="model-selector">Модель Ollama:</label>
-                        <select id="model-selector">
-                            <option value="llama3:latest">llama3:latest</option>
-                        </select>
-                        <button onclick="updateModels()" class="small-btn">🔄</button>
+                        <label for="model-selector">Модель Ollama (LLM + Embedding):</label>
+                        <div class="input-group">
+                            <select id="model-selector">
+                                <option value="llama3:latest">llama3:latest</option>
+                            </select>
+                            <button onclick="updateModels()" class="small-btn">🔄</button>
+                        </div>
                     </div>
                     <div class="filename-select">
-                        <label class="reindex-checkbox">
-                            <input type="checkbox" id="reindex-checkbox"> Переиндексировать всё для этой модели
-                        </label>
-                        <input type="text" id="filename-input" placeholder="Имя файла (например: passport2.jpg-clean)">
-                        <button onclick="runStructure()">Запустить структурирование</button>
+                        <button onclick="runFullReindex()" class="warning-btn">Переиндексировать всё</button>
                     </div>
                 </div>
-                <div id="structure-result" class="result-box json-view"></div>
+                <div id="structure-result" class="result-box"></div>
             </div>
         </div>
 
         <div class="search-panel">
             <h2>Поиск по документам</h2>
             <div class="search-config">
-                <label for="search-model-selector">Модель для поиска:</label>
-                <select id="search-model-selector">
-                    <option value="">(по умолчанию)</option>
-                </select>
-                <button onclick="updateSearchModels()" class="small-btn">🔄</button>
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="search-cleaned-only" checked> Только Clean
+                </label>
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="search-templates-only" checked> Без примеров (Few-shot)
+                </label>
             </div>
             <div class="search-box">
-                <input type="text" id="search-query" placeholder="Введите запрос (например: паспортные данные)...">
+                <textarea id="search-query" placeholder="Вставьте OCR текст целиком (с переносами строк) для точного поиска..." rows="5"></textarea>
                 <button onclick="runSearch()">Найти</button>
             </div>
             <div id="search-results" class="results-list"></div>
         </div>
 
         <div class="search-panel">
-            <h2>Бенчмарк Embedding</h2>
-            <p>Полный цикл: очистка коллекции, индексация raw/clean шаблонов и проверка на raw/clean тестах.</p>
+            <h2>Бенчмарк Структурирования (LLM)</h2>
+            <p>Проверка точности извлечения JSON данных через LLM. Сравнивается с эталонными значениями в data/benchmark/references.</p>
             <div class="config-row">
                 <div class="model-select">
-                    <label for="embedding-model-selector">Embedding-модель:</label>
-                    <select id="embedding-model-selector">
+                    <label for="llm-benchmark-model-selector">LLM Модель:</label>
+                    <select id="llm-benchmark-model-selector">
+                        <option value="llama3:latest">llama3:latest</option>
+                    </select>
+                </div>
+                <div class="model-select">
+                    <label for="llm-benchmark-embedding-selector">Embedding Модель (для RAG):</label>
+                    <select id="llm-benchmark-embedding-selector">
                         <option value="">Загрузка...</option>
                     </select>
                 </div>
                 <div class="filename-select">
-                    <button id="run-benchmark-btn" onclick="runEmbeddingBenchmark()">Запустить бенчмарк</button>
+                    <button id="run-struct-benchmark-btn" onclick="runStructuringBenchmark()">Запустить LLM бенчмарк</button>
                 </div>
             </div>
-            <div id="benchmark-summary" class="result-box"></div>
-            <div class="benchmark-grid">
-                <div>
-                    <h3>Raw тесты</h3>
-                    <div id="benchmark-raw" class="result-box"></div>
-                </div>
-                <div>
-                    <h3>Clean тесты</h3>
-                    <div id="benchmark-clean" class="result-box"></div>
-                </div>
-            </div>
+            <div id="struct-benchmark-summary" class="result-box"></div>
+            <div id="struct-benchmark-results" class="result-box full-width"></div>
         </div>
     </div>
 

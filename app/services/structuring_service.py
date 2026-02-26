@@ -40,7 +40,8 @@ class StructuringService:
             prompt += "### EXAMPLES OF EXTRACTION:\n\n"
             for i, ex in enumerate(examples):
                 prompt += f"--- EXAMPLE {i+1} ---\n"
-                prompt += f"OCR INPUT:\n{ex.get('cleaned_text')}\n\n"
+                ex_text = str(ex.get('cleaned_text', ''))[:4000]
+                prompt += f"OCR INPUT:\n{ex_text}\n\n"
                 prompt += f"JSON OUTPUT:\n{ex.get('json_output')}\n\n"
             prompt += "--- END OF EXAMPLES ---\n\n"
 
@@ -51,13 +52,24 @@ class StructuringService:
         
         return prompt
 
-    def structure(self, raw_text: str, cleaned_text: str, model_name: str) -> Dict[str, Any]:
+    def structure(
+        self,
+        raw_text: str,
+        cleaned_text: str,
+        model_name: str,
+        embedding_model: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """
         Основной метод: ищет похожий пример, строит промпт и вызывает LLM.
         """
         # 1. Поиск наиболее похожего примера по сырому тексту
         logger.info(f"Searching for examples for raw text (len={len(raw_text)})")
-        examples = self.vector_service.search(raw_text, limit=1, only_examples=True)
+        examples = self.vector_service.search(
+            raw_text,
+            limit=1,
+            only_examples=True,
+            embedding_model=embedding_model,
+        )
         
         if examples:
             logger.info(f"Found best example: {examples[0].get('filename')} (score: {examples[0].get('score'):.4f})")
@@ -65,24 +77,39 @@ class StructuringService:
             logger.warning("No examples found in vector store.")
 
         # 2. Формирование промпта
-        prompt = self.build_prompt(cleaned_text, examples)
+        # Ограничиваем длину текста для LLM, чтобы не превысить контекстное окно
+        truncated_cleaned = cleaned_text[:8000]
+        prompt = self.build_prompt(truncated_cleaned, examples)
         
-        # 3. Вызов Ollama с JSON форматом
+        # 3. Вызов Ollama
         logger.info(f"Calling Ollama model '{model_name}' for structuring...")
         try:
             response = self.ollama_client.generate(
                 model=model_name,
                 prompt=prompt,
                 format="json",
-                options={"temperature": 0.1} # Низкая температура для стабильности
+                options={"temperature": 0.1}
             )
             
-            result_str = response.get('response', '{}')
-            return json.loads(result_str)
+            result_str = response.get('response', '').strip()
+            if not result_str:
+                raise ValueError("Empty response from model")
+
+            # Пытаемся распарсить как есть
+            try:
+                return json.loads(result_str)
+            except json.JSONDecodeError:
+                # Если не вышло, пытаемся найти JSON блок в тексте (на случай если format="json" не сработал идеально)
+                import re
+                json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
+                if json_match:
+                    return json.loads(json_match.group(1))
+                raise
+                
         except Exception as e:
             logger.error(f"Failed to structure with model {model_name}: {e}")
             return {
                 "error": str(e),
                 "model": model_name,
-                "prompt_used": prompt[:200] + "..."
+                "raw_response_snippet": result_str[:100] if 'result_str' in locals() else ""
             }

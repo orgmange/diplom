@@ -18,6 +18,8 @@ class Settings:
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     DATA_DIR: Path = BASE_DIR / "data"
     OCR_DIR: Path = DATA_DIR / "ocr"
+    DOCS_DIR: Path = DATA_DIR / "docs"
+    BENCHMARK_REF_DIR: Path = DATA_DIR / "benchmark" / "references"
     
     # Qdrant Settings
     QDRANT_HOST: str = os.getenv("QDRANT_HOST", "localhost")

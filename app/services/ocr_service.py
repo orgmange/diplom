@@ -2,7 +2,7 @@ import base64
 import time
 import requests
 from pathlib import Path
-from typing import List, Optional, Dict
+from typing import List, Optional
 from app.core.config import settings
 
 class OCRService:
@@ -76,6 +76,44 @@ class OCRService:
             
         raw_b64 = results[0] if isinstance(results, list) else results
         return base64.b64decode(raw_b64)
+
+    def _iter_doc_dirs(self) -> List[Path]:
+        if not settings.DOCS_DIR.exists():
+            return []
+        return sorted(path for path in settings.DOCS_DIR.iterdir() if path.is_dir())
+
+    def process_docs_directory(self) -> List[str]:
+        """
+        Сканирует data/docs/*/image и создает XML в data/docs/*/xml.
+        Возвращает список обработанных изображений.
+        """
+        processed_files: List[str] = []
+        for doc_dir in self._iter_doc_dirs():
+            image_dir = doc_dir / "image"
+            xml_dir = doc_dir / "xml"
+            if not image_dir.exists():
+                continue
+            xml_dir.mkdir(parents=True, exist_ok=True)
+            images = sorted(
+                f for f in image_dir.iterdir()
+                if f.suffix.lower() in self.image_extensions and f.is_file()
+            )
+            for img in images:
+                xml_path = xml_dir / f"{img.name}-xml"
+                if xml_path.exists():
+                    continue
+                try:
+                    task_id = self.create_task(img)
+                    status = self.wait_for_task(task_id)
+                    if status == "success":
+                        result = self.fetch_result(task_id)
+                        if result:
+                            with open(xml_path, "wb") as f:
+                                f.write(result)
+                            processed_files.append(f"{doc_dir.name}/{img.name}")
+                except Exception as e:
+                    print(f"Error processing {img.name}: {e}")
+        return processed_files
 
     def process_directory(self) -> List[str]:
         """

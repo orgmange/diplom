@@ -1,11 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any
+from qdrant_client.http import models
 from app.services.ocr_service import OCRService
 from app.services.cleaner_service import CleanerService
 from app.services.vector_service import VectorService
 from app.services.structuring_service import StructuringService
 from app.services.benchmark_service import BenchmarkService
+from app.services.structuring_benchmark_service import StructuringBenchmarkService
 
 router = APIRouter()
 ocr_service = OCRService()
@@ -13,11 +15,14 @@ cleaner_service = CleanerService()
 vector_service = VectorService()
 structuring_service = StructuringService(vector_service)
 benchmark_service = BenchmarkService(vector_service)
+structuring_benchmark_service = StructuringBenchmarkService(structuring_service)
 
 class SearchQuery(BaseModel):
     query: str
     limit: int = 5
     model: str | None = None
+    is_cleaned: bool | None = None
+    only_templates: bool = False
 
 class StructureRequest(BaseModel):
     filename: str  # Имя файла из data/ocr
@@ -29,10 +34,16 @@ class StatusResponse(BaseModel):
     ocr_files: int
     cleaned_files: int
     vectorized_count: int
+    current_model: str
 
 
 class BenchmarkRunRequest(BaseModel):
     embedding_model: str
+
+
+class StructuringBenchmarkRunRequest(BaseModel):
+    model_name: str
+    embedding_model: str | None = None
 
 
 class BenchmarkItemResponse(BaseModel):
@@ -42,6 +53,17 @@ class BenchmarkItemResponse(BaseModel):
     predicted_filename: str | None
     score: float | None
     is_correct: bool
+    alternatives: List[Dict[str, Any]] | None = None
+
+
+class StructuringBenchmarkItemResponse(BaseModel):
+    filename: str
+    doc_type: str
+    processing_time: float
+    accuracy: float
+    is_reference_found: bool
+    result_json: Dict[str, Any]
+    reference_json: Dict[str, Any] | None
 
 
 class BenchmarkGroupResponse(BaseModel):
@@ -79,6 +101,16 @@ class BenchmarkRunResponse(BaseModel):
     clean_tests: BenchmarkGroupResponse
 
 
+class StructuringBenchmarkRunResponse(BaseModel):
+    model_name: str
+    embedding_model: str
+    total_files: int
+    files_with_reference: int
+    avg_processing_time: float
+    avg_accuracy: float
+    items: List[StructuringBenchmarkItemResponse]
+
+
 @router.post("/ocr/scan", response_model=Dict[str, List[str]])
 def scan_ocr():
     """Сканирует data/docs/*/image и запускает OCR для новых изображений."""
@@ -112,6 +144,15 @@ def run_benchmark(request: BenchmarkRunRequest):
     """Запускает полный цикл тестирования retrieval для embedding-модели."""
     return benchmark_service.run(request.embedding_model)
 
+@router.post("/rag/benchmark/structuring/run", response_model=StructuringBenchmarkRunResponse)
+def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
+    """Запускает бенчмарк структурирования для выбранной LLM модели."""
+    report = structuring_benchmark_service.run(
+        model_name=request.model_name,
+        embedding_model=request.embedding_model
+    )
+    return report.to_dict()
+
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])
 def index_examples():
     """Векторизует примеры из data/examples и сохраняет их в Qdrant."""
@@ -124,10 +165,39 @@ def index_documents():
     indexed = vector_service.index_directory()
     return {"indexed_files": indexed}
 
+@router.post("/rag/reindex", response_model=Dict[str, Any])
+def reindex_database(request: Dict[str, str]):
+    """Полная переиндексация базы с выбранной моделью."""
+    model_name = request.get("model_name")
+    if not model_name:
+        raise HTTPException(status_code=400, detail="model_name is required")
+    return vector_service.reindex_all(embedding_model=model_name)
+
 @router.post("/rag/search", response_model=List[Dict[str, Any]])
 def search_documents(query: SearchQuery):
     """Ищет документы по смыслу."""
-    results = vector_service.search(query.query, query.limit, embedding_model=query.model)
+    query_filter = None
+    must_conditions = []
+    
+    if query.is_cleaned is not None:
+        must_conditions.append(
+            models.FieldCondition(key="is_cleaned", match=models.MatchValue(value=query.is_cleaned))
+        )
+    
+    if query.only_templates:
+        must_conditions.append(
+            models.FieldCondition(key="is_example", match=models.MatchValue(value=False))
+        )
+        
+    if must_conditions:
+        query_filter = models.Filter(must=must_conditions)
+
+    results = vector_service.search(
+        query.query, 
+        query.limit, 
+        embedding_model=query.model,
+        query_filter=query_filter
+    )
     return results
 
 @router.post("/rag/structure", response_model=Dict[str, Any])
@@ -190,7 +260,7 @@ def get_status():
         clean_count = len(list(settings.OCR_DIR.glob("*-clean")))
 
     try:
-        count_res = vector_service.client.count(collection_name=settings.COLLECTION_NAME)
+        count_res = vector_service.client.count(collection_name=settings.COLLECTION_NAME, exact=True)
         vec_count = count_res.count
     except:
         vec_count = 0
@@ -198,5 +268,6 @@ def get_status():
     return {
         "ocr_files": ocr_count,
         "cleaned_files": clean_count,
-        "vectorized_count": vec_count
+        "vectorized_count": vec_count,
+        "current_model": vector_service._load_state()
     }

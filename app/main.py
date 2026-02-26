@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -7,8 +8,9 @@ from app.api.endpoints import router as api_router
 from app.core.config import settings
 
 # Настройка логирования с метками времени
+log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(
-    level=logging.INFO,
+    level=getattr(logging, log_level, logging.INFO),
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout)

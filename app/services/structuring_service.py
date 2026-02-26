@@ -132,9 +132,10 @@ class StructuringService:
         
         # 3. Вызов Ollama
         logger.info(f"Calling Ollama model '{model_name}' for structuring (structured output={bool(schema)})...")
+        logger.debug(f"PROMPT SENT TO LLM:\n{prompt}")
+        
         result_str = ""
         try:
-            # Если есть схема, передаем ее в format. Если нет - просто "json"
             response = self.ollama_client.generate(
                 model=model_name,
                 prompt=prompt,
@@ -143,13 +144,18 @@ class StructuringService:
             )
             
             result_str = response.get('response', '').strip()
+            logger.debug(f"RAW RESPONSE FROM LLM:\n{result_str}")
+            
             if not result_str:
+                # В случае пустого ответа логируем промпт в ERROR для дебага
+                logger.error(f"MODEL RETURNED EMPTY RESPONSE. Prompt snippet: {prompt[:500]}...")
                 raise ValueError("Empty response from model")
 
             return json.loads(result_str)
                 
         except Exception as e:
             logger.error(f"Failed to structure with model {model_name}: {e}")
+            logger.error(f"RAW RESPONSE AT MOMENT OF ERROR: {result_str}")
             
             # Fallback: пробуем найти JSON если схема не сработала или произошла ошибка
             if result_str:

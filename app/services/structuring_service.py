@@ -52,6 +52,51 @@ class StructuringService:
         
         return prompt
 
+    def _get_schema_for_type(self, doc_type: Optional[str]) -> Optional[Dict[str, Any]]:
+        """Загружает шаблон и преобразует его в упрощенную JSON Schema для Ollama."""
+        if not doc_type:
+            return None
+            
+        template_map = {
+            "passport": "passport_ru.json",
+            "driver_license": "driver_license_ru.json",
+            "snils": "snils.json",
+            "birth_certificate": "birth_certificate_ru.json"
+        }
+        
+        template_file = template_map.get(doc_type)
+        if not template_file:
+            return None
+            
+        try:
+            template_path = settings.BASE_DIR / "templates" / template_file
+            if not template_path.exists():
+                return None
+                
+            with open(template_path, "r", encoding="utf-8") as f:
+                template_data = json.load(f)
+                
+            # Генерируем простую схему, где все поля - строки
+            properties = {}
+            for key, val in template_data.items():
+                if isinstance(val, dict):
+                    nested_props = {k: {"type": "string"} for k in val.keys()}
+                    properties[key] = {
+                        "type": "object",
+                        "properties": nested_props
+                    }
+                else:
+                    properties[key] = {"type": "string"}
+                    
+            return {
+                "type": "object",
+                "properties": properties,
+                "required": list(properties.keys())
+            }
+        except Exception as e:
+            logger.error(f"Error generating schema for {doc_type}: {e}")
+            return None
+
     def structure(
         self,
         raw_text: str,
@@ -71,23 +116,29 @@ class StructuringService:
             embedding_model=embedding_model,
         )
         
+        doc_type = None
         if examples:
-            logger.info(f"Found best example: {examples[0].get('filename')} (score: {examples[0].get('score'):.4f})")
+            doc_type = examples[0].get('doc_type')
+            logger.info(f"Found best example: {examples[0].get('filename')} (type: {doc_type})")
         else:
-            logger.warning("No examples found in vector store.")
+            # Пытаемся определить тип документа по тексту, если RAG не помог
+            doc_type = self.vector_service._detect_doc_type(cleaned_text[:100])
+            logger.warning(f"No examples found. Detected type from text: {doc_type}")
 
-        # 2. Формирование промпта
-        # Ограничиваем длину текста для LLM, чтобы не превысить контекстное окно
+        # 2. Формирование промпта и схемы
         truncated_cleaned = cleaned_text[:8000]
         prompt = self.build_prompt(truncated_cleaned, examples)
+        schema = self._get_schema_for_type(doc_type)
         
         # 3. Вызов Ollama
-        logger.info(f"Calling Ollama model '{model_name}' for structuring...")
+        logger.info(f"Calling Ollama model '{model_name}' for structuring (structured output={bool(schema)})...")
+        result_str = ""
         try:
+            # Если есть схема, передаем ее в format. Если нет - просто "json"
             response = self.ollama_client.generate(
                 model=model_name,
                 prompt=prompt,
-                format="json",
+                format=schema or "json",
                 options={"temperature": 0.1}
             )
             
@@ -95,21 +146,24 @@ class StructuringService:
             if not result_str:
                 raise ValueError("Empty response from model")
 
-            # Пытаемся распарсить как есть
-            try:
-                return json.loads(result_str)
-            except json.JSONDecodeError:
-                # Если не вышло, пытаемся найти JSON блок в тексте (на случай если format="json" не сработал идеально)
-                import re
-                json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
-                if json_match:
-                    return json.loads(json_match.group(1))
-                raise
+            return json.loads(result_str)
                 
         except Exception as e:
             logger.error(f"Failed to structure with model {model_name}: {e}")
+            
+            # Fallback: пробуем найти JSON если схема не сработала или произошла ошибка
+            if result_str:
+                try:
+                    import re
+                    json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
+                    if json_match:
+                        return json.loads(json_match.group(1))
+                except:
+                    pass
+
             return {
                 "error": str(e),
                 "model": model_name,
-                "raw_response_snippet": result_str[:100] if 'result_str' in locals() else ""
+                "doc_type": doc_type,
+                "raw_response_snippet": result_str[:100] if result_str else ""
             }

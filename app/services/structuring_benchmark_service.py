@@ -145,7 +145,7 @@ class StructuringBenchmarkService:
             if raw_file.exists():
                 raw_text = raw_file.read_text(encoding="utf-8").strip()
 
-            logger.info(f"Processing {clean_file.name} ({doc_type})...")
+            logger.info(f"Processing {clean_file.name} (real type: {doc_type}, but not giving hints to LLM)...")
             # Замер времени структурирования
             start_time = time.time()
             result_json = self.structuring_service.structure(

@@ -130,6 +130,11 @@ class StructuringService:
         prompt = self.build_prompt(truncated_cleaned, examples)
         schema = self._get_schema_for_type(doc_type)
         
+        if schema:
+            logger.info(f"Using structured output schema for type: {doc_type}")
+        else:
+            logger.warning(f"No schema found for type: {doc_type}. Falling back to generic JSON.")
+        
         # 3. Вызов Ollama
         logger.info(f"Calling Ollama model '{model_name}' for structuring (structured output={bool(schema)})...")
         logger.debug(f"PROMPT SENT TO LLM:\n{prompt}")

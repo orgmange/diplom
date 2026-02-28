@@ -58,7 +58,9 @@ class BenchmarkItemResponse(BaseModel):
 
 class StructuringBenchmarkItemResponse(BaseModel):
     filename: str
-    doc_type: str
+    expected_type: str
+    detected_type: str
+    is_type_correct: bool
     processing_time: float
     accuracy: float
     is_reference_found: bool
@@ -106,6 +108,8 @@ class StructuringBenchmarkRunResponse(BaseModel):
     embedding_model: str
     total_files: int
     files_with_reference: int
+    correct_templates_count: int
+    template_accuracy: float
     avg_processing_time: float
     avg_accuracy: float
     items: List[StructuringBenchmarkItemResponse]

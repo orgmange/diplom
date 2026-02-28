@@ -103,16 +103,18 @@ class StructuringService:
         cleaned_text: str,
         model_name: str,
         embedding_model: Optional[str] = None,
+        expected_type: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Основной метод: ищет похожий пример, строит промпт и вызывает LLM.
+        Возвращает словарь с результатом и метаданными.
         """
-        # 1. Поиск наиболее похожего примера по сырому тексту
+        # 1. Поиск наиболее похожего примера по очищенному тексту
         logger.info(f"Searching for examples using model: {embedding_model or 'default'}")
         
         # Берем 3 примера, чтобы выбрать лучший по doc_type или отсечь шум
         all_results = self.vector_service.search(
-            raw_text,
+            cleaned_text,
             limit=3,
             only_examples=True,
             embedding_model=embedding_model,
@@ -142,6 +144,10 @@ class StructuringService:
             doc_type = self.vector_service._detect_doc_type(cleaned_text[:200])
             logger.info(f"Fallback detection: {doc_type}")
 
+        # Проверка на соответствие ожидаемому типу (для бенчмарков)
+        if expected_type and doc_type != expected_type:
+            logger.warning(f"Template mismatch: expected {expected_type}, but detected {doc_type}. Continuing with detected type.")
+
         # 2. Формирование промпта и схемы
         truncated_cleaned = cleaned_text[:8000]
         prompt = self.build_prompt(truncated_cleaned, examples)
@@ -152,16 +158,11 @@ class StructuringService:
         else:
             logger.warning(f"No schema found for type: {doc_type}. Falling back to generic JSON.")
         
-        if schema:
-            logger.info(f"Using structured output schema for type: {doc_type}")
-        else:
-            logger.warning(f"No schema found for type: {doc_type}. Falling back to generic JSON.")
-        
         # 3. Вызов Ollama
         logger.info(f"Calling Ollama model '{model_name}' for structuring (structured output={bool(schema)})...")
         logger.debug(f"PROMPT SENT TO LLM:\n{prompt}")
         
-        result_str = ""
+        result_json = {}
         try:
             response = self.ollama_client.generate(
                 model=model_name,
@@ -178,25 +179,24 @@ class StructuringService:
                 logger.error(f"MODEL RETURNED EMPTY RESPONSE. Prompt snippet: {prompt[:500]}...")
                 raise ValueError("Empty response from model")
 
-            return json.loads(result_str)
+            result_json = json.loads(result_str)
                 
         except Exception as e:
             logger.error(f"Failed to structure with model {model_name}: {e}")
-            logger.error(f"RAW RESPONSE AT MOMENT OF ERROR: {result_str}")
             
             # Fallback: пробуем найти JSON если схема не сработала или произошла ошибка
-            if result_str:
-                try:
-                    import re
-                    json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
-                    if json_match:
-                        return json.loads(json_match.group(1))
-                except:
-                    pass
+            try:
+                import re
+                json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
+                if json_match:
+                    result_json = json.loads(json_match.group(1))
+                else:
+                    result_json = {"error": str(e)}
+            except:
+                result_json = {"error": str(e)}
 
-            return {
-                "error": str(e),
-                "model": model_name,
-                "doc_type": doc_type,
-                "raw_response_snippet": result_str[:100] if result_str else ""
-            }
+        return {
+            "result": result_json,
+            "doc_type": doc_type,
+            "model": model_name
+        }

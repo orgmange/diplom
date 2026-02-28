@@ -255,6 +255,71 @@ button:disabled {
     background: #f8f9fa;
 }
 
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted #666;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 100;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -200px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.field-match {
+    color: #2ecc71;
+}
+
+.field-mismatch {
+    color: #e74c3c;
+}
+
+.field-missing {
+    color: #f39c12;
+}
+
+.type-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.type-ok {
+    background: #28a745;
+    color: white;
+}
+
+.type-err {
+    background: #dc3545;
+    color: white;
+}
+
 .alt-list {
     font-size: 0.8em;
     color: #666;

@@ -14,7 +14,9 @@ logger = logging.getLogger("diplom")
 @dataclass
 class StructuringBenchmarkItem:
     filename: str
-    doc_type: str
+    expected_type: str
+    detected_type: str
+    is_type_correct: bool
     processing_time: float
     accuracy: float
     is_reference_found: bool
@@ -24,7 +26,9 @@ class StructuringBenchmarkItem:
     def to_dict(self) -> Dict[str, Any]:
         return {
             "filename": self.filename,
-            "doc_type": self.doc_type,
+            "expected_type": self.expected_type,
+            "detected_type": self.detected_type,
+            "is_type_correct": self.is_type_correct,
             "processing_time": round(self.processing_time, 3),
             "accuracy": round(self.accuracy, 4),
             "is_reference_found": self.is_reference_found,
@@ -38,6 +42,8 @@ class StructuringBenchmarkReport:
     embedding_model: str
     total_files: int
     files_with_reference: int
+    correct_templates_count: int
+    template_accuracy: float
     avg_processing_time: float
     avg_accuracy: float
     items: List[StructuringBenchmarkItem]
@@ -48,6 +54,8 @@ class StructuringBenchmarkReport:
             "embedding_model": self.embedding_model,
             "total_files": self.total_files,
             "files_with_reference": self.files_with_reference,
+            "correct_templates_count": self.correct_templates_count,
+            "template_accuracy": round(self.template_accuracy, 4),
             "avg_processing_time": round(self.avg_processing_time, 3),
             "avg_accuracy": round(self.avg_accuracy, 4),
             "items": [item.to_dict() for item in self.items],
@@ -148,14 +156,19 @@ class StructuringBenchmarkService:
             logger.info(f"Processing {clean_file.name} (real type: {doc_type}, but not giving hints to LLM)...")
             # Замер времени структурирования
             start_time = time.time()
-            result_json = self.structuring_service.structure(
+            struct_data = self.structuring_service.structure(
                 raw_text=raw_text,
                 cleaned_text=cleaned_text,
                 model_name=model_name,
-                embedding_model=embedding_model
+                embedding_model=embedding_model,
+                expected_type=doc_type
             )
             duration = time.time() - start_time
             
+            result_json = struct_data["result"]
+            detected_type = struct_data["doc_type"]
+            is_type_correct = (detected_type == doc_type)
+
             # Поиск эталонного JSON
             image_name = clean_file.name.replace("-clean", "")
             ref_file = ref_dir / f"{image_name}-reference.json"
@@ -174,7 +187,9 @@ class StructuringBenchmarkService:
 
             items.append(StructuringBenchmarkItem(
                 filename=image_name,
-                doc_type=doc_type,
+                expected_type=doc_type,
+                detected_type=detected_type or "unknown",
+                is_type_correct=is_type_correct,
                 processing_time=duration,
                 accuracy=accuracy,
                 is_reference_found=is_reference_found,
@@ -184,6 +199,8 @@ class StructuringBenchmarkService:
 
         total_files = len(items)
         files_with_reference = sum(1 for item in items if item.is_reference_found)
+        correct_templates_count = sum(1 for item in items if item.is_type_correct)
+        template_accuracy = correct_templates_count / total_files if total_files > 0 else 0.0
         
         avg_time = sum(item.processing_time for item in items) / total_files if total_files > 0 else 0.0
         
@@ -195,6 +212,8 @@ class StructuringBenchmarkService:
             embedding_model=embedding_model or "default",
             total_files=total_files,
             files_with_reference=files_with_reference,
+            correct_templates_count=correct_templates_count,
+            template_accuracy=template_accuracy,
             avg_processing_time=avg_time,
             avg_accuracy=avg_accuracy,
             items=items

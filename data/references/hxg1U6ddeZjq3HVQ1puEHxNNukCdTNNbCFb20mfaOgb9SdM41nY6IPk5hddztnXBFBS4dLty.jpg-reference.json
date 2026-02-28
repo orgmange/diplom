@@ -1,0 +1,17 @@
+{
+  "series": "6616",
+  "number": "360743",
+  "surname": "БУЛАХОВА",
+  "name": "СНЕЖАНА",
+  "patronymic": "АНДРЕЕВНА",
+  "gender": "ЖЕН.",
+  "date_of_birth": "27.12.1997",
+  "place_of_birth": "пос. ТУМАНОВО ВЯЗЕМСКОГО Р-НА СМОЛЕНСКОЙ ОБЛ.",
+  "issued_by": "МО УФМС РОССИИ ПО СМОЛЕНСКОЙ ОБЛАСТИ",
+  "date_of_issue": "01.02.2012",
+  "division_code": "670-006",
+  "mrz": {
+    "line1": "PNRUSBULAHOVA<<SNEJANA<ANDREEVNA<<<<<<<",
+    "line2": "6616360743RUS9712272F<<<<<1120201670006<22"
+  }
+}

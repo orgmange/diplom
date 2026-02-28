@@ -48,7 +48,10 @@ def test_run_benchmark_mocked(tmp_path, mocker):
     (ref_dir / "test1.jpg-reference.json").write_text(json.dumps({"name": "Ivan"}), encoding="utf-8")
     
     struct_service = mocker.Mock()
-    struct_service.structure.return_value = {"name": "Ivan"}
+    struct_service.structure.return_value = {
+        "result": {"name": "Ivan"},
+        "doc_type": "passport"
+    }
     
     mocker.patch("app.services.structuring_benchmark_service.settings.DOCS_DIR", docs_dir)
     mocker.patch("app.services.structuring_benchmark_service.settings.BENCHMARK_REF_DIR", ref_dir)
@@ -60,4 +63,6 @@ def test_run_benchmark_mocked(tmp_path, mocker):
     assert report.files_with_reference == 1
     assert report.avg_accuracy == 1.0
     assert report.items[0].filename == "test1.jpg"
+    assert report.items[0].expected_type == "passport"
+    assert report.items[0].is_type_correct is True
     assert report.items[0].accuracy == 1.0

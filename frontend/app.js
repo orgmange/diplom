@@ -92,8 +92,9 @@ async function runStructuringBenchmark() {
             Модель: <b>${report.model_name}</b><br>
             Обработано файлов: ${report.total_files}<br>
             С эталоном: ${report.files_with_reference}<br>
+            Точность шаблона: <b>${(report.template_accuracy * 100).toFixed(1)}%</b> (${report.correct_templates_count}/${report.total_files})<br>
             Среднее время: ${report.avg_processing_time} сек.<br>
-            <b>Средняя точность: ${(report.avg_accuracy * 100).toFixed(1)}%</b>
+            <b>Средняя точность полей: ${(report.avg_accuracy * 100).toFixed(1)}%</b>
         `;
         
         renderStructuringBenchmarkTable("struct-benchmark-results", report.items);
@@ -111,17 +112,53 @@ function renderStructuringBenchmarkTable(containerId, items) {
         el.innerText = "Нет данных";
         return;
     }
+
     const rows = items.map(item => {
         const rowClass = item.is_reference_found ? (item.accuracy > 0.9 ? "ok-row" : "bad-row") : "neutral-row";
         const statusText = item.is_reference_found ? `${(item.accuracy * 100).toFixed(0)}%` : "N/A";
         
+        const typeMatchHtml = item.is_type_correct 
+            ? `<span class="type-tag type-ok">OK</span>` 
+            : `<span class="type-tag type-err">ERR (${item.detected_type})</span>`;
+
+        // Сравнение полей для тултипа
+        let tooltipContent = "Сравнение полей:\n\n";
+        if (item.reference_json) {
+            const keys = Object.keys(item.reference_json);
+            keys.forEach(key => {
+                const expected = item.reference_json[key];
+                const actual = item.result_json[key];
+                
+                const normalize = (val) => (val === null || val === undefined) ? "" : String(val).trim().toUpperCase();
+                
+                let isMatch = false;
+                if (typeof expected === 'object' && expected !== null && typeof actual === 'object' && actual !== null) {
+                    isMatch = JSON.stringify(expected).toUpperCase() === JSON.stringify(actual).toUpperCase();
+                } else {
+                    isMatch = normalize(expected) === normalize(actual);
+                }
+                
+                const status = isMatch ? "✓" : "✗";
+                const colorClass = isMatch ? "field-match" : "field-mismatch";
+                
+                tooltipContent += `${status} ${key}: ${actual || 'MISSING'}\n   (Exp: ${expected})\n\n`;
+            });
+        } else {
+            tooltipContent = "Эталонный JSON не найден";
+        }
+
         return `
             <tr class="${rowClass}">
-                <td>${item.filename}</td>
-                <td>${item.doc_type}</td>
+                <td class="tooltip">
+                    ${item.filename}
+                    <span class="tooltiptext">${tooltipContent}</span>
+                </td>
+                <td>
+                    ${item.expected_type}
+                    ${typeMatchHtml}
+                </td>
                 <td>${item.processing_time} сек.</td>
                 <td>${statusText}</td>
-                <td><button onclick="console.log(${JSON.stringify(item.result_json).replace(/"/g, '&quot;')})">JSON</button></td>
             </tr>
         `;
     }).join("");
@@ -130,11 +167,10 @@ function renderStructuringBenchmarkTable(containerId, items) {
         <table class="benchmark-table">
             <thead>
                 <tr>
-                    <th>Файл</th>
-                    <th>Тип</th>
+                    <th>Файл (наведи для деталей)</th>
+                    <th>Тип (Ожидаемый)</th>
                     <th>Время</th>
-                    <th>Точность</th>
-                    <th>Инфо</th>
+                    <th>Точность полей</th>
                 </tr>
             </thead>
             <tbody>${rows}</tbody>

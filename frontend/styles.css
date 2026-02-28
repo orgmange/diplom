@@ -189,6 +189,10 @@ button:disabled {
     width: 100%;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .json-view {
     background: #272822;
     color: #f8f8f2;

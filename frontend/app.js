@@ -58,8 +58,19 @@ async function updateModels() {
     }
 }
 
+async function cancelBenchmark() {
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/cancel`, { method: "POST" });
+        const data = await response.json();
+        console.log("Cancellation requested:", data);
+    } catch (error) {
+        console.error("Error cancelling benchmark:", error);
+    }
+}
+
 async function runStructuringBenchmark() {
     const btn = document.getElementById("run-struct-benchmark-btn");
+    const cancelBtn = document.getElementById("cancel-struct-benchmark-btn");
     const selector = document.getElementById("llm-benchmark-model-selector");
     const embedSelector = document.getElementById("llm-benchmark-embedding-selector");
     const summary = document.getElementById("struct-benchmark-summary");
@@ -74,6 +85,7 @@ async function runStructuringBenchmark() {
     
     btn.disabled = true;
     btn.innerText = "Выполняется...";
+    if (cancelBtn) cancelBtn.classList.remove("hidden");
     summary.innerText = "Запуск прогона документов через LLM...";
     resultsDiv.innerText = "";
     
@@ -103,6 +115,7 @@ async function runStructuringBenchmark() {
     } finally {
         btn.disabled = false;
         btn.innerText = "Запустить LLM бенчмарк";
+        if (cancelBtn) cancelBtn.classList.add("hidden");
     }
 }
 
@@ -420,6 +433,7 @@ async function updateBenchmarkModels() {
 
 async function runEmbeddingBenchmark() {
     const btn = document.getElementById("run-benchmark-btn");
+    const cancelBtn = document.getElementById("cancel-embedding-benchmark-btn");
     const selector = document.getElementById("embedding-model-selector");
     const summary = document.getElementById("benchmark-summary");
     const rawBox = document.getElementById("benchmark-raw");
@@ -431,6 +445,7 @@ async function runEmbeddingBenchmark() {
     }
     btn.disabled = true;
     btn.innerText = "Тестируется...";
+    if (cancelBtn) cancelBtn.classList.remove("hidden");
     summary.innerText = "Запуск пайплайна...";
     rawBox.innerText = "";
     cleanBox.innerText = "";
@@ -457,6 +472,7 @@ async function runEmbeddingBenchmark() {
     } finally {
         btn.disabled = false;
         btn.innerText = "Запустить бенчмарк";
+        if (cancelBtn) cancelBtn.classList.add("hidden");
     }
 }
 

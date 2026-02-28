@@ -59,6 +59,11 @@ class BenchmarkService:
         self.ocr_service = ocr_service or OCRService()
         self.cleaner_service = cleaner_service or CleanerService()
         self.image_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".tiff"}
+        self._stop_requested = False
+
+    def stop(self):
+        """Прерывает выполнение бенчмарка."""
+        self._stop_requested = True
 
     def _iter_doc_dirs(self, docs_dir: Path) -> List[Path]:
         if not docs_dir.exists():
@@ -82,6 +87,8 @@ class BenchmarkService:
                 if path.is_file() and path.suffix.lower() in self.image_extensions
             )
             for image_path in images:
+                if self._stop_requested:
+                    break
                 xml_path = xml_dir / f"{image_path.name}-xml"
                 clean_path = clean_dir / f"{image_path.name}-clean"
                 if not xml_path.exists():
@@ -147,6 +154,8 @@ class BenchmarkService:
                 continue
             files = sorted(path for path in source_dir.iterdir() if path.is_file())
             for path in files:
+                if self._stop_requested:
+                    break
                 query = path.read_text(encoding="utf-8").strip()
                 item_name = f"{expected_type}/{path.name}"
                 if not query:
@@ -223,28 +232,56 @@ class BenchmarkService:
 
     def run(self, embedding_model: str) -> Dict[str, Any]:
         """Запускает цикл reset, index и проверку raw/clean тестов в отдельной коллекции."""
+        self._stop_requested = False
         template_dir = settings.OCR_DIR
         docs_dir = settings.DOCS_DIR
         benchmark_collection = "benchmark_documents"
         
+        # Initialize default response structure
+        prepared = {"prepared_xml": 0, "prepared_clean": 0}
+        indexed = {"raw_count": 0, "clean_count": 0, "total_count": 0, "raw_files": [], "clean_files": []}
+        raw_report = {"total": 0, "correct": 0, "accuracy": 0.0, "items": []}
+        clean_report = {"total": 0, "correct": 0, "accuracy": 0.0, "items": []}
+        overall = {"total": 0, "correct": 0, "accuracy": 0.0}
+
         prepared = self._prepare_test_corpus(docs_dir)
+        if self._stop_requested:
+            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
         vector_size = self.vector_service.get_embedding_size(embedding_model=embedding_model)
         
         # Используем отдельную коллекцию для бенчмарка
         self.vector_service.reset_collection(vector_size=vector_size, collection_name=benchmark_collection)
         
+        if self._stop_requested:
+            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
         indexed_raw = self.vector_service.index_templates_by_mode(
             is_cleaned=False,
             directory=template_dir,
             embedding_model=embedding_model,
             collection_name=benchmark_collection
         )
+        indexed["raw_count"] = len(indexed_raw)
+        indexed["raw_files"] = indexed_raw
+        indexed["total_count"] = indexed["raw_count"] + indexed["clean_count"]
+
+        if self._stop_requested:
+            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
         indexed_clean = self.vector_service.index_templates_by_mode(
             is_cleaned=True,
             directory=template_dir,
             embedding_model=embedding_model,
             collection_name=benchmark_collection
         )
+        indexed["clean_count"] = len(indexed_clean)
+        indexed["clean_files"] = indexed_clean
+        indexed["total_count"] = indexed["raw_count"] + indexed["clean_count"]
+
+        if self._stop_requested:
+            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
         raw_report = self._evaluate_from_docs(
             docs_dir=docs_dir,
             mode_dir="xml",
@@ -252,6 +289,9 @@ class BenchmarkService:
             is_cleaned=False,
             collection_name=benchmark_collection
         )
+        if self._stop_requested:
+            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
         clean_report = self._evaluate_from_docs(
             docs_dir=docs_dir,
             mode_dir="clean",
@@ -264,17 +304,14 @@ class BenchmarkService:
         if hasattr(self.vector_service, "_save_state"):
             self.vector_service._save_state(embedding_model)
             
+        return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+
+    def _format_run_result(self, embedding_model, prepared, indexed, raw_report, clean_report):
         overall = self._combine_totals(raw_report=raw_report, clean_report=clean_report)
         return {
             "embedding_model": embedding_model,
             "prepared": prepared,
-            "indexed": {
-                "raw_count": len(indexed_raw),
-                "clean_count": len(indexed_clean),
-                "total_count": len(indexed_raw) + len(indexed_clean),
-                "raw_files": indexed_raw,
-                "clean_files": indexed_clean,
-            },
+            "indexed": indexed,
             "overall": overall.to_dict(),
             "raw_tests": raw_report,
             "clean_tests": clean_report,

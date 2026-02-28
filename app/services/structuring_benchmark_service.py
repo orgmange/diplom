@@ -67,6 +67,11 @@ class StructuringBenchmarkService:
     """
     def __init__(self, structuring_service: StructuringService):
         self.structuring_service = structuring_service
+        self._stop_requested = False
+
+    def stop(self):
+        """Прерывает выполнение бенчмарка."""
+        self._stop_requested = True
 
     def _calculate_accuracy(self, result: Dict[str, Any], reference: Dict[str, Any]) -> float:
         """Рекурсивно сравнивает поля в результате и эталоне, возвращая долю совпадений."""
@@ -98,6 +103,7 @@ class StructuringBenchmarkService:
 
     def run(self, model_name: str, embedding_model: Optional[str] = None) -> StructuringBenchmarkReport:
         """Запускает прогон всех доступных документов через выбранную LLM модель."""
+        self._stop_requested = False
         docs_dir = settings.DOCS_DIR
         ref_dir = settings.BENCHMARK_REF_DIR
         
@@ -143,6 +149,10 @@ class StructuringBenchmarkService:
         logger.info(f"Starting structuring benchmark for {len(files_to_process)} files using model {model_name}")
 
         for clean_file, xml_dir, doc_type in files_to_process:
+            if self._stop_requested:
+                logger.info("Structuring benchmark stopped by user request.")
+                break
+
             # Загрузка очищенного текста
             cleaned_text = clean_file.read_text(encoding="utf-8").strip()
             

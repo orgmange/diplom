@@ -157,6 +157,13 @@ def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
     )
     return report.to_dict()
 
+@router.post("/rag/benchmark/cancel")
+def cancel_benchmark():
+    """Прерывает выполнение текущих бенчмарков."""
+    benchmark_service.stop()
+    structuring_benchmark_service.stop()
+    return {"status": "Cancellation requested"}
+
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])
 def index_examples():
     """Векторизует примеры из data/examples и сохраняет их в Qdrant."""

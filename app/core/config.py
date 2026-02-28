@@ -19,7 +19,7 @@ class Settings:
     DATA_DIR: Path = BASE_DIR / "data"
     OCR_DIR: Path = DATA_DIR / "ocr"
     DOCS_DIR: Path = DATA_DIR / "docs"
-    BENCHMARK_REF_DIR: Path = DATA_DIR / "benchmark" / "references"
+    BENCHMARK_REF_DIR: Path = DATA_DIR / "references"
     
     # Qdrant Settings
     QDRANT_HOST: str = os.getenv("QDRANT_HOST", "localhost")
@@ -28,6 +28,7 @@ class Settings:
     
     # Ollama Settings
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+    OLLAMA_EMBED_BASE_URL: str = os.getenv("OLLAMA_EMBED_BASE_URL", "http://localhost:11435")
     EMBEDDING_MODEL: str = "nomic-embed-text:latest"
 
 settings = Settings()

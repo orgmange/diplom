@@ -96,6 +96,7 @@
                 </div>
                 <div class="filename-select">
                     <button id="run-struct-benchmark-btn" onclick="runStructuringBenchmark()">Запустить LLM бенчмарк</button>
+                    <button id="cancel-struct-benchmark-btn" onclick="cancelBenchmark()" class="warning-btn hidden">Отмена</button>
                 </div>
             </div>
             <div id="struct-benchmark-summary" class="result-box"></div>
@@ -114,6 +115,7 @@
                 </div>
                 <div class="filename-select">
                     <button id="run-benchmark-btn" onclick="runEmbeddingBenchmark()">Запустить бенчмарк</button>
+                    <button id="cancel-embedding-benchmark-btn" onclick="cancelBenchmark()" class="warning-btn hidden">Отмена</button>
                 </div>
             </div>
             <div id="benchmark-summary" class="result-box"></div>

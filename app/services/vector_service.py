@@ -19,6 +19,7 @@ class VectorService:
     def __init__(self):
         self._client = None
         self._ollama_client = None
+        self._ollama_embed_client = None
         self._state_path = settings.DATA_DIR / "rag" / "state.json"
         self._state_path.parent.mkdir(parents=True, exist_ok=True)
         self._embedding_sizes: Dict[str, int] = {}
@@ -50,6 +51,12 @@ class VectorService:
             self._ollama_client = ollama.Client(host=settings.OLLAMA_BASE_URL)
         return self._ollama_client
 
+    @property
+    def ollama_embed_client(self):
+        if not self._ollama_embed_client:
+            self._ollama_embed_client = ollama.Client(host=settings.OLLAMA_EMBED_BASE_URL)
+        return self._ollama_embed_client
+
     def generate_id(self, key: str) -> str:
         """Генерирует стабильный UUID на основе ключа."""
         return str(uuid.uuid5(uuid.NAMESPACE_DNS, key))
@@ -79,8 +86,8 @@ class VectorService:
         self.ensure_collection(vector_size=vector_size, collection_name=name)
 
     def list_embedding_models(self) -> List[str]:
-        """Возвращает список доступных embedding-моделей Ollama."""
-        payload = self.ollama_client.list()
+        """Возвращает список доступных embedding-моделей Ollama (с порта 11435)."""
+        payload = self.ollama_embed_client.list()
         items = payload.get("models", []) if isinstance(payload, dict) else getattr(payload, "models", [])
         names: List[str] = []
         for item in items:
@@ -110,10 +117,10 @@ class VectorService:
         return self._embedding_sizes[model]
 
     def vectorize_text(self, text: str, embedding_model: Optional[str] = None) -> List[float]:
-        """Преобразует текст в вектор с выбранной embedding-моделью."""
+        """Преобразует текст в вектор с выбранной embedding-моделью (используя порт 11435)."""
         truncated_text = text[:3000]
         model = embedding_model or self._load_state()
-        response = self.ollama_client.embeddings(
+        response = self.ollama_embed_client.embeddings(
             model=model,
             prompt=truncated_text,
         )

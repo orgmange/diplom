@@ -52,7 +52,7 @@ def test_run_benchmark_pipeline(tmp_path, mocker):
     assert report["overall"]["total"] == 2
     assert report["overall"]["correct"] == 2
     assert report["overall"]["accuracy"] == 1.0
-    service.reset_collection.assert_called_once_with(vector_size=1024)
+    service.reset_collection.assert_called_once_with(vector_size=1024, collection_name="benchmark_documents")
 
 
 def test_prepare_test_corpus_from_doc_folders(tmp_path, mocker):

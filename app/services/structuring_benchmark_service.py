@@ -101,7 +101,7 @@ class StructuringBenchmarkService:
 
         return matches / total_keys if total_keys > 0 else 1.0
 
-    def run(self, model_name: str, embedding_model: Optional[str] = None) -> StructuringBenchmarkReport:
+    async def run(self, model_name: str, embedding_model: Optional[str] = None) -> StructuringBenchmarkReport:
         """Запускает прогон всех доступных документов через выбранную LLM модель."""
         self._stop_requested = False
         docs_dir = settings.DOCS_DIR
@@ -128,6 +128,8 @@ class StructuringBenchmarkService:
                 embedding_model=embedding_model or "default",
                 total_files=0,
                 files_with_reference=0,
+                correct_templates_count=0,
+                template_accuracy=0.0,
                 avg_processing_time=0.0,
                 avg_accuracy=0.0,
                 items=[]
@@ -166,12 +168,11 @@ class StructuringBenchmarkService:
             logger.info(f"Processing {clean_file.name} (real type: {doc_type}, but not giving hints to LLM)...")
             # Замер времени структурирования
             start_time = time.time()
-            struct_data = self.structuring_service.structure(
+            struct_data = await self.structuring_service.structure(
                 raw_text=raw_text,
                 cleaned_text=cleaned_text,
                 model_name=model_name,
                 embedding_model=embedding_model,
-                expected_type=doc_type
             )
             duration = time.time() - start_time
             
@@ -217,7 +218,7 @@ class StructuringBenchmarkService:
         acc_sum = sum(item.accuracy for item in items if item.is_reference_found)
         avg_accuracy = acc_sum / files_with_reference if files_with_reference > 0 else 0.0
         
-        return StructuringBenchmarkReport(
+        report = StructuringBenchmarkReport(
             model_name=model_name,
             embedding_model=embedding_model or "default",
             total_files=total_files,
@@ -228,3 +229,106 @@ class StructuringBenchmarkService:
             avg_accuracy=avg_accuracy,
             items=items
         )
+
+        # Сохранение в историю
+        self._save_report(report)
+        return report
+
+    async def run_multi(
+        self,
+        model_names: List[str],
+        embedding_model: Optional[str] = None,
+    ) -> List[StructuringBenchmarkReport]:
+        """Поочерёдно запускает бенчмарк структурирования для каждой модели из списка."""
+        self._stop_requested = False
+        reports: List[StructuringBenchmarkReport] = []
+
+        for model_name in model_names:
+            if self._stop_requested:
+                logger.info("Multi-model benchmark stopped by user request.")
+                break
+
+            logger.info(f"Starting benchmark for model: {model_name}")
+            report = await self.run(
+                model_name=model_name,
+                embedding_model=embedding_model,
+            )
+            reports.append(report)
+
+        return reports
+
+    def _save_report(self, report: StructuringBenchmarkReport):
+        """Сохраняет отчет в JSON файл."""
+        import datetime
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "reports"
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"report_{report.model_name.replace(':', '_')}_{timestamp}.json"
+        filepath = reports_dir / filename
+        
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(report.to_dict(), f, ensure_ascii=False, indent=2)
+            logger.info(f"Benchmark report saved to {filepath}")
+        except Exception as e:
+            logger.error(f"Failed to save benchmark report: {e}")
+
+    def list_reports(self) -> List[Dict[str, Any]]:
+        """Возвращает список сохраненных отчетов (метаданные)."""
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "reports"
+        if not reports_dir.exists():
+            return []
+            
+        reports = []
+        for file in sorted(reports_dir.glob("report_*.json"), reverse=True):
+            try:
+                with open(file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    reports.append({
+                        "filename": file.name,
+                        "model_name": data.get("model_name"),
+                        "total_files": data.get("total_files"),
+                        "accuracy": data.get("avg_accuracy"),
+                        "template_accuracy": data.get("template_accuracy"),
+                        "timestamp": file.stat().st_mtime
+                    })
+            except: continue
+        return reports
+
+    def get_report(self, filename: str) -> Optional[Dict[str, Any]]:
+        """Загружает полный отчет из файла."""
+        filepath = settings.BASE_DIR / "data" / "benchmark" / "reports" / filename
+        if not filepath.exists():
+            return None
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except: return None
+
+    def delete_report(self, filename: str) -> bool:
+        """Удаляет конкретный отчет."""
+        filepath = settings.BASE_DIR / "data" / "benchmark" / "reports" / filename
+        if filepath.exists():
+            filepath.unlink()
+            logger.info(f"Deleted benchmark report: {filename}")
+            return True
+        return False
+
+    def clear_reports(self) -> int:
+        """Удаляет все отчеты."""
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "reports"
+        if not reports_dir.exists():
+            return 0
+            
+        count = 0
+        for file in reports_dir.glob("report_*.json"):
+            try:
+                file.unlink()
+                count += 1
+            except Exception as e:
+                logger.error(f"Failed to delete report {file.name}: {e}")
+        
+        logger.info(f"Cleared {count} benchmark reports")
+        return count
+

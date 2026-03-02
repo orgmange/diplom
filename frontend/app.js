@@ -28,7 +28,7 @@ async function updateStatus() {
 
 async function updateModels() {
     const selector = document.getElementById("model-selector");
-    const benchSelector = document.getElementById("llm-benchmark-model-selector");
+    const checkboxContainer = document.getElementById("llm-benchmark-model-checkboxes");
     if (!selector) return;
     try {
         const response = await fetch(`${API_URL}/rag/models`);
@@ -36,26 +36,44 @@ async function updateModels() {
         const data = await response.json();
         const currentVal = selector.value;
         selector.innerHTML = "";
-        if (benchSelector) benchSelector.innerHTML = "";
-        
+
         data.models.forEach(model => {
             const opt = document.createElement("option");
             opt.value = model;
             opt.innerText = model;
             if (model === currentVal) opt.selected = true;
             selector.appendChild(opt);
-            
-            if (benchSelector) {
-                const optBench = document.createElement("option");
-                optBench.value = model;
-                optBench.innerText = model;
-                benchSelector.appendChild(optBench);
-            }
         });
+
+        if (checkboxContainer) {
+            checkboxContainer.innerHTML = "";
+            data.models.forEach(model => {
+                const label = document.createElement("label");
+                label.className = "checkbox-label";
+                const cb = document.createElement("input");
+                cb.type = "checkbox";
+                cb.value = model;
+                cb.className = "model-checkbox";
+                label.appendChild(cb);
+                label.appendChild(document.createTextNode(" " + model));
+                checkboxContainer.appendChild(label);
+            });
+        }
     } catch (error) {
         console.error("Error fetching models:", error);
         selector.innerHTML = `<option value="">Ошибка: ${error.message}</option>`;
+        if (checkboxContainer) checkboxContainer.innerText = `Ошибка: ${error.message}`;
     }
+}
+
+function toggleAllModelCheckboxes(checked) {
+    const boxes = document.querySelectorAll("#llm-benchmark-model-checkboxes .model-checkbox");
+    boxes.forEach(cb => cb.checked = checked);
+}
+
+function getSelectedBenchmarkModels() {
+    const boxes = document.querySelectorAll("#llm-benchmark-model-checkboxes .model-checkbox:checked");
+    return Array.from(boxes).map(cb => cb.value);
 }
 
 async function cancelBenchmark() {
@@ -71,36 +89,123 @@ async function cancelBenchmark() {
 async function runStructuringBenchmark() {
     const btn = document.getElementById("run-struct-benchmark-btn");
     const cancelBtn = document.getElementById("cancel-struct-benchmark-btn");
-    const selector = document.getElementById("llm-benchmark-model-selector");
     const embedSelector = document.getElementById("llm-benchmark-embedding-selector");
     const summary = document.getElementById("struct-benchmark-summary");
     const resultsDiv = document.getElementById("struct-benchmark-results");
-    
-    const modelName = selector.value;
+
+    const modelNames = getSelectedBenchmarkModels();
     const embeddingModel = embedSelector ? embedSelector.value : null;
-    if (!modelName) {
-        alert("Выбери LLM модель");
+    if (modelNames.length === 0) {
+        alert("Выбери хотя бы одну LLM модель");
         return;
     }
-    
+
     btn.disabled = true;
     btn.innerText = "Выполняется...";
     if (cancelBtn) cancelBtn.classList.remove("hidden");
-    summary.innerText = "Запуск прогона документов через LLM...";
+    summary.innerHTML = `Запуск бенчмарка для ${modelNames.length} модел${modelNames.length === 1 ? "и" : "ей"}: ${modelNames.join(", ")}...`;
     resultsDiv.innerText = "";
-    
+
     try {
-        const response = await fetch(`${API_URL}/rag/benchmark/structuring/run`, {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/run-multi`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                model_name: modelName,
+            body: JSON.stringify({
+                model_names: modelNames,
                 embedding_model: embeddingModel
             })
         });
+        const reports = await response.json();
+
+        if (!Array.isArray(reports) || reports.length === 0) {
+            summary.innerText = "Нет результатов.";
+            return;
+        }
+
+        let summaryHtml = `<h3>Сводка по ${reports.length} модел${reports.length === 1 ? "и" : "ям"}</h3>`;
+        summaryHtml += `<table class="benchmark-table"><thead><tr>
+            <th>Модель</th><th>Файлов</th><th>Точность шаблона</th>
+            <th>Точность полей</th><th>Ср. время (сек)</th>
+        </tr></thead><tbody>`;
+        reports.forEach(report => {
+            summaryHtml += `<tr>
+                <td><b>${report.model_name}</b></td>
+                <td>${report.total_files}</td>
+                <td>${(report.template_accuracy * 100).toFixed(1)}% (${report.correct_templates_count}/${report.total_files})</td>
+                <td>${(report.avg_accuracy * 100).toFixed(1)}%</td>
+                <td>${report.avg_processing_time}</td>
+            </tr>`;
+        });
+        summaryHtml += `</tbody></table>`;
+        summary.innerHTML = summaryHtml;
+
+        let detailsHtml = "";
+        reports.forEach(report => {
+            detailsHtml += `<h3>Детали: ${report.model_name}</h3>`;
+            detailsHtml += `<div id="struct-detail-${report.model_name.replace(/[^a-zA-Z0-9]/g, '_')}"></div>`;
+        });
+        resultsDiv.innerHTML = detailsHtml;
+
+        reports.forEach(report => {
+            const safeId = `struct-detail-${report.model_name.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            renderStructuringBenchmarkTable(safeId, report.items);
+        });
+
+        updateBenchmarkHistory();
+    } catch (error) {
+        summary.innerText = `Ошибка бенчмарка: ${error.message}`;
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Запустить LLM бенчмарк";
+        if (cancelBtn) cancelBtn.classList.add("hidden");
+    }
+}
+
+async function updateBenchmarkHistory() {
+    const listDiv = document.getElementById("history-list");
+    if (!listDiv) return;
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports`);
+        const reports = await response.json();
+
+        if (reports.length === 0) {
+            listDiv.innerText = "История пуста";
+            return;
+        }
+
+        listDiv.innerHTML = reports.map(r => {
+            const date = new Date(r.timestamp * 1000).toLocaleString();
+            return `
+                <div class="history-item">
+                    <div class="history-content" onclick="loadReport('${r.filename}')">
+                        <span class="model">${r.model_name}</span>
+                        <span class="meta">Файлов: ${r.total_files} | Точность: <span class="accuracy">${(r.accuracy * 100).toFixed(1)}%</span></span>
+                        <span class="date">${date}</span>
+                    </div>
+                    <button class="delete-history-btn" onclick="deleteReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
+                </div>
+            `;
+        }).join("");
+    } catch (error) {
+        console.error("Error loading history:", error);
+        listDiv.innerText = "Ошибка загрузки истории";
+    }
+}
+
+async function loadReport(filename) {
+    const summary = document.getElementById("struct-benchmark-summary");
+    const resultsDiv = document.getElementById("struct-benchmark-results");
+
+    summary.innerHTML = `<span class="loading">Загрузка отчета ${filename}...</span>`;
+    resultsDiv.innerHTML = "";
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports/${filename}`);
         const report = await response.json();
-        
+
         summary.innerHTML = `
+            <i>Загружен исторический отчет: ${filename}</i><br>
             Модель: <b>${report.model_name}</b><br>
             Обработано файлов: ${report.total_files}<br>
             С эталоном: ${report.files_with_reference}<br>
@@ -108,14 +213,48 @@ async function runStructuringBenchmark() {
             Среднее время: ${report.avg_processing_time} сек.<br>
             <b>Средняя точность полей: ${(report.avg_accuracy * 100).toFixed(1)}%</b>
         `;
-        
+
         renderStructuringBenchmarkTable("struct-benchmark-results", report.items);
+        window.scrollTo({ top: summary.offsetTop - 20, behavior: 'smooth' });
     } catch (error) {
-        summary.innerText = `Ошибка бенчмарка: ${error.message}`;
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Запустить LLM бенчмарк";
-        if (cancelBtn) cancelBtn.classList.add("hidden");
+        summary.innerText = `Ошибка загрузки отчета: ${error.message}`;
+    }
+}
+
+async function deleteReport(filename, event) {
+    if (event) event.stopPropagation();
+    if (!confirm(`Удалить этот отчет (${filename})?`)) return;
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports/${filename}`, {
+            method: "DELETE"
+        });
+        if (response.ok) {
+            updateBenchmarkHistory();
+        } else {
+            alert("Ошибка при удалении отчета");
+        }
+    } catch (error) {
+        console.error("Error deleting report:", error);
+    }
+}
+
+async function clearBenchmarkHistory() {
+    if (!confirm("Вы уверены, что хотите удалить ВСЮ историю запусков? Это действие необратимо.")) return;
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports`, {
+            method: "DELETE"
+        });
+        if (response.ok) {
+            updateBenchmarkHistory();
+            document.getElementById("struct-benchmark-summary").innerText = "История очищена.";
+            document.getElementById("struct-benchmark-results").innerHTML = "";
+        } else {
+            alert("Ошибка при очистке истории");
+        }
+    } catch (error) {
+        console.error("Error clearing history:", error);
     }
 }
 
@@ -129,9 +268,9 @@ function renderStructuringBenchmarkTable(containerId, items) {
     const rows = items.map(item => {
         const rowClass = item.is_reference_found ? (item.accuracy > 0.9 ? "ok-row" : "bad-row") : "neutral-row";
         const statusText = item.is_reference_found ? `${(item.accuracy * 100).toFixed(0)}%` : "N/A";
-        
-        const typeMatchHtml = item.is_type_correct 
-            ? `<span class="type-tag type-ok">OK</span>` 
+
+        const typeMatchHtml = item.is_type_correct
+            ? `<span class="type-tag type-ok">OK</span>`
             : `<span class="type-tag type-err">ERR (${item.detected_type})</span>`;
 
         // Сравнение полей для тултипа
@@ -141,20 +280,24 @@ function renderStructuringBenchmarkTable(containerId, items) {
             keys.forEach(key => {
                 const expected = item.reference_json[key];
                 const actual = item.result_json[key];
-                
+
+                const formatVal = (val) => {
+                    if (val === null || val === undefined) return 'MISSING';
+                    if (typeof val === 'object') return JSON.stringify(val);
+                    return String(val);
+                };
+
                 const normalize = (val) => (val === null || val === undefined) ? "" : String(val).trim().toUpperCase();
-                
+
                 let isMatch = false;
                 if (typeof expected === 'object' && expected !== null && typeof actual === 'object' && actual !== null) {
                     isMatch = JSON.stringify(expected).toUpperCase() === JSON.stringify(actual).toUpperCase();
                 } else {
                     isMatch = normalize(expected) === normalize(actual);
                 }
-                
+
                 const status = isMatch ? "✓" : "✗";
-                const colorClass = isMatch ? "field-match" : "field-mismatch";
-                
-                tooltipContent += `${status} ${key}: ${actual || 'MISSING'}\n   (Exp: ${expected})\n\n`;
+                tooltipContent += `${status} ${key}: ${formatVal(actual)}\n   (Exp: ${formatVal(expected)})\n\n`;
             });
         } else {
             tooltipContent = "Эталонный JSON не найден";
@@ -175,7 +318,7 @@ function renderStructuringBenchmarkTable(containerId, items) {
             </tr>
         `;
     }).join("");
-    
+
     el.innerHTML = `
         <table class="benchmark-table">
             <thead>
@@ -194,11 +337,11 @@ function renderStructuringBenchmarkTable(containerId, items) {
 async function runFullReindex() {
     const model = document.getElementById("model-selector").value;
     const resultDiv = document.getElementById("structure-result");
-    
+
     if (!confirm(`Вы уверены, что хотите очистить базу и переиндексировать всё с помощью ${model}?`)) {
         return;
     }
-    
+
     resultDiv.innerHTML = `<span class="loading">🔄 Выполняется полная переиндексация с ${model}...</span>`;
 
     try {
@@ -229,13 +372,13 @@ async function runOCR() {
     btn.disabled = true;
     btn.innerText = "Выполняется...";
     resultDiv.innerHTML = "Сканирование изображений...";
-    
+
     try {
         const response = await fetch(`${API_URL}/ocr/scan`, { method: "POST" });
         const data = await response.json();
         const processedFiles = Array.isArray(data.processed_files) ? data.processed_files : [];
         resultDiv.innerHTML = "";
-        
+
         if (processedFiles.length === 0) {
             resultDiv.innerText = "Новых изображений не найдено.";
         } else {
@@ -264,7 +407,7 @@ async function runClean() {
         const data = await response.json();
         const cleanedFiles = Array.isArray(data.cleaned_files) ? data.cleaned_files : [];
         resultDiv.innerHTML = "";
-        
+
         if (cleanedFiles.length === 0) {
             resultDiv.innerText = "Новых XML для очистки не найдено.";
         } else {
@@ -289,7 +432,7 @@ async function runIndex() {
         const response = await fetch(`${API_URL}/rag/index`, { method: "POST" });
         const data = await response.json();
         resultDiv.innerHTML = "";
-        
+
         if (data.indexed_files.length === 0) {
             resultDiv.innerText = "Нет новых файлов для индексации.";
         } else {
@@ -332,8 +475,8 @@ async function runSearch() {
         const response = await fetch(`${API_URL}/rag/search`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                query: query, 
+            body: JSON.stringify({
+                query: query,
                 limit: 5,
                 is_cleaned: isCleaned,
                 only_templates: onlyTemplates
@@ -366,11 +509,11 @@ function renderBenchmarkTable(containerId, group) {
     const rows = group.items.map(item => {
         let altHtml = "";
         if (item.alternatives && item.alternatives.length > 0) {
-            altHtml = '<div class="alt-list">' + item.alternatives.map(a => 
+            altHtml = '<div class="alt-list">' + item.alternatives.map(a =>
                 `<span>${a.type}: ${(a.score * 100).toFixed(1)}%</span>`
             ).join("") + '</div>';
         }
-        
+
         return `
             <tr class="${item.is_correct ? "ok-row" : "bad-row"}">
                 <td>${item.filename}</td>
@@ -480,3 +623,4 @@ async function runEmbeddingBenchmark() {
 updateStatus();
 updateModels();
 updateBenchmarkModels();
+updateBenchmarkHistory();

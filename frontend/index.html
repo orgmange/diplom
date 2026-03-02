@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diplom OCR & RAG System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Система обработки документов</h1>
-        
+
         <div class="status-panel">
             <h2>Статус системы</h2>
             <div id="status-display">Загрузка...</div>
@@ -33,7 +35,8 @@
 
             <div class="card">
                 <h3>3. Индексация (RAG)</h3>
-                <p>Векторизует примеры (Few-shot) для поиска. Основные документы индексируются через блок Конфигурации.</p>
+                <p>Векторизует примеры (Few-shot) для поиска. Основные документы индексируются через блок Конфигурации.
+                </p>
                 <div class="btn-group">
                     <button onclick="runIndexExamples()" class="secondary">Индексировать примеры</button>
                 </div>
@@ -42,7 +45,8 @@
 
             <div class="card full-width">
                 <h3>4. Конфигурация RAG и Моделей</h3>
-                <p>Выбор модели для эмбеддингов и генерации. Нажмите "Переиндексировать всё", чтобы очистить базу и создать новые векторы через выбранную модель.</p>
+                <p>Выбор модели для эмбеддингов и генерации. Нажмите "Переиндексировать всё", чтобы очистить базу и
+                    создать новые векторы через выбранную модель.</p>
                 <div class="config-row">
                     <div class="model-select">
                         <label for="model-selector">Модель Ollama (LLM + Embedding):</label>
@@ -72,7 +76,9 @@
                 </label>
             </div>
             <div class="search-box">
-                <textarea id="search-query" placeholder="Вставьте OCR текст целиком (с переносами строк) для точного поиска..." rows="5"></textarea>
+                <textarea id="search-query"
+                    placeholder="Вставьте OCR текст целиком (с переносами строк) для точного поиска..."
+                    rows="5"></textarea>
                 <button onclick="runSearch()">Найти</button>
             </div>
             <div id="search-results" class="results-list"></div>
@@ -80,13 +86,16 @@
 
         <div class="search-panel">
             <h2>Бенчмарк Структурирования (LLM)</h2>
-            <p>Проверка точности извлечения JSON данных через LLM. Сравнивается с эталонными значениями в data/benchmark/references.</p>
+            <p>Проверка точности извлечения JSON данных через LLM. Сравнивается с эталонными значениями в
+                data/benchmark/references.</p>
             <div class="config-row">
-                <div class="model-select">
-                    <label for="llm-benchmark-model-selector">LLM Модель:</label>
-                    <select id="llm-benchmark-model-selector">
-                        <option value="llama3:latest">llama3:latest</option>
-                    </select>
+                <div class="model-select" style="flex: 2;">
+                    <label>LLM Модели (выбери одну или несколько):</label>
+                    <div class="checkbox-actions">
+                        <button onclick="toggleAllModelCheckboxes(true)" class="small-btn">Выбрать все</button>
+                        <button onclick="toggleAllModelCheckboxes(false)" class="small-btn">Снять все</button>
+                    </div>
+                    <div id="llm-benchmark-model-checkboxes" class="checkbox-list">Загрузка...</div>
                 </div>
                 <div class="model-select">
                     <label for="llm-benchmark-embedding-selector">Embedding Модель (для RAG):</label>
@@ -95,11 +104,23 @@
                     </select>
                 </div>
                 <div class="filename-select">
-                    <button id="run-struct-benchmark-btn" onclick="runStructuringBenchmark()">Запустить LLM бенчмарк</button>
-                    <button id="cancel-struct-benchmark-btn" onclick="cancelBenchmark()" class="warning-btn hidden">Отмена</button>
+                    <button id="run-struct-benchmark-btn" onclick="runStructuringBenchmark()">Запустить LLM
+                        бенчмарк</button>
+                    <button id="cancel-struct-benchmark-btn" onclick="cancelBenchmark()"
+                        class="warning-btn hidden">Отмена</button>
                 </div>
             </div>
             <div id="struct-benchmark-summary" class="result-box"></div>
+
+            <div id="struct-benchmark-history" class="history-panel">
+                <div class="history-header">
+                    <h3>История запусков</h3>
+                    <button onclick="clearBenchmarkHistory()" class="small-btn warning-btn">Очистить всю
+                        историю</button>
+                </div>
+                <div id="history-list" class="history-list">Загрузка истории...</div>
+            </div>
+
             <div id="struct-benchmark-results" class="result-box full-width"></div>
         </div>
 
@@ -115,7 +136,8 @@
                 </div>
                 <div class="filename-select">
                     <button id="run-benchmark-btn" onclick="runEmbeddingBenchmark()">Запустить бенчмарк</button>
-                    <button id="cancel-embedding-benchmark-btn" onclick="cancelBenchmark()" class="warning-btn hidden">Отмена</button>
+                    <button id="cancel-embedding-benchmark-btn" onclick="cancelBenchmark()"
+                        class="warning-btn hidden">Отмена</button>
                 </div>
             </div>
             <div id="benchmark-summary" class="result-box"></div>
@@ -134,4 +156,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

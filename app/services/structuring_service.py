@@ -8,9 +8,6 @@ from app.core.config import settings
 logger = logging.getLogger("diplom")
 
 class StructuringService:
-    """
-    Сервис для структурирования данных при помощи LLM и RAG (few-shot).
-    """
     def __init__(self, vector_service: VectorService):
         self.vector_service = vector_service
         self._ollama_client = None
@@ -18,86 +15,33 @@ class StructuringService:
     @property
     def ollama_client(self):
         if not self._ollama_client:
-            self._ollama_client = ollama.Client(host=settings.OLLAMA_BASE_URL)
+            # Асинхронный клиент с таймаутом 1 минута
+            self._ollama_client = ollama.AsyncClient(host=settings.OLLAMA_BASE_URL, timeout=60.0)
         return self._ollama_client
 
-    def get_available_models(self) -> List[str]:
-        """Возвращает список доступных моделей Ollama. Пробрасывает ошибку при неудаче."""
+    async def get_available_models(self) -> List[str]:
         try:
-            # В ollama-python 0.6.1 list() возвращает ListResponse с атрибутом models
-            response = self.ollama_client.list()
+            response = await self.ollama_client.list()
             return [m.model for m in response.models]
         except Exception as e:
             logger.error(f"Error listing models: {e}")
             raise e
 
-    def build_prompt(self, target_text: str, examples: List[Dict]) -> str:
-        """Формирует промпт с примерами (few-shot) для LLM."""
-        prompt = "You are an expert in extracting structured data from OCR text. "
-        prompt += "Your task is to convert the OCR text into a VALID JSON object.\n\n"
-        
-        if examples:
-            prompt += "### EXAMPLES OF EXTRACTION:\n\n"
-            for i, ex in enumerate(examples):
-                prompt += f"--- EXAMPLE {i+1} ---\n"
-                ex_text = str(ex.get('cleaned_text', ''))[:4000]
-                prompt += f"OCR INPUT:\n{ex_text}\n\n"
-                prompt += f"JSON OUTPUT:\n{ex.get('json_output')}\n\n"
-            prompt += "--- END OF EXAMPLES ---\n\n"
-
-        prompt += "Now, process the following OCR text and return ONLY the JSON object. "
-        prompt += "If a field is missing, use an empty string or null. Ensure the output is valid JSON.\n\n"
-        prompt += f"### TARGET OCR TEXT:\n{target_text}\n\n"
-        prompt += "### FINAL JSON OUTPUT:"
-        
-        return prompt
-
-    def _get_schema_for_type(self, doc_type: Optional[str]) -> Optional[Dict[str, Any]]:
-        """Загружает шаблон и преобразует его в упрощенную JSON Schema для Ollama."""
-        if not doc_type:
-            return None
-            
+    def _get_template_for_type(self, doc_type: str) -> str:
         template_map = {
             "passport": "passport_ru.json",
             "driver_license": "driver_license_ru.json",
             "snils": "snils.json",
             "birth_certificate": "birth_certificate_ru.json"
         }
-        
-        template_file = template_map.get(doc_type)
-        if not template_file:
-            return None
-            
+        filename = template_map.get(doc_type)
+        if not filename: return "{}"
         try:
-            template_path = settings.BASE_DIR / "templates" / template_file
-            if not template_path.exists():
-                return None
-                
-            with open(template_path, "r", encoding="utf-8") as f:
-                template_data = json.load(f)
-                
-            # Генерируем простую схему, где все поля - строки
-            properties = {}
-            for key, val in template_data.items():
-                if isinstance(val, dict):
-                    nested_props = {k: {"type": "string"} for k in val.keys()}
-                    properties[key] = {
-                        "type": "object",
-                        "properties": nested_props
-                    }
-                else:
-                    properties[key] = {"type": "string"}
-                    
-            return {
-                "type": "object",
-                "properties": properties,
-                "required": list(properties.keys())
-            }
-        except Exception as e:
-            logger.error(f"Error generating schema for {doc_type}: {e}")
-            return None
+            path = settings.BASE_DIR / "templates" / filename
+            return path.read_text(encoding="utf-8")
+        except: return "{}"
 
-    def structure(
+    async def structure(
         self,
         raw_text: str,
         cleaned_text: str,
@@ -106,97 +50,81 @@ class StructuringService:
         expected_type: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
-        Основной метод: ищет похожий пример, строит промпт и вызывает LLM.
-        Возвращает словарь с результатом и метаданными.
+        Стабильный асинхронный метод с большим контекстом (16к) и полными примерами RAG.
         """
-        # 1. Поиск наиболее похожего примера по очищенному тексту
-        logger.info(f"Searching for examples using model: {embedding_model or 'default'}")
-        
-        # Берем 3 примера, чтобы выбрать лучший по doc_type или отсечь шум
+        # 1. RAG
         all_results = self.vector_service.search(
-            cleaned_text,
-            limit=3,
-            only_examples=True,
-            embedding_model=embedding_model,
+            cleaned_text, limit=1, only_examples=True, embedding_model=embedding_model
+        )
+        best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
+        doc_type = best_match.get('doc_type') if best_match else (expected_type or self.vector_service._detect_doc_type(cleaned_text[:200]))
+        
+        # 2. Подготовка промпта
+        template_json = self._get_template_for_type(doc_type)
+        system_msg = (
+            "You are a professional data extraction system. "
+            "Extract data from OCR text according to the provided JSON schema. "
+            "Return ONLY raw JSON object."
         )
         
-        # Фильтруем по порогу сходства
-        threshold = 0.4
-        examples = [r for r in all_results if r.get('score', 0) >= threshold]
+        user_content = f"### JSON SCHEMA TO FOLLOW:\n{template_json}\n\n"
+        if best_match:
+            # Используем ПОЛНЫЙ текст примера для лучшего качества Few-Shot
+            user_content += f"### REFERENCE EXAMPLE:\nINPUT: {best_match.get('cleaned_text')}\nOUTPUT: {best_match.get('json_output')}\n\n"
         
-        doc_type = None
-        if examples:
-            # Берем тип из самого релевантного примера
-            best_match = examples[0]
-            doc_type = best_match.get('doc_type')
-            logger.info(f"RAG Match: {best_match.get('filename')} (type: {doc_type}, score: {best_match.get('score'):.4f})")
-            
-            # Оставляем только 1 лучший пример для Few-Shot промпта, 
-            # чтобы не раздувать контекст и не путать модель разными типами
-            examples = [best_match]
-        else:
-            if all_results:
-                logger.warning(f"Best RAG match below threshold: {all_results[0].get('filename')} (score: {all_results[0].get('score'):.4f})")
-            else:
-                logger.warning("No examples found in vector store.")
-            
-            # Fallback: определяем тип по тексту
-            doc_type = self.vector_service._detect_doc_type(cleaned_text[:200])
-            logger.info(f"Fallback detection: {doc_type}")
+        # Передаем полный очищенный текст OCR
+        user_content += f"### TARGET OCR TEXT TO PROCESS:\n{cleaned_text}\n\n"
+        user_content += "### FINAL RESULT (JSON ONLY):"
 
-        # Проверка на соответствие ожидаемому типу (для бенчмарков)
-        if expected_type and doc_type != expected_type:
-            logger.warning(f"Template mismatch: expected {expected_type}, but detected {doc_type}. Continuing with detected type.")
+        messages = [
+            {'role': 'system', 'content': system_msg},
+            {'role': 'user', 'content': user_content},
+        ]
+        
+        logger.debug(f"MESSAGES SENT TO LLM (Type: {doc_type}, Chars: {len(user_content)})")
+        
+        # Определяем модель (по умолчанию qwen3:8b если передано llama3)
+        actual_model = model_name
+        if "llama3" in model_name.lower():
+            actual_model = "qwen3:8b"
+            
+        max_retries = 3
+        last_error = ""
+        import asyncio
 
-        # 2. Формирование промпта и схемы
-        truncated_cleaned = cleaned_text[:8000]
-        prompt = self.build_prompt(truncated_cleaned, examples)
-        schema = self._get_schema_for_type(doc_type)
-        
-        if schema:
-            logger.info(f"Using structured output schema for type: {doc_type}")
-        else:
-            logger.warning(f"No schema found for type: {doc_type}. Falling back to generic JSON.")
-        
-        # 3. Вызов Ollama
-        logger.info(f"Calling Ollama model '{model_name}' for structuring (structured output={bool(schema)})...")
-        logger.debug(f"PROMPT SENT TO LLM:\n{prompt}")
-        
-        result_json = {}
-        try:
-            response = self.ollama_client.generate(
-                model=model_name,
-                prompt=prompt,
-                format=schema or "json",
-                options={"temperature": 0.1}
-            )
-            
-            result_str = response.get('response', '').strip()
-            logger.debug(f"RAW RESPONSE FROM LLM:\n{result_str}")
-            
-            if not result_str:
-                # В случае пустого ответа логируем промпт в ERROR для дебага
-                logger.error(f"MODEL RETURNED EMPTY RESPONSE. Prompt snippet: {prompt[:500]}...")
-                raise ValueError("Empty response from model")
-
-            result_json = json.loads(result_str)
-                
-        except Exception as e:
-            logger.error(f"Failed to structure with model {model_name}: {e}")
-            
-            # Fallback: пробуем найти JSON если схема не сработала или произошла ошибка
+        for attempt in range(max_retries):
             try:
-                import re
-                json_match = re.search(r'(\{.*\})', result_str, re.DOTALL)
-                if json_match:
-                    result_json = json.loads(json_match.group(1))
-                else:
-                    result_json = {"error": str(e)}
-            except:
-                result_json = {"error": str(e)}
+                response = await self.ollama_client.chat(
+                    model=actual_model, 
+                    messages=messages,
+                    format='json',
+                    options={
+                        "temperature": 0.0
+                    }
+                )
+                
+                result_str = response.message.content.strip()
+                if not result_str:
+                    raise ValueError("Ollama returned empty response")
 
+                logger.debug(f"RAW LLM RESPONSE (Len: {len(result_str)})")
+                
+                return {
+                    "result": json.loads(result_str),
+                    "doc_type": doc_type,
+                    "model": actual_model
+                }
+                    
+            except Exception as e:
+                last_error = str(e)
+                logger.warning(f"Ollama attempt {attempt + 1}/{max_retries} failed for {actual_model}: {e}")
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(2)
+                
+        logger.error(f"Ollama failure after {max_retries} attempts: {last_error}")
         return {
-            "result": result_json,
+            "result": {"error": f"Ollama failure after {max_retries} attempts: {last_error}"},
             "doc_type": doc_type,
-            "model": model_name
+            "model": actual_model
         }
+

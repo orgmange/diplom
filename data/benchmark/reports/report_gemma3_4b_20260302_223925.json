@@ -1,0 +1,884 @@
+{
+  "model_name": "gemma3:4b",
+  "embedding_model": "embeddinggemma:latest",
+  "total_files": 21,
+  "files_with_reference": 21,
+  "correct_templates_count": 19,
+  "template_accuracy": 0.9048,
+  "avg_processing_time": 3.052,
+  "avg_accuracy": 0.7648,
+  "items": [
+    {
+      "filename": "1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 8.047,
+      "accuracy": 0.7143,
+      "is_reference_found": true,
+      "result_json": {
+        "child": {
+          "surname": "Бауэр",
+          "name": "Артём",
+          "patronymic": "Евгеньевич",
+          "date_of_birth": "20.10.2008",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Россия"
+        },
+        "father": {
+          "fio": "Бауэр Евгений Петрович",
+          "citizenship": "гражданин России",
+          "nationality": "русский"
+        },
+        "mother": {
+          "fio": "Елена Сергеевна Бауэр",
+          "citizenship": "гражданка России",
+          "nationality": "немка"
+        },
+        "act_record": {
+          "number": "2503",
+          "date": "05.11.2008"
+        },
+        "registration_place": "отдел ЗАГС Ленинского района г. Новосибирска, управления по делам ЗАГС Новосибирской области",
+        "series": "II-ЕТ",
+        "number": "679933"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Бауэр",
+          "name": "Артём",
+          "patronymic": "Евгеньевич",
+          "date_of_birth": "20.10.2008",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Россия"
+        },
+        "father": {
+          "fio": "Бауэр Евгений Петрович",
+          "citizenship": "гражданин России",
+          "nationality": "русский"
+        },
+        "mother": {
+          "fio": "Бауэр Елена Сергеевна",
+          "citizenship": "гражданка России",
+          "nationality": "немка"
+        },
+        "act_record": {
+          "number": "2503",
+          "date": "05.11.2008"
+        },
+        "registration_place": "отдел ЗАГС Ленинского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+        "series": "II-ЕТ",
+        "number": "679933"
+      }
+    },
+    {
+      "filename": "718b.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 3.843,
+      "accuracy": 0.7143,
+      "is_reference_found": true,
+      "result_json": {
+        "child": {
+          "surname": "Хмелевский",
+          "name": "Даниил",
+          "patronymic": "Викторович",
+          "date_of_birth": "15.09.2011",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Российская Федерация"
+        },
+        "father": {
+          "fio": "Хмелевский --",
+          "citizenship": "гражданка России",
+          "nationality": "русская"
+        },
+        "mother": {
+          "fio": "Хмелевская Надежда Викторовна",
+          "citizenship": "гражданка России",
+          "nationality": "русская"
+        },
+        "act_record": {
+          "number": "1138",
+          "date": "12.10.2011"
+        },
+        "registration_place": "отдел ЗАГС Первомайского района г. Новосибирска",
+        "series": "II-ET",
+        "number": "670079"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Хмелевский",
+          "name": "Даниил",
+          "patronymic": "Викторович",
+          "date_of_birth": "15.09.2011",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Российская Федерация"
+        },
+        "father": {
+          "fio": "",
+          "citizenship": "",
+          "nationality": ""
+        },
+        "mother": {
+          "fio": "Хмелевская Надежда Викторовна",
+          "citizenship": "гражданка России",
+          "nationality": "русская"
+        },
+        "act_record": {
+          "number": "1138",
+          "date": "12.10.2011"
+        },
+        "registration_place": "отдел ЗАГС Первомайского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+        "series": "II-ET",
+        "number": "670079"
+      }
+    },
+    {
+      "filename": "7e05691483401ae2b94275bbd9091245.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 3.794,
+      "accuracy": 0.8571,
+      "is_reference_found": true,
+      "result_json": {
+        "child": {
+          "surname": "Асанова",
+          "name": "Асиё",
+          "patronymic": "Айдер кызы",
+          "date_of_birth": "02.09.2015",
+          "place_of_birth": "г. Симферополь, Республика Крым, Российская Федерация"
+        },
+        "father": {
+          "fio": "Асанов Айдер Талятович",
+          "citizenship": "гражданин Российской Федерации",
+          "nationality": "крымский татарин"
+        },
+        "mother": {
+          "fio": "Эльвина Сейрановна",
+          "citizenship": "гражданка Российской Федерации",
+          "nationality": "крымская татарка"
+        },
+        "act_record": {
+          "number": "4373",
+          "date": "02.10.2015"
+        },
+        "registration_place": "Отдел регистрации рождения Г.Симферополя Департамента записи актов гражданского состояния Министерства костиции Республики Крым",
+        "series": "I-АЯ",
+        "number": "628793"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Асанова",
+          "name": "Асие",
+          "patronymic": "Айдер кызы",
+          "date_of_birth": "02.09.2015",
+          "place_of_birth": "г. Симферополь, Республика Крым, Российская Федерация"
+        },
+        "father": {
+          "fio": "Асанов Айдер Талятович",
+          "citizenship": "гражданин Российской Федерации",
+          "nationality": "крымский татарин"
+        },
+        "mother": {
+          "fio": "Эльвина Сейрановна",
+          "citizenship": "гражданка Российской Федерации",
+          "nationality": "крымская татарка"
+        },
+        "act_record": {
+          "number": "4373",
+          "date": "02.10.2015"
+        },
+        "registration_place": "Отдел регистрации рождения Г.Симферополя Департамента записи актов гражданского состояния Министерства костиции Республики Крым",
+        "series": "I-АЯ",
+        "number": "628793"
+      }
+    },
+    {
+      "filename": "c38edbcs-960.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 3.832,
+      "accuracy": 0.8571,
+      "is_reference_found": true,
+      "result_json": {
+        "child": {
+          "surname": "Ильясова",
+          "name": "Ангелина",
+          "patronymic": "Руслановна",
+          "date_of_birth": "22.12.2014",
+          "place_of_birth": "г. Стерлитамак, Республика Башкортостан, Российская Федерация"
+        },
+        "father": {
+          "fio": "Ильясов Руслан Уралович",
+          "citizenship": "гражданин Российской Федерации",
+          "nationality": "татарин"
+        },
+        "mother": {
+          "fio": "Ильясова Елена Геннадьевна",
+          "citizenship": "гражданка Российской Федерации",
+          "nationality": "русская"
+        },
+        "act_record": {
+          "number": "4219",
+          "date": "30.12.2014"
+        },
+        "registration_place": "отдел ЗАГС г, Стерлитамяк Управления записи актов гражданского состояния Республики Башкортостан",
+        "series": null,
+        "number": "EZ213"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Ильясова",
+          "name": "Ангелина",
+          "patronymic": "Руслановна",
+          "date_of_birth": "22.12.2014",
+          "place_of_birth": "г. Стерлитамак, Республика Башкортостан, Российская Федерация"
+        },
+        "father": {
+          "fio": "Ильясов Руслан Уралович",
+          "citizenship": "гражданин Российской Федерации",
+          "nationality": "татарин"
+        },
+        "mother": {
+          "fio": "Ильясова Елена Геннадьевна",
+          "citizenship": "гражданка Российской Федерации",
+          "nationality": "русская"
+        },
+        "act_record": {
+          "number": "4219",
+          "date": "30.12.2014"
+        },
+        "registration_place": "отдел ЗАГС г, Стерлитамяк Управления записи актов гражданского состояния Республики Башкортостан",
+        "series": "",
+        "number": ""
+      }
+    },
+    {
+      "filename": "свидетельство-о-рождении-001.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "passport",
+      "is_type_correct": false,
+      "processing_time": 4.209,
+      "accuracy": 0.1429,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "65",
+        "number": "699324",
+        "surname": "Семенченко",
+        "name": "Яна",
+        "patronymic": "Дмитриевна",
+        "gender": "ЖЕН",
+        "date_of_birth": "12.05.2016",
+        "place_of_birth": "город Абакан Республика Хакасия Россия",
+        "issued_by": "Комитет ЗАГС при Правительстве Республики Хакасия",
+        "date_of_issue": "25.05.2016",
+        "division_code": "СОРСК",
+        "mrz": {
+          "line1": "XS",
+          "line2": "СЕРТОВ(дата/ signature)Я хочу дать 25 ФЕД и мая 2016 2 врачебная ...НИК г. Сущ город Я 65 45 А.И.Севельникова 4 Руководитель органа заинсизактов гражданского состояния а к с о р о х нел 2 4 Приложение - % плн I-ПВ № 699324 Гарант, МГФ, Мэсков, 2013,"
+        }
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Семенченко",
+          "name": "Яна",
+          "patronymic": "Дмитриевна",
+          "date_of_birth": "12.05.2016",
+          "place_of_birth": "Республика Хакасия, Россия"
+        },
+        "father": {
+          "fio": "Семенченко Дмитрий Сергеевич",
+          "citizenship": "гражданин России",
+          "nationality": ""
+        },
+        "mother": {
+          "fio": "Семенченко Ольга Сергеевна",
+          "citizenship": "Семенченко Ольга Сергеевна",
+          "nationality": ""
+        },
+        "act_record": {
+          "number": "716",
+          "date": "25.03.2010"
+        },
+        "registration_place": "Отдел Комитета ЗАГС при Правительстве Республики Хакасия по городу Сорску",
+        "series": "I-ПВ",
+        "number": "699324"
+      }
+    },
+    {
+      "filename": "1385315836_1578903606.jpg",
+      "expected_type": "driver_license",
+      "detected_type": "driver_license",
+      "is_type_correct": true,
+      "processing_time": 2.547,
+      "accuracy": 0.9,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "02 12 172900",
+        "surname": "ЕЛИЗАРЬЕВ",
+        "name_patronymic": "МАКСИМ АНДРЕЕВИЧ",
+        "date_of_birth": "21.04.1995",
+        "place_of_birth": "РЕСПУБЛИКА БАШКОРТОСТАН",
+        "date_of_issue": "26.06.2013",
+        "date_of_expiry": "26.06.2023",
+        "issued_by": "ГИБДД 0275",
+        "region": "РЕСПУБЛИКА БАШКОРТОСТАН",
+        "categories": [
+          "В"
+        ]
+      },
+      "reference_json": {
+        "number": "02 12 172900",
+        "surname": "ЕЛИЗАРЬЕВ",
+        "name_patronymic": "МАКСИМ АНДРЕЕВИЧ",
+        "date_of_birth": "21.04.1995",
+        "place_of_birth": "РЕСПУБЛИКА БАШКОРТОСТАН",
+        "date_of_issue": "26.06.2013",
+        "date_of_expiry": "26.06.2023",
+        "issued_by": "ГИБДД 0275",
+        "region": "РЕСПУБЛИКА БАШКОРТОСТАН",
+        "categories": "В"
+      }
+    },
+    {
+      "filename": "2c1e6114b0fd5e6a3f714ce0e6028b14.jpg",
+      "expected_type": "driver_license",
+      "detected_type": "driver_license",
+      "is_type_correct": true,
+      "processing_time": 2.526,
+      "accuracy": 0.9,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "64 04 396461",
+        "surname": "ИЛЬИН",
+        "name_patronymic": "МАКСИМ ПАВЛОВИЧ",
+        "date_of_birth": "31.08.1982",
+        "place_of_birth": "САРАТОВСКАЯ ОБЛ.",
+        "date_of_issue": "21.06.2011",
+        "date_of_expiry": "21.06.2021",
+        "issued_by": "ГИБДД 6421",
+        "region": "САРАТОВСКАЯ ОБЛ.",
+        "categories": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "reference_json": {
+        "number": "64 04 396461",
+        "surname": "ИЛЬИН",
+        "name_patronymic": "МАКСИМ ПАВЛОВИЧ",
+        "date_of_birth": "31.08.1982",
+        "place_of_birth": "САРАТОВСКАЯ ОБЛ.",
+        "date_of_issue": "21.06.2011",
+        "date_of_expiry": "21.06.2021",
+        "issued_by": "ГИБДД 6421",
+        "region": "САРАТОВСКАЯ ОБЛ.",
+        "categories": "B, С, D"
+      }
+    },
+    {
+      "filename": "780416_900.jpg",
+      "expected_type": "driver_license",
+      "detected_type": "driver_license",
+      "is_type_correct": true,
+      "processing_time": 2.196,
+      "accuracy": 0.8,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "8",
+        "surname": "ПОТАПОВ",
+        "name_patronymic": "КИРИЛЛ ГЕННАДЬЕВИЧ",
+        "date_of_birth": "17.06.1987",
+        "place_of_birth": "СВЕРДЛОВСКАЯ ОБЛ.",
+        "date_of_issue": "03.05.2016",
+        "date_of_expiry": "03.05.2026",
+        "issued_by": "ГИБДД 6617",
+        "region": "СВЕРДЛОВСКАЯ ОБЛ.",
+        "categories": [
+          "B",
+          "B1"
+        ]
+      },
+      "reference_json": {
+        "number": "",
+        "surname": "ПОТАПОВ",
+        "name_patronymic": "КИРИЛЛ ГЕННАДЬЕВИЧ",
+        "date_of_birth": "17.06.1987",
+        "place_of_birth": "СВЕРДЛОВСКАЯ ОБЛ.",
+        "date_of_issue": "03.05.2016",
+        "date_of_expiry": "03.05.2026",
+        "issued_by": "ГИБДД 6617",
+        "region": "СВЕРДЛОВСКАЯ ОБЛ.",
+        "categories": "В, B1"
+      }
+    },
+    {
+      "filename": "LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg",
+      "expected_type": "driver_license",
+      "detected_type": "driver_license",
+      "is_type_correct": true,
+      "processing_time": 2.249,
+      "accuracy": 0.9,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "38 28 755642",
+        "surname": "БАБКИН",
+        "name_patronymic": "АРТЕМ ДМИТРИЕВИЧ",
+        "date_of_birth": "24.09.1998",
+        "place_of_birth": "ИРКУТСКАЯ ОБЛ.",
+        "date_of_issue": "27.09.2016",
+        "date_of_expiry": "27.09.2026",
+        "issued_by": "ГИБДД 3818",
+        "region": "ИРКУТСКАЯ ОБЛ.",
+        "categories": [
+          "В1",
+          "М"
+        ]
+      },
+      "reference_json": {
+        "number": "38 28 755642",
+        "surname": "БАБКИН",
+        "name_patronymic": "АРТЕМ ДМИТРИЕВИЧ",
+        "date_of_birth": "24.09.1998",
+        "place_of_birth": "ИРКУТСКАЯ ОБЛ.",
+        "date_of_issue": "27.09.2016",
+        "date_of_expiry": "27.09.2026",
+        "issued_by": "ГИБДД 3818",
+        "region": "ИРКУТСКАЯ ОБЛ.",
+        "categories": "B, B1, M"
+      }
+    },
+    {
+      "filename": "Снимок экрана 2026-02-24 162115.jpg",
+      "expected_type": "driver_license",
+      "detected_type": "driver_license",
+      "is_type_correct": true,
+      "processing_time": 2.405,
+      "accuracy": 0.9,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "42 27 521544",
+        "surname": "ВЫСОЦКИЙ",
+        "name_patronymic": "НИКИТА ВЛАДИМИРОВИЧ",
+        "date_of_birth": "11.03.1998",
+        "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+        "date_of_issue": "16.03.2016",
+        "date_of_expiry": "16.03.2026",
+        "issued_by": "ГИБДД 4202",
+        "region": "КЕМЕРОВСКАЯ ОБЛ.",
+        "categories": [
+          "В",
+          "В1"
+        ]
+      },
+      "reference_json": {
+        "number": "42 27 521544",
+        "surname": "Высоцкий",
+        "name_patronymic": "НИКИТА ВЛАДИМИРОВИЧ",
+        "date_of_birth": "11.03.1998",
+        "place_of_birth": "КЕМЕРОВСКАЯ ОБЛ.",
+        "date_of_issue": "16.03.2016",
+        "date_of_expiry": "16.03.2026",
+        "issued_by": "ГИБДД 4202",
+        "region": "КЕМЕРОВСКАЯ ОБЛ.",
+        "categories": "B, B1"
+      }
+    },
+    {
+      "filename": "152f6bcs-960.jpg",
+      "expected_type": "passport",
+      "detected_type": "passport",
+      "is_type_correct": true,
+      "processing_time": 3.365,
+      "accuracy": 0.5833,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "2",
+        "number": "85911",
+        "surname": "ЖАДАН",
+        "name": "СТАНИСЛАВ",
+        "patronymic": "ВЛАДИМИРОВИЧ",
+        "gender": "МУЖ",
+        "date_of_birth": "19.08.1991",
+        "place_of_birth": "РФ гор. миллерово РОСТОВСКОЙ ОБЛ.",
+        "issued_by": "МЕЖРАЙОННЫМ ОТДЕЛОМ УФМС РОССИИ ПО РОСТОВСКОЙ ОБЛАСТИ",
+        "date_of_issue": "24.07.2014",
+        "division_code": "610-043",
+        "mrz": {
+          "line1": "PNRUSJADAN<CERVISIA0<VISDIMIROVI3<<<<<<<<<",
+          "line2": "60162085911А894«55<<4140724610043<06"
+        }
+      },
+      "reference_json": {
+        "series": "6014",
+        "number": "620859",
+        "surname": "ЖАДАН",
+        "name": "СТАНИСЛАВ",
+        "patronymic": "ВЛАДИМИРОВИЧ",
+        "gender": "МУЖ",
+        "date_of_birth": "19.08.1991",
+        "place_of_birth": "гор. миллерово РОСТОВСКОЙ ОБЛ.",
+        "issued_by": "МЕЖРАЙОННЫМ ОТДЕЛОМ УФМС РОССИИ ПО РОСТОВСКОЙ ОБЛАСТИ В ГОРОДЕ МИЛЛЕРОВО",
+        "date_of_issue": "24.07.2014",
+        "division_code": "610-043",
+        "mrz": {
+          "line1": "PNRUSJADAN<CERVISIA0<VISDIMIROVI3<<<<<<<<<<",
+          "line2": "60162085911А894«55<<4140724610043<06"
+        }
+      }
+    },
+    {
+      "filename": "1551114833_Qkr8HprHdtA.jpg",
+      "expected_type": "passport",
+      "detected_type": "passport",
+      "is_type_correct": true,
+      "processing_time": 3.361,
+      "accuracy": 0.5833,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "220",
+        "number": "070",
+        "surname": "БУСОРГИН",
+        "name": "АЛЕКСЕЙ",
+        "patronymic": "АЛЕКСЕЕВИЧ",
+        "gender": "МУЖ",
+        "date_of_birth": "30.07.1997",
+        "place_of_birth": "ГОР. Барнаул",
+        "issued_by": "ОТДЕЛ УФМС РОССИИ ПО АЛТАЙСКОМУ КРАЮ И РЕСПУБЛИКЕ АЛТАЙ",
+        "date_of_issue": "07.08.2017",
+        "division_code": "230-070",
+        "mrz": {
+          "line1": "PNRUSBUSORGIN<<ALEKSEQ<ALEKSEEVI3<<<<<<<<<",
+          "line2": "0113589573RUS9707302M<<<<<<<7170807220070<72"
+        }
+      },
+      "reference_json": {
+        "series": "0117",
+        "number": "358957",
+        "surname": "БУСОРГИН",
+        "name": "АЛЕКСЕЙ",
+        "patronymic": "АЛЕКСЕЕВИЧ",
+        "gender": "МУЖ",
+        "date_of_birth": "30.07.1997",
+        "place_of_birth": "ГОР. БАРНАУЛ",
+        "issued_by": "ОТДЕЛ УФМС РОССИИ ПО АЛТАЙСКОМУ КРАЮ И РЕСПУБЛИКЕ АЛТАЙ В ЛЕНИНСКОМ РАЙОНЕ Г. БАРНАУЛА",
+        "date_of_issue": "07.08.2017",
+        "division_code": "220-070",
+        "mrz": {
+          "line1": "PNRUSBUSORGIN<<ALEKSEQ<ALEKSEEVI3<<<<<<<<<<<",
+          "line2": "0113589573RUS9707302M<<<<<<<7170807220070<72"
+        }
+      }
+    },
+    {
+      "filename": "1647714700_02-min.jpg",
+      "expected_type": "passport",
+      "detected_type": "passport",
+      "is_type_correct": true,
+      "processing_time": 3.383,
+      "accuracy": 0.5,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "770",
+        "number": "093",
+        "surname": "АНДРЕЕВА",
+        "name": "ТАТЬЯНА",
+        "patronymic": "НИКОЛАЕВНА",
+        "gender": "ЖЕН",
+        "date_of_birth": "25.11.1968",
+        "place_of_birth": "С.БИЧУРЧА БАНТЕВО",
+        "issued_by": "УФМС РОССИИ ПО ГОР .МОСКВЕ",
+        "date_of_issue": "17.01.2014",
+        "division_code": "4513930326",
+        "mrz": {
+          "line1": "PNRUSANDREEVA<<TAT98NA<NIKOLAEVNA<<<<<<<<<<",
+          "line2": "4513930326RUS6811255F<<<<<3140117770093<ТСПОЛКОМ"
+        }
+      },
+      "reference_json": {
+        "series": "4513",
+        "number": "393032",
+        "surname": "АНДРЕЕВА",
+        "name": "ТАТЬЯНА",
+        "patronymic": "НИКОЛАЕВНА",
+        "gender": "ЖЕН",
+        "date_of_birth": "25.11.1968",
+        "place_of_birth": "С.БИЧУРЧА БАНТЕВО ШЕМУРШИНСКОГО Р-НА ЧУВАШСКОЙ АССР",
+        "issued_by": "УФМС РОССИИ ПО ГОР.МОСКВЕ ПО РАЙОНУ МИТИНО",
+        "date_of_issue": "17.01.2014",
+        "division_code": "770-093",
+        "mrz": {
+          "line1": "PNRUSANDREEVA<<TAT98NA<NIKOLAEVNA<<<<<<<<<<<",
+          "line2": "4513930326RUS6811255F<<<<<<<3140117770093<94"
+        }
+      }
+    },
+    {
+      "filename": "hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg",
+      "expected_type": "passport",
+      "detected_type": "passport",
+      "is_type_correct": true,
+      "processing_time": 3.464,
+      "accuracy": 0.5833,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "636014",
+        "number": "11636014",
+        "surname": "БУЛАХОВА",
+        "name": "СНЕЖАНА",
+        "patronymic": "АНДРЕЕВНА",
+        "gender": "ЖЕН",
+        "date_of_birth": "27.12.1997",
+        "place_of_birth": "пос. ТУМАНОВО ВЯЗЕМСКОГО Р-НА СМОЛЕНСКОЙ ОБЛ.",
+        "issued_by": "МО УФМС РОССИИ",
+        "date_of_issue": "01.02.2012",
+        "division_code": "670-006",
+        "mrz": {
+          "line1": "PNRUSBULAHOVA<<SNEJANA<ANDREEVNA<<<<<<<<<<",
+          "line2": "6616360743RUS9712272F<<<<<1120201670006<22"
+        }
+      },
+      "reference_json": {
+        "series": "6616",
+        "number": "360743",
+        "surname": "БУЛАХОВА",
+        "name": "СНЕЖАНА",
+        "patronymic": "АНДРЕЕВНА",
+        "gender": "ЖЕН.",
+        "date_of_birth": "27.12.1997",
+        "place_of_birth": "пос. ТУМАНОВО ВЯЗЕМСКОГО Р-НА СМОЛЕНСКОЙ ОБЛ.",
+        "issued_by": "МО УФМС РОССИИ ПО СМОЛЕНСКОЙ ОБЛАСТИ",
+        "date_of_issue": "01.02.2012",
+        "division_code": "670-006",
+        "mrz": {
+          "line1": "PNRUSBULAHOVA<<SNEJANA<ANDREEVNA<<<<<<<",
+          "line2": "6616360743RUS9712272F<<<<<1120201670006<22"
+        }
+      }
+    },
+    {
+      "filename": "vqxkqp1sp23nwwshszdk.jpg",
+      "expected_type": "passport",
+      "detected_type": "passport",
+      "is_type_correct": true,
+      "processing_time": 3.69,
+      "accuracy": 0.75,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "155",
+        "number": "69177.2.097",
+        "surname": "КОЛПАКОВА",
+        "name": "НАДЕЖДА",
+        "patronymic": "СЕРГЕЕВНА",
+        "gender": "МУЖ",
+        "date_of_birth": "07.03.2005",
+        "place_of_birth": "Г. УФА РЕСП. БАШКОРТОСТАН РОССИЯ",
+        "issued_by": "ГУ МВД РОССИИ ПО СВЕРДЛОВСКОЙ ОБЛАСТИ",
+        "date_of_issue": "28.05.2025",
+        "division_code": "660-001",
+        "mrz": {
+          "line1": "PNRUSKOLPAKOVA<<NADEJDA<SERGEE VNA<<<<<<<<<<",
+          "line2": "6522747890RUS0503073M<<<<<<5250528660001<02"
+        }
+      },
+      "reference_json": {
+        "series": "6525",
+        "number": "274789",
+        "surname": "КОЛПАКОВА",
+        "name": "НАДЕЖДА",
+        "patronymic": "СЕРГЕЕВНА",
+        "gender": "МУЖ",
+        "date_of_birth": "07.03.2005",
+        "place_of_birth": "Г. УФА РЕСП. БАШКОРТОСТАН РОССИЯ",
+        "issued_by": "ГУ МВД РОССИИ ПО СВЕРДЛОВСКОЙ ОБЛАСТИ",
+        "date_of_issue": "28.05.2025",
+        "division_code": "660-001",
+        "mrz": {
+          "line1": "PNRUSKOLPAKOVA<<NADEJDA<SERGEE VNA<<<<<<",
+          "line2": "6522747890RUS0503073M<<<<<<5250528660001<02"
+        }
+      }
+    },
+    {
+      "filename": "-vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg",
+      "expected_type": "snils",
+      "detected_type": "snils",
+      "is_type_correct": true,
+      "processing_time": 1.861,
+      "accuracy": 0.875,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "173-830-599 90",
+        "surname": "ТЕРЕХОВ",
+        "name": "МИХАИЛ",
+        "patronymic": "ЕВГЕНЬЕВИЧ",
+        "date_of_birth": "16.05.2009",
+        "place_of_birth": "НИЖНЕВАРТОВСК ТЮМЕНСКАЯ ОБЛАСТЬ",
+        "gender": "МУЖСКОЙ",
+        "registration_date": "05.10.2012"
+      },
+      "reference_json": {
+        "number": "173-830-599 90",
+        "surname": "ТЕРЕХОВ",
+        "name": "МИХАИЛ",
+        "patronymic": "ЕВГЕНЬЕВИЧ",
+        "date_of_birth": "16.05.2009",
+        "place_of_birth": "НИЖНЕВАРТОВСК ТЮМЕНСКАЯ ОБЛАСТЬ",
+        "gender": "МУЖСКОЙ",
+        "registration_date": "5.10.2012"
+      }
+    },
+    {
+      "filename": "1ca950819c74c99f143476956442d6a8.jpeg",
+      "expected_type": "snils",
+      "detected_type": "snils",
+      "is_type_correct": true,
+      "processing_time": 1.774,
+      "accuracy": 1.0,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "187-220-276 69",
+        "surname": "БЕРАЦ",
+        "name": "АНДРЕЙ",
+        "patronymic": "ИГОРЕВИЧ",
+        "date_of_birth": "10 августа 1992 года",
+        "place_of_birth": "САНКТ-ПЕТЕРБУРГ",
+        "gender": "мужской",
+        "registration_date": "4 февраля 2015 года"
+      },
+      "reference_json": {
+        "number": "187-220-276 69",
+        "surname": "БЕРАЦ",
+        "name": "АНДРЕЙ",
+        "patronymic": "ИГОРЕВИЧ",
+        "date_of_birth": "10 августа 1992 года",
+        "place_of_birth": "САНКТ-ПЕТЕРБУРГ",
+        "gender": "мужской",
+        "registration_date": "4 февраля 2015 года"
+      }
+    },
+    {
+      "filename": "R3fp08pn_yI.jpg",
+      "expected_type": "snils",
+      "detected_type": "snils",
+      "is_type_correct": true,
+      "processing_time": 1.803,
+      "accuracy": 1.0,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "205-372-234 29",
+        "surname": "ШЕМОНАЕВА",
+        "name": "КСЕНИЯ",
+        "patronymic": "ВЛАДИМИРОВНА",
+        "date_of_birth": "26 марта 2019",
+        "place_of_birth": "СИМФЕРОПОЛЬ, РЕСПУБЛИКА КРЫМ",
+        "gender": "ЖЕНСКИЙ",
+        "registration_date": "12 апреля 2019"
+      },
+      "reference_json": {
+        "number": "205-372-234 29",
+        "surname": "ШЕМОНАЕВА",
+        "name": "КСЕНИЯ",
+        "patronymic": "ВЛАДИМИРОВНА",
+        "date_of_birth": "26 марта 2019",
+        "place_of_birth": "СИМФЕРОПОЛЬ, РЕСПУБЛИКА КРЫМ",
+        "gender": "ЖЕНСКИЙ",
+        "registration_date": "12 апреля 2019"
+      }
+    },
+    {
+      "filename": "auSBK6ncH3c.jpg",
+      "expected_type": "snils",
+      "detected_type": "snils",
+      "is_type_correct": true,
+      "processing_time": 1.678,
+      "accuracy": 1.0,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "171-623-328 50",
+        "surname": "РУДОЙ",
+        "name": "АНДРЕЙ",
+        "patronymic": "МИХАЙЛОВИЧ",
+        "date_of_birth": "13.12.2006",
+        "place_of_birth": "МОСКВА",
+        "gender": "МУЖСКОЙ",
+        "registration_date": "27.04.2012"
+      },
+      "reference_json": {
+        "number": "171-623-328 50",
+        "surname": "РУДОЙ",
+        "name": "АНДРЕЙ",
+        "patronymic": "МИХАЙЛОВИЧ",
+        "date_of_birth": "13.12.2006",
+        "place_of_birth": "МОСКВА",
+        "gender": "мужской",
+        "registration_date": "27.04.2012"
+      }
+    },
+    {
+      "filename": "yoqWE8WFTe8.jpg",
+      "expected_type": "snils",
+      "detected_type": "snils",
+      "is_type_correct": true,
+      "processing_time": 1.689,
+      "accuracy": 0.875,
+      "is_reference_found": true,
+      "result_json": {
+        "number": "138-814-899 07",
+        "surname": "ШИРОКИХ",
+        "name": "ТАТЬЯНА",
+        "patronymic": "ОЛЕГОВНА",
+        "date_of_birth": "29 апреля 1997 года",
+        "place_of_birth": "РОСТОВ, ЯРОСЛАВСКАЯ ОБЛАСТЬ",
+        "gender": "женский",
+        "registration_date": "Дата регистрации"
+      },
+      "reference_json": {
+        "number": "138-814-899 07",
+        "surname": "ШИРОКИХ",
+        "name": "ТАТЬЯНА",
+        "patronymic": "ОЛЕГОВНА",
+        "date_of_birth": "29 апреля 1997 года",
+        "place_of_birth": "РОСТОВ, ЯРОСЛАВСКАЯ ОБЛАСТЬ",
+        "gender": "женский",
+        "registration_date": ""
+      }
+    },
+    {
+      "filename": "снилс мой.png",
+      "expected_type": "snils",
+      "detected_type": "passport",
+      "is_type_correct": false,
+      "processing_time": 2.38,
+      "accuracy": 0.625,
+      "is_reference_found": true,
+      "result_json": {
+        "series": "885",
+        "number": "86",
+        "surname": "МАЛЫШЕВ",
+        "name": "ГЕОРГИЙ",
+        "patronymic": "ВАЛЕНТИНОВИЧ",
+        "gender": "МУЖ",
+        "date_of_birth": "07.03.2005",
+        "place_of_birth": "УФА РЕСПУБЛИКА БАШКОРТОСТАН",
+        "issued_by": null,
+        "date_of_issue": "14.05.2007",
+        "division_code": null,
+        "mrz": {
+          "line1": null,
+          "line2": null
+        }
+      },
+      "reference_json": {
+        "number": "145-625-885 86",
+        "surname": "МАЛЫШЕВ",
+        "name": "ГЕОРГИЙ",
+        "patronymic": "ВАЛЕНТИНОВИЧ",
+        "date_of_birth": "07.03.2005",
+        "place_of_birth": "УФА РЕСПУБЛИКА БАШКОРТОСТАН",
+        "gender": "МУЖСКОЙ",
+        "registration_date": "14.05.2007"
+      }
+    }
+  ]
+}

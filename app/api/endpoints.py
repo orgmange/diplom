@@ -46,6 +46,11 @@ class StructuringBenchmarkRunRequest(BaseModel):
     embedding_model: str | None = None
 
 
+class StructuringBenchmarkMultiRunRequest(BaseModel):
+    model_names: List[str]
+    embedding_model: str | None = None
+
+
 class BenchmarkItemResponse(BaseModel):
     filename: str
     expected_type: str | None
@@ -130,9 +135,9 @@ def clean_ocr():
 
 
 @router.get("/rag/models", response_model=Dict[str, List[str]])
-def list_models():
+async def list_models():
     """Список доступных моделей Ollama."""
-    models = structuring_service.get_available_models()
+    models = await structuring_service.get_available_models()
     return {"models": models}
 
 
@@ -149,13 +154,22 @@ def run_benchmark(request: BenchmarkRunRequest):
     return benchmark_service.run(request.embedding_model)
 
 @router.post("/rag/benchmark/structuring/run", response_model=StructuringBenchmarkRunResponse)
-def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
+async def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
     """Запускает бенчмарк структурирования для выбранной LLM модели."""
-    report = structuring_benchmark_service.run(
+    report = await structuring_benchmark_service.run(
         model_name=request.model_name,
         embedding_model=request.embedding_model
     )
     return report.to_dict()
+
+@router.post("/rag/benchmark/structuring/run-multi", response_model=List[StructuringBenchmarkRunResponse])
+async def run_structuring_benchmark_multi(request: StructuringBenchmarkMultiRunRequest):
+    """Поочерёдно запускает бенчмарк структурирования для списка LLM моделей."""
+    reports = await structuring_benchmark_service.run_multi(
+        model_names=request.model_names,
+        embedding_model=request.embedding_model
+    )
+    return [report.to_dict() for report in reports]
 
 @router.post("/rag/benchmark/cancel")
 def cancel_benchmark():
@@ -163,6 +177,33 @@ def cancel_benchmark():
     benchmark_service.stop()
     structuring_benchmark_service.stop()
     return {"status": "Cancellation requested"}
+
+@router.get("/rag/benchmark/structuring/reports", response_model=List[Dict[str, Any]])
+def list_structuring_reports():
+    """Возвращает список сохраненных отчетов структурирования."""
+    return structuring_benchmark_service.list_reports()
+
+@router.get("/rag/benchmark/structuring/reports/{filename}", response_model=Dict[str, Any])
+def get_structuring_report(filename: str):
+    """Возвращает детали конкретного отчета структурирования."""
+    report = structuring_benchmark_service.get_report(filename)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
+@router.delete("/rag/benchmark/structuring/reports/{filename}")
+def delete_structuring_report(filename: str):
+    """Удаляет конкретный отчет структурирования."""
+    success = structuring_benchmark_service.delete_report(filename)
+    if not success:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return {"status": "deleted", "filename": filename}
+
+@router.delete("/rag/benchmark/structuring/reports")
+def clear_structuring_reports():
+    """Удаляет всю историю отчетов структурирования."""
+    count = structuring_benchmark_service.clear_reports()
+    return {"status": "cleared", "deleted_count": count}
 
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])
 def index_examples():
@@ -212,11 +253,10 @@ def search_documents(query: SearchQuery):
     return results
 
 @router.post("/rag/structure", response_model=Dict[str, Any])
-def structure_document(request: StructureRequest):
+async def structure_document(request: StructureRequest):
     """Выполняет структурирование данных для выбранного файла."""
     # 1. Загружаем данные файла
     from app.core.config import settings
-    import os
     
     xml_filename = request.filename.replace("-clean", "-xml")
     clean_filename = request.filename if "-clean" in request.filename else f"{request.filename}-clean"
@@ -239,8 +279,10 @@ def structure_document(request: StructureRequest):
     if request.reindex:
         vector_service.reindex_all(embedding_model=request.model_name)
             
-    # 3. Выполняем структурирование
-    result = structuring_service.structure(
+    # 3. Выполняем структурирование асинхронно
+    # Благодаря AsyncClient в сервисе, если клиент закроет соединение,
+    # запрос к Ollama будет прерван автоматически библиотекой httpx/ollama
+    result = await structuring_service.structure(
         raw_text=raw_text if request.use_raw_for_search else cleaned_text,
         cleaned_text=cleaned_text,
         model_name=request.model_name,

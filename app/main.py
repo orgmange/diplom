@@ -8,15 +8,22 @@ from app.api.endpoints import router as api_router
 from app.core.config import settings
 
 # Настройка логирования с метками времени
-log_level = os.getenv("LOG_LEVEL", "INFO").upper()
-logging.basicConfig(
-    level=getattr(logging, log_level, logging.INFO),
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
-)
+log_level = os.getenv("LOG_LEVEL", "DEBUG").upper()
+root_logger = logging.getLogger()
+root_logger.setLevel(getattr(logging, log_level, logging.DEBUG))
+
+# Создаем обработчик для файла
+file_handler = logging.FileHandler("app.log", encoding="utf-8")
+file_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+root_logger.addHandler(file_handler)
+
+# Создаем обработчик для консоли
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+root_logger.addHandler(console_handler)
+
 logger = logging.getLogger("diplom")
+logger.setLevel(getattr(logging, log_level, logging.DEBUG))
 
 app = FastAPI(
     title=settings.PROJECT_NAME,

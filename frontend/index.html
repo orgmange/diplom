@@ -68,12 +68,7 @@
         <div class="search-panel">
             <h2>Поиск по документам</h2>
             <div class="search-config">
-                <label class="filter-checkbox">
-                    <input type="checkbox" id="search-cleaned-only" checked> Только Clean
-                </label>
-                <label class="filter-checkbox">
-                    <input type="checkbox" id="search-templates-only" checked> Без примеров (Few-shot)
-                </label>
+                <!-- Старые фильтры (Clean/Raw) удалены, так как теперь поиск только по чистым данным -->
             </div>
             <div class="search-box">
                 <textarea id="search-query"
@@ -158,15 +153,10 @@
                 </div>
             </div>
             <div id="benchmark-summary" class="result-box"></div>
-            <div class="benchmark-grid">
-                <div>
-                    <h3>Raw тесты</h3>
-                    <div id="benchmark-raw" class="result-box"></div>
-                </div>
-                <div>
-                    <h3>Clean тесты</h3>
-                    <div id="benchmark-clean" class="result-box"></div>
-                </div>
+            <div class="benchmark-single">
+                <h3>Результаты поиска (Unified Clean RAG)</h3>
+                <div id="benchmark-clean" class="result-box full-width"></div>
+                <div id="benchmark-raw" class="hidden"></div>
             </div>
         </div>
     </div>

@@ -137,18 +137,15 @@ class BenchmarkService:
         docs_dir: Path,
         mode_dir: str,
         embedding_model: str,
-        is_cleaned: bool,
         collection_name: Optional[str] = None,
     ) -> Dict[str, Any]:
-        query_filter = models.Filter(
-            must=[
-                models.FieldCondition(key="is_cleaned", match=models.MatchValue(value=is_cleaned)),
-                models.FieldCondition(key="is_example", match=models.MatchValue(value=False)),
-            ]
-        )
+        """Оценивает точность поиска по документам (только чистый текст)."""
         items: List[BenchmarkItem] = []
         for doc_dir in self._iter_doc_dirs(docs_dir):
             expected_type = doc_dir.name
+            # Мы теперь поддерживаем только clean режим в бенчмарках
+            if mode_dir != "clean":
+                continue
             source_dir = doc_dir / mode_dir
             if not source_dir.exists():
                 continue
@@ -174,7 +171,6 @@ class BenchmarkService:
                     query=query,
                     limit=3,
                     embedding_model=embedding_model,
-                    query_filter=query_filter,
                     collection_name=collection_name
                 )
                 if not results:
@@ -191,7 +187,7 @@ class BenchmarkService:
                     continue
                 top = results[0]
                 predicted_filename = top.get("filename")
-                predicted_type = top.get("doc_type") or self._detect_doc_type(predicted_filename or "")
+                predicted_type = top.get("doc_type")
                 score = top.get("score")
                 
                 # Собираем альтернативы (топ-3)
@@ -200,7 +196,7 @@ class BenchmarkService:
                     alt_filename = res.get("filename")
                     alternatives.append({
                         "filename": alt_filename,
-                        "type": res.get("doc_type") or self._detect_doc_type(alt_filename or ""),
+                        "type": res.get("doc_type"),
                         "score": res.get("score")
                     })
 
@@ -224,29 +220,15 @@ class BenchmarkService:
             "items": [item.to_dict() for item in items],
         }
 
-    def _combine_totals(self, raw_report: Dict[str, Any], clean_report: Dict[str, Any]) -> BenchmarkTotals:
-        total = int(raw_report.get("total", 0)) + int(clean_report.get("total", 0))
-        correct = int(raw_report.get("correct", 0)) + int(clean_report.get("correct", 0))
-        accuracy = round(correct / total, 4) if total else 0.0
-        return BenchmarkTotals(total=total, correct=correct, accuracy=accuracy)
-
     def run(self, embedding_model: str) -> Dict[str, Any]:
-        """Запускает цикл reset, index и проверку raw/clean тестов в отдельной коллекции."""
+        """Запускает бенчмарк поиска по единому хранилищу примеров."""
         self._stop_requested = False
-        template_dir = settings.OCR_DIR
         docs_dir = settings.DOCS_DIR
         benchmark_collection = "benchmark_documents"
         
         # Initialize default response structure
-        prepared = {"prepared_xml": 0, "prepared_clean": 0}
-        indexed = {"raw_count": 0, "clean_count": 0, "total_count": 0, "raw_files": [], "clean_files": []}
-        raw_report = {"total": 0, "correct": 0, "accuracy": 0.0, "items": []}
+        indexed = {"total_count": 0, "files": []}
         clean_report = {"total": 0, "correct": 0, "accuracy": 0.0, "items": []}
-        overall = {"total": 0, "correct": 0, "accuracy": 0.0}
-
-        prepared = self._prepare_test_corpus(docs_dir)
-        if self._stop_requested:
-            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
 
         vector_size = self.vector_service.get_embedding_size(embedding_model=embedding_model)
         
@@ -254,49 +236,24 @@ class BenchmarkService:
         self.vector_service.reset_collection(vector_size=vector_size, collection_name=benchmark_collection)
         
         if self._stop_requested:
-            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+            return self._format_run_result(embedding_model, indexed, clean_report)
 
-        indexed_raw = self.vector_service.index_templates_by_mode(
-            is_cleaned=False,
-            directory=template_dir,
+        # Индексируем только примеры (теперь это единый источник)
+        indexed_files = self.vector_service.index_examples(
             embedding_model=embedding_model,
             collection_name=benchmark_collection
         )
-        indexed["raw_count"] = len(indexed_raw)
-        indexed["raw_files"] = indexed_raw
-        indexed["total_count"] = indexed["raw_count"] + indexed["clean_count"]
+        indexed["total_count"] = len(indexed_files)
+        indexed["files"] = indexed_files
 
         if self._stop_requested:
-            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+            return self._format_run_result(embedding_model, indexed, clean_report)
 
-        indexed_clean = self.vector_service.index_templates_by_mode(
-            is_cleaned=True,
-            directory=template_dir,
-            embedding_model=embedding_model,
-            collection_name=benchmark_collection
-        )
-        indexed["clean_count"] = len(indexed_clean)
-        indexed["clean_files"] = indexed_clean
-        indexed["total_count"] = indexed["raw_count"] + indexed["clean_count"]
-
-        if self._stop_requested:
-            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
-
-        raw_report = self._evaluate_from_docs(
-            docs_dir=docs_dir,
-            mode_dir="xml",
-            embedding_model=embedding_model,
-            is_cleaned=False,
-            collection_name=benchmark_collection
-        )
-        if self._stop_requested:
-            return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
-
+        # Оцениваем только по чистым документам
         clean_report = self._evaluate_from_docs(
             docs_dir=docs_dir,
             mode_dir="clean",
             embedding_model=embedding_model,
-            is_cleaned=True,
             collection_name=benchmark_collection
         )
         
@@ -304,15 +261,16 @@ class BenchmarkService:
         if hasattr(self.vector_service, "_save_state"):
             self.vector_service._save_state(embedding_model)
             
-        return self._format_run_result(embedding_model, prepared, indexed, raw_report, clean_report)
+        return self._format_run_result(embedding_model, indexed, clean_report)
 
-    def _format_run_result(self, embedding_model, prepared, indexed, raw_report, clean_report):
-        overall = self._combine_totals(raw_report=raw_report, clean_report=clean_report)
+    def _format_run_result(self, embedding_model, indexed, clean_report):
         return {
             "embedding_model": embedding_model,
-            "prepared": prepared,
             "indexed": indexed,
-            "overall": overall.to_dict(),
-            "raw_tests": raw_report,
+            "overall": {
+                "total": clean_report.get("total", 0),
+                "correct": clean_report.get("correct", 0),
+                "accuracy": clean_report.get("accuracy", 0.0)
+            },
             "clean_tests": clean_report,
         }

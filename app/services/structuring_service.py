@@ -53,12 +53,16 @@ class StructuringService:
         """
         Стабильный асинхронный метод с большим контекстом (16к) и полными примерами RAG.
         """
-        # 1. RAG
+        # 1. RAG (Поиск типа документа и примера для LLM)
+        # Ищем по единой базе примеров
         all_results = self.vector_service.search(
-            cleaned_text, limit=1, only_examples=True, embedding_model=embedding_model
+            cleaned_text, limit=1, embedding_model=embedding_model
         )
+        
         best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
-        doc_type = best_match.get('doc_type') if best_match else (expected_type or self.vector_service._detect_doc_type(cleaned_text[:200]))
+        
+        # Тип документа берем из метаданных найденного примера
+        doc_type = best_match.get('doc_type') if best_match else (expected_type or "unknown")
         
         # 2. Подготовка промпта
         template_json = self._get_template_for_type(doc_type)
@@ -70,10 +74,10 @@ class StructuringService:
         
         user_content = f"### JSON SCHEMA TO FOLLOW:\n{template_json}\n\n"
         if best_match:
-            # Используем ПОЛНЫЙ текст примера для лучшего качества Few-Shot
-            user_content += f"### REFERENCE EXAMPLE:\nINPUT: {best_match.get('cleaned_text')}\nOUTPUT: {best_match.get('json_output')}\n\n"
+            # Используем текст и JSON найденного примера для Few-Shot обучения
+            user_content += f"### REFERENCE EXAMPLE:\nINPUT: {best_match.get('text')}\nOUTPUT: {best_match.get('json_output')}\n\n"
         
-        # Передаем полный очищенный текст OCR
+        # Передаем очищенный текст OCR
         user_content += f"### TARGET OCR TEXT TO PROCESS:\n{cleaned_text}\n\n"
         user_content += "### FINAL RESULT (JSON ONLY):"
 

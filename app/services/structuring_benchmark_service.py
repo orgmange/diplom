@@ -126,23 +126,17 @@ class StructuringBenchmarkService:
         docs_dir = settings.DOCS_DIR
         ref_dir = settings.BENCHMARK_REF_DIR
         
-        # Синхронизация эмбеддинг-модели и переиндексация при необходимости
+        # Синхронизация эмбеддинг-модели и переиндексация
         try:
             current_embed = self.structuring_service.vector_service._load_state()
             target_embed = embedding_model or current_embed
             
-            # Проверяем наличие примеров в основной коллекции
-            example_count_res = self.structuring_service.vector_service.client.count(
-                collection_name=settings.COLLECTION_NAME,
-                exact=True,
-                count_filter=models.Filter(must=[models.FieldCondition(key="is_example", match=models.MatchValue(value=True))])
-            )
-            
-            if target_embed != current_embed or example_count_res.count == 0:
-                logger.warning(f"Re-indexing examples for benchmark (Target: {target_embed}, Current: {current_embed}, Count: {example_count_res.count})")
-                self.structuring_service.vector_service.reindex_all(embedding_model=target_embed)
+            # В новой системе мы просто вызываем reindex_all, который индексирует только примеры
+            # Это гарантирует, что база всегда в актуальном состоянии для бенчмарка.
+            logger.info(f"Re-indexing unified examples for benchmark (Target: {target_embed})")
+            self.structuring_service.vector_service.reindex_all(embedding_model=target_embed)
         except Exception as e:
-            logger.error(f"Error checking embedding state or re-indexing: {e}")
+            logger.error(f"Error re-indexing: {e}")
 
         items: List[StructuringBenchmarkItem] = []
         

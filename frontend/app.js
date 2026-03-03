@@ -429,9 +429,7 @@ async function runFullReindex() {
         resultDiv.innerHTML = `
             <div style="color: green; font-weight: bold;">✅ Переиндексация завершена!</div>
             Модель: ${data.embedding_model}<br>
-            Примеров: ${data.indexed_examples}<br>
-            OCR: ${data.indexed_ocr}<br>
-            Документов: ${data.indexed_docs}<br>
+            Проиндексировано примеров: ${data.indexed_examples}<br>
             <b>Всего векторов: ${data.total}</b>
         `;
     } catch (error) {
@@ -539,8 +537,6 @@ async function runIndexExamples() {
 
 async function runSearch() {
     const query = document.getElementById("search-query").value;
-    const isCleaned = document.getElementById("search-cleaned-only").checked;
-    const onlyTemplates = document.getElementById("search-templates-only").checked;
     if (!query) return;
 
     const resultsDiv = document.getElementById("search-results");
@@ -553,8 +549,7 @@ async function runSearch() {
             body: JSON.stringify({
                 query: query,
                 limit: 5,
-                is_cleaned: isCleaned,
-                only_templates: onlyTemplates
+                doc_type: null // Можно добавить селектор типов позже
             })
         });
         const results = await response.json();
@@ -674,15 +669,15 @@ async function runEmbeddingBenchmark() {
             body: JSON.stringify({ embedding_model: embeddingModel })
         });
         const report = await response.json();
+
+        // ВАЖНО: Убеждаемся, что мы не обращаемся к report.prepared
         summary.innerHTML = `
             Модель: <b>${report.embedding_model}</b><br>
-            Подготовлено тестов: xml=${report.prepared.prepared_xml}, clean=${report.prepared.prepared_clean}<br>
-            Индексировано: raw=${report.indexed.raw_count}, clean=${report.indexed.clean_count}, total=${report.indexed.total_count}<br>
-            Raw accuracy: ${(report.raw_tests.accuracy * 100).toFixed(1)}% (${report.raw_tests.correct}/${report.raw_tests.total})<br>
-            Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})<br>
-            Общий результат: ${(report.overall.accuracy * 100).toFixed(1)}% (${report.overall.correct}/${report.overall.total})
+            Индексировано примеров: ${report.indexed ? report.indexed.total_count : 'н/д'}<br>
+            <b>Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})</b>
         `;
-        renderBenchmarkTable("benchmark-raw", report.raw_tests);
+
+        if (rawBox) rawBox.innerHTML = "<i>Поиск по 'raw' данным (OCR XML) больше не поддерживается. Система перешла на Unified Clean RAG.</i>";
         renderBenchmarkTable("benchmark-clean", report.clean_tests);
         updateStatus();
     } catch (error) {

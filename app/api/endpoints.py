@@ -21,8 +21,7 @@ class SearchQuery(BaseModel):
     query: str
     limit: int = 5
     model: str | None = None
-    is_cleaned: bool | None = None
-    only_templates: bool = False
+    doc_type: str | None = None
 
 class StructureRequest(BaseModel):
     filename: str  # Имя файла из data/ocr
@@ -81,16 +80,11 @@ class BenchmarkGroupResponse(BaseModel):
 
 
 class BenchmarkIndexedResponse(BaseModel):
-    raw_count: int
-    clean_count: int
     total_count: int
-    raw_files: List[str]
-    clean_files: List[str]
+    files: List[str]
 
 
-class BenchmarkPreparedResponse(BaseModel):
-    prepared_xml: int
-    prepared_clean: int
+# BenchmarkPreparedResponse removed as we only use clean examples now
 
 
 class BenchmarkOverallResponse(BaseModel):
@@ -101,10 +95,8 @@ class BenchmarkOverallResponse(BaseModel):
 
 class BenchmarkRunResponse(BaseModel):
     embedding_model: str
-    prepared: BenchmarkPreparedResponse
     indexed: BenchmarkIndexedResponse
     overall: BenchmarkOverallResponse
-    raw_tests: BenchmarkGroupResponse
     clean_tests: BenchmarkGroupResponse
 
 
@@ -222,11 +214,11 @@ def index_examples():
     indexed = vector_service.index_examples()
     return {"indexed_examples": indexed}
 
-@router.post("/rag/index", response_model=Dict[str, List[str]])
+@router.post("/rag/index", response_model=Dict[str, Any])
 def index_documents():
-    """Векторизует очищенные тексты и сохраняет их в Qdrant."""
-    indexed = vector_service.index_directory()
-    return {"indexed_files": indexed}
+    """Векторизует примеры из data/examples (теперь это единый источник)."""
+    indexed = vector_service.index_examples()
+    return {"indexed_files": indexed, "count": len(indexed)}
 
 @router.post("/rag/reindex", response_model=Dict[str, Any])
 def reindex_database(request: Dict[str, str]):
@@ -238,28 +230,12 @@ def reindex_database(request: Dict[str, str]):
 
 @router.post("/rag/search", response_model=List[Dict[str, Any]])
 def search_documents(query: SearchQuery):
-    """Ищет документы по смыслу."""
-    query_filter = None
-    must_conditions = []
-    
-    if query.is_cleaned is not None:
-        must_conditions.append(
-            models.FieldCondition(key="is_cleaned", match=models.MatchValue(value=query.is_cleaned))
-        )
-    
-    if query.only_templates:
-        must_conditions.append(
-            models.FieldCondition(key="is_example", match=models.MatchValue(value=False))
-        )
-        
-    if must_conditions:
-        query_filter = models.Filter(must=must_conditions)
-
+    """Ищет документы в едином хранилище примеров."""
     results = vector_service.search(
-        query.query, 
-        query.limit, 
+        query.query,
+        query.limit,
         embedding_model=query.model,
-        query_filter=query_filter
+        doc_type=query.doc_type
     )
     return results
 

@@ -106,9 +106,26 @@
                 <div class="filename-select">
                     <button id="run-struct-benchmark-btn" onclick="runStructuringBenchmark()">Запустить LLM
                         бенчмарк</button>
+                    <button id="skip-struct-benchmark-btn" onclick="skipStructuringModel()" class="hidden">Пропустить
+                        модель</button>
                     <button id="cancel-struct-benchmark-btn" onclick="cancelBenchmark()"
                         class="warning-btn hidden">Отмена</button>
                 </div>
+            </div>
+            <div id="struct-benchmark-progress" class="progress-container hidden">
+                <div class="progress-info">
+                    <span id="progress-model-name">Модель: -</span>
+                    <span id="progress-file-count">Файл: 0/0</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div id="progress-current-file" class="progress-subtext">Ожидание...</div>
+            </div>
+            <div id="struct-benchmark-live-stream" class="json-view hidden"
+                style="margin-top: 10px; font-size: 0.8em; max-height: 200px;">
+                <div class="progress-subtext" style="color: #aaa; margin-bottom: 5px;">Live Stream:</div>
+                <pre id="live-stream-content" class="json-code"></pre>
             </div>
             <div id="struct-benchmark-summary" class="result-box"></div>
 

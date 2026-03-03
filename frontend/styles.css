@@ -469,3 +469,52 @@ button:disabled {
     gap: 5px;
     margin-bottom: 5px;
 }
+
+/* Progress Bar Styles */
+.progress-container {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+.progress-subtext {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+}
+
+#skip-struct-benchmark-btn {
+    background-color: #ffc107;
+    color: #212529;
+    margin-left: 10px;
+}
+
+#skip-struct-benchmark-btn:hover {
+    background-color: #e0a800;
+}

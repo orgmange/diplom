@@ -178,6 +178,17 @@ def cancel_benchmark():
     structuring_benchmark_service.stop()
     return {"status": "Cancellation requested"}
 
+@router.post("/rag/benchmark/structuring/skip")
+def skip_structuring_model():
+    """Пропускает текущую модель в бенчмарке структурирования."""
+    structuring_benchmark_service.skip_model()
+    return {"status": "Skip requested"}
+
+@router.get("/rag/benchmark/structuring/progress")
+def get_structuring_benchmark_progress():
+    """Возвращает текущий прогресс бенчмарка структурирования."""
+    return structuring_benchmark_service.get_progress()
+
 @router.get("/rag/benchmark/structuring/reports", response_model=List[Dict[str, Any]])
 def list_structuring_reports():
     """Возвращает список сохраненных отчетов структурирования."""

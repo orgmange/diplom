@@ -68,10 +68,29 @@ class StructuringBenchmarkService:
     def __init__(self, structuring_service: StructuringService):
         self.structuring_service = structuring_service
         self._stop_requested = False
+        self._skip_model_requested = False
+        self._current_progress: Dict[str, Any] = {
+            "is_running": False,
+            "current_model": None,
+            "processed_files": 0,
+            "total_files": 0,
+            "current_file": None,
+            "current_stream": "",
+            "models_to_run": [],
+            "completed_models": []
+        }
 
     def stop(self):
         """Прерывает выполнение бенчмарка."""
         self._stop_requested = True
+
+    def skip_model(self):
+        """Пропускает текущую модель в бенчмарке."""
+        self._skip_model_requested = True
+
+    def get_progress(self) -> Dict[str, Any]:
+        """Возвращает текущий прогресс бенчмарка."""
+        return self._current_progress
 
     def _calculate_accuracy(self, result: Dict[str, Any], reference: Dict[str, Any]) -> float:
         """Рекурсивно сравнивает поля в результате и эталоне, возвращая долю совпадений."""
@@ -107,18 +126,23 @@ class StructuringBenchmarkService:
         docs_dir = settings.DOCS_DIR
         ref_dir = settings.BENCHMARK_REF_DIR
         
-        # Предварительная проверка наличия примеров
+        # Синхронизация эмбеддинг-модели и переиндексация при необходимости
         try:
+            current_embed = self.structuring_service.vector_service._load_state()
+            target_embed = embedding_model or current_embed
+            
+            # Проверяем наличие примеров в основной коллекции
             example_count_res = self.structuring_service.vector_service.client.count(
                 collection_name=settings.COLLECTION_NAME,
                 exact=True,
                 count_filter=models.Filter(must=[models.FieldCondition(key="is_example", match=models.MatchValue(value=True))])
             )
-            if example_count_res.count == 0:
-                logger.warning("No examples found in collection. Auto-indexing examples for RAG...")
-                self.structuring_service.vector_service.index_examples(embedding_model=embedding_model)
+            
+            if target_embed != current_embed or example_count_res.count == 0:
+                logger.warning(f"Re-indexing examples for benchmark (Target: {target_embed}, Current: {current_embed}, Count: {example_count_res.count})")
+                self.structuring_service.vector_service.reindex_all(embedding_model=target_embed)
         except Exception as e:
-            logger.error(f"Error checking example count: {e}")
+            logger.error(f"Error checking embedding state or re-indexing: {e}")
 
         items: List[StructuringBenchmarkItem] = []
         
@@ -149,11 +173,36 @@ class StructuringBenchmarkService:
                     files_to_process.append((clean_file, xml_dir, doc_type_dir.name))
 
         logger.info(f"Starting structuring benchmark for {len(files_to_process)} files using model {model_name}")
+        
+        # Обновляем прогресс
+        self._current_progress.update({
+            "is_running": True,
+            "current_model": model_name,
+            "total_files": len(files_to_process),
+            "processed_files": 0
+        })
 
-        for clean_file, xml_dir, doc_type in files_to_process:
+        consecutive_errors = 0
+        for i, (clean_file, xml_dir, doc_type) in enumerate(files_to_process):
             if self._stop_requested:
                 logger.info("Structuring benchmark stopped by user request.")
                 break
+            
+            if self._skip_model_requested:
+                logger.info(f"Skipping model {model_name} by user request.")
+                break
+
+            if consecutive_errors >= 3:
+                logger.error(f"Skipping model {model_name} due to 3 consecutive errors.")
+                break
+
+            # Обновляем текущий файл в прогрессе
+            self._current_progress["current_file"] = clean_file.name
+            self._current_progress["processed_files"] = i
+            self._current_progress["current_stream"] = ""
+
+            async def update_local_stream(chunk_text: str):
+                self._current_progress["current_stream"] += chunk_text
 
             # Загрузка очищенного текста
             cleaned_text = clean_file.read_text(encoding="utf-8").strip()
@@ -165,15 +214,40 @@ class StructuringBenchmarkService:
             if raw_file.exists():
                 raw_text = raw_file.read_text(encoding="utf-8").strip()
 
-            logger.info(f"Processing {clean_file.name} (real type: {doc_type}, but not giving hints to LLM)...")
+            logger.info(f"[{i+1}/{len(files_to_process)}] Processing {clean_file.name} for model {model_name}...")
+            
+            # Первый файл может загружаться долго (прогрев модели)
+            if i == 0:
+                logger.info("First file: allowing model to load into memory...")
+                # Мы не меняем таймаут здесь (он уже 90с в клиенте), но логируем ожидание.
+                # Можно добавить небольшой delay если нужно, но 90с должно хватить.
+
             # Замер времени структурирования
             start_time = time.time()
-            struct_data = await self.structuring_service.structure(
-                raw_text=raw_text,
-                cleaned_text=cleaned_text,
-                model_name=model_name,
-                embedding_model=embedding_model,
-            )
+            try:
+                struct_data = await self.structuring_service.structure(
+                    raw_text=raw_text,
+                    cleaned_text=cleaned_text,
+                    model_name=model_name,
+                    embedding_model=embedding_model,
+                    on_chunk=update_local_stream
+                )
+                
+                if "error" in struct_data.get("result", {}):
+                    consecutive_errors += 1
+                    logger.warning(f"Consecutive error {consecutive_errors}/3 for model {model_name} on file {clean_file.name}")
+                else:
+                    # Даже если тип не совпал, это считается "успешным" ответом модели (она не зависла)
+                    consecutive_errors = 0
+                    
+            except Exception as e:
+                logger.error(f"Critical error processing {clean_file.name}: {e}")
+                consecutive_errors += 1
+                struct_data = {
+                    "result": {"error": str(e)},
+                    "doc_type": "unknown"
+                }
+
             duration = time.time() - start_time
             
             result_json = struct_data["result"]
@@ -207,6 +281,10 @@ class StructuringBenchmarkService:
                 result_json=result_json,
                 reference_json=reference_json
             ))
+        
+        # Завершаем прогресс для этой модели
+        self._current_progress["processed_files"] = len(files_to_process)
+        self._current_progress["current_file"] = "Завершено"
 
         total_files = len(items)
         files_with_reference = sum(1 for item in items if item.is_reference_found)
@@ -242,18 +320,32 @@ class StructuringBenchmarkService:
         """Поочерёдно запускает бенчмарк структурирования для каждой модели из списка."""
         self._stop_requested = False
         reports: List[StructuringBenchmarkReport] = []
+        
+        self._current_progress.update({
+            "is_running": True,
+            "models_to_run": model_names,
+            "completed_models": [],
+            "current_model": None,
+            "processed_files": 0,
+            "total_files": 0
+        })
 
-        for model_name in model_names:
-            if self._stop_requested:
-                logger.info("Multi-model benchmark stopped by user request.")
-                break
+        try:
+            for model_name in model_names:
+                if self._stop_requested:
+                    logger.info("Multi-model benchmark stopped by user request.")
+                    break
 
-            logger.info(f"Starting benchmark for model: {model_name}")
-            report = await self.run(
-                model_name=model_name,
-                embedding_model=embedding_model,
-            )
-            reports.append(report)
+                self._skip_model_requested = False
+                logger.info(f"Starting benchmark for model: {model_name}")
+                report = await self.run(
+                    model_name=model_name,
+                    embedding_model=embedding_model,
+                )
+                reports.append(report)
+                self._current_progress["completed_models"].append(model_name)
+        finally:
+            self._current_progress["is_running"] = False
 
         return reports
 

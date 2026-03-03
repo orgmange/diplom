@@ -15,8 +15,8 @@ class StructuringService:
     @property
     def ollama_client(self):
         if not self._ollama_client:
-            # Асинхронный клиент с таймаутом 1 минута
-            self._ollama_client = ollama.AsyncClient(host=settings.OLLAMA_BASE_URL, timeout=60.0)
+            # Асинхронный клиент с таймаутом 1.5 минуты
+            self._ollama_client = ollama.AsyncClient(host=settings.OLLAMA_BASE_URL, timeout=90.0)
         return self._ollama_client
 
     async def get_available_models(self) -> List[str]:
@@ -48,6 +48,7 @@ class StructuringService:
         model_name: str,
         embedding_model: Optional[str] = None,
         expected_type: Optional[str] = None,
+        on_chunk: Optional[Any] = None,
     ) -> Dict[str, Any]:
         """
         Стабильный асинхронный метод с большим контекстом (16к) и полными примерами RAG.
@@ -94,23 +95,53 @@ class StructuringService:
 
         for attempt in range(max_retries):
             try:
-                response = await self.ollama_client.chat(
+                # Включаем стриминг для детектирования активности модели
+                logger.debug(f"Starting streamed chat with {actual_model} (Attempt {attempt+1})")
+                full_content = ""
+                first_chunk = True
+                
+                # Используем вспомогательную переменную для отслеживания таймаута между чанками
+                # Для первого чанка даем 60 секунд (на случай загрузки модели),
+                # для последующих - по 10 секунд ожидания.
+                
+                stream = await self.ollama_client.chat(
                     model=actual_model, 
                     messages=messages,
                     format='json',
                     options={
                         "temperature": 0.0
-                    }
+                    },
+                    stream=True
                 )
-                
-                result_str = response.message.content.strip()
-                if not result_str:
+
+                while True:
+                    try:
+                        # Таймаут на ожидание следующего чанка
+                        wait_time = 60.0 if first_chunk else 5.0
+                        chunk = await asyncio.wait_for(stream.__anext__(), timeout=wait_time)
+                        
+                        if first_chunk:
+                            logger.debug(f"Ollama started generating content for {actual_model}")
+                            first_chunk = False
+                        
+                        if chunk.message.content:
+                            full_content += chunk.message.content
+                            if on_chunk:
+                                await on_chunk(chunk.message.content)
+                                
+                    except StopAsyncIteration:
+                        break
+                    except asyncio.TimeoutError:
+                        logger.error(f"Ollama stream timed out after {wait_time}s of inactivity")
+                        raise ValueError(f"Ollama inactivity timeout ({wait_time}s)")
+
+                if not full_content.strip():
                     raise ValueError("Ollama returned empty response")
 
-                logger.debug(f"RAW LLM RESPONSE (Len: {len(result_str)})")
+                logger.debug(f"RAW LLM RESPONSE (Len: {len(full_content)})")
                 
                 return {
-                    "result": json.loads(result_str),
+                    "result": json.loads(full_content),
                     "doc_type": doc_type,
                     "model": actual_model
                 }

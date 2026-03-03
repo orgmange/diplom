@@ -86,6 +86,71 @@ async function cancelBenchmark() {
     }
 }
 
+async function skipStructuringModel() {
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/skip`, { method: "POST" });
+        const data = await response.json();
+        console.log("Skip requested:", data);
+    } catch (error) {
+        console.error("Error skipping model:", error);
+    }
+}
+
+let benchmarkProgressInterval = null;
+
+async function pollStructuringProgress() {
+    const progressEl = document.getElementById("struct-benchmark-progress");
+    const modelNameEl = document.getElementById("progress-model-name");
+    const fileCountEl = document.getElementById("progress-file-count");
+    const barFillEl = document.getElementById("progress-bar-fill");
+    const currentFileEl = document.getElementById("progress-current-file");
+    const streamBoxEl = document.getElementById("struct-benchmark-live-stream");
+    const streamContentEl = document.getElementById("live-stream-content");
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/structuring/progress`);
+        const data = await response.json();
+
+        if (data.is_running) {
+            progressEl.classList.remove("hidden");
+            modelNameEl.innerText = `Модель: ${data.current_model || "Загрузка..."}`;
+            fileCountEl.innerText = `Файл: ${data.processed_files}/${data.total_files}`;
+
+            const percent = data.total_files > 0 ? (data.processed_files / data.total_files * 100) : 0;
+            barFillEl.style.width = `${percent}%`;
+            currentFileEl.innerText = data.current_file ? `Обработка: ${data.current_file}` : "Ожидание...";
+
+            if (data.current_stream && data.current_stream.length > 0) {
+                streamBoxEl.classList.remove("hidden");
+                streamContentEl.innerText = data.current_stream;
+                streamBoxEl.scrollTop = streamBoxEl.scrollHeight;
+            } else {
+                streamContentEl.innerText = "";
+            }
+        } else {
+            stopProgressPolling();
+        }
+    } catch (error) {
+        console.error("Error polling progress:", error);
+    }
+}
+
+function startProgressPolling() {
+    stopProgressPolling();
+    benchmarkProgressInterval = setInterval(pollStructuringProgress, 1000);
+}
+
+function stopProgressPolling() {
+    if (benchmarkProgressInterval) {
+        clearInterval(benchmarkProgressInterval);
+        benchmarkProgressInterval = null;
+    }
+    const progressEl = document.getElementById("struct-benchmark-progress");
+    if (progressEl) progressEl.classList.add("hidden");
+    const streamBoxEl = document.getElementById("struct-benchmark-live-stream");
+    if (streamBoxEl) streamBoxEl.classList.add("hidden");
+}
+
 async function runStructuringBenchmark() {
     const btn = document.getElementById("run-struct-benchmark-btn");
     const cancelBtn = document.getElementById("cancel-struct-benchmark-btn");
@@ -103,8 +168,13 @@ async function runStructuringBenchmark() {
     btn.disabled = true;
     btn.innerText = "Выполняется...";
     if (cancelBtn) cancelBtn.classList.remove("hidden");
+    const skipBtn = document.getElementById("skip-struct-benchmark-btn");
+    if (skipBtn) skipBtn.classList.remove("hidden");
+
     summary.innerHTML = `Запуск бенчмарка для ${modelNames.length} модел${modelNames.length === 1 ? "и" : "ей"}: ${modelNames.join(", ")}...`;
     resultsDiv.innerText = "";
+
+    startProgressPolling();
 
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/structuring/run-multi`, {
@@ -116,6 +186,8 @@ async function runStructuringBenchmark() {
             })
         });
         const reports = await response.json();
+
+        stopProgressPolling();
 
         if (!Array.isArray(reports) || reports.length === 0) {
             summary.innerText = "Нет результатов.";
@@ -158,6 +230,9 @@ async function runStructuringBenchmark() {
         btn.disabled = false;
         btn.innerText = "Запустить LLM бенчмарк";
         if (cancelBtn) cancelBtn.classList.add("hidden");
+        const skipBtn = document.getElementById("skip-struct-benchmark-btn");
+        if (skipBtn) skipBtn.classList.add("hidden");
+        stopProgressPolling();
     }
 }
 

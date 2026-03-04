@@ -196,8 +196,9 @@ async function runStructuringBenchmark() {
 
         let summaryHtml = `<h3>Сводка по ${reports.length} модел${reports.length === 1 ? "и" : "ям"}</h3>`;
         summaryHtml += `<table class="benchmark-table"><thead><tr>
-            <th>Модель</th><th>Файлов</th><th>Точность шаблона</th>
-            <th>Точность полей</th><th>Ср. время (сек)</th>
+            <th>Модель</th><th>Файлов</th><th>Шаблон</th>
+            <th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th>
+            <th>CER ↓</th><th>Fuzzy</th><th>Время (с)</th>
         </tr></thead><tbody>`;
         reports.forEach(report => {
             summaryHtml += `<tr>
@@ -205,6 +206,11 @@ async function runStructuringBenchmark() {
                 <td>${report.total_files}</td>
                 <td>${(report.template_accuracy * 100).toFixed(1)}% (${report.correct_templates_count}/${report.total_files})</td>
                 <td>${(report.avg_accuracy * 100).toFixed(1)}%</td>
+                <td>${(report.avg_precision * 100).toFixed(1)}%</td>
+                <td>${(report.avg_recall * 100).toFixed(1)}%</td>
+                <td><b>${(report.avg_f1 * 100).toFixed(1)}%</b></td>
+                <td>${(report.avg_cer * 100).toFixed(2)}%</td>
+                <td>${(report.avg_fuzzy_score * 100).toFixed(1)}%</td>
                 <td>${report.avg_processing_time}</td>
             </tr>`;
         });
@@ -286,7 +292,12 @@ async function loadReport(filename) {
             С эталоном: ${report.files_with_reference}<br>
             Точность шаблона: <b>${(report.template_accuracy * 100).toFixed(1)}%</b> (${report.correct_templates_count}/${report.total_files})<br>
             Среднее время: ${report.avg_processing_time} сек.<br>
-            <b>Средняя точность полей: ${(report.avg_accuracy * 100).toFixed(1)}%</b>
+            <b>Accuracy: ${(report.avg_accuracy * 100).toFixed(1)}% | 
+            Precision: ${((report.avg_precision || 0) * 100).toFixed(1)}% | 
+            Recall: ${((report.avg_recall || 0) * 100).toFixed(1)}% | 
+            F1: ${((report.avg_f1 || 0) * 100).toFixed(1)}%</b><br>
+            CER: ${((report.avg_cer || 0) * 100).toFixed(2)}% | 
+            Fuzzy: ${((report.avg_fuzzy_score || 0) * 100).toFixed(1)}%
         `;
 
         renderStructuringBenchmarkTable("struct-benchmark-results", report.items);
@@ -342,37 +353,33 @@ function renderStructuringBenchmarkTable(containerId, items) {
 
     const rows = items.map(item => {
         const rowClass = item.is_reference_found ? (item.accuracy > 0.9 ? "ok-row" : "bad-row") : "neutral-row";
-        const statusText = item.is_reference_found ? `${(item.accuracy * 100).toFixed(0)}%` : "N/A";
+        const accText = item.is_reference_found ? `${(item.accuracy * 100).toFixed(0)}%` : "N/A";
+        const f1Text = item.is_reference_found ? `${(item.f1 * 100).toFixed(0)}%` : "N/A";
+        const cerText = item.is_reference_found ? `${(item.avg_cer * 100).toFixed(1)}%` : "N/A";
+        const fuzzyText = item.is_reference_found ? `${(item.avg_fuzzy_score * 100).toFixed(0)}%` : "N/A";
 
         const typeMatchHtml = item.is_type_correct
             ? `<span class="type-tag type-ok">OK</span>`
             : `<span class="type-tag type-err">ERR (${item.detected_type})</span>`;
 
-        // Сравнение полей для тултипа
         let tooltipContent = "Сравнение полей:\n\n";
-        if (item.reference_json) {
+        if (item.field_metrics && item.field_metrics.length > 0) {
+            item.field_metrics.forEach(fm => {
+                const status = fm.is_exact_match ? "✓" : "✗";
+                const cerInfo = fm.is_exact_match ? "" : ` CER:${(fm.cer * 100).toFixed(1)}%`;
+                tooltipContent += `${status} ${fm.field_name}: ${fm.actual}\n   (Exp: ${fm.expected})${cerInfo}\n\n`;
+            });
+        } else if (item.reference_json) {
             const keys = Object.keys(item.reference_json);
             keys.forEach(key => {
                 const expected = item.reference_json[key];
                 const actual = item.result_json[key];
-
                 const formatVal = (val) => {
                     if (val === null || val === undefined) return 'MISSING';
                     if (typeof val === 'object') return JSON.stringify(val);
                     return String(val);
                 };
-
-                const normalize = (val) => (val === null || val === undefined) ? "" : String(val).trim().toUpperCase();
-
-                let isMatch = false;
-                if (typeof expected === 'object' && expected !== null && typeof actual === 'object' && actual !== null) {
-                    isMatch = JSON.stringify(expected).toUpperCase() === JSON.stringify(actual).toUpperCase();
-                } else {
-                    isMatch = normalize(expected) === normalize(actual);
-                }
-
-                const status = isMatch ? "✓" : "✗";
-                tooltipContent += `${status} ${key}: ${formatVal(actual)}\n   (Exp: ${formatVal(expected)})\n\n`;
+                tooltipContent += `${key}: ${formatVal(actual)}\n   (Exp: ${formatVal(expected)})\n\n`;
             });
         } else {
             tooltipContent = "Эталонный JSON не найден";
@@ -389,7 +396,10 @@ function renderStructuringBenchmarkTable(containerId, items) {
                     ${typeMatchHtml}
                 </td>
                 <td>${item.processing_time} сек.</td>
-                <td>${statusText}</td>
+                <td>${accText}</td>
+                <td><b>${f1Text}</b></td>
+                <td>${cerText}</td>
+                <td>${fuzzyText}</td>
             </tr>
         `;
     }).join("");
@@ -401,7 +411,10 @@ function renderStructuringBenchmarkTable(containerId, items) {
                     <th>Файл (наведи для деталей)</th>
                     <th>Тип (Ожидаемый)</th>
                     <th>Время</th>
-                    <th>Точность полей</th>
+                    <th>Accuracy</th>
+                    <th>F1</th>
+                    <th>CER ↓</th>
+                    <th>Fuzzy</th>
                 </tr>
             </thead>
             <tbody>${rows}</tbody>

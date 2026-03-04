@@ -60,6 +60,15 @@ class BenchmarkItemResponse(BaseModel):
     alternatives: List[Dict[str, Any]] | None = None
 
 
+class FieldMetricsResponse(BaseModel):
+    field_name: str
+    expected: str
+    actual: str
+    is_exact_match: bool
+    cer: float
+    fuzzy_score: float
+
+
 class StructuringBenchmarkItemResponse(BaseModel):
     filename: str
     expected_type: str
@@ -67,9 +76,15 @@ class StructuringBenchmarkItemResponse(BaseModel):
     is_type_correct: bool
     processing_time: float
     accuracy: float
+    precision: float
+    recall: float
+    f1: float
+    avg_cer: float
+    avg_fuzzy_score: float
     is_reference_found: bool
     result_json: Dict[str, Any]
     reference_json: Dict[str, Any] | None
+    field_metrics: List[FieldMetricsResponse] = []
 
 
 class BenchmarkGroupResponse(BaseModel):
@@ -109,6 +124,11 @@ class StructuringBenchmarkRunResponse(BaseModel):
     template_accuracy: float
     avg_processing_time: float
     avg_accuracy: float
+    avg_precision: float
+    avg_recall: float
+    avg_f1: float
+    avg_cer: float
+    avg_fuzzy_score: float
     items: List[StructuringBenchmarkItemResponse]
 
 

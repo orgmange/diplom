@@ -547,3 +547,878 @@
 2026-03-03 23:03:31,334 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
 2026-03-03 23:03:31,454 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
 2026-03-03 23:06:15,697 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:1.7b: 
+2026-03-04 12:25:02,274 - diplom - INFO - Accessing root index.html
+2026-03-04 12:25:02,400 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-04 12:25:02,421 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-03-04 12:25:02,424 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-04 12:25:02,424 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-03-04 12:25:33,039 - diplom - INFO - Starting benchmark for model: qwen3:8b
+2026-03-04 12:25:33,039 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 12:25:34,315 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:34,325 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:25:34,327 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 12:25:34,396 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:25:34,398 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:25:35,209 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:36,251 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:36,613 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:36,958 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:37,264 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:37,696 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:38,367 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:38,944 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:38,958 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 12:25:38,959 - diplom - INFO - Starting structuring benchmark for 21 files using model qwen3:8b
+2026-03-04 12:25:38,960 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3:8b...
+2026-03-04 12:25:38,960 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 12:25:38,962 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:25:39,899 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:39,909 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:25:45,552 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:25:58,721 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model qwen3:8b...
+2026-03-04 12:25:58,723 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:25:59,673 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:25:59,677 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:26:00,413 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:26:52,815 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3:8b...
+2026-03-04 12:26:52,816 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:26:53,565 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:26:53,569 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:26:54,245 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:27:52,674 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model qwen3:8b...
+2026-03-04 12:27:52,675 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:27:53,533 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:27:53,551 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:27:54,292 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:28:37,219 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3:8b...
+2026-03-04 12:28:37,221 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:28:38,142 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:28:38,146 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:28:38,834 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:29:00,808 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model qwen3:8b...
+2026-03-04 12:29:00,809 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:29:01,211 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:29:01,216 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:29:01,684 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:29:51,607 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3:8b...
+2026-03-04 12:29:51,609 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:29:51,978 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:29:51,982 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:29:52,196 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:30:06,960 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model qwen3:8b...
+2026-03-04 12:30:06,961 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:30:07,329 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:30:07,345 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:30:07,574 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:33:07,997 - diplom - WARNING - Consecutive error 1/3 for model qwen3:8b on file 780416_900.jpg-clean
+2026-03-04 12:33:07,998 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3:8b...
+2026-03-04 12:33:08,000 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:33:08,398 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:33:08,402 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:33:08,884 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:09,771 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:8b: Ollama returned empty response
+2026-03-04 12:43:12,207 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:12,707 - diplom - WARNING - Ollama attempt 2/3 failed for qwen3:8b: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:14,800 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:15,294 - diplom - WARNING - Ollama attempt 3/3 failed for qwen3:8b: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:15,294 - diplom - ERROR - Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:15,294 - diplom - WARNING - Consecutive error 2/3 for model qwen3:8b on file LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean
+2026-03-04 12:43:15,295 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model qwen3:8b...
+2026-03-04 12:43:15,297 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:16,132 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:16,136 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:43:16,308 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:16,798 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:8b: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:18,890 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:19,383 - diplom - WARNING - Ollama attempt 2/3 failed for qwen3:8b: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:21,478 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:21,986 - diplom - WARNING - Ollama attempt 3/3 failed for qwen3:8b: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:21,986 - diplom - ERROR - Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-03-04 12:43:21,986 - diplom - WARNING - Consecutive error 3/3 for model qwen3:8b on file Снимок экрана 2026-02-24 162115.jpg-clean
+2026-03-04 12:43:21,986 - diplom - ERROR - Skipping model qwen3:8b due to 3 consecutive errors.
+2026-03-04 12:43:21,987 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3_8b_20260304_124321.json
+2026-03-04 12:43:21,987 - diplom - INFO - Starting benchmark for model: ministral-3:8b
+2026-03-04 12:43:21,987 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 12:43:21,990 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:21,991 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 12:43:22,044 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:22,045 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:22,817 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:23,814 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:24,171 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:24,500 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:24,793 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:25,172 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:25,803 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:26,363 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:26,370 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 12:43:26,371 - diplom - INFO - Starting structuring benchmark for 21 files using model ministral-3:8b
+2026-03-04 12:43:26,371 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model ministral-3:8b...
+2026-03-04 12:43:26,371 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 12:43:26,372 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:27,275 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:27,277 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:43:38,395 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:44,968 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model ministral-3:8b...
+2026-03-04 12:43:44,970 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:45,896 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:45,899 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:43:46,621 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:43:52,763 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model ministral-3:8b...
+2026-03-04 12:43:52,765 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:43:53,559 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:43:53,561 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:43:54,230 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:01,265 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:01,267 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:02,157 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:02,160 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:02,530 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:10,370 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:10,372 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:11,253 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:11,256 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:11,986 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:18,155 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:18,156 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:18,540 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:18,543 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:19,061 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:23,853 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:23,854 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:24,221 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:24,225 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:24,514 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:29,054 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:29,055 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:29,395 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:29,398 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:29,679 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:34,124 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:34,126 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:34,492 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:34,495 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:34,944 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:39,586 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:39,587 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:39,979 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:40,003 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:40,280 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:46,015 - diplom - INFO - [11/21] Processing 152f6bcs-960.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:46,016 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:46,609 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:46,612 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:47,307 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:44:55,075 - diplom - INFO - [12/21] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model ministral-3:8b...
+2026-03-04 12:44:55,077 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:44:55,654 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:44:55,657 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:44:56,219 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:03,678 - diplom - INFO - [13/21] Processing 1647714700_02-min.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:03,680 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:04,335 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:04,337 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:04,672 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:12,474 - diplom - INFO - [14/21] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:12,475 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:13,082 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:13,105 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:13,705 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:22,513 - diplom - INFO - [15/21] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:22,515 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:23,176 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:23,179 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:23,531 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:30,512 - diplom - INFO - [16/21] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:30,514 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:30,823 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:30,826 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:31,294 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:34,870 - diplom - INFO - [17/21] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model ministral-3:8b...
+2026-03-04 12:45:34,872 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:35,135 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:35,137 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:35,363 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:38,396 - diplom - INFO - [18/21] Processing R3fp08pn_yI.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:38,398 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:38,709 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:38,711 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:38,966 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:42,675 - diplom - INFO - [19/21] Processing auSBK6ncH3c.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:42,676 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:42,956 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:42,958 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:43,187 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:46,169 - diplom - INFO - [20/21] Processing yoqWE8WFTe8.jpg-clean for model ministral-3:8b...
+2026-03-04 12:45:46,171 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:46,438 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:46,440 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:46,676 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:50,954 - diplom - INFO - [21/21] Processing снилс мой.png-clean for model ministral-3:8b...
+2026-03-04 12:45:50,956 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:51,270 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:51,273 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:45:51,512 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:45:55,053 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_ministral-3_8b_20260304_124555.json
+2026-03-04 12:45:55,053 - diplom - INFO - Starting benchmark for model: qwen3:4b
+2026-03-04 12:45:55,053 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 12:45:55,057 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:55,058 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 12:45:55,122 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:55,123 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:45:55,924 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:56,884 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:57,231 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:57,543 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:57,834 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:58,219 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:58,858 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:59,429 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:45:59,436 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 12:45:59,437 - diplom - INFO - Starting structuring benchmark for 21 files using model qwen3:4b
+2026-03-04 12:45:59,437 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3:4b...
+2026-03-04 12:45:59,437 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 12:45:59,438 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:46:00,360 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:46:00,362 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:46:04,067 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:47:13,736 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model qwen3:4b...
+2026-03-04 12:47:13,737 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:47:14,582 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:47:14,585 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:47:17,682 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 12:47:17,683 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 12:47:26,880 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:48:31,593 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3:4b...
+2026-03-04 12:48:31,595 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:48:32,383 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:48:32,387 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:48:32,816 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:49:47,595 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model qwen3:4b...
+2026-03-04 12:49:47,596 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:49:48,444 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:49:48,447 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:49:48,878 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:51:05,203 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3:4b...
+2026-03-04 12:51:05,204 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:51:06,045 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:51:06,049 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:51:06,485 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:52:24,264 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model qwen3:4b...
+2026-03-04 12:52:24,265 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:52:24,682 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:52:24,685 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:52:24,954 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:53:54,241 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3:4b...
+2026-03-04 12:53:54,244 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:53:54,657 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:53:54,679 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:53:54,954 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:54:44,523 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model qwen3:4b...
+2026-03-04 12:54:44,525 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:54:44,846 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:54:44,849 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:54:45,112 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:56:03,804 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3:4b...
+2026-03-04 12:56:03,806 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:56:04,203 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:56:04,206 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:56:04,483 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:57:24,760 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model qwen3:4b...
+2026-03-04 12:57:24,762 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:57:25,172 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:57:25,175 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:57:25,455 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:58:36,331 - diplom - INFO - [11/21] Processing 152f6bcs-960.jpg-clean for model qwen3:4b...
+2026-03-04 12:58:36,332 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:58:36,951 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:58:36,955 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:58:37,333 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 12:59:49,158 - diplom - INFO - [12/21] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model qwen3:4b...
+2026-03-04 12:59:49,160 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 12:59:49,843 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 12:59:49,866 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 12:59:50,300 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:00:52,041 - diplom - INFO - [13/21] Processing 1647714700_02-min.jpg-clean for model qwen3:4b...
+2026-03-04 13:00:52,043 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:00:53,589 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:00:53,613 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:00:54,003 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:02:08,607 - diplom - INFO - [14/21] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model qwen3:4b...
+2026-03-04 13:02:08,609 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:02:09,224 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:02:09,227 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:02:09,615 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:03:30,556 - diplom - INFO - [15/21] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model qwen3:4b...
+2026-03-04 13:03:30,558 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:03:31,257 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:03:31,260 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:03:31,736 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:04:52,097 - diplom - INFO - [16/21] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model qwen3:4b...
+2026-03-04 13:04:52,098 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:04:52,331 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:04:52,334 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:04:52,552 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:05:35,272 - diplom - INFO - [17/21] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model qwen3:4b...
+2026-03-04 13:05:35,274 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:05:35,494 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:05:35,497 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:05:35,739 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:06:23,934 - diplom - INFO - [18/21] Processing R3fp08pn_yI.jpg-clean for model qwen3:4b...
+2026-03-04 13:06:23,935 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:06:24,258 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:06:24,261 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:06:26,010 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:06:26,011 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:06:34,336 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:07:13,368 - diplom - INFO - [19/21] Processing auSBK6ncH3c.jpg-clean for model qwen3:4b...
+2026-03-04 13:07:13,370 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:07:13,600 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:07:13,603 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:07:13,820 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:07:51,577 - diplom - INFO - [20/21] Processing yoqWE8WFTe8.jpg-clean for model qwen3:4b...
+2026-03-04 13:07:51,578 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:07:51,822 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:07:51,824 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:07:51,927 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:08:43,713 - diplom - INFO - [21/21] Processing снилс мой.png-clean for model qwen3:4b...
+2026-03-04 13:08:43,714 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:08:44,021 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:08:44,025 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:08:44,303 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:09:35,746 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: -1)
+2026-03-04 13:09:40,687 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:09:41,061 - diplom - WARNING - Ollama attempt 2/3 failed for qwen3:4b: Ollama returned empty response
+2026-03-04 13:09:43,990 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:09:44,391 - diplom - WARNING - Ollama attempt 3/3 failed for qwen3:4b: Ollama returned empty response
+2026-03-04 13:09:44,391 - diplom - ERROR - Ollama failure after 3 attempts: Ollama returned empty response
+2026-03-04 13:09:44,391 - diplom - WARNING - Consecutive error 1/3 for model qwen3:4b on file снилс мой.png-clean
+2026-03-04 13:09:44,392 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3_4b_20260304_130944.json
+2026-03-04 13:09:44,392 - diplom - INFO - Starting benchmark for model: gemma3:4b
+2026-03-04 13:09:44,392 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 13:09:44,396 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:09:44,397 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 13:09:44,456 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:09:44,457 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:09:45,311 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:46,412 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:46,766 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:47,100 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:47,397 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:47,789 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:48,468 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:49,075 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:49,087 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 13:09:49,087 - diplom - INFO - Starting structuring benchmark for 21 files using model gemma3:4b
+2026-03-04 13:09:49,087 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model gemma3:4b...
+2026-03-04 13:09:49,088 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 13:09:49,089 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:09:50,035 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:50,038 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:09:55,122 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:09:58,501 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model gemma3:4b...
+2026-03-04 13:09:58,502 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:09:59,534 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:09:59,537 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:00,235 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:03,797 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:03,799 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:04,613 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:04,616 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:05,253 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:09,409 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:09,414 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:10,435 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:10,442 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:11,076 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:14,662 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:14,664 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:16,471 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:16,475 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:17,166 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:20,839 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:20,840 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:21,241 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:21,243 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:21,729 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:24,242 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:24,243 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:24,652 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:24,655 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:25,002 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:27,563 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:27,564 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:27,913 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:27,916 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:28,224 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:30,485 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:30,486 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:30,889 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:30,893 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:32,598 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:10:32,598 - diplom - WARNING - Ollama attempt 1/3 failed for gemma3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:10:37,575 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:40,038 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:40,039 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:40,454 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:40,457 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:40,971 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:43,551 - diplom - INFO - [11/21] Processing 152f6bcs-960.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:43,553 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:44,171 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:44,175 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:44,747 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:48,338 - diplom - INFO - [12/21] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:48,339 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:49,911 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:49,914 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:10:50,552 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:10:50,553 - diplom - WARNING - Ollama attempt 1/3 failed for gemma3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:10:55,158 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:10:58,772 - diplom - INFO - [13/21] Processing 1647714700_02-min.jpg-clean for model gemma3:4b...
+2026-03-04 13:10:58,773 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:10:59,488 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:10:59,510 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:00,112 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:03,808 - diplom - INFO - [14/21] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:03,809 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:04,472 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:04,475 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:05,087 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:08,713 - diplom - INFO - [15/21] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:08,715 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:09,377 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:09,379 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:10,004 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:11:10,004 - diplom - WARNING - Ollama attempt 1/3 failed for gemma3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:11:18,071 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:21,775 - diplom - INFO - [16/21] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:21,776 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:23,021 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:23,025 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:23,480 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:25,339 - diplom - INFO - [17/21] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model gemma3:4b...
+2026-03-04 13:11:25,341 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:25,625 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:25,628 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:25,929 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:27,549 - diplom - INFO - [18/21] Processing R3fp08pn_yI.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:27,551 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:27,844 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:27,848 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:28,147 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:29,941 - diplom - INFO - [19/21] Processing auSBK6ncH3c.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:29,943 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:30,241 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:30,244 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:30,566 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:32,250 - diplom - INFO - [20/21] Processing yoqWE8WFTe8.jpg-clean for model gemma3:4b...
+2026-03-04 13:11:32,252 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:32,562 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:32,564 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:33,002 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:11:33,002 - diplom - WARNING - Ollama attempt 1/3 failed for gemma3:4b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:11:42,186 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:43,740 - diplom - INFO - [21/21] Processing снилс мой.png-clean for model gemma3:4b...
+2026-03-04 13:11:43,742 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:44,051 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:44,054 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:44,372 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:46,249 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_gemma3_4b_20260304_131146.json
+2026-03-04 13:11:46,249 - diplom - INFO - Starting benchmark for model: ministral-3:3b
+2026-03-04 13:11:46,249 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 13:11:46,253 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:46,254 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 13:11:46,308 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:46,309 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:47,179 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:48,276 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:48,659 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:49,009 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:49,323 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:49,727 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:50,403 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:51,018 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:51,029 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 13:11:51,029 - diplom - INFO - Starting structuring benchmark for 21 files using model ministral-3:3b
+2026-03-04 13:11:51,030 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model ministral-3:3b...
+2026-03-04 13:11:51,030 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 13:11:51,031 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:11:52,014 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:11:52,017 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:11:57,627 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:11:59,875 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model ministral-3:3b...
+2026-03-04 13:11:59,877 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:00,824 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:00,826 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:01,309 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:03,674 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:03,675 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:04,520 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:04,523 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:04,973 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:07,700 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:07,701 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:08,595 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:08,597 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:08,890 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:11,709 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:11,711 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:12,733 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:12,737 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:13,286 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:15,779 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:15,780 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:16,221 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:16,223 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:16,595 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:18,449 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:18,450 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:18,860 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:18,863 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:19,077 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:20,623 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:20,625 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:20,981 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:20,983 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:21,195 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:22,501 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:22,503 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:22,827 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:22,830 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:23,104 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:24,391 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:24,392 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:24,731 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:24,733 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:24,966 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:26,283 - diplom - INFO - [11/21] Processing 152f6bcs-960.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:26,285 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:26,868 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:26,871 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:27,276 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:30,204 - diplom - INFO - [12/21] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:30,205 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:30,757 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:30,759 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:31,095 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:33,102 - diplom - INFO - [13/21] Processing 1647714700_02-min.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:33,104 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:33,678 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:33,681 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:33,904 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:36,148 - diplom - INFO - [14/21] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:36,150 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:36,753 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:36,755 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:37,102 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:39,229 - diplom - INFO - [15/21] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:39,231 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:39,781 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:39,784 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:40,011 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:42,017 - diplom - INFO - [16/21] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:42,018 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:42,279 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:42,281 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:42,551 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:43,591 - diplom - INFO - [17/21] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model ministral-3:3b...
+2026-03-04 13:12:43,593 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:43,862 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:43,865 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:44,055 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:44,960 - diplom - INFO - [18/21] Processing R3fp08pn_yI.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:44,962 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:45,232 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:45,235 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:45,432 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:46,520 - diplom - INFO - [19/21] Processing auSBK6ncH3c.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:46,522 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:46,771 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:46,774 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:46,968 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:47,812 - diplom - INFO - [20/21] Processing yoqWE8WFTe8.jpg-clean for model ministral-3:3b...
+2026-03-04 13:12:47,813 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:48,047 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:48,050 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:48,233 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:49,126 - diplom - INFO - [21/21] Processing снилс мой.png-clean for model ministral-3:3b...
+2026-03-04 13:12:49,128 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:49,383 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:49,385 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:49,568 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:12:50,556 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_ministral-3_3b_20260304_131250.json
+2026-03-04 13:12:50,556 - diplom - INFO - Starting benchmark for model: qwen3:1.7b
+2026-03-04 13:12:50,556 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 13:12:50,559 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:50,560 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 13:12:50,615 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:50,616 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:51,279 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:52,172 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:52,476 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:52,731 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:52,987 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:53,312 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:53,914 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:54,441 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:54,451 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 13:12:54,452 - diplom - INFO - Starting structuring benchmark for 21 files using model qwen3:1.7b
+2026-03-04 13:12:54,452 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:12:54,452 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 13:12:54,453 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:12:55,247 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:12:55,249 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:12:57,753 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:04,876 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:04,877 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:05,623 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:05,625 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:05,863 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:10,014 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:10,015 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:10,642 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:10,645 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:10,875 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:15,134 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:15,136 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:15,838 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:15,840 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:15,984 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:23,142 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:23,143 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:23,894 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:23,909 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:24,138 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:29,158 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:29,159 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:29,470 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:29,472 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:29,640 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:37,699 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:37,700 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:38,005 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:38,020 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:38,138 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:13:45,192 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:13:45,194 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:13:45,510 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:13:45,535 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:13:45,651 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:18:35,328 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:18:37,515 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:20:17,415 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:20:17,416 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:20:18,894 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:20:18,897 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:20:19,139 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:25:10,026 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:25:12,213 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:27:27,737 - diplom - INFO - Accessing root index.html
+2026-03-04 13:27:27,813 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-04 13:27:27,813 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-03-04 13:27:27,818 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-03-04 13:27:27,824 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-03-04 13:27:47,798 - diplom - INFO - Cleared 5 benchmark reports
+2026-03-04 13:27:53,987 - diplom - INFO - Starting benchmark for model: ministral-3:3b
+2026-03-04 13:27:53,987 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 13:27:54,469 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:54,473 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:27:54,474 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 13:27:54,533 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:27:54,535 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:27:55,292 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:56,292 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:56,629 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:56,922 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:57,159 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:57,517 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:58,035 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:58,549 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:58,557 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 13:27:58,558 - diplom - INFO - Starting structuring benchmark for 21 files using model ministral-3:3b
+2026-03-04 13:27:58,559 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model ministral-3:3b...
+2026-03-04 13:27:58,559 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 13:27:58,560 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:27:59,334 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:27:59,338 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:03,071 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:04,868 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:04,869 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:05,816 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:05,818 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:06,272 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:08,057 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:08,058 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:08,858 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:08,860 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:09,272 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:11,411 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:11,412 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:12,336 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:12,339 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:12,622 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:14,940 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:14,941 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:15,918 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:15,922 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:16,425 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2026-03-04 13:28:16,426 - diplom - WARNING - Ollama attempt 1/3 failed for ministral-3:3b: model runner has unexpectedly stopped, this may be due to resource limitations or an internal error, check ollama server logs for details (status code: 500)
+2026-03-04 13:28:24,706 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:26,855 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:26,857 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:27,287 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:27,290 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:27,657 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:29,049 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:29,051 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:29,442 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:29,445 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:29,663 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:31,240 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:31,242 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:31,578 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:31,581 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:31,799 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:34,375 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:34,376 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:34,768 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:34,771 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:35,061 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:36,649 - diplom - INFO - [10/21] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:36,650 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:37,027 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:37,030 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:37,233 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:38,526 - diplom - INFO - [11/21] Processing 152f6bcs-960.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:38,527 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:39,105 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:39,108 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:39,480 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:41,473 - diplom - INFO - [12/21] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:41,475 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:42,028 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:42,031 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:42,364 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:44,350 - diplom - INFO - [13/21] Processing 1647714700_02-min.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:44,352 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:44,935 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:44,938 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:45,192 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:47,538 - diplom - INFO - [14/21] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:47,539 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:48,170 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:48,172 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:48,575 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:50,929 - diplom - INFO - [15/21] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:50,931 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:51,549 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:51,552 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:51,781 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:54,052 - diplom - INFO - [16/21] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:54,053 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:54,349 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:54,352 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:54,639 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:55,706 - diplom - INFO - [17/21] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model ministral-3:3b...
+2026-03-04 13:28:55,707 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:55,987 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:55,990 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:56,187 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:57,125 - diplom - INFO - [18/21] Processing R3fp08pn_yI.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:57,127 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:57,428 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:57,431 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:57,624 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:28:58,737 - diplom - INFO - [19/21] Processing auSBK6ncH3c.jpg-clean for model ministral-3:3b...
+2026-03-04 13:28:58,738 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:28:58,991 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:28:58,994 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:28:59,191 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:00,070 - diplom - INFO - [20/21] Processing yoqWE8WFTe8.jpg-clean for model ministral-3:3b...
+2026-03-04 13:29:00,071 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:00,294 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:00,296 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:00,488 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:01,473 - diplom - INFO - [21/21] Processing снилс мой.png-clean for model ministral-3:3b...
+2026-03-04 13:29:01,475 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:01,743 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:01,746 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:01,933 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:03,002 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_ministral-3_3b_20260304_132902.json
+2026-03-04 13:29:03,002 - diplom - INFO - Starting benchmark for model: qwen3:1.7b
+2026-03-04 13:29:03,002 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-03-04 13:29:03,006 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:03,007 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-03-04 13:29:03,066 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:03,067 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:03,822 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:04,799 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:05,139 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:05,474 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:05,742 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:06,101 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:07,944 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:08,489 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:08,499 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-03-04 13:29:08,500 - diplom - INFO - Starting structuring benchmark for 21 files using model qwen3:1.7b
+2026-03-04 13:29:08,500 - diplom - INFO - [1/21] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:08,500 - diplom - INFO - First file: allowing model to load into memory...
+2026-03-04 13:29:08,501 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:09,400 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:09,403 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:10,966 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:17,173 - diplom - INFO - [2/21] Processing 718b.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:17,174 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:18,026 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:18,028 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:18,274 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:22,818 - diplom - INFO - [3/21] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:22,820 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:23,519 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:23,522 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:23,744 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:28,087 - diplom - INFO - [4/21] Processing c38edbcs-960.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:28,089 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:28,797 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:28,799 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:28,946 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:36,536 - diplom - INFO - [5/21] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:36,538 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:37,449 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:37,453 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:37,723 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:44,418 - diplom - INFO - [6/21] Processing 1385315836_1578903606.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:44,420 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:44,817 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:44,819 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:45,012 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:29:52,827 - diplom - INFO - [7/21] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:29:52,829 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:29:53,220 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:29:53,224 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:29:53,345 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:30:00,900 - diplom - INFO - [8/21] Processing 780416_900.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:30:00,902 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:30:01,263 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:30:01,266 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:30:01,381 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:35:06,651 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:35:08,842 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:36:35,506 - diplom - WARNING - Ollama attempt 2/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:36:37,725 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:37:38,952 - diplom - INFO - [9/21] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3:1.7b...
+2026-03-04 13:37:38,953 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-03-04 13:37:39,670 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-03-04 13:37:39,690 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-03-04 13:37:39,871 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:42:44,858 - diplom - WARNING - Ollama attempt 1/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:42:47,061 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:47:45,247 - diplom - WARNING - Ollama attempt 2/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:47:47,452 - httpx - INFO - HTTP Request: POST http://172.26.208.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-04 13:52:41,429 - diplom - WARNING - Ollama attempt 3/3 failed for qwen3:1.7b: Ollama returned empty response
+2026-03-04 13:52:41,430 - diplom - ERROR - Ollama failure after 3 attempts: Ollama returned empty response
+2026-03-04 13:52:41,430 - diplom - WARNING - Consecutive error 1/3 for model qwen3:1.7b on file LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean
+2026-03-04 13:52:41,430 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-03-04 13:52:41,432 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3_1.7b_20260304_135241.json
+2026-03-04 13:52:41,432 - diplom - INFO - Multi-model benchmark stopped by user request.

@@ -1,15 +1,38 @@
 import json
+import re
 import time
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+from rapidfuzz import fuzz
 
 from app.core.config import settings
 from app.services.structuring_service import StructuringService
 from qdrant_client.http import models
 
 logger = logging.getLogger("diplom")
+
+@dataclass
+class FieldMetrics:
+    """Метрики отдельного поля."""
+    field_name: str
+    expected: str
+    actual: str
+    is_exact_match: bool
+    cer: float
+    fuzzy_score: float
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "field_name": self.field_name,
+            "expected": self.expected,
+            "actual": self.actual,
+            "is_exact_match": self.is_exact_match,
+            "cer": round(self.cer, 4),
+            "fuzzy_score": round(self.fuzzy_score, 4),
+        }
 
 @dataclass
 class StructuringBenchmarkItem:
@@ -19,9 +42,15 @@ class StructuringBenchmarkItem:
     is_type_correct: bool
     processing_time: float
     accuracy: float
+    precision: float
+    recall: float
+    f1: float
+    avg_cer: float
+    avg_fuzzy_score: float
     is_reference_found: bool
     result_json: Dict[str, Any]
     reference_json: Optional[Dict[str, Any]] = None
+    field_metrics: List[FieldMetrics] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -31,9 +60,15 @@ class StructuringBenchmarkItem:
             "is_type_correct": self.is_type_correct,
             "processing_time": round(self.processing_time, 3),
             "accuracy": round(self.accuracy, 4),
+            "precision": round(self.precision, 4),
+            "recall": round(self.recall, 4),
+            "f1": round(self.f1, 4),
+            "avg_cer": round(self.avg_cer, 4),
+            "avg_fuzzy_score": round(self.avg_fuzzy_score, 4),
             "is_reference_found": self.is_reference_found,
             "result_json": self.result_json,
             "reference_json": self.reference_json,
+            "field_metrics": [fm.to_dict() for fm in self.field_metrics],
         }
 
 @dataclass
@@ -46,6 +81,11 @@ class StructuringBenchmarkReport:
     template_accuracy: float
     avg_processing_time: float
     avg_accuracy: float
+    avg_precision: float
+    avg_recall: float
+    avg_f1: float
+    avg_cer: float
+    avg_fuzzy_score: float
     items: List[StructuringBenchmarkItem]
 
     def to_dict(self) -> Dict[str, Any]:
@@ -58,6 +98,11 @@ class StructuringBenchmarkReport:
             "template_accuracy": round(self.template_accuracy, 4),
             "avg_processing_time": round(self.avg_processing_time, 3),
             "avg_accuracy": round(self.avg_accuracy, 4),
+            "avg_precision": round(self.avg_precision, 4),
+            "avg_recall": round(self.avg_recall, 4),
+            "avg_f1": round(self.avg_f1, 4),
+            "avg_cer": round(self.avg_cer, 4),
+            "avg_fuzzy_score": round(self.avg_fuzzy_score, 4),
             "items": [item.to_dict() for item in self.items],
         }
 
@@ -92,33 +137,96 @@ class StructuringBenchmarkService:
         """Возвращает текущий прогресс бенчмарка."""
         return self._current_progress
 
-    def _calculate_accuracy(self, result: Dict[str, Any], reference: Dict[str, Any]) -> float:
-        """Рекурсивно сравнивает поля в результате и эталоне, возвращая долю совпадений."""
-        if not reference:
-            return 0.0
+    @staticmethod
+    def _normalize(val: Any) -> str:
+        """Нормализует значение: убирает регистр, пробелы и знаки препинания."""
+        if val is None:
+            return ""
+        text = str(val).strip().upper()
+        text = re.sub(r"[^\w]", "", text, flags=re.UNICODE)
+        return text
 
-        matches = 0
-        total_keys = 0
-
-        def _normalize(val: Any) -> str:
-            if val is None:
-                return ""
-            return str(val).strip().upper()
-
-        for key, expected_val in reference.items():
-            total_keys += 1
-            actual_val = result.get(key)
-
-            if isinstance(expected_val, dict) and isinstance(actual_val, dict):
-                # Для вложенных словарей (например, mrz)
-                nested_accuracy = self._calculate_accuracy(actual_val, expected_val)
-                if nested_accuracy == 1.0:
-                    matches += 1
+    @staticmethod
+    def _flatten_dict(d: Dict[str, Any], parent_key: str = "") -> Dict[str, Any]:
+        """Рекурсивно разворачивает вложенные словари в плоский формат."""
+        items: List[Tuple[str, Any]] = []
+        for k, v in d.items():
+            new_key = f"{parent_key}.{k}" if parent_key else k
+            if isinstance(v, dict):
+                items.extend(StructuringBenchmarkService._flatten_dict(v, new_key).items())
             else:
-                if _normalize(actual_val) == _normalize(expected_val):
-                    matches += 1
+                items.append((new_key, v))
+        return dict(items)
 
-        return matches / total_keys if total_keys > 0 else 1.0
+    @staticmethod
+    def _calculate_cer(actual: str, expected: str) -> float:
+        """Вычисляет Character Error Rate (расстояние Левенштейна / длина эталона)."""
+        if not expected:
+            return 0.0 if not actual else 1.0
+        from rapidfuzz.distance import Levenshtein
+        distance = Levenshtein.distance(actual, expected)
+        return distance / len(expected)
+
+    @staticmethod
+    def _calculate_fuzzy_score(actual: str, expected: str) -> float:
+        """Вычисляет нечёткое совпадение строк через token_sort_ratio (0-100 -> 0-1)."""
+        if not expected and not actual:
+            return 1.0
+        return fuzz.token_sort_ratio(actual, expected) / 100.0
+
+    def _calculate_field_metrics(
+        self, result: Dict[str, Any], reference: Dict[str, Any]
+    ) -> Tuple[float, float, float, float, float, float, List[FieldMetrics]]:
+        """Вычисляет все метрики: accuracy, precision, recall, f1, cer, fuzzy_score и детали по полям."""
+        if not reference:
+            return 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, []
+
+        flat_ref = self._flatten_dict(reference)
+        flat_res = self._flatten_dict(result)
+
+        ref_keys = set(flat_ref.keys())
+        res_keys = set(flat_res.keys())
+
+        true_positives = 0
+        field_metrics_list: List[FieldMetrics] = []
+        cer_values: List[float] = []
+        fuzzy_values: List[float] = []
+
+        for key in ref_keys:
+            expected_norm = self._normalize(flat_ref[key])
+            actual_norm = self._normalize(flat_res.get(key))
+
+            is_exact = expected_norm == actual_norm
+            if is_exact:
+                true_positives += 1
+
+            cer = self._calculate_cer(actual_norm, expected_norm)
+            fuzzy_s = self._calculate_fuzzy_score(actual_norm, expected_norm)
+            cer_values.append(cer)
+            fuzzy_values.append(fuzzy_s)
+
+            field_metrics_list.append(FieldMetrics(
+                field_name=key,
+                expected=str(flat_ref[key]),
+                actual=str(flat_res.get(key, "")),
+                is_exact_match=is_exact,
+                cer=cer,
+                fuzzy_score=fuzzy_s,
+            ))
+
+        accuracy = true_positives / len(ref_keys) if ref_keys else 1.0
+        precision = true_positives / len(res_keys) if res_keys else 0.0
+        recall = true_positives / len(ref_keys) if ref_keys else 0.0
+        f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
+        avg_cer = sum(cer_values) / len(cer_values) if cer_values else 0.0
+        avg_fuzzy = sum(fuzzy_values) / len(fuzzy_values) if fuzzy_values else 0.0
+
+        return accuracy, precision, recall, f1, avg_cer, avg_fuzzy, field_metrics_list
+
+    def _calculate_accuracy(self, result: Dict[str, Any], reference: Dict[str, Any]) -> float:
+        """Обратная совместимость: возвращает долю точных совпадений полей."""
+        accuracy, _, _, _, _, _, _ = self._calculate_field_metrics(result, reference)
+        return accuracy
 
     async def run(self, model_name: str, embedding_model: Optional[str] = None) -> StructuringBenchmarkReport:
         """Запускает прогон всех доступных документов через выбранную LLM модель."""
@@ -253,13 +361,21 @@ class StructuringBenchmarkService:
             ref_file = ref_dir / f"{image_name}-reference.json"
             
             accuracy = 0.0
+            precision = 0.0
+            recall = 0.0
+            f1 = 0.0
+            avg_cer = 1.0
+            avg_fuzzy = 0.0
             reference_json = None
             is_reference_found = False
+            field_metrics_list: List[FieldMetrics] = []
             
             if ref_file.exists():
                 try:
                     reference_json = json.loads(ref_file.read_text(encoding="utf-8"))
-                    accuracy = self._calculate_accuracy(result_json, reference_json)
+                    accuracy, precision, recall, f1, avg_cer, avg_fuzzy, field_metrics_list = (
+                        self._calculate_field_metrics(result_json, reference_json)
+                    )
                     is_reference_found = True
                 except Exception as e:
                     logger.error(f"Error reading reference file {ref_file}: {e}")
@@ -271,9 +387,15 @@ class StructuringBenchmarkService:
                 is_type_correct=is_type_correct,
                 processing_time=duration,
                 accuracy=accuracy,
+                precision=precision,
+                recall=recall,
+                f1=f1,
+                avg_cer=avg_cer,
+                avg_fuzzy_score=avg_fuzzy,
                 is_reference_found=is_reference_found,
                 result_json=result_json,
-                reference_json=reference_json
+                reference_json=reference_json,
+                field_metrics=field_metrics_list,
             ))
         
         # Завершаем прогресс для этой модели
@@ -287,8 +409,14 @@ class StructuringBenchmarkService:
         
         avg_time = sum(item.processing_time for item in items) / total_files if total_files > 0 else 0.0
         
-        acc_sum = sum(item.accuracy for item in items if item.is_reference_found)
-        avg_accuracy = acc_sum / files_with_reference if files_with_reference > 0 else 0.0
+        ref_items = [item for item in items if item.is_reference_found]
+        n_ref = len(ref_items) if ref_items else 1
+        avg_accuracy = sum(item.accuracy for item in ref_items) / n_ref
+        avg_precision = sum(item.precision for item in ref_items) / n_ref
+        avg_recall = sum(item.recall for item in ref_items) / n_ref
+        avg_f1 = sum(item.f1 for item in ref_items) / n_ref
+        avg_cer = sum(item.avg_cer for item in ref_items) / n_ref
+        avg_fuzzy = sum(item.avg_fuzzy_score for item in ref_items) / n_ref
         
         report = StructuringBenchmarkReport(
             model_name=model_name,
@@ -299,6 +427,11 @@ class StructuringBenchmarkService:
             template_accuracy=template_accuracy,
             avg_processing_time=avg_time,
             avg_accuracy=avg_accuracy,
+            avg_precision=avg_precision,
+            avg_recall=avg_recall,
+            avg_f1=avg_f1,
+            avg_cer=avg_cer,
+            avg_fuzzy_score=avg_fuzzy,
             items=items
         )
 

@@ -25,7 +25,7 @@ def test_calculate_accuracy_nested():
     result = {"name": "Ivan", "mrz": {"line1": "abc", "line2": "wrong"}}
     
     accuracy = service._calculate_accuracy(result, reference)
-    assert accuracy == 0.5
+    assert accuracy == 2 / 3
 
 def test_calculate_accuracy_normalization():
     service = StructuringBenchmarkService(None)
@@ -34,6 +34,78 @@ def test_calculate_accuracy_normalization():
     
     accuracy = service._calculate_accuracy(result, reference)
     assert accuracy == 1.0
+
+def test_normalization_removes_punctuation():
+    service = StructuringBenchmarkService(None)
+    reference = {"number": "145-625-885 86"}
+    result = {"number": "145 625 885 86"}
+    
+    accuracy = service._calculate_accuracy(result, reference)
+    assert accuracy == 1.0
+
+def test_field_metrics_full_match():
+    service = StructuringBenchmarkService(None)
+    reference = {"name": "Ivan", "age": "30"}
+    result = {"name": "Ivan", "age": "30"}
+
+    accuracy, precision, recall, f1, avg_cer, avg_fuzzy, fields = (
+        service._calculate_field_metrics(result, reference)
+    )
+
+    assert accuracy == 1.0
+    assert precision == 1.0
+    assert recall == 1.0
+    assert f1 == 1.0
+    assert avg_cer == 0.0
+    assert avg_fuzzy == 1.0
+    assert len(fields) == 2
+
+def test_field_metrics_partial_match():
+    service = StructuringBenchmarkService(None)
+    reference = {"name": "Ivan", "surname": "Petrov"}
+    result = {"name": "Ivan", "surname": "Petroff", "extra": "data"}
+
+    accuracy, precision, recall, f1, avg_cer, avg_fuzzy, fields = (
+        service._calculate_field_metrics(result, reference)
+    )
+
+    assert accuracy == 0.5
+    assert recall == 0.5
+    assert precision == 1 / 3
+    assert avg_cer > 0.0
+    assert avg_fuzzy > 0.5
+
+def test_field_metrics_nested():
+    service = StructuringBenchmarkService(None)
+    reference = {"name": "Ivan", "mrz": {"line1": "ABC", "line2": "DEF"}}
+    result = {"name": "Ivan", "mrz": {"line1": "ABC", "line2": "DEF"}}
+
+    accuracy, precision, recall, f1, avg_cer, avg_fuzzy, fields = (
+        service._calculate_field_metrics(result, reference)
+    )
+
+    assert accuracy == 1.0
+    assert f1 == 1.0
+    assert len(fields) == 3
+
+def test_cer_calculation():
+    service = StructuringBenchmarkService(None)
+    assert service._calculate_cer("КITTEN", "KITTEN") > 0.0
+    assert service._calculate_cer("KITTEN", "KITTEN") == 0.0
+    assert service._calculate_cer("", "HELLO") == 1.0
+    assert service._calculate_cer("", "") == 0.0
+
+def test_fuzzy_score_calculation():
+    service = StructuringBenchmarkService(None)
+    assert service._calculate_fuzzy_score("ПЕТРОВ", "ПЕТРОВ") == 1.0
+    assert service._calculate_fuzzy_score("ПЕТРOВ", "ПЕТРОВ") > 0.7
+    assert service._calculate_fuzzy_score("", "") == 1.0
+
+def test_flatten_dict():
+    flat = StructuringBenchmarkService._flatten_dict(
+        {"a": 1, "b": {"c": 2, "d": {"e": 3}}}
+    )
+    assert flat == {"a": 1, "b.c": 2, "b.d.e": 3}
 
 def _setup_benchmark_env(tmp_path, mocker, with_reference=True):
     docs_dir = tmp_path / "docs"
@@ -80,6 +152,9 @@ def test_run_benchmark_mocked(tmp_path, mocker):
     assert report.total_files == 1
     assert report.files_with_reference == 1
     assert report.avg_accuracy == 1.0
+    assert report.avg_f1 == 1.0
+    assert report.avg_cer == 0.0
+    assert report.avg_fuzzy_score == 1.0
     assert report.items[0].filename == "test1.jpg"
     assert report.items[0].expected_type == "passport"
     assert report.items[0].is_type_correct is True
@@ -98,6 +173,7 @@ def test_run_multi_benchmark(tmp_path, mocker):
     assert reports[1].model_name == "model-b"
     assert reports[0].avg_accuracy == 1.0
     assert reports[1].avg_accuracy == 1.0
+    assert reports[0].avg_f1 == 1.0
 
 def test_run_multi_stop_between_models(tmp_path, mocker):
     struct_service = _setup_benchmark_env(tmp_path, mocker)

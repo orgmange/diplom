@@ -87,6 +87,10 @@ class StructuringBenchmarkReport:
     avg_cer: float
     avg_fuzzy_score: float
     items: List[StructuringBenchmarkItem]
+    temperature: float = 0.0
+    num_ctx: int = 16384
+    timeout: int = 60
+    structured_output: bool = True
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -103,6 +107,10 @@ class StructuringBenchmarkReport:
             "avg_f1": round(self.avg_f1, 4),
             "avg_cer": round(self.avg_cer, 4),
             "avg_fuzzy_score": round(self.avg_fuzzy_score, 4),
+            "temperature": self.temperature,
+            "num_ctx": self.num_ctx,
+            "timeout": self.timeout,
+            "structured_output": self.structured_output,
             "items": [item.to_dict() for item in self.items],
         }
 
@@ -215,7 +223,11 @@ class StructuringBenchmarkService:
             ))
 
         accuracy = true_positives / len(ref_keys) if ref_keys else 1.0
-        precision = true_positives / len(res_keys) if res_keys else 0.0
+        
+        implicit_correct_empty = sum(1 for k in ref_keys if k not in res_keys and self._normalize(flat_ref[k]) == "")
+        total_predictions = len(res_keys) + implicit_correct_empty
+        
+        precision = true_positives / total_predictions if total_predictions > 0 else 0.0
         recall = true_positives / len(ref_keys) if ref_keys else 0.0
         f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
         avg_cer = sum(cer_values) / len(cer_values) if cer_values else 0.0
@@ -228,7 +240,15 @@ class StructuringBenchmarkService:
         accuracy, _, _, _, _, _, _ = self._calculate_field_metrics(result, reference)
         return accuracy
 
-    async def run(self, model_name: str, embedding_model: Optional[str] = None) -> StructuringBenchmarkReport:
+    async def run(
+        self,
+        model_name: str,
+        embedding_model: Optional[str] = None,
+        temperature: float = 0.0,
+        num_ctx: int = 16384,
+        timeout: int = 60,
+        structured_output: bool = True
+    ) -> StructuringBenchmarkReport:
         """Запускает прогон всех доступных документов через выбранную LLM модель."""
         self._stop_requested = False
         docs_dir = settings.DOCS_DIR
@@ -316,7 +336,10 @@ class StructuringBenchmarkService:
             if raw_file.exists():
                 raw_text = raw_file.read_text(encoding="utf-8").strip()
 
-            logger.info(f"[{i+1}/{len(files_to_process)}] Processing {clean_file.name} for model {model_name}...")
+            logger.info(
+                f"[{i+1}/{len(files_to_process)}] Processing {clean_file.name} for model {model_name} "
+                f"(T={temperature}, Ctx={num_ctx}, TO={timeout}, Struct={structured_output})..."
+            )
             
             # Первый файл может загружаться долго (прогрев модели)
             if i == 0:
@@ -332,15 +355,22 @@ class StructuringBenchmarkService:
                     cleaned_text=cleaned_text,
                     model_name=model_name,
                     embedding_model=embedding_model,
-                    on_chunk=update_local_stream
+                    on_chunk=update_local_stream,
+                    temperature=temperature,
+                    num_ctx=num_ctx,
+                    timeout=timeout,
+                    structured_output=structured_output
                 )
                 
+                prompt_size = struct_data.get("prompt_size", 0)
                 if "error" in struct_data.get("result", {}):
                     consecutive_errors += 1
-                    logger.warning(f"Consecutive error {consecutive_errors}/3 for model {model_name} on file {clean_file.name}")
+                    logger.warning(f"  Prompt: {prompt_size} chars. Error: {struct_data['result']['error']}")
+                    logger.warning(f"  Consecutive error {consecutive_errors}/3 for model {model_name} on file {clean_file.name}")
                 else:
                     # Даже если тип не совпал, это считается "успешным" ответом модели (она не зависла)
                     consecutive_errors = 0
+                    logger.info(f"  Prompt: {prompt_size} chars. Success in {time.time() - start_time:.2f}s.")
                     
             except Exception as e:
                 logger.error(f"Critical error processing {clean_file.name}: {e}")
@@ -432,6 +462,10 @@ class StructuringBenchmarkService:
             avg_f1=avg_f1,
             avg_cer=avg_cer,
             avg_fuzzy_score=avg_fuzzy,
+            temperature=temperature,
+            num_ctx=num_ctx,
+            timeout=timeout,
+            structured_output=structured_output,
             items=items
         )
 
@@ -443,6 +477,10 @@ class StructuringBenchmarkService:
         self,
         model_names: List[str],
         embedding_model: Optional[str] = None,
+        temperature: float = 0.0,
+        num_ctx: int = 16383,
+        timeout: int = 60,
+        structured_output: bool = True
     ) -> List[StructuringBenchmarkReport]:
         """Поочерёдно запускает бенчмарк структурирования для каждой модели из списка."""
         self._stop_requested = False
@@ -468,6 +506,10 @@ class StructuringBenchmarkService:
                 report = await self.run(
                     model_name=model_name,
                     embedding_model=embedding_model,
+                    temperature=temperature,
+                    num_ctx=num_ctx,
+                    timeout=timeout,
+                    structured_output=structured_output
                 )
                 reports.append(report)
                 self._current_progress["completed_models"].append(model_name)
@@ -509,6 +551,10 @@ class StructuringBenchmarkService:
                         "model_name": data.get("model_name"),
                         "total_files": data.get("total_files"),
                         "accuracy": data.get("avg_accuracy"),
+                        "precision": data.get("avg_precision"),
+                        "recall": data.get("avg_recall"),
+                        "f1": data.get("avg_f1"),
+                        "fuzzy": data.get("avg_fuzzy_score"),
                         "template_accuracy": data.get("template_accuracy"),
                         "timestamp": file.stat().st_mtime
                     })

@@ -1,0 +1,540 @@
+{
+  "model_name": "gemma3:1b",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "total_files": 3,
+  "files_with_reference": 3,
+  "correct_templates_count": 3,
+  "template_accuracy": 1.0,
+  "avg_processing_time": 11.321,
+  "avg_accuracy": 0.0625,
+  "avg_precision": 1.0,
+  "avg_recall": 0.0625,
+  "avg_f1": 0.1176,
+  "avg_cer": 0.9375,
+  "avg_fuzzy_score": 0.0625,
+  "temperature": 0.1,
+  "num_ctx": 16383,
+  "timeout": 60,
+  "structured_output": false,
+  "items": [
+    {
+      "filename": "1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 11.477,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "avg_cer": 1.0,
+      "avg_fuzzy_score": 0.0,
+      "is_reference_found": true,
+      "result_json": {
+        "error": "Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Бауэр",
+          "name": "Артём",
+          "patronymic": "Евгеньевич",
+          "date_of_birth": "20.10.2008",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Россия"
+        },
+        "father": {
+          "fio": "Бауэр Евгений Петрович",
+          "citizenship": "гражданин России",
+          "nationality": "русский"
+        },
+        "mother": {
+          "fio": "Бауэр Елена Сергеевна",
+          "citizenship": "гражданка России",
+          "nationality": "немка"
+        },
+        "act_record": {
+          "number": "2503",
+          "date": "05.11.2008"
+        },
+        "registration_place": "отдел ЗАГС Ленинского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+        "series": "II-ЕТ",
+        "number": "679933"
+      },
+      "field_metrics": [
+        {
+          "field_name": "mother.fio",
+          "expected": "Бауэр Елена Сергеевна",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.place_of_birth",
+          "expected": "г. Новосибирск, Новосибирская область, Россия",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "number",
+          "expected": "679933",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "series",
+          "expected": "II-ЕТ",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.fio",
+          "expected": "Бауэр Евгений Петрович",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "act_record.number",
+          "expected": "2503",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.name",
+          "expected": "Артём",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.citizenship",
+          "expected": "гражданка России",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.patronymic",
+          "expected": "Евгеньевич",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "registration_place",
+          "expected": "отдел ЗАГС Ленинского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.citizenship",
+          "expected": "гражданин России",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.nationality",
+          "expected": "русский",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "act_record.date",
+          "expected": "05.11.2008",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.surname",
+          "expected": "Бауэр",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.date_of_birth",
+          "expected": "20.10.2008",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.nationality",
+          "expected": "немка",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        }
+      ]
+    },
+    {
+      "filename": "718b.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 9.901,
+      "accuracy": 0.1875,
+      "precision": 3.0,
+      "recall": 0.1875,
+      "f1": 0.3529,
+      "avg_cer": 0.8125,
+      "avg_fuzzy_score": 0.1875,
+      "is_reference_found": true,
+      "result_json": {
+        "error": "Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Хмелевский",
+          "name": "Даниил",
+          "patronymic": "Викторович",
+          "date_of_birth": "15.09.2011",
+          "place_of_birth": "г. Новосибирск, Новосибирская область, Российская Федерация"
+        },
+        "father": {
+          "fio": "",
+          "citizenship": "",
+          "nationality": ""
+        },
+        "mother": {
+          "fio": "Хмелевская Надежда Викторовна",
+          "citizenship": "гражданка России",
+          "nationality": "русская"
+        },
+        "act_record": {
+          "number": "1138",
+          "date": "12.10.2011"
+        },
+        "registration_place": "отдел ЗАГС Первомайского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+        "series": "II-ET",
+        "number": "670079"
+      },
+      "field_metrics": [
+        {
+          "field_name": "mother.fio",
+          "expected": "Хмелевская Надежда Викторовна",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.place_of_birth",
+          "expected": "г. Новосибирск, Новосибирская область, Российская Федерация",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "number",
+          "expected": "670079",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "series",
+          "expected": "II-ET",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.fio",
+          "expected": "",
+          "actual": "",
+          "is_exact_match": true,
+          "cer": 0.0,
+          "fuzzy_score": 1.0
+        },
+        {
+          "field_name": "act_record.number",
+          "expected": "1138",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.name",
+          "expected": "Даниил",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.citizenship",
+          "expected": "гражданка России",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.patronymic",
+          "expected": "Викторович",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "registration_place",
+          "expected": "отдел ЗАГС Первомайского района г. Новосибирска управления по делам ЗАГС Новосибирской области",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.citizenship",
+          "expected": "",
+          "actual": "",
+          "is_exact_match": true,
+          "cer": 0.0,
+          "fuzzy_score": 1.0
+        },
+        {
+          "field_name": "father.nationality",
+          "expected": "",
+          "actual": "",
+          "is_exact_match": true,
+          "cer": 0.0,
+          "fuzzy_score": 1.0
+        },
+        {
+          "field_name": "act_record.date",
+          "expected": "12.10.2011",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.surname",
+          "expected": "Хмелевский",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.date_of_birth",
+          "expected": "15.09.2011",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.nationality",
+          "expected": "русская",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        }
+      ]
+    },
+    {
+      "filename": "7e05691483401ae2b94275bbd9091245.jpg",
+      "expected_type": "birth_certificate",
+      "detected_type": "birth_certificate",
+      "is_type_correct": true,
+      "processing_time": 12.585,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "avg_cer": 1.0,
+      "avg_fuzzy_score": 0.0,
+      "is_reference_found": true,
+      "result_json": {
+        "error": "Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)"
+      },
+      "reference_json": {
+        "child": {
+          "surname": "Асанова",
+          "name": "Асие",
+          "patronymic": "Айдер кызы",
+          "date_of_birth": "02.09.2015",
+          "place_of_birth": "г. Симферополь, Республика Крым, Российская Федерация"
+        },
+        "father": {
+          "fio": "Асанов Айдер Талятович",
+          "citizenship": "гражданин Российской Федерации",
+          "nationality": "крымский татарин"
+        },
+        "mother": {
+          "fio": "Эльвина Сейрановна",
+          "citizenship": "гражданка Российской Федерации",
+          "nationality": "крымская татарка"
+        },
+        "act_record": {
+          "number": "4373",
+          "date": "02.10.2015"
+        },
+        "registration_place": "Отдел регистрации рождения Г.Симферополя Департамента записи актов гражданского состояния Министерства костиции Республики Крым",
+        "series": "I-АЯ",
+        "number": "628793"
+      },
+      "field_metrics": [
+        {
+          "field_name": "mother.fio",
+          "expected": "Эльвина Сейрановна",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.place_of_birth",
+          "expected": "г. Симферополь, Республика Крым, Российская Федерация",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "number",
+          "expected": "628793",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "series",
+          "expected": "I-АЯ",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.fio",
+          "expected": "Асанов Айдер Талятович",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "act_record.number",
+          "expected": "4373",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.name",
+          "expected": "Асие",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.citizenship",
+          "expected": "гражданка Российской Федерации",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.patronymic",
+          "expected": "Айдер кызы",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "registration_place",
+          "expected": "Отдел регистрации рождения Г.Симферополя Департамента записи актов гражданского состояния Министерства костиции Республики Крым",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.citizenship",
+          "expected": "гражданин Российской Федерации",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "father.nationality",
+          "expected": "крымский татарин",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "act_record.date",
+          "expected": "02.10.2015",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.surname",
+          "expected": "Асанова",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "child.date_of_birth",
+          "expected": "02.09.2015",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        },
+        {
+          "field_name": "mother.nationality",
+          "expected": "крымская татарка",
+          "actual": "",
+          "is_exact_match": false,
+          "cer": 1.0,
+          "fuzzy_score": 0.0
+        }
+      ]
+    }
+  ]
+}

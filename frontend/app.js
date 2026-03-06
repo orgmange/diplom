@@ -176,13 +176,22 @@ async function runStructuringBenchmark() {
 
     startProgressPolling();
 
+    const temperature = parseFloat(document.getElementById("bench-temp")?.value || 0.0);
+    const numCtx = parseInt(document.getElementById("bench-ctx")?.value || 16383);
+    const timeout = parseInt(document.getElementById("bench-timeout")?.value || 60);
+    const structuredOutput = document.getElementById("bench-structured")?.checked ?? true;
+
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/structuring/run-multi`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 model_names: modelNames,
-                embedding_model: embeddingModel
+                embedding_model: embeddingModel,
+                temperature: temperature,
+                num_ctx: numCtx,
+                timeout: timeout,
+                structured_output: structuredOutput
             })
         });
         const reports = await response.json();
@@ -196,20 +205,20 @@ async function runStructuringBenchmark() {
 
         let summaryHtml = `<h3>Сводка по ${reports.length} модел${reports.length === 1 ? "и" : "ям"}</h3>`;
         summaryHtml += `<table class="benchmark-table"><thead><tr>
-            <th>Модель</th><th>Файлов</th><th>Шаблон</th>
-            <th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th>
-            <th>CER ↓</th><th>Fuzzy</th><th>Время (с)</th>
+            <th>Модель</th><th>Параметры</th><th>Файлов</th><th>Шаблон</th>
+            <th>Precision</th><th>Recall</th><th>F1</th>
+            <th>Fuzzy</th><th>Время (с)</th>
         </tr></thead><tbody>`;
         reports.forEach(report => {
+            const paramsText = `T=${report.temperature}, Ctx=${report.num_ctx}, TO=${report.timeout}, Struct=${report.structured_output ? 'ON' : 'OFF'}`;
             summaryHtml += `<tr>
                 <td><b>${report.model_name}</b></td>
+                <td><small>${paramsText}</small></td>
                 <td>${report.total_files}</td>
                 <td>${(report.template_accuracy * 100).toFixed(1)}% (${report.correct_templates_count}/${report.total_files})</td>
-                <td>${(report.avg_accuracy * 100).toFixed(1)}%</td>
                 <td>${(report.avg_precision * 100).toFixed(1)}%</td>
                 <td>${(report.avg_recall * 100).toFixed(1)}%</td>
                 <td><b>${(report.avg_f1 * 100).toFixed(1)}%</b></td>
-                <td>${(report.avg_cer * 100).toFixed(2)}%</td>
                 <td>${(report.avg_fuzzy_score * 100).toFixed(1)}%</td>
                 <td>${report.avg_processing_time}</td>
             </tr>`;
@@ -242,32 +251,96 @@ async function runStructuringBenchmark() {
     }
 }
 
+let currentHistorySort = "timestamp";
+let currentHistorySortDesc = true;
+
+function setHistorySort(column) {
+    if (currentHistorySort === column) {
+        currentHistorySortDesc = !currentHistorySortDesc;
+    } else {
+        currentHistorySort = column;
+        currentHistorySortDesc = true;
+    }
+    updateBenchmarkHistory();
+}
+
 async function updateBenchmarkHistory() {
     const listDiv = document.getElementById("history-list");
     if (!listDiv) return;
 
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports`);
-        const reports = await response.json();
+        let reports = await response.json();
 
         if (reports.length === 0) {
             listDiv.innerText = "История пуста";
             return;
         }
 
-        listDiv.innerHTML = reports.map(r => {
+        // Client-side sorting
+        reports.sort((a, b) => {
+            let valA = a[currentHistorySort];
+            let valB = b[currentHistorySort];
+
+            if (currentHistorySort === "model_name") {
+                valA = valA || "";
+                valB = valB || "";
+                if (valA < valB) return currentHistorySortDesc ? 1 : -1;
+                if (valA > valB) return currentHistorySortDesc ? -1 : 1;
+                return 0;
+            }
+
+            if (valA === undefined) valA = 0;
+            if (valB === undefined) valB = 0;
+
+            return currentHistorySortDesc ? (valB - valA) : (valA - valB);
+        });
+
+        const getSortIcon = (col) => {
+            if (currentHistorySort !== col) return "";
+            return currentHistorySortDesc ? " ↓" : " ↑";
+        };
+
+        let tableHtml = `<table class="benchmark-table" style="width: 100%; text-align: center; margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th style="text-align: left; cursor: pointer;" onclick="setHistorySort('model_name')">Модель${getSortIcon('model_name')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('total_files')">Файлов${getSortIcon('total_files')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('precision')">Precision${getSortIcon('precision')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('recall')">Recall${getSortIcon('recall')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('f1')">F1${getSortIcon('f1')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('fuzzy')">Fuzzy${getSortIcon('fuzzy')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('timestamp')">Дата${getSortIcon('timestamp')}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+        tableHtml += reports.map(r => {
             const date = new Date(r.timestamp * 1000).toLocaleString();
+            const prec = ((r.precision || 0) * 100).toFixed(1);
+            const rec = ((r.recall || 0) * 100).toFixed(1);
+            const f1 = ((r.f1 || 0) * 100).toFixed(1);
+            const fuzzy = ((r.fuzzy || 0) * 100).toFixed(1);
+
             return `
-                <div class="history-item">
-                    <div class="history-content" onclick="loadReport('${r.filename}')">
-                        <span class="model">${r.model_name}</span>
-                        <span class="meta">Файлов: ${r.total_files} | Точность: <span class="accuracy">${(r.accuracy * 100).toFixed(1)}%</span></span>
-                        <span class="date">${date}</span>
-                    </div>
-                    <button class="delete-history-btn" onclick="deleteReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
-                </div>
+                <tr class="history-item" style="cursor: pointer;" onclick="loadReport('${r.filename}')">
+                    <td style="text-align: left; padding: 10px;"><b>${r.model_name}</b></td>
+                    <td style="padding: 10px;">${r.total_files}</td>
+                    <td style="padding: 10px;">${prec}%</td>
+                    <td style="padding: 10px;">${rec}%</td>
+                    <td style="padding: 10px;"><b>${f1}%</b></td>
+                    <td style="padding: 10px;">${fuzzy}%</td>
+                    <td style="padding: 10px;"><small>${date}</small></td>
+                    <td style="padding: 10px; text-align: right;">
+                        <button class="delete-history-btn" style="position: static; display: inline-block;" onclick="deleteReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
+                    </td>
+                </tr>
             `;
         }).join("");
+
+        tableHtml += `</tbody></table>`;
+        listDiv.innerHTML = tableHtml;
     } catch (error) {
         console.error("Error loading history:", error);
         listDiv.innerText = "Ошибка загрузки истории";
@@ -292,11 +365,10 @@ async function loadReport(filename) {
             С эталоном: ${report.files_with_reference}<br>
             Точность шаблона: <b>${(report.template_accuracy * 100).toFixed(1)}%</b> (${report.correct_templates_count}/${report.total_files})<br>
             Среднее время: ${report.avg_processing_time} сек.<br>
-            <b>Accuracy: ${(report.avg_accuracy * 100).toFixed(1)}% | 
-            Precision: ${((report.avg_precision || 0) * 100).toFixed(1)}% | 
+            Параметры: <small>T=${report.temperature}, Ctx=${report.num_ctx}, TO=${report.timeout}, Struct=${report.structured_output ? 'ON' : 'OFF'}</small><br>
+            <b>Precision: ${((report.avg_precision || 0) * 100).toFixed(1)}% | 
             Recall: ${((report.avg_recall || 0) * 100).toFixed(1)}% | 
             F1: ${((report.avg_f1 || 0) * 100).toFixed(1)}%</b><br>
-            CER: ${((report.avg_cer || 0) * 100).toFixed(2)}% | 
             Fuzzy: ${((report.avg_fuzzy_score || 0) * 100).toFixed(1)}%
         `;
 
@@ -352,10 +424,10 @@ function renderStructuringBenchmarkTable(containerId, items) {
     }
 
     const rows = items.map(item => {
-        const rowClass = item.is_reference_found ? (item.accuracy > 0.9 ? "ok-row" : "bad-row") : "neutral-row";
-        const accText = item.is_reference_found ? `${(item.accuracy * 100).toFixed(0)}%` : "N/A";
+        const rowClass = item.is_reference_found ? (item.f1 > 0.9 ? "ok-row" : "bad-row") : "neutral-row";
+        const precText = item.is_reference_found ? `${((item.precision || 0) * 100).toFixed(0)}%` : "N/A";
+        const recallText = item.is_reference_found ? `${((item.recall || 0) * 100).toFixed(0)}%` : "N/A";
         const f1Text = item.is_reference_found ? `${(item.f1 * 100).toFixed(0)}%` : "N/A";
-        const cerText = item.is_reference_found ? `${(item.avg_cer * 100).toFixed(1)}%` : "N/A";
         const fuzzyText = item.is_reference_found ? `${(item.avg_fuzzy_score * 100).toFixed(0)}%` : "N/A";
 
         const typeMatchHtml = item.is_type_correct
@@ -366,8 +438,7 @@ function renderStructuringBenchmarkTable(containerId, items) {
         if (item.field_metrics && item.field_metrics.length > 0) {
             item.field_metrics.forEach(fm => {
                 const status = fm.is_exact_match ? "✓" : "✗";
-                const cerInfo = fm.is_exact_match ? "" : ` CER:${(fm.cer * 100).toFixed(1)}%`;
-                tooltipContent += `${status} ${fm.field_name}: ${fm.actual}\n   (Exp: ${fm.expected})${cerInfo}\n\n`;
+                tooltipContent += `${status} ${fm.field_name}: ${fm.actual}\n   (Exp: ${fm.expected})\n\n`;
             });
         } else if (item.reference_json) {
             const keys = Object.keys(item.reference_json);
@@ -396,9 +467,9 @@ function renderStructuringBenchmarkTable(containerId, items) {
                     ${typeMatchHtml}
                 </td>
                 <td>${item.processing_time} сек.</td>
-                <td>${accText}</td>
+                <td>${precText}</td>
+                <td>${recallText}</td>
                 <td><b>${f1Text}</b></td>
-                <td>${cerText}</td>
                 <td>${fuzzyText}</td>
             </tr>
         `;
@@ -411,9 +482,9 @@ function renderStructuringBenchmarkTable(containerId, items) {
                     <th>Файл (наведи для деталей)</th>
                     <th>Тип (Ожидаемый)</th>
                     <th>Время</th>
-                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
                     <th>F1</th>
-                    <th>CER ↓</th>
                     <th>Fuzzy</th>
                 </tr>
             </thead>

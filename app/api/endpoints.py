@@ -22,12 +22,20 @@ class SearchQuery(BaseModel):
     limit: int = 5
     model: str | None = None
     doc_type: str | None = None
+    temperature: float = 0.0
+    num_ctx: int = 16384
+    timeout: int = 60
+    structured_output: bool = True
 
 class StructureRequest(BaseModel):
     filename: str  # Имя файла из data/ocr
     model_name: str = "llama3:latest"
     use_raw_for_search: bool = True
     reindex: bool = False
+    temperature: float = 0.0
+    num_ctx: int = 16384
+    timeout: int = 60
+    structured_output: bool = True
 
 class StatusResponse(BaseModel):
     ocr_files: int
@@ -43,11 +51,19 @@ class BenchmarkRunRequest(BaseModel):
 class StructuringBenchmarkRunRequest(BaseModel):
     model_name: str
     embedding_model: str | None = None
+    temperature: float = 0.0
+    num_ctx: int = 16384
+    timeout: int = 60
+    structured_output: bool = True
 
 
 class StructuringBenchmarkMultiRunRequest(BaseModel):
     model_names: List[str]
     embedding_model: str | None = None
+    temperature: float = 0.0
+    num_ctx: int = 16384
+    timeout: int = 60
+    structured_output: bool = True
 
 
 class BenchmarkItemResponse(BaseModel):
@@ -129,6 +145,10 @@ class StructuringBenchmarkRunResponse(BaseModel):
     avg_f1: float
     avg_cer: float
     avg_fuzzy_score: float
+    temperature: float
+    num_ctx: int
+    timeout: int
+    structured_output: bool
     items: List[StructuringBenchmarkItemResponse]
 
 
@@ -170,7 +190,11 @@ async def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
     """Запускает бенчмарк структурирования для выбранной LLM модели."""
     report = await structuring_benchmark_service.run(
         model_name=request.model_name,
-        embedding_model=request.embedding_model
+        embedding_model=request.embedding_model,
+        temperature=request.temperature,
+        num_ctx=request.num_ctx,
+        timeout=request.timeout,
+        structured_output=request.structured_output
     )
     return report.to_dict()
 
@@ -179,7 +203,11 @@ async def run_structuring_benchmark_multi(request: StructuringBenchmarkMultiRunR
     """Поочерёдно запускает бенчмарк структурирования для списка LLM моделей."""
     reports = await structuring_benchmark_service.run_multi(
         model_names=request.model_names,
-        embedding_model=request.embedding_model
+        embedding_model=request.embedding_model,
+        temperature=request.temperature,
+        num_ctx=request.num_ctx,
+        timeout=request.timeout,
+        structured_output=request.structured_output
     )
     return [report.to_dict() for report in reports]
 
@@ -293,7 +321,11 @@ async def structure_document(request: StructureRequest):
         raw_text=raw_text if request.use_raw_for_search else cleaned_text,
         cleaned_text=cleaned_text,
         model_name=request.model_name,
-        embedding_model=request.model_name
+        embedding_model=request.model_name,
+        temperature=request.temperature,
+        num_ctx=request.num_ctx,
+        timeout=request.timeout,
+        structured_output=request.structured_output
     )
     
     return result

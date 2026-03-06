@@ -107,6 +107,26 @@
                         class="warning-btn hidden">Отмена</button>
                 </div>
             </div>
+
+            <div class="config-row"
+                style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <div class="model-select">
+                    <label for="bench-temp">Temperature (0.0 - 1.0):</label>
+                    <input type="number" id="bench-temp" value="0.0" step="0.1" min="0" max="1" style="width: 80px;">
+                </div>
+                <div class="model-select">
+                    <label for="bench-ctx">Context size:</label>
+                    <input type="number" id="bench-ctx" value="16383" step="1024" min="1024" style="width: 100px;">
+                </div>
+                <div class="model-select">
+                    <label for="bench-timeout">Timeout (sec):</label>
+                    <input type="number" id="bench-timeout" value="60" step="10" min="10" style="width: 80px;">
+                </div>
+                <div class="model-select" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+                    <input type="checkbox" id="bench-structured" checked>
+                    <label for="bench-structured">Structured output</label>
+                </div>
+            </div>
             <div id="struct-benchmark-progress" class="progress-container hidden">
                 <div class="progress-info">
                     <span id="progress-model-name">Модель: -</span>
@@ -127,10 +147,12 @@
             <div id="struct-benchmark-history" class="history-panel">
                 <div class="history-header">
                     <h3>История запусков</h3>
-                    <button onclick="clearBenchmarkHistory()" class="small-btn warning-btn">Очистить всю
-                        историю</button>
+                    <div class="history-controls">
+                        <button onclick="clearBenchmarkHistory()" class="small-btn warning-btn">Очистить
+                            историю</button>
+                    </div>
                 </div>
-                <div id="history-list" class="history-list">Загрузка истории...</div>
+                <div id="history-list" class="history-list" style="overflow-x: auto;">Загрузка истории...</div>
             </div>
 
             <div id="struct-benchmark-results" class="result-box full-width"></div>

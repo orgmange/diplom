@@ -49,9 +49,13 @@ class StructuringService:
         embedding_model: Optional[str] = None,
         expected_type: Optional[str] = None,
         on_chunk: Optional[Any] = None,
+        temperature: float = 0.0,
+        num_ctx: int = 16383,
+        timeout: int = 60,
+        structured_output: bool = True
     ) -> Dict[str, Any]:
         """
-        Стабильный асинхронный метод с большим контекстом (16к) и полными примерами RAG.
+        Стабильный асинхронный метод с настраиваемыми параметрами.
         """
         # 1. RAG (Поиск типа документа и примера для LLM)
         # Ищем по единой базе примеров
@@ -105,23 +109,25 @@ class StructuringService:
                 first_chunk = True
                 
                 # Используем вспомогательную переменную для отслеживания таймаута между чанками
-                # Для первого чанка даем 60 секунд (на случай загрузки модели),
-                # для последующих - по 10 секунд ожидания.
+                # Для первого чанка даем настраиваемый таймаут (на случай загрузки модели),
+                # для последующих - по 5 секунд ожидания.
                 
                 stream = await self.ollama_client.chat(
                     model=actual_model, 
                     messages=messages,
-                    format='json',
+                    format='json' if structured_output else None,
                     options={
-                        "temperature": 0.0
+                        "temperature": temperature,
+                        "num_ctx": num_ctx
                     },
-                    stream=True
+                    stream=True,
+                    think=False
                 )
 
                 while True:
                     try:
                         # Таймаут на ожидание следующего чанка
-                        wait_time = 60.0 if first_chunk else 5.0
+                        wait_time = float(timeout) if first_chunk else 5.0
                         chunk = await asyncio.wait_for(stream.__anext__(), timeout=wait_time)
                         
                         if first_chunk:
@@ -147,7 +153,8 @@ class StructuringService:
                 return {
                     "result": json.loads(full_content),
                     "doc_type": doc_type,
-                    "model": actual_model
+                    "model": actual_model,
+                    "prompt_size": sum(len(m['content']) for m in messages)
                 }
                     
             except Exception as e:
@@ -156,10 +163,17 @@ class StructuringService:
                 if attempt < max_retries - 1:
                     await asyncio.sleep(2)
                 
-        logger.error(f"Ollama failure after {max_retries} attempts: {last_error}")
+        logger.error(f"Ollama failure after {max_retries} attempts for model {actual_model}.")
+        logger.error(f"LAST PROMPT:\n{json.dumps(messages, ensure_ascii=False, indent=2)}")
+        if full_content:
+            logger.error(f"LAST PARTIAL RESPONSE:\n{full_content}")
+            
         return {
             "result": {"error": f"Ollama failure after {max_retries} attempts: {last_error}"},
             "doc_type": doc_type,
-            "model": actual_model
+            "model": actual_model,
+            "prompt_size": sum(len(m['content']) for m in messages),
+            "raw_response": full_content,
+            "prompt": messages
         }
 

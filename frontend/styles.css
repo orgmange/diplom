@@ -349,8 +349,6 @@ button:disabled {
 }
 
 .history-list {
-    display: flex;
-    gap: 10px;
     overflow-x: auto;
     padding-bottom: 5px;
 }
@@ -360,11 +358,23 @@ button:disabled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.history-header h3 {
-    margin: 0;
+.history-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+.history-controls select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background: #fff;
 }
 
 .history-item {
@@ -377,8 +387,6 @@ button:disabled {
     min-width: 200px;
     transition: all 0.2s;
     border-left: 4px solid #007bff;
-    display: flex;
-    overflow: hidden;
 }
 
 .history-content {

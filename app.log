@@ -9811,3 +9811,4 @@ We are given an OCR text and need to extract data according to the provided JSON
 2026-03-05 15:41:28,896 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11434/api/tags "HTTP/1.1 200 OK"
 2026-03-05 15:41:28,897 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
 2026-03-05 15:41:28,897 - httpx - INFO - HTTP Request: GET http://172.26.208.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-03-10 13:33:59,718 - diplom - ERROR - Failed to start task: Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4

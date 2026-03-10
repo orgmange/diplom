@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from app.api.endpoints import router as api_router
+from app.api.external import router as external_router
 from app.core.config import settings
 
 # Настройка логирования с метками времени
@@ -32,6 +33,7 @@ app = FastAPI(
 
 # Include API router
 app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(external_router, prefix=settings.API_V1_STR)
 
 # Mount static files (Frontend)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")

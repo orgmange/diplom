@@ -1,5 +1,7 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query, Response, File, UploadFile
 from pydantic import BaseModel
+import dicttoxml
+import base64
 from typing import Dict, Any, Optional
 
 from app.services.ocr_service import OCRService
@@ -36,6 +38,21 @@ def start_template_recognition(request: RecognitionRequest):
          raise HTTPException(status_code=400, detail="image_base64 field is required")
          
     task_id = recognition_service.start_template_task(request.image_base64)
+    return {"task_id": task_id}
+
+
+@router.post("/templates/upload", response_model=TaskStartedResponse, summary="Только для тестирования в Swagger")
+async def start_template_recognition_upload(file: UploadFile = File(..., description="Изображение для создания шаблона")):
+    """
+    Удобный метод ТОЛЬКО ДЛЯ ТЕСТИРОВАНИЯ В SWAGGER.
+    Принимает файл, конвертирует в base64 и вызывает основной метод.
+    """
+    content = await file.read()
+    if not content:
+         raise HTTPException(status_code=400, detail="Empty file provided")
+         
+    image_base64 = base64.b64encode(content).decode('utf-8')
+    task_id = recognition_service.start_template_task(image_base64)
     return {"task_id": task_id}
 
 
@@ -82,6 +99,21 @@ def start_document_recognition(request: RecognitionRequest):
     return {"task_id": task_id}
 
 
+@router.post("/recognize/upload", response_model=TaskStartedResponse, summary="Только для тестирования в Swagger")
+async def start_document_recognition_upload(file: UploadFile = File(..., description="Изображение для распознавания")):
+    """
+    Удобный метод ТОЛЬКО ДЛЯ ТЕСТИРОВАНИЯ В SWAGGER.
+    Принимает файл, конвертирует в base64 и вызывает основной метод.
+    """
+    content = await file.read()
+    if not content:
+         raise HTTPException(status_code=400, detail="Empty file provided")
+         
+    image_base64 = base64.b64encode(content).decode('utf-8')
+    task_id = recognition_service.start_recognition_task(image_base64)
+    return {"task_id": task_id}
+
+
 @router.get("/recognize/{task_id}/status")
 def get_document_recognition_status(task_id: str):
     """
@@ -94,10 +126,13 @@ def get_document_recognition_status(task_id: str):
 
 
 @router.get("/recognize/{task_id}/result")
-def get_document_recognition_result(task_id: str):
+def get_document_recognition_result(
+    task_id: str,
+    format: str = Query("json", description="Формат ответа: json или xml")
+):
     """
-    Возвращает итоговый структурированный JSON результат распознавания документа.
-    Доступно только когда статус = completed.
+    Возвращает итоговый структурированный результат распознавания документа.
+    Доступно только когда статус = completed. Можно запросить в формате xml.
     """
     result = recognition_service.get_task_result(task_id)
     if not result:
@@ -109,4 +144,12 @@ def get_document_recognition_result(task_id: str):
             detail=f"Task is not completed. Current status: {result['status']}"
         )
         
+    data = result["result"]
+    if format.lower() == "xml":
+        try:
+            xml_bytes = dicttoxml.dicttoxml(data, custom_root='document', attr_type=False)
+            return Response(content=xml_bytes, media_type="application/xml")
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"XML conversion failed: {str(e)}")
+            
     return result

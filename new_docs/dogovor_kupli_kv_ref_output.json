@@ -1,0 +1,41 @@
+{
+  "document_type": "Договор купли-продажи квартиры",
+  "location": "г. Энск",
+  "date": "01.06.2023",
+  "seller": {
+    "surname": "Пэпэтэшин",
+    "name": "Петр",
+    "patronymic": "Петрович",
+    "date_of_birth": "05.12.1982",
+    "address": "Энская область, г. Энск, ул. Ленина, д. 1, кв. 2",
+    "passport": {
+      "series": "12 34",
+      "number": "567890",
+      "date_of_issue": "01.10.2019",
+      "issued_by": "УВД по Энской области"
+    }
+  },
+  "buyer": {
+    "surname": "Пэпэтэшина",
+    "name": "Полина",
+    "patronymic": "Петровна",
+    "date_of_birth": "01.10.1985",
+    "address": "Энская область, г. Энск, ул. Карла Маркса, д. 2, кв. 3",
+    "passport": {
+      "series": "12 34",
+      "number": "789012",
+      "date_of_issue": "05.05.2021",
+      "issued_by": "УВД по Энской области"
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "area_sq_m": 53.4,
+    "rooms_count": 2,
+    "address": "Энская область, г. Энск, ул. Мира, д. 12, кв. 34",
+    "cadastral_number": "11:22:3333333:4444"
+  },
+  "financial_conditions": {
+    "price_rub": 3500000
+  }
+}

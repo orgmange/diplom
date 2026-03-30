@@ -1,0 +1,42 @@
+{
+  "document_type": "Договор аренды квартиры",
+  "location": "г. Санкт-Петербург",
+  "date": "03.09.2022",
+  "lessor": {
+    "surname": "Иванова",
+    "name": "Алёна",
+    "patronymic": "Ивановна",
+    "date_of_birth": "03.09.1955",
+    "address": "г. Санкт-Петербург, ул. Пушкина 13, кв. 228",
+    "passport": {
+      "series": "77 01",
+      "number": "123456",
+      "issued_by": "ОУФМС города Санкт-Петербурга и Ленинградской области"
+    }
+  },
+  "tenant": {
+    "surname": "Раскольников",
+    "name": "Родион",
+    "patronymic": "Романович",
+    "date_of_birth": "27.05.1993",
+    "address": "г. Санкт-Петербург, Кузнечный переулок, 5/2",
+    "passport": {
+      "series": "1881",
+      "number": "654321",
+      "issued_by": "ОУФМС города Санкт-Петербурга и Ленинградской области"
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "rooms_count": 1,
+    "address": "г. Санкт-Петербург, Литейный проспект, дом 24, квартира 2"
+  },
+  "rental_terms": {
+    "duration_months": 11,
+    "start_date": "11.09.2019",
+    "end_date": "11.08.2020",
+    "monthly_payment_rub": 22000,
+    "deposit_rub": 7000,
+    "payment_day_of_month": 15
+  }
+}

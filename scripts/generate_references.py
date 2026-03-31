@@ -2,6 +2,7 @@ import os
 import json
 import logging
 import time
+import asyncio
 from pathlib import Path
 from typing import Dict, Any
 
@@ -13,7 +14,13 @@ from app.services.structuring_service import StructuringService
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger("generate-references")
 
-def generate_references(model_name: str = "qwen2.5:latest", embedding_model: str = "nomic-embed-text:latest"):
+def generate_references(model_name: str = "qwen3:8b", embedding_model: str = "embeddinggemma"):
+    """
+    Оболочка для запуска асинхронной функции.
+    """
+    asyncio.run(async_generate_references(model_name, embedding_model))
+
+async def async_generate_references(model_name: str, embedding_model: str):
     """
     Проходит по всем очищенным файлам в data/docs и генерирует эталонные JSON.
     """
@@ -69,7 +76,7 @@ def generate_references(model_name: str = "qwen2.5:latest", embedding_model: str
         
         try:
             start_time = time.time()
-            struct_data = structuring_service.structure(
+            struct_data = await structuring_service.structure(
                 raw_text=raw_text,
                 cleaned_text=cleaned_text,
                 model_name=model_name,

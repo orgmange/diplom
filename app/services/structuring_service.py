@@ -32,7 +32,21 @@ class StructuringService:
             "passport": "passport_ru.json",
             "driver_license": "driver_license_ru.json",
             "snils": "snils.json",
-            "birth_certificate": "birth_certificate_ru.json"
+            "birth_certificate": "birth_certificate_ru.json",
+            "diplom_bakalavra": "diplom.json",
+            "dogovor_kupli_prodazhi_kv": "dogovor_kupli_kv.json",
+            "dogovor_prodagi_machini": "dogovor_kupli.json",
+            "dogovor_arendi_kv": "renal.json",
+            "inn": "inn.json",
+            "kvitancia": "kvit.json",
+            "zagran_passport": "zagran.json",
+            "diplom_bakalavra": "diplom.json",
+            "dogovor_kupli_prodazhi_kv": "dogovor_kupli_kv.json",
+            "dogovor_prodagi_machini": "dogovor_kupli.json",
+            "dogovor_arendi_kv": "renal.json",
+            "inn": "inn.json",
+            "kvitancia": "kvit.json",
+            "zagran_passport": "zagran.json"
         }
         filename = template_map.get(doc_type)
         if not filename: return "{}"

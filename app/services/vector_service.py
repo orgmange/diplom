@@ -140,6 +140,13 @@ class VectorService:
             ("svid", "birth_certificate"),
             ("свид", "birth_certificate"),
             ("birth", "birth_certificate"),
+            ("diplom", "diplom_bakalavra"),
+            ("dogovor_kupli_kv", "dogovor_kupli_prodazhi_kv"),
+            ("dogovor_kupli", "dogovor_prodagi_machini"),
+            ("renal", "dogovor_arendi_kv"),
+            ("inn", "inn"),
+            ("kvit", "kvitancia"),
+            ("zagran", "zagran_passport"),
         )
         for token, doc_type in rules:
             if token in lowered:

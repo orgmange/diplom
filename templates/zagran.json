@@ -1,0 +1,21 @@
+{
+  "document_type": "Заграничный паспорт гражданина Российской Федерации",
+  "surname": "ИВАНОВА",
+  "surname_latin": "IVANOVA",
+  "given_names": "АННА ВАЛЕРЬЕВНА",
+  "given_names_latin": "ANNA",
+  "nationality": "РОССИЙСКАЯ ФЕДЕРАЦИЯ / RUSSIAN FEDERATION",
+  "gender": "Ж / F",
+  "date_of_birth": "15.09.1982",
+  "place_of_birth": "КИРОВСКАЯ ОБЛАСТЬ / USSR",
+  "date_of_issue": "06.10.2011",
+  "date_of_expiry": "06.10.2021",
+  "authority": "ФМС 45006",
+  "passport_number": "70 2893282",
+  "type": "P",
+  "issuing_state_code": "RUS",
+  "mrz": {
+    "line1": "P<RUSIVANOVA<<ANNA<<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "7028932827RUS8209153F21100611<<<<<<<<<<<<<<04"
+  }
+}

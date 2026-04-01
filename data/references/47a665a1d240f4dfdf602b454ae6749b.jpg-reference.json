@@ -1,0 +1,61 @@
+{
+  "location": "г. Москва",
+  "date": "1 января 2015 года",
+  "seller": {
+    "surname": "Медведев",
+    "name": "Дмитрий",
+    "patronymic": "Алексеевич",
+    "date_of_birth": "05.07.1967",
+    "address": "Москва, ул. Тверская д. 1, кв. 5",
+    "passport": {
+      "series": "4543",
+      "number": "186132",
+      "date_of_issue": "15.07.2004",
+      "issued_by": "26 ОМ г. Москва"
+    },
+    "phone": "+7 912 222 22 22"
+  },
+  "buyer": {
+    "surname": "Кудрин",
+    "name": "Сергей",
+    "patronymic": "Михайлович",
+    "date_of_birth": "07.05.1961",
+    "address": "Москва, Кутузовский пр. д.3 кв. 7",
+    "passport": {
+      "series": "4345",
+      "number": "176155",
+      "date_of_issue": "12.03.2003",
+      "issued_by": "25 ОМ г. Москва"
+    },
+    "phone": "+7 901 777 77 77"
+  },
+  "vehicle": {
+    "make_model": "Мерседес S600",
+    "category": "B",
+    "type": "Легковой",
+    "registration_number": "0001ом777",
+    "vin": "Wdb2221A003777",
+    "year_of_manufacture": 2014,
+    "engine_number": "43457777",
+    "chassis_number": "Отсутствует",
+    "body_number": "Wdb2221A003777",
+    "color": "Черный",
+    "documents": {
+      "pts": {
+        "series": "7-АК",
+        "number": "345345",
+        "date_of_issue": "05.01.2014",
+        "issued_by": "Мерседес Рус групп"
+      },
+      "sts": {
+        "series": "50-Р",
+        "number": "123456",
+        "date_of_issue": "10.01.2014",
+        "issued_by": "МРЭО 1 г. Москва"
+      }
+    }
+  },
+  "financial_conditions": {
+    "price_rub": 5000000
+  }
+}

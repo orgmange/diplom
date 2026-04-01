@@ -1,0 +1,42 @@
+{
+  "billing_period": "Декабрь 2018",
+  "payer": {
+    "name": "Житель",
+    "address": "проспект КУЗНЕЦКСТРОЕВСКИЙ, дом 00, квартира 00",
+    "area_sq_m": 3679.5,
+    "residents_count": 2
+  },
+  "service_provider": {
+    "name": "АО \"КУЗНЕЦКАЯ ТЭЦ\"",
+    "address": "г. Новокузнецк",
+    "phone": ""
+  },
+  "payment_details": {
+    "personal_account": "40702810626000098233",
+    "total_to_pay": 1040.47,
+    "total_with_arrears": 1040.47,
+    "recipient": {
+      "name": "АО \"КУЗНЕЦКАЯ ТЭЦ\"",
+      "bank_account": "40702810626000098233",
+      "bank_name": "ПАО СБЕРБАНК",
+      "correspondent_account": "30101810200000000612",
+      "bik": "043207612"
+    }
+  },
+  "services": [
+    {
+      "name": "Горячее водоснабжение",
+      "unit": "м3",
+      "volume": 3.0,
+      "rate": 60.79,
+      "amount": 182.37
+    },
+    {
+      "name": "Отопление",
+      "unit": "Гкал",
+      "volume": 0.850,
+      "rate": 1010.11,
+      "amount": 858.1
+    }
+  ]
+}

@@ -1,18 +1,22 @@
 {
-  "document_type": "диплом",
-  "full_name": "Аляутдинов Равиль Раисович",
-  "specialization": "09.03.04 Программная инженерия",
-  "educational_institution": "Федеральное государственное бюджетное «МИРЭА - Российский технологический университет»",
-  "city": "г. Москва",
-  "qualification": "БАКАЛАВРА",
-  "date_of_issue": "07 июля 2022 года",
+  "series": "107732",
+  "number": "0057600",
   "registration_number": "129240",
-  "grade": "С ОТЛИЧИЕМ",
-  "exam_committee_protocol_number": "Протокол № 01",
-  "exam_committee_date": "30 июня 2022 г.",
-  "signature": "М.П.",
-  "document_number": "107732 0057600",
-  "document_id": "7219",
-  "document_code": "91.57.5",
-  "document_status": "ДОКУМЕНТ ОБ ОБРАЗОВАНИИ И О КВАЛИФИКАЦИИ"
+  "date_of_issue": "07.07.2022",
+  "graduate": {
+    "surname": "Аляутдинов",
+    "name": "Равиль",
+    "patronymic": "Раисович"
+  },
+  "organization": {
+    "name": "Федеральное государственное бюджетное образовательное учреждение высшего профессионального образования \"МИРЭА - Российский технологический университет\"",
+    "location": "г. Москва"
+  },
+  "qualification": {
+    "degree": "БАКАЛАВР",
+    "specialty_code": "090304",
+    "specialty_name": "Программная инженерия",
+    "special_rank": "БАКАЛАВР"
+  },
+  "decision_date": "30.06.2022"
 }

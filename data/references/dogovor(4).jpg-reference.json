@@ -1,0 +1,61 @@
+{
+  "location": "г. Екатеринбург",
+  "date": "14.01.2017",
+  "seller": {
+    "surname": "Сидоров",
+    "name": "Михаил",
+    "patronymic": "Иванович",
+    "date_of_birth": "02.05.1964",
+    "address": "г. Екатеринбург, проспект Ленина, д. 1, кв. 1",
+    "passport": {
+      "series": "6505",
+      "number": "123456",
+      "date_of_issue": "23.01.2004",
+      "issued_by": "отделом УФМС России по Свердловской области, в ленинском районе г. Екатеринбурга"
+    },
+    "phone": "+7"
+  },
+  "buyer": {
+    "surname": "Иванова",
+    "name": "Марья",
+    "patronymic": "Сергеевна",
+    "date_of_birth": "02.05.1985",
+    "address": "г. Екатеринбург, ул. Гагарина, д. 14, кв. 49",
+    "passport": {
+      "series": "6505",
+      "number": "987456",
+      "date_of_issue": "21.05.2005",
+      "issued_by": "отделом УФМС России по Свердловской области, в кировском районе г. Екатеринбурга"
+    },
+    "phone": "+7"
+  },
+  "vehicle": {
+    "make_model": "Toyota Chaser",
+    "category": "В",
+    "type": "Легк. авто. седан",
+    "registration_number": "А 123 АА 96",
+    "vin": "JZX90-1234567",
+    "year_of_manufacture": 1995,
+    "engine_number": "отсутствует",
+    "chassis_number": "отсутствует",
+    "body_number": "JZX90-1234567",
+    "color": "белый",
+    "documents": {
+      "pts": {
+        "series": "66 XE",
+        "number": "123456",
+        "date_of_issue": "12.07.2013",
+        "issued_by": "МРЭО ГИБДД ГУ МВД России по Свердловской области"
+      },
+      "sts": {
+        "series": "66 AA",
+        "number": "654321",
+        "date_of_issue": "14.08.2005",
+        "issued_by": "МРЭО ГИБДД ГУ МВД России по Свердловской области"
+      }
+    }
+  },
+  "financial_conditions": {
+    "price_rub": 300000
+  }
+}

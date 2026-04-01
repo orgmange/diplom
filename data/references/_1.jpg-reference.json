@@ -1,0 +1,16 @@
+{
+  "fio": {
+    "surname": "Семенов",
+    "name": "Сергей",
+    "patronymic": "Викторович"
+  },
+  "gender": "Мужской",
+  "date_of_birth": "14.11.1979",
+  "place_of_birth": "Ленинград",
+  "registration_date": "27.09.2001",
+  "inn": "780716125138",
+  "tax_authority": {
+    "name": "ИМНС по Красносельскому району",
+    "code": "7807"
+  }
+}

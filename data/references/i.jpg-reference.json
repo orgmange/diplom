@@ -1,17 +1,22 @@
 {
-  "document_type": "ДИПЛОМ",
-  "full_name": "Носова Алёна Игоревна",
-  "direction_of_training": "050700 Педагогика",
-  "country": "РОССИЙСКАЯ ФЕДЕРАЦИЯ",
-  "educational_organization": "федеральное государственное бюджетное образовательное учреждение высшего профессионального образования \"Омский государственный педагогический университет\"",
-  "city": "г. Омск",
-  "qualification": "БАКАЛАВР ПЕДАГОГИКИ",
-  "reg_number": "105524 0121646",
-  "protocol_number": "27-36/321",
-  "protocol_date": "20 января 2014 г.",
-  "document_number": "4650",
-  "exam_commission_number": "402",
-  "registration_number": "025500%650",
-  "date_of_issue": "27 января 2014 года",
-  "educational_organization_OGRN": "4-1"
+  "series": "105524",
+  "number": "0121646",
+  "registration_number": "27-28/198",
+  "date_of_issue": "27.01.2014",
+  "graduate": {
+    "surname": "Носова",
+    "name": "Алёна",
+    "patronymic": "Игоревна"
+  },
+  "organization": {
+    "name": "федеральное государственное бюджетное образовательное учреждение высшего профессионального образования \"Омский государственный педагогический университет\"",
+    "location": "г. Омск"
+  },
+  "qualification": {
+    "degree": "БАКАЛАВР",
+    "specialty_code": "050700",
+    "specialty_name": "Педагогика",
+    "special_rank": "БАКАЛАВР ПЕДАГОГИКИ"
+  },
+  "decision_date": "27.01.2014"
 }

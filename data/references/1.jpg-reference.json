@@ -1,0 +1,20 @@
+{
+  "surname": "ЧИЧАДЕЕВ",
+  "surname_latin": "CHICHADEEV",
+  "given_names": "НИКОЛАЙ ПЕТРОВИЧ",
+  "given_names_latin": "NIKOLAI",
+  "nationality": "РОССИЙСКАЯ ФЕДЕРАЦИЯ / RUSSIAN FEDERATION",
+  "gender": "М / М",
+  "date_of_birth": "07.11.1971",
+  "place_of_birth": "Г.СВЕРДЛОВСК / USSR",
+  "date_of_issue": "03.08.2012",
+  "date_of_expiry": "03.08.2017",
+  "authority": "УФМС 875",
+  "passport_number": "64 6908657",
+  "type": "P",
+  "issuing_state_code": "RUS",
+  "mrz": {
+    "line1": "P<RUSCHICHADEEV<<NIKOLAI<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "6469086578RUS7111077M2208037<<<<<<<<<<<<<<02"
+  }
+}

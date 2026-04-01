@@ -1,0 +1,61 @@
+{
+  "location": "г. Москва",
+  "date": "15.07.2017",
+  "seller": {
+    "surname": "Сидоров",
+    "name": "Семен",
+    "patronymic": "Семенович",
+    "date_of_birth": "10.10.1978",
+    "address": "г. Москва ул. Синяя д.6 кв. 122",
+    "passport": {
+      "series": "2003",
+      "number": "123456",
+      "date_of_issue": "11.10.2003",
+      "issued_by": "ОУФМС России по г. Москва"
+    },
+    "phone": ""
+  },
+  "buyer": {
+    "surname": "Иванов",
+    "name": "Иван",
+    "patronymic": "Иванович",
+    "date_of_birth": "12.12.1980",
+    "address": "г. Москва ул. Зеленая д 7В кв.2",
+    "passport": {
+      "series": "2004",
+      "number": "654321",
+      "date_of_issue": "12.10.2004",
+      "issued_by": "ОУФМС России по г. Тверь"
+    },
+    "phone": ""
+  },
+  "vehicle": {
+    "make_model": "BMW X5",
+    "category": "B",
+    "type": "Легковой",
+    "registration_number": "А111АА199",
+    "vin": "XXX1234555643",
+    "year_of_manufacture": 2015,
+    "engine_number": "M50 328477",
+    "chassis_number": "не установлен",
+    "body_number": "XXX1234555643",
+    "color": "Черный",
+    "documents": {
+      "pts": {
+        "series": "20 нв",
+        "number": "123456",
+        "date_of_issue": "12.01.2016",
+        "issued_by": "МРЭО г. Москва"
+      },
+      "sts": {
+        "series": "20 04",
+        "number": "443332",
+        "date_of_issue": "12.01.2016",
+        "issued_by": "РЭГ ГИБДД №1 г. Москва"
+      }
+    }
+  },
+  "financial_conditions": {
+    "price_rub": 1000000
+  }
+}

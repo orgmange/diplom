@@ -1,0 +1,41 @@
+{
+  "location": "г. Анапа",
+  "date": "30.07.2021",
+  "lessor": {
+    "surname": "Леонидов",
+    "name": "Александр",
+    "patronymic": "Иванович",
+    "date_of_birth": "25.04.1985",
+    "address": "г. Анапа, ул. Владимирская 69 кв. 402",
+    "passport": {
+      "series": "66-47",
+      "number": "123456",
+      "issued_by": "Анапским РОВД Краснодарского края"
+    }
+  },
+  "tenant": {
+    "surname": "Овсянников",
+    "name": "Владимир",
+    "patronymic": "Петрович",
+    "date_of_birth": "01.04.2004",
+    "address": "г. Асино, ул. Чулымская, 97",
+    "passport": {
+      "series": "53-25",
+      "number": "567984",
+      "issued_by": "Асиновским РОВД Томской области"
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "rooms_count": 1,
+    "address": "г. Анапа, ул. Владимирская 69 кв. 403"
+  },
+  "rental_terms": {
+    "duration_months": 1,
+    "start_date": "02.08.2021",
+    "end_date": "10.09.2021",
+    "monthly_payment_rub": 20000,
+    "deposit_rub": 0,
+    "payment_day_of_month": 12
+  }
+}

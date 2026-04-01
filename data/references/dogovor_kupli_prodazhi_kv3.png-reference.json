@@ -1,0 +1,40 @@
+{
+  "location": "г. Самара",
+  "date": "17.05.2021",
+  "seller": {
+    "surname": "Петров",
+    "name": "Петр",
+    "patronymic": "Петрович",
+    "date_of_birth": "17.04.1978",
+    "address": "г. Самара, ул. Куйбышева, д. 14, кв. 17",
+    "passport": {
+      "series": "4545",
+      "number": "123123",
+      "date_of_issue": "12.12.2003",
+      "issued_by": "Ленский РОВД"
+    }
+  },
+  "buyer": {
+    "surname": "Иванова",
+    "name": "Раиса",
+    "patronymic": "Федоровна",
+    "date_of_birth": "08.11.1960",
+    "address": "г. Новокуйбышевск, ул. Ломоносова, д. 2, кв. 2",
+    "passport": {
+      "series": "8989",
+      "number": "436436",
+      "date_of_issue": "16.04.2000",
+      "issued_by": "Алексеевский РОВД"
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "area_sq_m": 63,
+    "rooms_count": 2,
+    "address": "г. Самара, ул. Куйбышева, д. 14, кв. 17",
+    "cadastral_number": ""
+  },
+  "financial_conditions": {
+    "price_rub": 2500000
+  }
+}

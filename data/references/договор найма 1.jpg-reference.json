@@ -1,0 +1,41 @@
+{
+  "location": "г. Бирск",
+  "date": "24.09.2003",
+  "lessor": {
+    "surname": "Ахтямов",
+    "name": "Алексей",
+    "patronymic": "Анатольевич",
+    "date_of_birth": null,
+    "address": "г. Бирск, ул. Интернациональная, дом 25А, квартира 2",
+    "passport": {
+      "series": "80 07",
+      "number": "467903",
+      "issued_by": "отделом УФМС России по РБ в г. Бирске"
+    }
+  },
+  "tenant": {
+    "surname": "Фарлина",
+    "name": "Сайдагуловна",
+    "patronymic": null,
+    "date_of_birth": null,
+    "address": null,
+    "passport": {
+      "series": null,
+      "number": null,
+      "issued_by": null
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "rooms_count": 2,
+    "address": "г. Бирск, ул. Интернациональная, дом 25А, квартира 2"
+  },
+  "rental_terms": {
+    "duration_months": 12,
+    "start_date": "24.09.2003",
+    "end_date": "24.09.2004",
+    "monthly_payment_rub": 5000,
+    "deposit_rub": 0,
+    "payment_day_of_month": 30
+  }
+}

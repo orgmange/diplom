@@ -39,13 +39,6 @@ class StructuringService:
             "dogovor_arendi_kv": "renal.json",
             "inn": "inn.json",
             "kvitancia": "kvit.json",
-            "zagran_passport": "zagran.json",
-            "diplom_bakalavra": "diplom.json",
-            "dogovor_kupli_prodazhi_kv": "dogovor_kupli_kv.json",
-            "dogovor_prodagi_machini": "dogovor_kupli.json",
-            "dogovor_arendi_kv": "renal.json",
-            "inn": "inn.json",
-            "kvitancia": "kvit.json",
             "zagran_passport": "zagran.json"
         }
         filename = template_map.get(doc_type)
@@ -109,7 +102,7 @@ class StructuringService:
         # Определяем модель (по умолчанию qwen3:8b если передано llama3)
         actual_model = model_name
         if "llama3" in model_name.lower():
-            actual_model = "qwen3:8b"
+            actual_model = "qwen3.5:9b"
             
         max_retries = 3
         last_error = ""

@@ -1,0 +1,16 @@
+{
+  "fio": {
+    "surname": "Старокожко",
+    "name": "Леонид",
+    "patronymic": "Евгеньевич"
+  },
+  "gender": "Мужской",
+  "date_of_birth": "20.02.1946",
+  "place_of_birth": "Дагестан, Махачкала",
+  "registration_date": "03.11.1999",
+  "inn": "262600375746",
+  "tax_authority": {
+    "name": "ГНИ по г. Пятигорску",
+    "code": "2626"
+  }
+}

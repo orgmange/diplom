@@ -1,0 +1,20 @@
+{
+  "surname": "ОБРАЗЕЦ",
+  "surname_latin": "OBRAZETS",
+  "given_names": "ТЕСТЕР ЮРЬЕВИЧ",
+  "given_names_latin": "TESTER",
+  "nationality": "РОССИЙСКАЯ ФЕДЕРАЦИЯ / RUSSIAN FEDERATION",
+  "gender": "М / M",
+  "date_of_birth": "08.08.1956",
+  "place_of_birth": "КАМЧАТСКАЯ ОБЛАСТЬ / USSR",
+  "date_of_issue": "15.02.2010",
+  "date_of_expiry": "15.02.2020",
+  "authority": "МИД РОССИИ 07701",
+  "passport_number": "52 0036019",
+  "type": "P",
+  "issuing_state_code": "RUS",
+  "mrz": {
+    "line1": "P<RUSOBRAZETS<<TESTER<<<<<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "5200360198RUS5608087M2002156<<<<<<<<<<<<<<08"
+  }
+}

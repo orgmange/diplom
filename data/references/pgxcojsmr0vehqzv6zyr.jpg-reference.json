@@ -1,0 +1,20 @@
+{
+  "surname": "РОДИОНЦЕВ",
+  "surname_latin": "RODIONTSEV",
+  "given_names": "ФЕДОР ИГОРЕВИЧ",
+  "given_names_latin": "FEDOR",
+  "nationality": "РОССИЙСКАЯ ФЕДЕРАЦИЯ / RUSSIAN FEDERATION",
+  "gender": "М / М",
+  "date_of_birth": "12.12.1981",
+  "place_of_birth": "Г. МОСКВА / USSR",
+  "date_of_issue": "06.08.2009",
+  "date_of_expiry": "06.08.2014",
+  "authority": "ФМС 77313",
+  "passport_number": "70 3855336",
+  "type": "P",
+  "issuing_state_code": "RUS",
+  "mrz": {
+    "line1": "P<RUSRODIONTSEV<<FEDOR<<<<<<< <<<<<<<<<<",
+    "line2": "7038553364RUS81 12129M1408061<<<<<<<<<<08"
+  }
+}

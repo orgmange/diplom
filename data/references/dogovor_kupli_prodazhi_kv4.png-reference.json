@@ -1,0 +1,40 @@
+{
+  "location": "г. Асино",
+  "date": "23.08.2021",
+  "seller": {
+    "surname": "Пахомов",
+    "name": "Леонид",
+    "patronymic": "Николаевич",
+    "date_of_birth": "13.08.1991",
+    "address": "г. Асино, улица Лесная, д. 4, кв. 3",
+    "passport": {
+      "series": "34-56",
+      "number": "12345678",
+      "date_of_issue": "18.09.2017",
+      "issued_by": "Асиновским РОВД"
+    }
+  },
+  "buyer": {
+    "surname": "Кузнецова",
+    "name": "Анна",
+    "patronymic": "Федоровна",
+    "date_of_birth": "11.04.1987",
+    "address": "пос. Копыловка, ул. Чулымская, д. 2",
+    "passport": {
+      "series": "56-78",
+      "number": "12345678",
+      "date_of_issue": "03.03.2018",
+      "issued_by": "Асиновским РОВД"
+    }
+  },
+  "property": {
+    "type": "Квартира",
+    "area_sq_m": 64,
+    "rooms_count": 3,
+    "address": "г. Асино, улица Алтайская, дом 14, квартира № 3",
+    "cadastral_number": "123456789"
+  },
+  "financial_conditions": {
+    "price_rub": 0
+  }
+}

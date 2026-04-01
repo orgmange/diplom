@@ -1,0 +1,49 @@
+{
+  "billing_period": "Июнь 2019",
+  "payer": {
+    "name": "ТСЖ Янтарный берег-2",
+    "address": "ул Варшавская, д.23, корп.2, кв.4",
+    "area_sq_m": 132.3,
+    "residents_count": 1
+  },
+  "service_provider": {
+    "name": "ТСЖ Янтарный берег-2",
+    "address": "ул Варшавская, д.23, корп.2, кв.1",
+    "phone": ""
+  },
+  "payment_details": {
+    "personal_account": "7894853621268",
+    "total_to_pay": 6080.79,
+    "total_with_arrears": 6080.79,
+    "recipient": {
+      "name": "ТСЖ Янтарный берег-2",
+      "bank_account": "40703810255160000026",
+      "bank_name": "СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК",
+      "correspondent_account": "30101810500000000653",
+      "bik": "044030653"
+    }
+  },
+  "services": [
+    {"name": "Сод.общ.имущества дома", "unit": "м2", "volume": 132.3, "rate": 5.53, "amount": 731.62},
+    {"name": "Уборка лестниц", "unit": "м2", "volume": 132.3, "rate": 2.11, "amount": 279.15},
+    {"name": "Вывоз мусора", "unit": "м2", "volume": 132.3, "rate": 5.02, "amount": 664.15},
+    {"name": "Текущий ремонт дома", "unit": "м2", "volume": 132.3, "rate": 6.31, "amount": 834.81},
+    {"name": "Сан.сод.территории", "unit": "м2", "volume": 132.3, "rate": 1.91, "amount": 252.69},
+    {"name": "ПЗУ", "unit": "м2", "volume": 132.3, "rate": 0.34, "amount": 44.98},
+    {"name": "АППЗ", "unit": "м2", "volume": 132.3, "rate": 0.44, "amount": 58.21},
+    {"name": "Экспл.приборов учета", "unit": "м2", "volume": 132.3, "rate": 0.67, "amount": 88.64},
+    {"name": "Лифт", "unit": "м2", "volume": 132.3, "rate": 1.67, "amount": 220.94},
+    {"name": "АХР (адм.хоз.расх.)", "unit": "м2", "volume": 132.3, "rate": 2.60, "amount": 343.98},
+    {"name": "Деж.администратор", "unit": "м2", "volume": 132.3, "rate": 2.00, "amount": 264.60},
+    {"name": "Электр.МОП День", "unit": "кВт.ч", "volume": 39.439, "rate": 3.67, "amount": 144.74},
+    {"name": "Электр.МОП Ночь", "unit": "кВт.ч", "volume": 15.01, "rate": 2.13, "amount": 31.97},
+    {"name": "Электр.МОП однотарифная", "unit": "кВт.ч", "volume": 3.396, "rate": 3.46, "amount": 11.75},
+    {"name": "Холодная вода", "unit": "м3", "volume": 7.35, "rate": 30.60, "amount": 224.91},
+    {"name": "В/отвед.ХВС", "unit": "м3", "volume": 7.35, "rate": 30.60, "amount": 224.91},
+    {"name": "Горячая вода", "unit": "м3", "volume": 5.22, "rate": 106.53, "amount": 556.09},
+    {"name": "В/отвед.ГВС", "unit": "м3", "volume": 5.22, "rate": 30.60, "amount": 159.73},
+    {"name": "Отопление", "unit": "Гкал", "volume": 0.003246, "rate": 1775.45, "amount": 762.42},
+    {"name": "Антенна", "unit": "шт", "volume": 1, "rate": 90.00, "amount": 90.00},
+    {"name": "Радиоточка", "unit": "шт", "volume": 1, "rate": 90.50, "amount": 90.50}
+  ]
+}

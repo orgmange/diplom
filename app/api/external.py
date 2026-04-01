@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, Query, Response, File, UploadFile
+from fastapi import APIRouter, HTTPException, Query, Response, File, UploadFile
 from pydantic import BaseModel
 import dicttoxml
 import base64

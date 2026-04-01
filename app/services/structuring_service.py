@@ -1,4 +1,5 @@
 import json
+import asyncio
 import logging
 import ollama
 from typing import List, Dict, Any, Optional
@@ -106,7 +107,7 @@ class StructuringService:
             
         max_retries = 3
         last_error = ""
-        import asyncio
+
 
         for attempt in range(max_retries):
             try:

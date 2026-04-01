@@ -27,15 +27,7 @@ class SearchQuery(BaseModel):
     timeout: int = 60
     structured_output: bool = True
 
-class StructureRequest(BaseModel):
-    filename: str  # Имя файла из data/ocr
-    model_name: str = "llama3:latest"
-    use_raw_for_search: bool = True
-    reindex: bool = False
-    temperature: float = 0.0
-    num_ctx: int = 16384
-    timeout: int = 60
-    structured_output: bool = True
+
 
 class StatusResponse(BaseModel):
     ocr_files: int
@@ -287,48 +279,7 @@ def search_documents(query: SearchQuery):
     )
     return results
 
-@router.post("/rag/structure", response_model=Dict[str, Any])
-async def structure_document(request: StructureRequest):
-    """Выполняет структурирование данных для выбранного файла."""
-    # 1. Загружаем данные файла
-    from app.core.config import settings
-    
-    xml_filename = request.filename.replace("-clean", "-xml")
-    clean_filename = request.filename if "-clean" in request.filename else f"{request.filename}-clean"
-    
-    xml_path = settings.OCR_DIR / xml_filename
-    clean_path = settings.OCR_DIR / clean_filename
-    
-    if not clean_path.exists():
-        raise HTTPException(status_code=404, detail=f"Cleaned file {clean_filename} not found.")
 
-    with open(clean_path, "r", encoding="utf-8") as f:
-        cleaned_text = f.read().strip()
-        
-    raw_text = cleaned_text
-    if xml_path.exists():
-        with open(xml_path, "r", encoding="utf-8") as f:
-            raw_text = f.read().strip()
-            
-    # 2. Переиндексация при необходимости
-    if request.reindex:
-        vector_service.reindex_all(embedding_model=request.model_name)
-            
-    # 3. Выполняем структурирование асинхронно
-    # Благодаря AsyncClient в сервисе, если клиент закроет соединение,
-    # запрос к Ollama будет прерван автоматически библиотекой httpx/ollama
-    result = await structuring_service.structure(
-        raw_text=raw_text if request.use_raw_for_search else cleaned_text,
-        cleaned_text=cleaned_text,
-        model_name=request.model_name,
-        embedding_model=request.model_name,
-        temperature=request.temperature,
-        num_ctx=request.num_ctx,
-        timeout=request.timeout,
-        structured_output=request.structured_output
-    )
-    
-    return result
 
 @router.get("/status", response_model=StatusResponse)
 def get_status():
@@ -347,9 +298,7 @@ def get_status():
                 ocr_count += len([path for path in xml_dir.iterdir() if path.is_file()])
             if clean_dir.exists():
                 clean_count += len([path for path in clean_dir.iterdir() if path.is_file()])
-    elif settings.OCR_DIR.exists():
-        ocr_count = len(list(settings.OCR_DIR.glob("*-xml")))
-        clean_count = len(list(settings.OCR_DIR.glob("*-clean")))
+
 
     try:
         count_res = vector_service.client.count(collection_name=settings.COLLECTION_NAME, exact=True)

@@ -115,36 +115,4 @@ class OCRService:
                     print(f"Error processing {img.name}: {e}")
         return processed_files
 
-    def process_directory(self) -> List[str]:
-        """
-        Сканирует директорию на наличие новых изображений и обрабатывает их.
-        Возвращает список обработанных файлов.
-        """
-        processed_files = []
-        if not settings.OCR_DIR.exists():
-            return processed_files
 
-        images = [
-            f for f in settings.OCR_DIR.iterdir()
-            if f.suffix.lower() in self.image_extensions and f.is_file()
-        ]
-
-        for img in images:
-            xml_path = img.parent / f"{img.name}-xml"
-            if xml_path.exists():
-                continue
-
-            try:
-                task_id = self.create_task(img)
-                status = self.wait_for_task(task_id)
-                
-                if status == "success":
-                    result = self.fetch_result(task_id)
-                    if result:
-                        with open(xml_path, "wb") as f:
-                            f.write(result)
-                        processed_files.append(img.name)
-            except Exception as e:
-                print(f"Error processing {img.name}: {e}")
-
-        return processed_files

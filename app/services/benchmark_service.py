@@ -5,8 +5,6 @@ from typing import Any, Dict, List, Optional
 from qdrant_client.http import models
 
 from app.core.config import settings
-from app.services.cleaner_service import CleanerService
-from app.services.ocr_service import OCRService
 from app.services.vector_service import VectorService
 
 
@@ -49,16 +47,8 @@ class BenchmarkTotals:
 class BenchmarkService:
     """Сервис для полного теста retrieval по разным embedding-моделям."""
 
-    def __init__(
-        self,
-        vector_service: VectorService,
-        ocr_service: Optional[OCRService] = None,
-        cleaner_service: Optional[CleanerService] = None,
-    ):
+    def __init__(self, vector_service: VectorService):
         self.vector_service = vector_service
-        self.ocr_service = ocr_service or OCRService()
-        self.cleaner_service = cleaner_service or CleanerService()
-        self.image_extensions = {".jpg", ".jpeg", ".png", ".bmp", ".tiff"}
         self._stop_requested = False
 
     def stop(self):
@@ -70,67 +60,7 @@ class BenchmarkService:
             return []
         return sorted(path for path in docs_dir.iterdir() if path.is_dir())
 
-    def _prepare_test_corpus(self, docs_dir: Path) -> Dict[str, int]:
-        prepared = 0
-        prepared_clean = 0
-        docs_dir.mkdir(parents=True, exist_ok=True)
-        for doc_dir in self._iter_doc_dirs(docs_dir):
-            image_dir = doc_dir / "image"
-            xml_dir = doc_dir / "xml"
-            clean_dir = doc_dir / "clean"
-            xml_dir.mkdir(parents=True, exist_ok=True)
-            clean_dir.mkdir(parents=True, exist_ok=True)
-            if not image_dir.exists():
-                continue
-            images = sorted(
-                path for path in image_dir.iterdir()
-                if path.is_file() and path.suffix.lower() in self.image_extensions
-            )
-            for image_path in images:
-                if self._stop_requested:
-                    break
-                xml_path = xml_dir / f"{image_path.name}-xml"
-                clean_path = clean_dir / f"{image_path.name}-clean"
-                if not xml_path.exists():
-                    try:
-                        task_id = self.ocr_service.create_task(image_path)
-                        status = self.ocr_service.wait_for_task(task_id)
-                        if status == "success":
-                            content = self.ocr_service.fetch_result(task_id)
-                            if content:
-                                xml_path.write_bytes(content)
-                                prepared += 1
-                    except Exception:
-                        continue
-                if xml_path.exists() and not clean_path.exists():
-                    try:
-                        xml_bytes = xml_path.read_bytes()
-                        clean_text = self.cleaner_service.parse_xml_bytes(xml_bytes)
-                        if clean_text:
-                            clean_path.write_text(clean_text, encoding="utf-8")
-                            prepared_clean += 1
-                    except Exception:
-                        continue
-        return {"prepared_xml": prepared, "prepared_clean": prepared_clean}
 
-    def _detect_doc_type(self, filename: str) -> Optional[str]:
-        lowered = filename.lower()
-        rules = (
-            ("passport", "passport"),
-            ("паспорт", "passport"),
-            ("prava", "driver_license"),
-            ("права", "driver_license"),
-            ("driver", "driver_license"),
-            ("snils", "snils"),
-            ("снилс", "snils"),
-            ("svid", "birth_certificate"),
-            ("свид", "birth_certificate"),
-            ("birth", "birth_certificate"),
-        )
-        for token, doc_type in rules:
-            if token in lowered:
-                return doc_type
-        return None
 
     def _evaluate_from_docs(
         self,

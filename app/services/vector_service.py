@@ -9,6 +9,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http import models
 
 from app.core.config import settings
+from app.services.utils import detect_doc_type
 
 logger = logging.getLogger("diplom")
 
@@ -25,12 +26,10 @@ class VectorService:
         self._embedding_sizes: Dict[str, int] = {}
 
     def _save_state(self, model_name: str):
-        import json
         with open(self._state_path, "w", encoding="utf-8") as f:
             json.dump({"current_model": model_name}, f)
 
     def _load_state(self) -> str:
-        import json
         if self._state_path.exists():
             try:
                 with open(self._state_path, "r", encoding="utf-8") as f:
@@ -127,31 +126,7 @@ class VectorService:
         )
         return response["embedding"]
 
-    def _detect_doc_type(self, filename: str) -> Optional[str]:
-        lowered = filename.lower()
-        rules = (
-            ("passport", "passport"),
-            ("паспорт", "passport"),
-            ("prava", "driver_license"),
-            ("права", "driver_license"),
-            ("driver", "driver_license"),
-            ("snils", "snils"),
-            ("снилс", "snils"),
-            ("svid", "birth_certificate"),
-            ("свид", "birth_certificate"),
-            ("birth", "birth_certificate"),
-            ("diplom", "diplom_bakalavra"),
-            ("dogovor_kupli_kv", "dogovor_kupli_prodazhi_kv"),
-            ("dogovor_kupli", "dogovor_prodagi_machini"),
-            ("renal", "dogovor_arendi_kv"),
-            ("inn", "inn"),
-            ("kvit", "kvitancia"),
-            ("zagran", "zagran_passport"),
-        )
-        for token, doc_type in rules:
-            if token in lowered:
-                return doc_type
-        return None
+
 
     def _iter_doc_dirs(self) -> List[Path]:
         if not settings.DOCS_DIR.exists():
@@ -186,7 +161,7 @@ class VectorService:
             vector = self.vectorize_text(raw_text, embedding_model=embedding_model)
             
             # Определяем тип из имени файла или метаданных
-            doc_type = self._detect_doc_type(input_path.name)
+            doc_type = detect_doc_type(input_path.name)
             
             points.append(
                 models.PointStruct(

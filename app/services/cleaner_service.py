@@ -119,35 +119,4 @@ class CleanerService:
                     print(f"Error cleaning {xml_path.name}: {e}")
         return processed
 
-    def process_directory(self) -> List[Dict[str, str]]:
-        """
-        Сканирует директорию на наличие *-xml файлов и создает *-clean версии.
-        Возвращает список объектов с информацией об обработанных файлах.
-        """
-        processed = []
-        if not settings.OCR_DIR.exists():
-            return processed
 
-        xml_files = list(settings.OCR_DIR.glob("*-xml"))
-        for xml_path in xml_files:
-            clean_filename = xml_path.name.replace("-xml", "-clean")
-            clean_path = xml_path.parent / clean_filename
-
-            if clean_path.exists():
-                continue
-
-            try:
-                with open(xml_path, "rb") as f:
-                    content = self.parse_xml_bytes(f.read())
-                
-                if content:
-                    with open(clean_path, "w", encoding="utf-8") as f:
-                        f.write(content)
-                    processed.append({
-                        "filename": clean_filename,
-                        "snippet": content[:100] + "..." if len(content) > 100 else content
-                    })
-            except Exception as e:
-                print(f"Error cleaning {xml_path.name}: {e}")
-                
-        return processed

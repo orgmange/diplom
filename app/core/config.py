@@ -17,7 +17,7 @@ class Settings:
     # Paths
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     DATA_DIR: Path = BASE_DIR / "data"
-    OCR_DIR: Path = DATA_DIR / "ocr"
+
     DOCS_DIR: Path = DATA_DIR / "docs"
     BENCHMARK_REF_DIR: Path = DATA_DIR / "references"
     
@@ -30,5 +30,6 @@ class Settings:
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     OLLAMA_EMBED_BASE_URL: str = os.getenv("OLLAMA_EMBED_BASE_URL", "http://localhost:11435")
     EMBEDDING_MODEL: str = "nomic-embed-text:latest"
+    DEFAULT_MODEL: str = "qwen3.5:9b"
 
 settings = Settings()

@@ -121,7 +121,7 @@ class RecognitionService:
             # 3. Structuring
             logger.info(f"Task {task_id}: Standardizing via LLM")
             # Defaults. We can accept these as params later if needed.
-            model_name = "llama3:latest" 
+            model_name = settings.DEFAULT_MODEL
             
             result = await self.structuring_service.structure(
                 raw_text=xml_text,

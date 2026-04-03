@@ -26,14 +26,25 @@ root_logger.addHandler(console_handler)
 logger = logging.getLogger("diplom")
 logger.setLevel(getattr(logging, log_level, logging.DEBUG))
 
+from contextlib import asynccontextmanager
+from app.db.database import engine, Base
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create tables
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    lifespan=lifespan
 )
 
 # Include API router
-app.include_router(api_router, prefix=settings.API_V1_STR)
-app.include_router(external_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix=settings.API_V1_STR, tags=["Internal API"])
+app.include_router(external_router, prefix=settings.API_V1_STR, tags=["External API"])
 
 # Mount static files (Frontend)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")

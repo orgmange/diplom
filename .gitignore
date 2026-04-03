@@ -2,3 +2,8 @@ __pycache__/
 data/images/
 .gemini/
 data/rag/
+.venv/
+*.pyc
+*.log
+.env
+.pytest_cache/

@@ -32,4 +32,15 @@ class Settings:
     EMBEDDING_MODEL: str = "nomic-embed-text:latest"
     DEFAULT_MODEL: str = "qwen3.5:9b"
 
+    # Database Settings
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "diplom_user")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "diplom_password")
+    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "diplom_db")
+    POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "localhost")
+    POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
+    
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+
 settings = Settings()

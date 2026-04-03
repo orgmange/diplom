@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query, Response, File, UploadFile
 from pydantic import BaseModel
 import dicttoxml
 import base64
+import json
 from typing import Dict, Any, Optional
 
 from app.services.ocr_service import OCRService
@@ -24,128 +25,60 @@ class RecognitionRequest(BaseModel):
     image_base64: str
 
 class TaskStartedResponse(BaseModel):
-    task_id: str
+    job_id: str
     status: str = "pending"
 
-
-@router.post("/templates", response_model=TaskStartedResponse)
-def start_template_recognition(request: RecognitionRequest):
-    """
-    Отправляет изображение на OCR для получения XML разметки (используется для создания шаблона).
-    Возвращает task_id для отслеживания статуса.
-    """
-    if not request.image_base64:
-         raise HTTPException(status_code=400, detail="image_base64 field is required")
-         
-    task_id = recognition_service.start_template_task(request.image_base64)
-    return {"task_id": task_id}
+class TaskResultResponse(BaseModel):
+    status: str
+    value: Optional[Any] = None
+    error: Optional[str] = None
 
 
-@router.post("/templates/upload", response_model=TaskStartedResponse, summary="Только для тестирования в Swagger")
-async def start_template_recognition_upload(file: UploadFile = File(..., description="Изображение для создания шаблона")):
-    """
-    Удобный метод ТОЛЬКО ДЛЯ ТЕСТИРОВАНИЯ В SWAGGER.
-    Принимает файл, конвертирует в base64 и вызывает основной метод.
-    """
-    content = await file.read()
-    if not content:
-         raise HTTPException(status_code=400, detail="Empty file provided")
-         
-    image_base64 = base64.b64encode(content).decode('utf-8')
-    task_id = recognition_service.start_template_task(image_base64)
-    return {"task_id": task_id}
+class LearnResponse(BaseModel):
+    status: str
+    example_id: str
 
 
-@router.get("/templates/{task_id}/status")
-def get_template_task_status(task_id: str):
-    """
-    Возвращает текущий статус задачи распознавания шаблона.
-    """
-    status = recognition_service.get_task_status(task_id)
-    if not status:
-        raise HTTPException(status_code=404, detail="Task not found")
-    return status
-
-
-@router.get("/templates/{task_id}/result")
-def get_template_task_result(task_id: str):
-    """
-    Возвращает результат распознавания шаблона (XML).
-    Доступно только когда статус = completed.
-    """
-    result = recognition_service.get_task_result(task_id)
-    if not result:
-        raise HTTPException(status_code=404, detail="Task not found")
-        
-    if result["status"] != "completed":
-        raise HTTPException(
-            status_code=400, 
-            detail=f"Task is not completed. Current status: {result['status']}"
-        )
-        
-    return result
+class LearnRequest(BaseModel):
+    xml: str
+    structured_data: Dict[str, Any]
+    doc_type: Optional[str] = None
 
 
 @router.post("/recognize", response_model=TaskStartedResponse)
-def start_document_recognition(request: RecognitionRequest):
+async def start_document_recognition(request: RecognitionRequest):
     """
     Отправляет изображение на полный цикл распознавания: OCR -> Cleaner -> RAG -> LLM.
-    Возвращает task_id для отслеживания статуса.
+    Возвращает job_id для отслеживания статуса.
     """
     if not request.image_base64:
          raise HTTPException(status_code=400, detail="image_base64 field is required")
          
-    task_id = recognition_service.start_recognition_task(request.image_base64)
-    return {"task_id": task_id}
-
-
-@router.post("/recognize/upload", response_model=TaskStartedResponse, summary="Только для тестирования в Swagger")
-async def start_document_recognition_upload(file: UploadFile = File(..., description="Изображение для распознавания")):
-    """
-    Удобный метод ТОЛЬКО ДЛЯ ТЕСТИРОВАНИЯ В SWAGGER.
-    Принимает файл, конвертирует в base64 и вызывает основной метод.
-    """
-    content = await file.read()
-    if not content:
-         raise HTTPException(status_code=400, detail="Empty file provided")
-         
-    image_base64 = base64.b64encode(content).decode('utf-8')
-    task_id = recognition_service.start_recognition_task(image_base64)
-    return {"task_id": task_id}
-
-
-@router.get("/recognize/{task_id}/status")
-def get_document_recognition_status(task_id: str):
-    """
-    Возвращает текущий статус полного цикла распознавания.
-    """
-    status = recognition_service.get_task_status(task_id)
-    if not status:
-        raise HTTPException(status_code=404, detail="Task not found")
-    return status
-
-
-@router.post("/generate-ocr")
-async def generate_ocr(file: UploadFile = File(..., description="Изображение документа для запуска OCR-пайплайна")):
-    """
-    Загрузка изображения документа для запуска OCR-пайплайна.
-    Возвращает job_id, по которому потом можно поллить /result/{job_id}.
-    """
-    content = await file.read()
-    if not content:
-         raise HTTPException(status_code=400, detail="Empty file provided")
-         
-    image_base64 = base64.b64encode(content).decode('utf-8')
-    task_id = recognition_service.start_template_task(image_base64)
+    task_id = await recognition_service.start_recognition_task(request.image_base64)
     return {"job_id": task_id}
 
 
-@router.get("/result/{job_id}")
-def get_job_result(job_id: str):
+@router.post("/generate-ocr", response_model=TaskStartedResponse)
+async def generate_ocr(file: UploadFile = File(..., description="Изображение документа для запуска OCR-пайплайна")):
+    """
+    Загрузка изображения документа для запуска OCR-пайплайна.
+    """
+    content = await file.read()
+    if not content:
+         raise HTTPException(status_code=400, detail="Empty file provided")
+         
+    image_base64 = base64.b64encode(content).decode('utf-8')
+    task_id = await recognition_service.start_template_task(image_base64)
+    return {"job_id": task_id}
+
+
+@router.get("/result/{job_id}", response_model=TaskResultResponse)
+async def get_job_result(job_id: str):
     """
     Получение результата асинхронной задачи по её идентификатору.
+    Поддерживает как OCR (/generate-ocr), так и структурирование (/recognize).
     """
-    result_data = recognition_service.get_task_result(job_id)
+    result_data = await recognition_service.get_task_result(job_id)
     if not result_data:
         raise HTTPException(status_code=404, detail="Job not found")
     
@@ -163,12 +96,7 @@ def get_job_result(job_id: str):
     error = result_data.get("error")
     
     if status == "done":
-        raw_value = result_data.get("result")
-        if isinstance(raw_value, dict):
-            import json
-            value = json.dumps(raw_value, ensure_ascii=False)
-        else:
-            value = str(raw_value) if raw_value is not None else ""
+        value = result_data.get("result")
             
     return {
         "status": status,
@@ -177,31 +105,26 @@ def get_job_result(job_id: str):
     }
 
 
-@router.get("/recognize/{task_id}/result")
-def get_document_recognition_result(
-    task_id: str,
-    format: str = Query("json", description="Формат ответа: json или xml")
-):
+@router.post("/learn", response_model=LearnResponse)
+async def learn_example(request: LearnRequest):
     """
-    Возвращает итоговый структурированный результат распознавания документа.
-    Доступно только когда статус = completed. Можно запросить в формате xml.
+    Добавляет новый пример (XML + структурированные данные) в базу знаний.
     """
-    result = recognition_service.get_task_result(task_id)
-    if not result:
-        raise HTTPException(status_code=404, detail="Task not found")
+    try:
+        # Извлекаем текст из XML
+        cleaned_text = cleaner_service.parse_xml_bytes(request.xml.encode("utf-8"))
+        if not cleaned_text:
+            raise HTTPException(status_code=400, detail="Failed to extract text from XML")
+            
+        json_output = json.dumps(request.structured_data, ensure_ascii=False)
         
-    if result["status"] != "completed":
-        raise HTTPException(
-            status_code=400, 
-            detail=f"Task is not completed. Current status: {result['status']}"
+        # Добавляем в векторную базу
+        example_id = await vector_service.add_example(
+            cleaned_text, 
+            json_output, 
+            doc_type=request.doc_type
         )
         
-    data = result["result"]
-    if format.lower() == "xml":
-        try:
-            xml_bytes = dicttoxml.dicttoxml(data, custom_root='document', attr_type=False)
-            return Response(content=xml_bytes, media_type="application/xml")
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"XML conversion failed: {str(e)}")
-            
-    return result
+        return {"status": "success", "example_id": example_id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -7,8 +7,11 @@ from typing import Any, Dict, List, Optional
 import ollama
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
+from sqlalchemy import select
 
 from app.core.config import settings
+from app.db.database import async_session_local
+from app.db.models import Example
 from app.services.utils import detect_doc_type
 
 logger = logging.getLogger("diplom")
@@ -182,21 +185,51 @@ class VectorService:
         self._upsert_points(points, collection_name=collection_name)
         return indexed
 
-    def reindex_all(self, embedding_model: Optional[str] = None) -> Dict[str, Any]:
+    async def reindex_all(self, embedding_model: Optional[str] = None) -> Dict[str, Any]:
         """Полностью очищает и переиндексирует базу, используя только примеры."""
         model_name = embedding_model or self._load_state()
         vector_size = self.get_embedding_size(embedding_model=model_name)
         self.reset_collection(vector_size=vector_size)
         
-        # Индексируем только примеры
+        # 1. Индексируем примеры из файлов (data/examples)
         indexed_examples = self.index_examples(embedding_model=model_name)
+        
+        # 2. Индексируем примеры из базы данных
+        indexed_db_examples = 0
+        async with async_session_local() as session:
+            stmt = select(Example)
+            result = await session.execute(stmt)
+            db_examples = result.scalars().all()
+            
+            points = []
+            for ex in db_examples:
+                vector = self.vectorize_text(ex.text, embedding_model=model_name)
+                points.append(
+                    models.PointStruct(
+                        id=self.generate_id(f"example_{ex.id}"),
+                        vector=vector,
+                        payload={
+                            "filename": f"db_{ex.id}",
+                            "text": ex.text,
+                            "json_output": ex.json_output,
+                            "doc_type": ex.doc_type,
+                            "is_example": True,
+                            "is_cleaned": True,
+                        },
+                    )
+                )
+                indexed_db_examples += 1
+            
+            if points:
+                self._upsert_points(points)
         
         self._save_state(model_name)
         
         return {
             "embedding_model": model_name,
-            "indexed_examples": len(indexed_examples),
-            "total": len(indexed_examples)
+            "indexed_files": len(indexed_examples),
+            "indexed_db": indexed_db_examples,
+            "total": len(indexed_examples) + indexed_db_examples
         }
 
     def search(
@@ -238,3 +271,47 @@ class VectorService:
             }
             for res in results
         ]
+
+    async def add_example(self, raw_text: str, json_output: str, doc_type: Optional[str] = None) -> str:
+        """Добавляет новый пример в базу данных и индексирует его в Qdrant."""
+        example_id = str(uuid.uuid4())
+        
+        # 1. Детектируем doc_type
+        if not doc_type:
+            try:
+                data = json.loads(json_output)
+                if isinstance(data, dict):
+                    doc_type = data.get("doc_type")
+            except:
+                pass
+            if not doc_type:
+                doc_type = detect_doc_type(example_id)
+
+        # 2. Сохраняем в PostgreSQL
+        async with async_session_local() as session:
+            new_example = Example(
+                id=example_id,
+                text=raw_text,
+                json_output=json_output,
+                doc_type=doc_type
+            )
+            session.add(new_example)
+            await session.commit()
+            
+        # 3. Индексируем в Qdrant
+        vector = self.vectorize_text(raw_text)
+        point = models.PointStruct(
+            id=self.generate_id(f"example_{example_id}"),
+            vector=vector,
+            payload={
+                "filename": f"db_{example_id}",
+                "text": raw_text,
+                "json_output": json_output,
+                "doc_type": doc_type,
+                "is_example": True,
+                "is_cleaned": True,
+            },
+        )
+        
+        self._upsert_points([point])
+        return example_id

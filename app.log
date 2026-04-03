@@ -16139,3 +16139,160 @@ We are given an OCR text and need to extract data according to the provided JSON
 2026-04-03 14:19:16,069 - diplom - INFO -   Prompt: 3106 chars. Success in 11.07s.
 2026-04-03 14:19:16,078 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_gemma4_e2b_20260403_141916.json
 2026-04-03 16:29:00,591 - diplom - INFO - Task d6bff08a-7c0c-4a51-831b-af7373b1c9a6: Starting OCR
+2026-04-03 22:09:21,767 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:09:21,767 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:21,769 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:09:21,769 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:21,771 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:09:21,771 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:21,772 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:09:21,774 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:09:21,774 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:09:21,777 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:09:21,777 - sqlalchemy.engine.Engine - INFO - [cached since 0.003164s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:09:21,778 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE tasks (
+	id VARCHAR NOT NULL, 
+	status VARCHAR NOT NULL, 
+	result JSON, 
+	error TEXT, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id)
+)
+
+
+2026-04-03 22:09:21,778 - sqlalchemy.engine.Engine - INFO - [no key 0.00014s] ()
+2026-04-03 22:09:21,782 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_tasks_id ON tasks (id)
+2026-04-03 22:09:21,782 - sqlalchemy.engine.Engine - INFO - [no key 0.00014s] ()
+2026-04-03 22:09:21,783 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE examples (
+	id VARCHAR NOT NULL, 
+	text TEXT NOT NULL, 
+	json_output TEXT NOT NULL, 
+	doc_type VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	PRIMARY KEY (id)
+)
+
+
+2026-04-03 22:09:21,783 - sqlalchemy.engine.Engine - INFO - [no key 0.00016s] ()
+2026-04-03 22:09:21,784 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_examples_id ON examples (id)
+2026-04-03 22:09:21,784 - sqlalchemy.engine.Engine - INFO - [no key 0.00012s] ()
+2026-04-03 22:09:21,785 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:09:43,106 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:09:43,106 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:43,108 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:09:43,108 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:43,109 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:09:43,109 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:09:43,110 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:09:43,112 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:09:43,112 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:09:43,115 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:09:43,115 - sqlalchemy.engine.Engine - INFO - [cached since 0.002538s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:09:43,115 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:10:56,643 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:10:56,643 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:10:56,644 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:10:56,644 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:10:56,646 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:10:56,646 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:10:56,647 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:10:56,649 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:10:56,649 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:10:56,651 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:10:56,651 - sqlalchemy.engine.Engine - INFO - [cached since 0.002603s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:10:56,652 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:12:29,625 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:12:29,625 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:12:29,627 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:12:29,627 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:12:29,628 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:12:29,628 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:12:29,629 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:12:29,631 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:12:29,632 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:12:29,634 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:12:29,634 - sqlalchemy.engine.Engine - INFO - [cached since 0.002312s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:12:29,634 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:14:39,284 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:14:39,284 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:14:39,286 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:14:39,286 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:14:39,287 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:14:39,287 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:14:39,288 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:14:39,290 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:14:39,290 - sqlalchemy.engine.Engine - INFO - [generated in 0.00013s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:14:39,292 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:14:39,293 - sqlalchemy.engine.Engine - INFO - [cached since 0.002387s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:14:39,293 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:15:37,556 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:15:37,556 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:37,557 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:15:37,558 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:37,559 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:15:37,559 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:37,560 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:15:37,562 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:15:37,562 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:15:37,565 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:15:37,565 - sqlalchemy.engine.Engine - INFO - [cached since 0.002509s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:15:37,565 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:15:41,304 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:15:41,304 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:41,305 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:15:41,305 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:41,306 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:15:41,307 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:15:41,308 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:15:41,310 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:15:41,310 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:15:41,312 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:15:41,312 - sqlalchemy.engine.Engine - INFO - [cached since 0.002489s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:15:41,313 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-03 22:17:09,291 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-03 22:17:09,291 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:17:09,293 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-03 22:17:09,293 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:17:09,294 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-03 22:17:09,294 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-03 22:17:09,295 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-03 22:17:09,297 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:17:09,297 - sqlalchemy.engine.Engine - INFO - [generated in 0.00014s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:17:09,299 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-03 22:17:09,299 - sqlalchemy.engine.Engine - INFO - [cached since 0.00196s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-03 22:17:09,299 - sqlalchemy.engine.Engine - INFO - COMMIT

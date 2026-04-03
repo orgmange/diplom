@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   qdrant:
     image: qdrant/qdrant:v1.16.3
@@ -9,3 +7,18 @@ services:
     volumes:
       - ./data/rag:/qdrant/storage
     restart: "no"
+
+  postgres:
+    image: postgres:18
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: diplom_db
+      POSTGRES_USER: diplom_user
+      POSTGRES_PASSWORD: diplom_password
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    restart: always
+
+volumes:
+  postgres_data:

@@ -15116,3 +15116,1026 @@ We are given an OCR text and need to extract data according to the provided JSON
 2026-04-01 19:33:31,450 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
 2026-04-01 19:33:31,469 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
 2026-04-01 19:33:34,278 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:34:01,637 - diplom - INFO -   Prompt: 10421 chars. Success in 49.51s.
+2026-04-01 19:34:01,638 - diplom - INFO - [20/53] Processing 47a665a1d240f4dfdf602b454ae6749b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:34:01,641 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:34:15,587 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:34:15,615 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:34:18,769 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:34:58,591 - diplom - INFO -   Prompt: 7284 chars. Success in 56.95s.
+2026-04-01 19:34:58,592 - diplom - INFO - [21/53] Processing dogovor(4).jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:34:58,595 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:35:13,411 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:35:13,433 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:35:16,294 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:35:55,907 - diplom - INFO -   Prompt: 7482 chars. Success in 57.31s.
+2026-04-01 19:35:55,908 - diplom - INFO - [22/53] Processing orig.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:35:55,917 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:36:09,914 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:36:09,920 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:36:12,529 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:36:47,607 - diplom - INFO -   Prompt: 7295 chars. Success in 51.70s.
+2026-04-01 19:36:47,608 - diplom - INFO - [23/53] Processing 1385315836_1578903606.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:36:47,610 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:36:51,431 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:36:51,437 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:36:52,460 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:37:02,291 - diplom - INFO -   Prompt: 1580 chars. Success in 14.68s.
+2026-04-01 19:37:02,292 - diplom - INFO - [24/53] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:37:02,295 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:37:05,117 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:37:05,122 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:37:05,673 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:37:15,008 - diplom - INFO -   Prompt: 1537 chars. Success in 12.72s.
+2026-04-01 19:37:15,009 - diplom - INFO - [25/53] Processing 780416_900.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:37:15,012 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:37:17,635 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:37:17,641 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:37:18,205 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:37:28,082 - diplom - INFO -   Prompt: 1519 chars. Success in 13.07s.
+2026-04-01 19:37:28,083 - diplom - INFO - [26/53] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:37:28,085 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:37:30,926 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:37:30,931 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:37:31,476 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:37:41,285 - diplom - INFO -   Prompt: 1531 chars. Success in 13.20s.
+2026-04-01 19:37:41,286 - diplom - INFO - [27/53] Processing ______________2026-02-24_162115.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:37:41,289 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:37:44,296 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:37:44,301 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:37:45,403 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:37:55,525 - diplom - INFO -   Prompt: 1630 chars. Success in 14.24s.
+2026-04-01 19:37:55,526 - diplom - INFO - [28/53] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:37:55,529 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:37:58,503 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:37:58,508 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:37:59,171 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:38:08,938 - diplom - INFO -   Prompt: 1630 chars. Success in 13.41s.
+2026-04-01 19:38:08,939 - diplom - INFO - [29/53] Processing 1637856537256.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:38:08,942 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:38:18,583 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:38:18,604 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:38:20,007 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:38:31,235 - diplom - INFO -   Prompt: 3250 chars. Success in 22.30s.
+2026-04-01 19:38:31,236 - diplom - INFO - [30/53] Processing 5c5f8.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:38:31,240 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:38:39,802 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:38:39,822 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:38:40,738 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:38:49,834 - diplom - INFO -   Prompt: 3204 chars. Success in 18.60s.
+2026-04-01 19:38:49,835 - diplom - INFO - [31/53] Processing _1.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:38:49,838 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:38:58,082 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:38:58,106 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:38:59,064 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:39:08,728 - diplom - INFO -   Prompt: 3148 chars. Success in 18.89s.
+2026-04-01 19:39:08,729 - diplom - INFO - [32/53] Processing inn-fizlica-724x570.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:39:08,732 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:39:12,950 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:39:12,955 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:39:13,586 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:39:23,251 - diplom - INFO -   Prompt: 2166 chars. Success in 14.52s.
+2026-04-01 19:39:23,252 - diplom - INFO - [33/53] Processing inn.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:39:23,256 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:39:30,872 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:39:30,877 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:39:31,591 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:39:41,180 - diplom - INFO -   Prompt: 2920 chars. Success in 17.93s.
+2026-04-01 19:39:41,182 - diplom - INFO - [34/53] Processing 28426.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:39:41,186 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:40:09,373 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:40:09,403 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:40:15,549 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:40:47,930 - diplom - INFO -   Prompt: 13308 chars. Success in 66.75s.
+2026-04-01 19:40:47,931 - diplom - INFO - [35/53] Processing 4d5c39e55844da80efe8af6755de558f.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:40:47,935 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:41:00,318 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:41:00,325 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:41:02,010 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:41:27,341 - diplom - INFO -   Prompt: 7759 chars. Success in 39.41s.
+2026-04-01 19:41:27,344 - diplom - INFO - [36/53] Processing i.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:41:27,348 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:41:55,967 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:41:55,972 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:41:58,948 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:42:38,395 - diplom - INFO -   Prompt: 10553 chars. Success in 71.05s.
+2026-04-01 19:42:38,397 - diplom - INFO - [37/53] Processing kvit.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:42:38,401 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:42:59,780 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:42:59,786 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:43:01,836 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:44:15,235 - diplom - INFO -   Prompt: 8364 chars. Success in 96.84s.
+2026-04-01 19:44:15,237 - diplom - INFO - [38/53] Processing kvitantsija-zhkh.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:44:15,241 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:44:42,256 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:44:42,279 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:44:45,059 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:45:25,880 - diplom - INFO -   Prompt: 10627 chars. Success in 70.64s.
+2026-04-01 19:45:25,882 - diplom - INFO - [39/53] Processing 152f6bcs-960.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:45:25,886 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:45:30,463 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:45:30,469 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:45:31,860 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:45:47,031 - diplom - INFO -   Prompt: 2195 chars. Success in 21.15s.
+2026-04-01 19:45:47,033 - diplom - INFO - [40/53] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:45:47,036 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:45:51,762 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:45:51,770 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:45:52,700 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:46:08,550 - diplom - INFO -   Prompt: 2196 chars. Success in 21.52s.
+2026-04-01 19:46:08,551 - diplom - INFO - [41/53] Processing 1647714700_02-min.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:46:08,555 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:46:13,736 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:46:13,742 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:46:15,369 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:46:33,009 - diplom - INFO -   Prompt: 2814 chars. Success in 24.46s.
+2026-04-01 19:46:33,010 - diplom - INFO - [42/53] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:46:33,014 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:46:37,664 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:46:37,669 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:46:38,715 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:46:58,213 - diplom - INFO -   Prompt: 2780 chars. Success in 25.20s.
+2026-04-01 19:46:58,214 - diplom - INFO - [43/53] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:46:58,216 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:47:03,159 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:47:03,165 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:47:04,533 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:47:19,072 - diplom - INFO -   Prompt: 2239 chars. Success in 20.86s.
+2026-04-01 19:47:19,073 - diplom - INFO - [44/53] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:47:19,077 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:47:21,337 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:47:21,343 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:47:22,202 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:47:29,265 - diplom - INFO -   Prompt: 1348 chars. Success in 10.19s.
+2026-04-01 19:47:29,266 - diplom - INFO - [45/53] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:47:29,270 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:47:31,337 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:47:31,342 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:47:32,187 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:47:38,738 - diplom - INFO -   Prompt: 1338 chars. Success in 9.47s.
+2026-04-01 19:47:38,739 - diplom - INFO - [46/53] Processing R3fp08pn_yI.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:47:38,741 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:47:41,030 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:47:41,049 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:47:41,908 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:47:49,546 - diplom - INFO -   Prompt: 1346 chars. Success in 10.81s.
+2026-04-01 19:47:49,547 - diplom - INFO - [47/53] Processing auSBK6ncH3c.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:47:49,551 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:47:51,586 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:47:51,604 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:47:52,430 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:47:58,775 - diplom - INFO -   Prompt: 1331 chars. Success in 9.23s.
+2026-04-01 19:47:58,776 - diplom - INFO - [48/53] Processing yoqWE8WFTe8.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:47:58,780 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:48:00,830 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:48:00,835 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:48:01,642 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:48:07,875 - diplom - INFO -   Prompt: 1331 chars. Success in 9.10s.
+2026-04-01 19:48:07,876 - diplom - INFO - [49/53] Processing снилс мой.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:48:07,880 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:48:10,133 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:48:10,139 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:48:10,957 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:48:18,223 - diplom - INFO -   Prompt: 1351 chars. Success in 10.35s.
+2026-04-01 19:48:18,224 - diplom - INFO - [50/53] Processing 1.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:48:18,227 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:48:24,276 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:48:24,281 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:48:25,590 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:48:41,327 - diplom - INFO -   Prompt: 3044 chars. Success in 23.10s.
+2026-04-01 19:48:41,328 - diplom - INFO - [51/53] Processing 196854.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:48:41,331 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:48:46,602 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:48:46,608 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:48:47,790 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:49:05,346 - diplom - INFO -   Prompt: 3036 chars. Success in 24.02s.
+2026-04-01 19:49:05,347 - diplom - INFO - [52/53] Processing bocharov_naebschik.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:49:05,349 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:49:10,791 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:49:10,820 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:49:11,998 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:49:29,514 - diplom - INFO -   Prompt: 2954 chars. Success in 24.17s.
+2026-04-01 19:49:29,515 - diplom - INFO - [53/53] Processing pgxcojsmr0vehqzv6zyr.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-01 19:49:29,518 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-01 19:49:35,367 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-01 19:49:35,373 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-01 19:49:36,507 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-01 19:49:52,626 - diplom - INFO -   Prompt: 3106 chars. Success in 23.11s.
+2026-04-01 19:49:52,647 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_9b_20260401_194952.json
+2026-04-03 13:56:32,354 - diplom - INFO - Accessing root index.html
+2026-04-03 13:56:32,469 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-03 13:56:32,482 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-03 13:56:34,753 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-03 13:56:51,820 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-03 13:56:52,072 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-03 13:57:05,408 - diplom - INFO - Accessing root index.html
+2026-04-03 13:57:05,428 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-03 13:57:05,433 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-03 13:57:05,437 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-03 14:00:27,194 - diplom - INFO - Accessing root index.html
+2026-04-03 14:00:27,214 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-03 14:00:27,216 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-03 14:00:27,222 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-03 14:00:39,329 - diplom - INFO - Starting benchmark for model: gemma4:e2b
+2026-04-03 14:00:39,329 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-03 14:00:40,356 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:40,373 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:00:40,377 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-04-03 14:00:40,500 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:00:40,503 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:00:41,327 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:42,218 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:43,024 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:44,083 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:48,157 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:50,063 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:50,418 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:52,988 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:53,299 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:53,581 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:54,155 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:54,541 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:55,200 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:57,600 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:59,570 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:00:59,594 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-04-03 14:00:59,596 - diplom - INFO - Starting structuring benchmark for 53 files using model gemma4:e2b
+2026-04-03 14:00:59,597 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:00:59,597 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-03 14:00:59,599 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:01:00,589 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:01:00,603 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:01:26,950 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:01:35,747 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:01:37,996 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:01:45,254 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:01:47,490 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:01:54,948 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:01:54,948 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:01:54,948 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"child\": {\n    \"surname\": \"Фамилия ребенка\",\n    \"name\": \"Имя ребенка\",\n    \"patronymic\": \"Отчество ребенка\",\n    \"date_of_birth\": \"Дата рождения (числом и прописью)\",\n    \"place_of_birth\": \"Место рождения\"\n  },\n  \"father\": {\n    \"fio\": \"ФИО отца\",\n    \"citizenship\": \"Гражданство отца\",\n    \"nationality\": \"Национальность отца (если указана)\"\n  },\n  \"mother\": {\n    \"fio\": \"ФИО матери\",\n    \"citizenship\": \"Гражданство матери\",\n    \"nationality\": \"Национальность матери (если указана)\"\n  },\n  \"act_record\": {\n    \"number\": \"Номер записи акта\",\n    \"date\": \"Дата записи акта\"\n  },\n  \"registration_place\": \"Место государственной регистрации (ЗАГС)\",\n  \"series\": \"Серия (римские цифры - буквы)\",\n  \"number\": \"Номер (6 цифр)\"\n}\n\n\n### REFERENCE EXAMPLE:\nINPUT: шиш\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nC.\nИсматов\nДмитрий Антонович\nфамилия\nродился(лась)\nчисло, месяц, год (тифрами и прописью)\n27.02.2010\nдвадцать седьмого февраля\nBy Operator Р—Р°РїРѕР»\n3.\nдве тысячи десятого года\nместо рождения\nг. Саратов,\nСаратовская область,\nРоссийская Федерация\nо чем\n2010\nгода\nмарта\nмесяца\n25\nчисла\nсоставлена запись акта о рождении №\n716\nМИСИС\nОтец\nИсматов\nАнтон Валерьевич\nгражданин Российской Федерации\nими, отчесть\nгражданство\nМать\nнациональность (вносится по желанию отца)\nИсматова\nАнна Алексеевна\nами\nлиния\nгражданка Российской Федерации\nражданство\n|\nМесто государственной регистрации\n10 матери)\nотдел ЗАГС по Ленинскому району г. Саратова\nнаименование органа записи акто\n(Госуд) - М.Пис.\n\"ов гражданского состояния\"\nАК\nКВА\n484\nЛ.Н.\nскол\nТадиси\nОГРН\nмарта\n2010г.\nАста оставим\nсост\n{\nО. Г. Воронкова\n*\nиюля\nII-РУ № 602386\nГомас, МПФ, Москва,\nCECTERTARC\nOUTPUT: {\n  \"child\": {\n    \"surname\": \"Исматов\",\n    \"name\": \"Дмитрий\",\n    \"patronymic\": \"Антонович\",\n    \"date_of_birth\": \"27.02.2010\",\n    \"place_of_birth\": \"г. Саратов, Саратовская область, Российская Федерация\"\n  },\n  \"father\": {\n    \"fio\": \"Исматов Антон Валерьевич\",\n    \"citizenship\": \"гражданин Российской Федерации\",\n    \"nationality\": \"\"\n  },\n  \"mother\": {\n    \"fio\": \"Исматова Анна Алексеевна\",\n    \"citizenship\": \"гражданка Российской Федерации\",\n    \"nationality\": \"\"\n  },\n  \"act_record\": {\n    \"number\": \"716\",\n    \"date\": \"25.03.2010\"\n  },\n  \"registration_place\": \"отдел ЗАГС по Ленинскому району г. Саратова\",\n  \"series\": \"II-РУ\",\n  \"number\": \"602386\"\n}\n\n### TARGET OCR TEXT TO PROCESS:\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nБауэр\n3.\nАртём Евгеньевич\nродился(лась)\n20.10.2008\nдвадцатого октября\nУниверс\n3\nдве тысячи восьмого года\nУниверситете\nBLA(\nместо рождения\nг. Новосибирск,\nНовосибирская область,\nУниверс\nРоссия\nо чем\n2008\nгода\nноября\nмесяца\n-\n05\nUU\nчисла\n3м\nсоставлена запись акта о рождении №\n2503\nОтец\nБауэр\nЕвгений Петрович\nгражданин России\nВолгогр\nУниверс\nсоединнадцать (должится не колонией отца)\nрусский\nМать\nЕлена Сергеевна\nЬауэр\nгражданка России\nТРАЯ\nнемка\nавистью\nМесто государственной регистрации\nсоединнадцать (вторыхая по камнем материи)\nотдел ЗАГС Ленинского района г. Новосибирска\nинженер like запись и\nуправления по делам ЗАГС Новосибирской области\nГралья Ланс видеть пост\nК*ол****\nВЕЛАДНЫХ\nизучением\nавгуста\n2011 г.\nОГРН\nРЕНИЯ\n=\nI\nРасугодитель органа\nзаписи актов гражданского состояния\nЕ. В. Головина\n282\nО\n4\n196\nРас\n<\nФИОН\n7\nГРН\nх\n52\nЫ\nс\nII-ЕТ № 679933\nИванович\nГомace, МОТЬ\nдиск принцип осуществ панели,\nбиоотправоохраненизации,\nбезументациями. В Будем\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:01:54,949 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "child": {
+    "surname": "Бауэр",
+    "name": "Артём Евгеньевич",
+    "patronymic": "",
+    "date_of_birth": "20.10.2008",
+    "place_of_birth": "г. Новосибирск, Новосибирская область, Россия"
+  },
+  "father": {
+    "fio": "Бауэр Евгений Петрович",
+    "citizenship": "гражданин России",
+    "nationality": "русский"
+  },
+  "mother": {
+    "fio": "Елена Сергеевна Бауэр",
+    "citizenship": "гражданка России",
+    "nationality": "немка"
+  },
+  "act_record": {
+    "number": "2503",
+    "date": ""
+  },
+  "registration_place": "отдел ЗАГС Ленинского района г. Новосибирска",
+  "series": "II-ЕТ",
+  "number": "679933"
+}
+```
+2026-04-03 14:01:54,949 - diplom - WARNING -   Prompt: 3514 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:01:54,949 - diplom - WARNING -   Consecutive error 1/3 for model gemma4:e2b on file 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean
+2026-04-03 14:01:54,955 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:01:54,958 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:01:55,908 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:01:55,913 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:01:57,498 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:06,873 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:02:09,102 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:17,043 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:02:19,266 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:27,275 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:02:27,275 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:02:27,275 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"child\": {\n    \"surname\": \"Фамилия ребенка\",\n    \"name\": \"Имя ребенка\",\n    \"patronymic\": \"Отчество ребенка\",\n    \"date_of_birth\": \"Дата рождения (числом и прописью)\",\n    \"place_of_birth\": \"Место рождения\"\n  },\n  \"father\": {\n    \"fio\": \"ФИО отца\",\n    \"citizenship\": \"Гражданство отца\",\n    \"nationality\": \"Национальность отца (если указана)\"\n  },\n  \"mother\": {\n    \"fio\": \"ФИО матери\",\n    \"citizenship\": \"Гражданство матери\",\n    \"nationality\": \"Национальность матери (если указана)\"\n  },\n  \"act_record\": {\n    \"number\": \"Номер записи акта\",\n    \"date\": \"Дата записи акта\"\n  },\n  \"registration_place\": \"Место государственной регистрации (ЗАГС)\",\n  \"series\": \"Серия (римские цифры - буквы)\",\n  \"number\": \"Номер (6 цифр)\"\n}\n\n\n### REFERENCE EXAMPLE:\nINPUT: информация\n900,0000,\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nНигмедзянов\nИльназ Фанисович\nродился(лась)\nимя, отчес\n20.04.2003\nдвадцатого апреля\nдве тысячи третьего года\nместо рождения\nг.Казань\nРеспублика Татарстан\nРоссийская Федерация\n2003\nгода\nмая\nмесяца\n05\nчисла\nо чем\nConspiration\nсоставлена запись акта о рождении №\n370\nМИСИС\nОтец\nПигмедзянов\nФанис Фирдавилович\nамилия\nгражданин России\nи, отче,\nтатарин\nгражданство\nнациональность (вносится по желанию отца)\nНигмедзянова\nУниверс\nМать\nфамилия\nАльбина Фирдавильевна\nгражданка России\nимя, отчество\nтатарка\nгражданство\nУниверс\nМесто государственной регистрации\nнациональность (вносится по желанию матери)\nОтдел ЗАГС адм. Кировского\nрайона г.Казани Республики Татарстан\n49696496\nАбхазия\nнаименование органа записи актов гражданского состояния\nher\n6\nЗАВЛЯ\nКИРОВСКИ\n58\n№509\nСИЯ\nSAMAGEAK\nМ.Пар\nS8\nДата выдачи ,05 »\nмая\n2003\nРасши\nII\nКВА\nФИНС\n10\nМ.П.\n13\n1/\nРуководитель органа\nзаписи актов гражданского состояния\nM\nneas\n60%\nдруг\nПлюснина О.А.\n19\nИМЧ\n116\nИ\n2\nPPRO\nдаже\nФd\nAMA\nI-КБ № 781872\nMTC, 1998\nOUTPUT: {\n  \"child\": {\n    \"surname\": \"Нигмедзянов\",\n    \"name\": \"Ильназ\",\n    \"patronymic\": \"Фанисович\",\n    \"date_of_birth\": \"20.04.2003\",\n    \"place_of_birth\": \"г. Казань, Республика Татарстан, Российская Федерация\"\n  },\n  \"father\": {\n    \"fio\": \"Нигмедзянов Фанис Фирдавилович\",\n    \"citizenship\": \"гражданин России\",\n    \"nationality\": \"татарин\"\n  },\n  \"mother\": {\n    \"fio\": \"Нигмедзянова Альбина Фирдавильевна\",\n    \"citizenship\": \"гражданка России\",\n    \"nationality\": \"татарка\"\n  },\n  \"act_record\": {\n    \"number\": \"370\",\n    \"date\": \"05.05.2003\"\n  },\n  \"registration_place\": \"Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан\",\n  \"series\": \"I-КБ\",\n  \"number\": \"781872\"\n}\n\n### TARGET OCR TEXT TO PROCESS:\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nХмелевский\nДаниил Викторович\nродился(лась)\n15.09.2011\nпятнадцатого сентября\nдве тысячи одиннадцатого года\nместо рождения\nг. Новосибирск,\nНовосибирская область,\nРоссийская Федерация\nо чем\n2011\nгода\nоктября\nмесяца\n12\nчисла\nBy Operator Р—Р°РїРѕР»\nBy Operator Р—Р°РїРѕР»\n1138\n82\nсоставлена запись акта о рождении №\nм\nОтец.\nФамилия\n--\nимя, отчество\n---\nГражданство\nпапа\nнациональность (вносится по склонению отца)\n-\nМать\nХмелевская\nЧЕМА\nНадежда Викторовна\nгражданка России\nCARCUL\nУниверс\nрусская\nражданс\n160\nМесто государственной регистрации\nнациональность (высокая не желание жатери)\nотдел ЗАГС Первомайского района г. Новосибирска\nА что произошло больше 3А? С Новосибирской области\nнаименование\nсо\nо\nАтоматериф прошел\n-М\n026495\nАическое\nДата выдачи « 12 »\nоктября\n2011 г.\nМАПСОВ\nп\nПре\nНЕСКВА\nКИФИ\nGARG\nзаписи, октов гражданского состояния\nРуководитель органа\nМ. В. Титова\nД\nИГР\n68\n902\n99\nСочи\nS\nII-ET № 670079\nГомас, МПб, Мосты, 2010,\nДополнРазмизации,\nОГРН\nшишинашии\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:02:27,275 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "child": {
+    "surname": "Хмелевский",
+    "name": "Даниил",
+    "patronymic": "Викторович",
+    "date_of_birth": "15.09.2011",
+    "place_of_birth": "г. Новосибирск, Новосибирская область, Российская Федерация"
+  },
+  "father": {
+    "fio": "Фамилия -- имя, отчество",
+    "citizenship": "гражданка России",
+    "nationality": "русская"
+  },
+  "mother": {
+    "fio": "Хмелевская Надежда Викторовна",
+    "citizenship": "гражданка России",
+    "nationality": "Универс"
+  },
+  "act_record": {
+    "number": "113882",
+    "date": "12.10.2011"
+  },
+  "registration_place": "отдел ЗАГС Первомайского района г. Новосибирска",
+  "series": "II-ET",
+  "number": "670079"
+}
+```
+2026-04-03 14:02:27,275 - diplom - WARNING -   Prompt: 3706 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:02:27,275 - diplom - WARNING -   Consecutive error 2/3 for model gemma4:e2b on file 718b.jpg-clean
+2026-04-03 14:02:27,277 - diplom - INFO - [3/53] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:02:27,279 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:02:28,096 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:02:28,101 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:02:29,371 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:37,738 - diplom - INFO -   Prompt: 3427 chars. Success in 10.46s.
+2026-04-03 14:02:37,740 - diplom - INFO - [4/53] Processing _____________-_-________-001.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:02:37,743 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:02:40,096 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:02:40,101 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:02:41,713 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:49,345 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:02:51,585 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:02:59,027 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:01,270 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:08,926 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:08,926 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:03:08,927 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"child\": {\n    \"surname\": \"Фамилия ребенка\",\n    \"name\": \"Имя ребенка\",\n    \"patronymic\": \"Отчество ребенка\",\n    \"date_of_birth\": \"Дата рождения (числом и прописью)\",\n    \"place_of_birth\": \"Место рождения\"\n  },\n  \"father\": {\n    \"fio\": \"ФИО отца\",\n    \"citizenship\": \"Гражданство отца\",\n    \"nationality\": \"Национальность отца (если указана)\"\n  },\n  \"mother\": {\n    \"fio\": \"ФИО матери\",\n    \"citizenship\": \"Гражданство матери\",\n    \"nationality\": \"Национальность матери (если указана)\"\n  },\n  \"act_record\": {\n    \"number\": \"Номер записи акта\",\n    \"date\": \"Дата записи акта\"\n  },\n  \"registration_place\": \"Место государственной регистрации (ЗАГС)\",\n  \"series\": \"Серия (римские цифры - буквы)\",\n  \"number\": \"Номер (6 цифр)\"\n}\n\n\n### REFERENCE EXAMPLE:\nINPUT: информация\n900,0000,\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nНигмедзянов\nИльназ Фанисович\nродился(лась)\nимя, отчес\n20.04.2003\nдвадцатого апреля\nдве тысячи третьего года\nместо рождения\nг.Казань\nРеспублика Татарстан\nРоссийская Федерация\n2003\nгода\nмая\nмесяца\n05\nчисла\nо чем\nConspiration\nсоставлена запись акта о рождении №\n370\nМИСИС\nОтец\nПигмедзянов\nФанис Фирдавилович\nамилия\nгражданин России\nи, отче,\nтатарин\nгражданство\nнациональность (вносится по желанию отца)\nНигмедзянова\nУниверс\nМать\nфамилия\nАльбина Фирдавильевна\nгражданка России\nимя, отчество\nтатарка\nгражданство\nУниверс\nМесто государственной регистрации\nнациональность (вносится по желанию матери)\nОтдел ЗАГС адм. Кировского\nрайона г.Казани Республики Татарстан\n49696496\nАбхазия\nнаименование органа записи актов гражданского состояния\nher\n6\nЗАВЛЯ\nКИРОВСКИ\n58\n№509\nСИЯ\nSAMAGEAK\nМ.Пар\nS8\nДата выдачи ,05 »\nмая\n2003\nРасши\nII\nКВА\nФИНС\n10\nМ.П.\n13\n1/\nРуководитель органа\nзаписи актов гражданского состояния\nM\nneas\n60%\nдруг\nПлюснина О.А.\n19\nИМЧ\n116\nИ\n2\nPPRO\nдаже\nФd\nAMA\nI-КБ № 781872\nMTC, 1998\nOUTPUT: {\n  \"child\": {\n    \"surname\": \"Нигмедзянов\",\n    \"name\": \"Ильназ\",\n    \"patronymic\": \"Фанисович\",\n    \"date_of_birth\": \"20.04.2003\",\n    \"place_of_birth\": \"г. Казань, Республика Татарстан, Российская Федерация\"\n  },\n  \"father\": {\n    \"fio\": \"Нигмедзянов Фанис Фирдавилович\",\n    \"citizenship\": \"гражданин России\",\n    \"nationality\": \"татарин\"\n  },\n  \"mother\": {\n    \"fio\": \"Нигмедзянова Альбина Фирдавильевна\",\n    \"citizenship\": \"гражданка России\",\n    \"nationality\": \"татарка\"\n  },\n  \"act_record\": {\n    \"number\": \"370\",\n    \"date\": \"05.05.2003\"\n  },\n  \"registration_place\": \"Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан\",\n  \"series\": \"I-КБ\",\n  \"number\": \"781872\"\n}\n\n### TARGET OCR TEXT TO PROCESS:\nВашина\nonly\nних\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nСеменченко\nЯна Дмитриевна\nОЖИМЕ\n.\n12/05/2016\nродился(лась)\nдвенадцатого мая\nмесяц, год (индровна и кровисью)\nдве тысячи шестнадцатого года\nгород Абакан\nместо рождения\nРеспублика Хакасия\nРоссия\nо чем\n2016\nмая\nмесяца\n25\nгода\nacross\nчисла\nсоставлена запись акта о рождении №65\nОтец\nСеменченко\nДмитрий Сергеевич\nгражданин России\nгражданство\nнациоинезность (двсиуса по жезанном отца)\nсеменченко\nМать\nОльга Сергеевна\nгражданка России\nАс.Чество\nгражданство\nМесто государственной регистрации.Отдел Комитета ЗАГС при\nнациональность (вносится по незамыю матери)\nПравительстве Республики Хакасия по городу Сорску\nнаименование органа записи актов гражданского состояния./\nСРАЦИЯ\nXS\nверхи\nСЕРТОВ\n(дата/ signature)\nЯ хочу дать 25\nФЕД\nи\nмая\n2016\n2\nврачебная\n...\nНИК\nг.\nСущ\nгород\nЯ\n65\n45\nА.И.Севельникова\n4\nРуководитель органа\nзаинсизактов гражданского состояния\nа к с о р о\nх\nнел\n2\n4\nПриложение -\n%\nплн\nI-ПВ № 699324\nГарант, МГФ, Мэсков, 2013,\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:03:08,927 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "child": {
+    "surname": "Вашина",
+    "name": "Семенченко",
+    "patronymic": "Яна Дмитриевна",
+    "date_of_birth": "12/05/2016",
+    "place_of_birth": "Абакан, Республика Хакасия, Россия"
+  },
+  "father": {
+    "fio": "Семенченко Дмитрий Сергеевич",
+    "citizenship": "гражданин России",
+    "nationality": "семенченко"
+  },
+  "mother": {
+    "fio": "Ольга Сергеевна",
+    "citizenship": "гражданка России",
+    "nationality": ""
+  },
+  "act_record": {
+    "number": "65",
+    "date": "25.05.2016"
+  },
+  "registration_place": "Отдел Комитета ЗАГС при Правительстве Республики Хакасия по городу Сорску",
+  "series": "XS",
+  "number": "699324"
+}
+```
+2026-04-03 14:03:08,927 - diplom - WARNING -   Prompt: 3686 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:08,927 - diplom - WARNING -   Consecutive error 1/3 for model gemma4:e2b on file _____________-_-________-001.jpg-clean
+2026-04-03 14:03:08,929 - diplom - INFO - [5/53] Processing c38edbcs-960.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:03:08,931 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:03:09,831 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:03:09,834 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:03:11,138 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:20,596 - diplom - INFO -   Prompt: 3544 chars. Success in 11.67s.
+2026-04-03 14:03:20,598 - diplom - INFO - [6/53] Processing свидетельство-о-рождении-001.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:03:20,600 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:03:21,521 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:03:21,526 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:03:22,984 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:30,151 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:32,386 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:40,034 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:42,268 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:51,344 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:51,345 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:03:51,345 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"child\": {\n    \"surname\": \"Фамилия ребенка\",\n    \"name\": \"Имя ребенка\",\n    \"patronymic\": \"Отчество ребенка\",\n    \"date_of_birth\": \"Дата рождения (числом и прописью)\",\n    \"place_of_birth\": \"Место рождения\"\n  },\n  \"father\": {\n    \"fio\": \"ФИО отца\",\n    \"citizenship\": \"Гражданство отца\",\n    \"nationality\": \"Национальность отца (если указана)\"\n  },\n  \"mother\": {\n    \"fio\": \"ФИО матери\",\n    \"citizenship\": \"Гражданство матери\",\n    \"nationality\": \"Национальность матери (если указана)\"\n  },\n  \"act_record\": {\n    \"number\": \"Номер записи акта\",\n    \"date\": \"Дата записи акта\"\n  },\n  \"registration_place\": \"Место государственной регистрации (ЗАГС)\",\n  \"series\": \"Серия (римские цифры - буквы)\",\n  \"number\": \"Номер (6 цифр)\"\n}\n\n\n### REFERENCE EXAMPLE:\nINPUT: информация\n900,0000,\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nНигмедзянов\nИльназ Фанисович\nродился(лась)\nимя, отчес\n20.04.2003\nдвадцатого апреля\nдве тысячи третьего года\nместо рождения\nг.Казань\nРеспублика Татарстан\nРоссийская Федерация\n2003\nгода\nмая\nмесяца\n05\nчисла\nо чем\nConspiration\nсоставлена запись акта о рождении №\n370\nМИСИС\nОтец\nПигмедзянов\nФанис Фирдавилович\nамилия\nгражданин России\nи, отче,\nтатарин\nгражданство\nнациональность (вносится по желанию отца)\nНигмедзянова\nУниверс\nМать\nфамилия\nАльбина Фирдавильевна\nгражданка России\nимя, отчество\nтатарка\nгражданство\nУниверс\nМесто государственной регистрации\nнациональность (вносится по желанию матери)\nОтдел ЗАГС адм. Кировского\nрайона г.Казани Республики Татарстан\n49696496\nАбхазия\nнаименование органа записи актов гражданского состояния\nher\n6\nЗАВЛЯ\nКИРОВСКИ\n58\n№509\nСИЯ\nSAMAGEAK\nМ.Пар\nS8\nДата выдачи ,05 »\nмая\n2003\nРасши\nII\nКВА\nФИНС\n10\nМ.П.\n13\n1/\nРуководитель органа\nзаписи актов гражданского состояния\nM\nneas\n60%\nдруг\nПлюснина О.А.\n19\nИМЧ\n116\nИ\n2\nPPRO\nдаже\nФd\nAMA\nI-КБ № 781872\nMTC, 1998\nOUTPUT: {\n  \"child\": {\n    \"surname\": \"Нигмедзянов\",\n    \"name\": \"Ильназ\",\n    \"patronymic\": \"Фанисович\",\n    \"date_of_birth\": \"20.04.2003\",\n    \"place_of_birth\": \"г. Казань, Республика Татарстан, Российская Федерация\"\n  },\n  \"father\": {\n    \"fio\": \"Нигмедзянов Фанис Фирдавилович\",\n    \"citizenship\": \"гражданин России\",\n    \"nationality\": \"татарин\"\n  },\n  \"mother\": {\n    \"fio\": \"Нигмедзянова Альбина Фирдавильевна\",\n    \"citizenship\": \"гражданка России\",\n    \"nationality\": \"татарка\"\n  },\n  \"act_record\": {\n    \"number\": \"370\",\n    \"date\": \"05.05.2003\"\n  },\n  \"registration_place\": \"Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан\",\n  \"series\": \"I-КБ\",\n  \"number\": \"781872\"\n}\n\n### TARGET OCR TEXT TO PROCESS:\nВашина\nonly\nних\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nСеменченко\nЯна Дмитриевна\nОЖИМЕ\n.\n12/05/2016\nродился(лась)\nдвенадцатого мая\nмесяц, год (индровна и кровисью)\nдве тысячи шестнадцатого года\nгород Абакан\nместо рождения\nРеспублика Хакасия\nРоссия\nо чем\n2016\nмая\nмесяца\n25\nгода\nacross\nчисла\nсоставлена запись акта о рождении №65\nОтец\nСеменченко\nДмитрий Сергеевич\nгражданин России\nгражданство\nнациоинезность (двсиуса по жезанном отца)\nсеменченко\nМать\nОльга Сергеевна\nгражданка России\nАс.Чество\nгражданство\nМесто государственной регистрации.Отдел Комитета ЗАГС при\nнациональность (вносится по незамыю матери)\nПравительстве Республики Хакасия по городу Сорску\nнаименование органа записи актов гражданского состояния./\nСРАЦИЯ\nXS\nверхи\nСЕРТОВ\n(дата/ signature)\nЯ хочу дать 25\nФЕД\nи\nмая\n2016\n2\nврачебная\n...\nНИК\nг.\nСущ\nгород\nЯ\n65\n45\nА.И.Севельникова\n4\nРуководитель органа\nзаинсизактов гражданского состояния\nа к с о р о\nх\nнел\n2\n4\nПриложение -\n%\nплн\nI-ПВ № 699324\nГарант, МГФ, Мэсков, 2013,\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:03:51,345 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "child": {
+    "surname": "Вашина",
+    "name": "Семенченко",
+    "patronymic": "Яна Дмитриевна",
+    "date_of_birth": "12/05/2016",
+    "place_of_birth": "Абакан, Республика Хакасия, Россия"
+  },
+  "father": {
+    "fio": "Семенченко Дмитрий Сергеевич",
+    "citizenship": "гражданин России",
+    "nationality": "семенченко"
+  },
+  "mother": {
+    "fio": "Ольга Сергеевна",
+    "citizenship": "гражданка России",
+    "nationality": ""
+  },
+  "act_record": {
+    "number": "65",
+    "date": "25.05.2016"
+  },
+  "registration_place": "Отдел Комитета ЗАГС при Правительстве Республики Хакасия по городу Сорску",
+  "series": "XS",
+  "number": "699324"
+}
+```
+2026-04-03 14:03:51,345 - diplom - WARNING -   Prompt: 3686 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:03:51,345 - diplom - WARNING -   Consecutive error 1/3 for model gemma4:e2b on file свидетельство-о-рождении-001.jpg-clean
+2026-04-03 14:03:51,347 - diplom - INFO - [7/53] Processing certn120766.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:03:51,349 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:03:52,122 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:03:52,128 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:03:53,465 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:03:59,533 - diplom - INFO -   Prompt: 3187 chars. Success in 8.19s.
+2026-04-03 14:03:59,534 - diplom - INFO - [8/53] Processing diplom_bakalavra_mgtu_im._baumana.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:03:59,536 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:04:00,322 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:04:00,326 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:04:00,973 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:04:07,370 - diplom - INFO -   Prompt: 3261 chars. Success in 7.84s.
+2026-04-03 14:04:07,372 - diplom - INFO - [9/53] Processing diploma (1).jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:04:07,374 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:04:08,234 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:04:08,239 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:04:08,945 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:04:15,679 - diplom - INFO -   Prompt: 3284 chars. Success in 8.31s.
+2026-04-03 14:04:15,680 - diplom - INFO - [10/53] Processing diploma.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:04:15,682 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:04:16,493 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:04:16,498 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:04:17,210 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:04:25,142 - diplom - INFO -   Prompt: 3184 chars. Success in 9.46s.
+2026-04-03 14:04:25,145 - diplom - INFO - [11/53] Processing i.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:04:25,147 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:04:26,000 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:04:26,004 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:04:26,742 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:04:33,266 - diplom - INFO -   Prompt: 3236 chars. Success in 8.12s.
+2026-04-03 14:04:33,268 - diplom - INFO - [12/53] Processing word-image-102.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:04:33,270 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:04:35,655 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:04:35,658 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:04:41,752 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:04:58,448 - diplom - INFO -   Prompt: 8593 chars. Success in 25.18s.
+2026-04-03 14:04:58,451 - diplom - INFO - [13/53] Processing word-image-216.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:04:58,454 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:05:01,213 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:05:01,218 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:05:07,344 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:05:21,637 - diplom - INFO -   Prompt: 9168 chars. Success in 23.19s.
+2026-04-03 14:05:21,639 - diplom - INFO - [14/53] Processing word-image-93.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:05:21,641 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:05:24,133 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:05:24,139 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:05:29,677 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:05:44,495 - diplom - INFO -   Prompt: 9774 chars. Success in 22.86s.
+2026-04-03 14:05:44,496 - diplom - INFO - [15/53] Processing договор найма 1.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:05:44,498 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:05:47,042 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:05:47,047 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:05:51,221 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:06:03,861 - diplom - INFO -   Prompt: 9683 chars. Success in 19.36s.
+2026-04-03 14:06:03,862 - diplom - INFO - [16/53] Processing dogovor_kupli_prodazhi_kv2.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:06:03,864 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:06:06,733 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:06:06,736 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:06:13,516 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:06:31,142 - diplom - INFO -   Prompt: 8861 chars. Success in 27.28s.
+2026-04-03 14:06:31,145 - diplom - INFO - [17/53] Processing dogovor_kupli_prodazhi_kv3.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:06:31,147 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:06:33,611 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:06:33,614 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:06:38,557 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:06:53,208 - diplom - INFO -   Prompt: 8998 chars. Success in 22.06s.
+2026-04-03 14:06:53,209 - diplom - INFO - [18/53] Processing dogovor_kupli_prodazhi_kv4.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:06:53,211 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:06:55,442 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:06:55,445 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:06:58,437 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:07:27,152 - diplom - INFO -   Prompt: 8180 chars. Success in 33.94s.
+2026-04-03 14:07:27,155 - diplom - INFO - [19/53] Processing dogovor_kupli_prodazhi_kv5.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:07:27,157 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:07:30,048 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:07:30,051 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:07:36,167 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:07:55,744 - diplom - INFO -   Prompt: 10421 chars. Success in 28.59s.
+2026-04-03 14:07:55,745 - diplom - INFO - [20/53] Processing 47a665a1d240f4dfdf602b454ae6749b.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:07:55,747 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:07:57,756 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:07:57,760 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:08:04,040 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:08:28,641 - diplom - INFO -   Prompt: 7284 chars. Success in 32.90s.
+2026-04-03 14:08:28,643 - diplom - INFO - [21/53] Processing dogovor(4).jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:08:28,644 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:08:30,527 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:08:30,530 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:08:33,390 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:08:52,696 - diplom - INFO -   Prompt: 7482 chars. Success in 24.05s.
+2026-04-03 14:08:52,698 - diplom - INFO - [22/53] Processing orig.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:08:52,699 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:08:54,699 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:08:54,703 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:08:57,542 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:17,499 - diplom - INFO -   Prompt: 7295 chars. Success in 24.80s.
+2026-04-03 14:09:17,500 - diplom - INFO - [23/53] Processing 1385315836_1578903606.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:17,502 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:17,899 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:17,902 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:18,638 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:25,082 - diplom - INFO -   Prompt: 1580 chars. Success in 7.58s.
+2026-04-03 14:09:25,083 - diplom - INFO - [24/53] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:25,085 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:25,491 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:25,494 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:25,904 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:31,211 - diplom - INFO -   Prompt: 1537 chars. Success in 6.13s.
+2026-04-03 14:09:31,213 - diplom - INFO - [25/53] Processing 780416_900.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:31,214 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:31,598 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:31,602 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:31,991 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:36,843 - diplom - INFO -   Prompt: 1519 chars. Success in 5.63s.
+2026-04-03 14:09:36,844 - diplom - INFO - [26/53] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:36,845 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:37,242 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:37,245 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:37,925 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:43,069 - diplom - INFO -   Prompt: 1603 chars. Success in 6.23s.
+2026-04-03 14:09:43,071 - diplom - INFO - [27/53] Processing ______________2026-02-24_162115.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:43,072 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:43,478 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:43,481 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:43,902 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:49,150 - diplom - INFO -   Prompt: 1630 chars. Success in 6.08s.
+2026-04-03 14:09:49,151 - diplom - INFO - [28/53] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:49,153 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:49,568 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:49,571 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:49,814 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:09:55,097 - diplom - INFO -   Prompt: 1630 chars. Success in 5.95s.
+2026-04-03 14:09:55,098 - diplom - INFO - [29/53] Processing 1637856537256.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:09:55,100 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:09:57,632 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:09:57,635 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:09:58,873 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:10:04,279 - diplom - INFO -   Prompt: 3250 chars. Success in 9.18s.
+2026-04-03 14:10:04,280 - diplom - INFO - [30/53] Processing 5c5f8.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:10:04,282 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:10:05,444 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:10:05,447 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:10:06,201 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:10:11,247 - diplom - INFO -   Prompt: 3204 chars. Success in 6.97s.
+2026-04-03 14:10:11,249 - diplom - INFO - [31/53] Processing _1.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:10:11,251 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:10:12,381 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:10:12,384 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:10:13,278 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:10:18,107 - diplom - INFO -   Prompt: 3148 chars. Success in 6.86s.
+2026-04-03 14:10:18,108 - diplom - INFO - [32/53] Processing inn-fizlica-724x570.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:10:18,111 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:10:18,696 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:10:18,699 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:10:19,166 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:10:23,945 - diplom - INFO -   Prompt: 2166 chars. Success in 5.84s.
+2026-04-03 14:10:23,948 - diplom - INFO - [33/53] Processing inn.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:10:23,949 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:10:24,940 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:10:24,942 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:10:25,692 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:10:32,115 - diplom - INFO -   Prompt: 2920 chars. Success in 8.17s.
+2026-04-03 14:10:32,117 - diplom - INFO - [34/53] Processing 28426.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:10:32,119 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:10:35,776 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:10:35,779 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:11:02,904 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:11:27,664 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:11:29,946 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:11:54,632 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:11:56,913 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:12:21,625 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:12:21,625 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:12:21,626 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### REFERENCE EXAMPLE:\nINPUT: для внесения платы за содержание жилого помещения и предоставление коммунальных услуг\nПЛАТЕЖНЫЙ ДОКУМЕНТ\nРаздел 1. Сведения о плательщике и исполнителе услуг\nРаздел 2. Сведения о показаниях ИПУ\nза Апрель 2020 г.\n(расчетный\nНаименование организации:\n113205, Москва г, Вавилова , дом № 65\nУК \"ЖилКом\"\nИПУ\nНаименование коммунальной\nПредыдущие показания\nМоск\nприборов учета\nТекущие показания\nприборов учета\nпериод)\nАдрес:\nтел.: 8 (836) 230-40-09\nуслуги\nком. услуг\nком. услуг\nФ.И.О. (наименование) плательщика собственника/нанимателя\nДиспетчерская: 8 (836) 255-55-55\nГаз, кв.32\nГазовое снабжение\n112\n120\nЛебедев Юрий Викторович\nСайт управляющей компании: demo-jkh.otr-soft.ru\nЭлектрическая энергия,\nЭлектрическая энергия\n741\n752\nАдрес: Москва г, Вавилова ул, 67, Кв. 32\nКВ.32\nПлощадь помещ. : 75 кв.м.\nКол-во прожив. / зарег: 1 / 1 чел.\nГорячее водоснабжение,\nKB.32\nГорячее водоснабжение\n41.5\n47\nводоснабжение, кв.32\nХолодное\nХолодное водоснабжение\n38\n45\nРаздел 3. РАСЧЕТ РАЗМЕРА ПЛАТЫ ЗА СОДЕРЖАНИЕ И РЕМОНТ ЖИЛОГО ПОМЕЩЕНИЯ И КОММУНАЛЬНЫЕ УСЛУГИ\nОбъем коммуна-\nОбъем услуг\nн\nТариф/\nНачисл. за\n10.11.10\nрасчетный\nРазмер\nРазмер\nПерерас-\nчеты\nЛьготы,\nсубси-\nК оплате за\nЗадолженность\nНеустойка\n№\nВиды услуг\nЕд. изм.\n-\nльных услуг\nвсе лишь\nобщ.услуг\nСОИ или\nРазм.\nпл.\n.\nпериод\nкоэффициента\nповышающего\nпревыш.платы с уч.\nповыш.коэф\nвсего,\n-\nДИИ,\nрасчетный период,\nрублей\nм\n/Переплата(-),руб.\n(штраф, пеня)\nполучателя\n-\nплатежа\nИтого к оплате\n(подпись)\nру0.\nруб.\nруб.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nХолодное водоснабжение\nM3\n4,000\n0,000\n29,85\n119,40\n0,00\n0,00\n0,00\n119,40\n134,33\n0,00\n5\n119,40\nГорячее водоснабжение\nM3\n97,000\n4,745\n0,000\n123,58\n586,39\n0,00\n0,00\n0,00\n586,39\n586,39\n0,00\n5\n586,39\nЭлектрическая энергия\nКВТ.Ч\n0,000\n4,87\n472,39\n0,00\n0,00\n0,00\n472,39\n460,70\n510,57\n0,00\n5\n498,37\n472,39\nВодоснабжение\n20,425\nХ\n0,000\n24,4\n498,37\n0,00\n0,00\n0,00\n498,37\n150,00\n0,00\n5\n150,00\nВывоз мусора\nшт\nХ\n150\n150,00\n0,00\n0,00\n0,00\n150,00\n0,00\n5\nГазовое снабжение\nM3\n14,000\n0,000\n7.45\n104,30\n0,00\n0,00\n0,00\n104,30\n104,30\n0,00\n5\n104,30\nЗапирающее устройство\nшт\nХ\nХ\n142\n142,00\n0,00\n0,00\n0,00\n142,00\n142,00\n0,00\n5\n142,00\nОбслуживание лифта\nшт\nХ\nХ\n110\n110,00\n0,00\n0,00\n0,00\n110,00\n110,00\n0,00\n5\n110,00\nТелеантенна\nшт\nХ\nХ\n175\n175,00\n0,00\n0,00\n0,00\n175,00\n175,00\n0,00\n5\n175,00\nОтопление\nM2\n0,000\n25\n0,00\n1 875,00\n0,00\n0,00\n0,00\n0,00\n2 357,85\n4 248,29\n0,00\n2 357,85\nВнесено оплат от 02.04.2020\n4 248,29\nИтого к оплате\n2 357,85\nСведения о получателях платежа\nполучателя\n№\nНаименование\nполучателя\nНомер банковского счета\n№ л/счета (иной\nидентификатор\nИтого к оплате за\nШтриховой\nплатежа\nплатежа\nи банковские реквизиты\nплательщика) / Идентификатор ЖКУ\nрасч. период руб.\nкод\n5\nУК \"Престиж\"\nР/с 40704820100320030032 в ОАО \"БАНК МОСКВЫ\", к/с 30201810500000300214, БИК 044525\nл/с №2011067048\n2 357,85\nOUTPUT: {\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### TARGET OCR TEXT TO PROCESS:\nИванов Иван Иванович\nПочтовый адрес для доставки: 694420, р-н Александровск-Сахалинский, г Александровск-Сахалинский,\nАПРЕЛЬ\nАдрес помещения: 694420, р-н Александровск-Сахалинский, г Александровск-Сахалинский, ул\n2023 г.\nВид услуги\nЛицевой\nРеквизиты получателя платежа\nоплате, в т.ч.\nИтого к\nНачислено,\nПеня\nК оплате,\nсчет\nпени\nДолг, руб.\nруб.\nруб.\nэлектроэнергия\n452456456\nПАО \"Сахалинэнерго\", ИНН 6500000024, КПП 650102007,\nР/счет 40702810350340008184, БИК 040813608,\n1 022,95\n0,00\n0.00\n0,00\nДальневосточный Банк ПАО Сбербанк г Хабаровск, к/счет\n30101810600000000608\nобращение с\nвопросам строительного\n5501269229, КПП 650101001, Р/счет 40602810550340000011,\nАО \"Управление по обращению с отходами\", ИНН\n20,72\n0,00\n0,00\n0,00\nTKO\n452456456\n--\nБИК 040813608, Дальневосточный Банк ПАО Сбербанк\nг.Хабаровск, к/счет 30101810600000000608\nвзнос на\nдомов Сахалинской области\". ИНН 6501236424, КПП\nНО \"Фонд капитального ремонта многоквартирных\nкапремонт\n654354354\n650101001, Р/счет 40604810850340030608, БИК 040813608,\nДальневосточный Банк ПАО Сбербанк г Хабаровск, к/счет\n3 749,21\n2 868,60\n0,00\n0.00\nСНЯТИЕ И ПЕРЕДАЧУ ПОКАЗАНИЙ НЕОБХОДИМО ОСУЩЕСТВЛЯТЬ С 15 ПО 25 ЧИСЛО ПО ТЕЛЕФОНУ 8-800-234-777 или на сайте www.dvec.ru в ЛК\n30101810600000000608\nТип\nНомер\nповерки\nСрок\nТехущие\nПредыдущие\nРасход\nКозф-т\nтранс\nВид услуг\nородой\nучета\nприбора\nучета\nистекает\nПУ\nпо прибору\nучета\nмации\nфор\nЭлектрознергия (ИПУ)\nСутки\n18572132\n31.03.2030\n20.02.2023\nДата\nПоказания\n17 490\n23.01.2023\nДата\nПоказания\n17 285\n205\nN\nКоличество противающих:\nОбщая площадь жилого помещения:\n57,90\n1\nСуммарная площадь жилых и нежилых помещений / Общего имущества:\nТип собственности:\n3 188,70/0,00\nЧастная\nПАО \"Сахалинэнерго\".\nРАСЧЕТ РАЗМЕРА ПЛАТЫ ЗА ЭЛЕКТРОЭНЕРГИЮ ЗА МАРТ 2023\nЕд.\nТариф,\nОбъем\nНачислено,\nпревышения\nРазмер\n6500000024L210101055P022023S102295D\nПерерасчеты,\nначислено\nИтого\nДолг-У\nИтого\nВид услуг\nизм.\n(\")\nСМДС\nруб.\nпотребления\nуслуги\nруб. СНДС\n(ПК-0,5), руб.\nснда\nруб. с НДС\nруб.сНДС\nза месяц,\nпереплата,\nруб.с НДС\nРуб. СНДС\nк оплате,\ni\nЭлектроэнергия\nВсего:\nкВт.ч\n2\n4,99\n205\n1 022.95\n1 022,95\n0.00\n0.00\n1 022,95\n1 022,95\n0,00\n1 022,95\n(**) способ расчета объема потребления: (1) форматив потребления: (2) показания ИПУ: (З)среднемесячный расход ИПУ: (4)показания ОДПУ:(5)иорматив на ОДН\nОчный прием по расчетам за электроэнергию по адресу: г. Александровск-Сахалинский ул. Советская д. 34 оф. 76. Режим работы: Пн-ут 8:30-16:50; пт 8:30-16:15. Обед\n12:00-13:00.Для обращений тел: 8 800 234 777; офиц сайт: www.dvec.ru;\nТариф на электрическую энергию для населения с 01.12.22 г. составляет 4,99 руб. за кВт*ч. (установлен Приказом РЭК от 24.11 22г. №117-Э). Для населения и\nЭл.почта: Infoenergo@sakh.dvec.ru\nприравненных к нему категорий тариф экономически обоснованный 740,79 коп. без НДС, тариф на услуги по передаче а/э 446,39 коп. без НДС (Приказ РЭК от 24.11.22 г.\n№138-Э). тариф на продажу за 294,40 коп. без НДС, компенсация разницы в тарифах 324,96 коп. без НДС, тариф населения дотационный 499 коп. с НДС (Приказ РЭК от\n24.11.22г. № 117-Э)\n20\nАО \"Управление по обращению с отходами\".\nРАСЧЕТ РАЗМЕРА ПЛАТЫ ПО ОБРАЩЕНИЮ С ТКО ЗА АПРЕЛЬ 2023\nТариф,\nНорматив\nКол-во\nпотреб-\nОбъем\nНачислено\nПерерасчеты,\nначислено\nИтого\nДолг-4/\nИтого\nВид услуг\nЛьгота\nизм.\nЕд.\nруб. склонде\n33 №\nнаусловия\nплн\nпроживаю-\nщих (чел)\nуслуги,\nвсегда\nпения\nруб. СНДС\nза месяц,\nCARCESS\nруб.сидс\nведьм\nперерасчетов,\nс учетом\nпереплата,\nруб.с НДС\nруб.с НДС\nк оплате,\nиз/мел. в год\nизвел, в\nмесяц\nваши\nруб. СМДС\nif\nВсего:\nОбращение с ТКО\nветераны труда\nø\n0,59997\n414,55\n1\n1\n34,546\n34,546\n20,72\n20,72\n0.00\n20,72\n20,72\n0.00\n20,72\nОчный прием по расчетам за ТКО по адресу: г. Южно-Сахалинск ул. Поповича д.112, ЕРИЦ. Режим работы:Пн-пт 9:00-18:00; сб 9:00-15:00 без перерыва. Для обращений\nтел.: 8 800 234 7777: офици. сайт: www.dvec.ru; зл. почта: Info@sakh.dvec.ru; ПО ВОПРОСАМ КАЧЕСТВА ОКАЗАНИЯ УСЛУГ обращаться по тел.: 8(4242) 55 61-66;\n89147404908; офиц.сайт: www.sotko65.ru: Эл.почта: gup_so_othody@svtc.ru.Размер платы на 1 за ТКО рассчитывается по формуле: N/12 ° Т. где: N - норматив\nнакопления ТКО, (приказ Мин. ЖКХ Сах. обл. от 29.10.21 № 3.10-34-П с 01.12.21г.) для МКД в размере 414,55 кг., для ИЖД в размере 418.56 в год на 1 чел; Т - тариф с\n01.12.22г.\n(приказ РЭК Сах. обл. от 25.11.22г № 100-ОКК) в размере 2 400,34;1199,98; 599,97 руб. за тонну.\nмногоквартирных домов Сахалинской области\"\nНО \"Фонд капитального ремонта\nСобственник: ИВАНОВ ИВАН ИВАНОВИЧ\nвнимание задолженность\nс\nL\nВид услуг\nизм.\nЕд.\nзамос, руб.\nМийс.\nОппота\nmm\nНачислено\nза месяц,\nНачислено\nпо льготе,\nПерерасче\nвоз.ном наверно\nИтого к оплате\nза месяц,\nпереплата,\nДолг-4\nПереросчеты\nвопросам\nНовоси\n-\nОплата в\nтекущем\nк оплате,\nВсего\nза кв.м.\n58.м.\n25,\nруб.\nруб.\nты, руб.\nруб.\nруб. сНДС\nпо суту, руб.\nмесяце, руб.\nруб.\nВзнос на капитальный ремонт\nПенза несвоевременную уплату взносов на капитальный\nBRM\n10.20\n67,30\n584,46\n0,00\n0,00\n584,46\n591.53\n0.00\n295,38\n880,61\nремонт\n57,03\n0,00\n67,03\n2 811,57\n0,00\n0.00\n2 868,60\nF\nс\nПо Закону Сахалинской области от 16.12.2022 N 106-30 с 01.01.2023г осуществляется компенсация взносов на капитальный ремонт льготной категории граждан\nИтого к оплате\n641,49\n0,00\n641,49\n3 403,10\n0,00\n295,38\n3 749,21\nнапрямую в некоммерческую организацию «Фонд капитального ремонта Сахалинской области».\nПО ВОПРОСАМ СУММЫ НАЧИСЛЕННОЙ ЛЬГОТЫ 8 800 201 0099 (пн-пт с 09.00 до 17.00). прием льготников: г.Южно-Сахалинск, ул. Пограничная, 33\nГорячая линия ЖКХ: 8 800 302 00 65, пн-сб с 08.00 до 20.00. По вопросам начисления и оплаты взносов: 8 800 100 1402 (пн-пт с 09.00 до 17.00); Прием граждан: г.Южно-\nСахалинск, Коммунистический пр. 398, каб.111 (пн-что с 9:00 до 17:00, обед с 13 до 14) Сайт fkr65.ru, e-mail: sakhremont@sakhalln.g факс 8(4242)722091\nС 01.01.2023 г. минимальный размер взноса составляет 10,20 руб. на кв.м. в месяц (Постановление Правительства Сахалинской области от 21.11.2022г. №531)\nУважаемый клиент!\nонлайн-оплата, подача заявлений, архив квитанций, просмотр истории показаний, начислений, обращений, оплат. Для передачи\nЗарегистрируйте Личный кабинет на сайте www.dvec.ru В удобном сервисе для вас будут доступны услуги: прием показаний,\nдокументов, подтверждающих право собственности, площади жилого помещения, справок о зарегистрированных, предлагаем\nвоспользоваться интернет-приемной на сайте ПАО «ДЭК» www.dvec.ru/sakhalin/private_clients/priemnaya.\nпозволяет оплачивать услуги ЖКХ онлайн, видеть все начисления, передавать показания и многое другое.\nУдобный сервис ГИС ЖКХ (отдельная регистрация не требуется, вход через подтвержденную учетную запись «Госуслуг»)\nИнформация об аварийных и плановых отключениях по тел: 8 924 490 23 19 или на сайте ФРС www.sakh-frs.ru.\nВНИМАНИЕ! Для передачи показаний прибора учета по телефону\nКонтакт-центра 8-800-234-7777 назовите цифровой код:\n640100214781\nДля входа в «Личный кабинет» на сайте ПАО «ДЭК» www.dvec.ru используйте логин JKH_R7635202541, пароль 203qphUJY1\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:12:21,626 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "billing_period": "Апрель 2020 г.",
+  "payer": {
+    "name": "Иванов Иван Иванович",
+    "address": "694420, р-н Александровск-Сахалинский, г Александровск-Сахалинский",
+    "area_sq_m": 57.9,
+    "residents_count": 1
+  },
+  "service_provider": {
+    "name": "ПАО \"Сахалинэнерго\"",
+    "address": "г. Александровск-Сахалинский ул. Советская д. 34 оф. 76"
+  },
+  "payment_details": {
+    "personal_account": "452456456",
+    "total_to_pay": 1022.95,
+    "total_with_arrears": 0.0,
+    "recipient": {
+      "name": "ПАО \"Сахалинэнерго\"",
+      "bank_account": "40702810350340008184",
+      "bank_name": "Дальневосточный Банк ПАО Сбербанк",
+      "correspondent_account": "30101810600000000608",
+      "bik": "040813608"
+    }
+  },
+  "services": [
+    {
+      "name": "Электроэнергия",
+      "unit": "кВт.ч",
+      "volume": 205,
+      "rate": 4.99,
+      "amount": 1022.95
+    },
+    {
+      "name": "Обращение с ТКО",
+      "unit": "руб.",
+      "volume": 1,
+      "rate": 34.546,
+      "amount": 34.546
+    },
+    {
+      "name": "Взнос на капитальный ремонт",
+      "unit": "руб.",
+      "volume": 584.46,
+      "rate": 295.38,
+      "amount": 2868.60
+    }
+  ]
+}
+```
+2026-04-03 14:12:21,626 - diplom - WARNING -   Prompt: 13308 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:12:21,626 - diplom - WARNING -   Consecutive error 1/3 for model gemma4:e2b on file 28426.jpg-clean
+2026-04-03 14:12:21,628 - diplom - INFO - [35/53] Processing 4d5c39e55844da80efe8af6755de558f.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:12:21,630 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:12:23,305 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:12:23,309 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:12:33,674 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:12:51,926 - diplom - INFO -   Prompt: 7759 chars. Success in 30.30s.
+2026-04-03 14:12:51,928 - diplom - INFO - [36/53] Processing i.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:12:51,929 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:12:55,718 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:12:55,722 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:13:08,346 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:13:29,847 - diplom - INFO -   Prompt: 10553 chars. Success in 37.92s.
+2026-04-03 14:13:29,849 - diplom - INFO - [37/53] Processing kvit.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:13:29,851 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:13:32,695 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:13:32,698 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:13:38,562 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:14:17,273 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting ',' delimiter: line 38 column 16 (char 886)
+2026-04-03 14:14:19,535 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:15:00,002 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting ',' delimiter: line 38 column 16 (char 886)
+2026-04-03 14:15:02,284 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:15:41,429 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting ',' delimiter: line 38 column 16 (char 886)
+2026-04-03 14:15:41,429 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:15:41,430 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### REFERENCE EXAMPLE:\nINPUT: для внесения платы за содержание жилого помещения и предоставление коммунальных услуг\nПЛАТЕЖНЫЙ ДОКУМЕНТ\nРаздел 1. Сведения о плательщике и исполнителе услуг\nРаздел 2. Сведения о показаниях ИПУ\nза Апрель 2020 г.\n(расчетный\nНаименование организации:\n113205, Москва г, Вавилова , дом № 65\nУК \"ЖилКом\"\nИПУ\nНаименование коммунальной\nПредыдущие показания\nМоск\nприборов учета\nТекущие показания\nприборов учета\nпериод)\nАдрес:\nтел.: 8 (836) 230-40-09\nуслуги\nком. услуг\nком. услуг\nФ.И.О. (наименование) плательщика собственника/нанимателя\nДиспетчерская: 8 (836) 255-55-55\nГаз, кв.32\nГазовое снабжение\n112\n120\nЛебедев Юрий Викторович\nСайт управляющей компании: demo-jkh.otr-soft.ru\nЭлектрическая энергия,\nЭлектрическая энергия\n741\n752\nАдрес: Москва г, Вавилова ул, 67, Кв. 32\nКВ.32\nПлощадь помещ. : 75 кв.м.\nКол-во прожив. / зарег: 1 / 1 чел.\nГорячее водоснабжение,\nKB.32\nГорячее водоснабжение\n41.5\n47\nводоснабжение, кв.32\nХолодное\nХолодное водоснабжение\n38\n45\nРаздел 3. РАСЧЕТ РАЗМЕРА ПЛАТЫ ЗА СОДЕРЖАНИЕ И РЕМОНТ ЖИЛОГО ПОМЕЩЕНИЯ И КОММУНАЛЬНЫЕ УСЛУГИ\nОбъем коммуна-\nОбъем услуг\nн\nТариф/\nНачисл. за\n10.11.10\nрасчетный\nРазмер\nРазмер\nПерерас-\nчеты\nЛьготы,\nсубси-\nК оплате за\nЗадолженность\nНеустойка\n№\nВиды услуг\nЕд. изм.\n-\nльных услуг\nвсе лишь\nобщ.услуг\nСОИ или\nРазм.\nпл.\n.\nпериод\nкоэффициента\nповышающего\nпревыш.платы с уч.\nповыш.коэф\nвсего,\n-\nДИИ,\nрасчетный период,\nрублей\nм\n/Переплата(-),руб.\n(штраф, пеня)\nполучателя\n-\nплатежа\nИтого к оплате\n(подпись)\nру0.\nруб.\nруб.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nХолодное водоснабжение\nM3\n4,000\n0,000\n29,85\n119,40\n0,00\n0,00\n0,00\n119,40\n134,33\n0,00\n5\n119,40\nГорячее водоснабжение\nM3\n97,000\n4,745\n0,000\n123,58\n586,39\n0,00\n0,00\n0,00\n586,39\n586,39\n0,00\n5\n586,39\nЭлектрическая энергия\nКВТ.Ч\n0,000\n4,87\n472,39\n0,00\n0,00\n0,00\n472,39\n460,70\n510,57\n0,00\n5\n498,37\n472,39\nВодоснабжение\n20,425\nХ\n0,000\n24,4\n498,37\n0,00\n0,00\n0,00\n498,37\n150,00\n0,00\n5\n150,00\nВывоз мусора\nшт\nХ\n150\n150,00\n0,00\n0,00\n0,00\n150,00\n0,00\n5\nГазовое снабжение\nM3\n14,000\n0,000\n7.45\n104,30\n0,00\n0,00\n0,00\n104,30\n104,30\n0,00\n5\n104,30\nЗапирающее устройство\nшт\nХ\nХ\n142\n142,00\n0,00\n0,00\n0,00\n142,00\n142,00\n0,00\n5\n142,00\nОбслуживание лифта\nшт\nХ\nХ\n110\n110,00\n0,00\n0,00\n0,00\n110,00\n110,00\n0,00\n5\n110,00\nТелеантенна\nшт\nХ\nХ\n175\n175,00\n0,00\n0,00\n0,00\n175,00\n175,00\n0,00\n5\n175,00\nОтопление\nM2\n0,000\n25\n0,00\n1 875,00\n0,00\n0,00\n0,00\n0,00\n2 357,85\n4 248,29\n0,00\n2 357,85\nВнесено оплат от 02.04.2020\n4 248,29\nИтого к оплате\n2 357,85\nСведения о получателях платежа\nполучателя\n№\nНаименование\nполучателя\nНомер банковского счета\n№ л/счета (иной\nидентификатор\nИтого к оплате за\nШтриховой\nплатежа\nплатежа\nи банковские реквизиты\nплательщика) / Идентификатор ЖКУ\nрасч. период руб.\nкод\n5\nУК \"Престиж\"\nР/с 40704820100320030032 в ОАО \"БАНК МОСКВЫ\", к/с 30201810500000300214, БИК 044525\nл/с №2011067048\n2 357,85\nOUTPUT: {\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### TARGET OCR TEXT TO PROCESS:\nСЧЕТ-ИЗВЕЩЕНИЕ\nПолучатель платежа\nПлательщик:\nТСЖ Янтарный берег-2\nАдрес\nул Варшавская, д.23, корп.2, кв.1,\nЛицевой счет\n7894853621268\nБанковские реквизиты:\n40703810255160000026\nРасчетный период\nИюнь 2019\nВ СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО\nСумма к оплате\n6080p 79к\nСБЕРБАНК\nк/с 30101810500000000653\nБИК 044030653\nПодпись\nплательщика\nСЧЕТ-КВИТАНЦИЯ\nПолучатель платежа\nПлательщик:\nТСЖ Янтарный берег-2\nАдрес\nул Варшавская, д.23, корп.2, кв.4\nИНН 7810330296\nЛицевой счет\n7894853621268\nБанковские реквизиты:\nЕЛС (ГИС ЖКХ) 30ВP394802\n40703810255160000026\nВ СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО\nСБЕРБАНК\nк/с 30101810500000000653\nНачислено\n6080p 79k\nДомовые приборы учета\nXBC: 5782,0 м3; ГВС: 3097,3 м3\nТепл.: 371,6 Гкал\nК оплате за\nИюнь 2019\n6080p 79к\nОбщая площадь 57221,6\nОплатить до 10 числа след.месяца\nИндивидуальные приборы учета\nПоказания по водосчетчикам сдавать до 2-ого числа\nXBC:\nПлощадь:\n132.30 кв.м\nКол.чел. 1/1\nГВС:\nНормативы потребления коммунальных услуг:\nХВС: 4,9 куб.м/чел; ГВС; 3,48 куб.м/чел\nвид платежа\nразмер\nплаты\nрасход\nнорм./\nсумма\nльгота\nперерасч.\nначислено\nвид платежа\nразмер\nплаты\nрасход\nнорм./\nсумма\nльгота\nперерасч\nначислено\nЖИЛИЩНЫЕ УСЛУГИ\nСод.общ.имущества дома\nКачество\n731,62\n731,62\nКОММУНАЛЬНЫЕ УСЛУГИ\nЭлектр.МОП однотарифная\n3.46\n3.396\n11.75\n-\n11,75\nУборка лесниц\nВывоз мусора\n11\n02\n279,15\n664,15\n279,15\n664,15\nХолодная вода\nВ/отвед.ХВС\n30.60\n30,60\n7:35\n7.35\n224,91\n224,91\n4\n-\n224,91\n224,91\nТекущий ремонт дома\n31\n834,81\n834,81\nГорячая вода\n106.53\n5.22\n556,09\nE\nй\n556,09\nСан.сод.территории\nПЗУ\n252,69\n44,98\n252,69\n44,98\nВ/отвед.ГВС\nОтопление\n1775.45\n30,60\n0.003246\n5.22\n782,42\n159,73\n4\n-\n159,73\n762,42\nАППЗ\nЭкспл.приборов учета\n58,21\n88,64\n58,21\n88,64\nАнтенна\nПРОЧИЕ\n90,00\n90,00\n90,00\nЛифт\n67\n60\n220,94\n343,98\nF\n4\n220,94\n343,98\nРадиоточка\n90,50\n90,50\n-\n=\n-\nE\n90,50\nАХР (адм.хоз.расх.)\nДеж.администратор\n00\n264,60\n4\n4\n264,60\nЭлектр.МОП День\nЭлектр.МОП Ночь\n67\n13\n39.439\n15.01\n144,74\n31.97\n4\n144,74\n31.97\nИтого\n6080,79\n0,00\n0.00\n6080,79\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:15:41,430 - diplom - ERROR - LAST PARTIAL RESPONSE:
+{
+  "billing_period": "Июнь 2019",
+  "payer": {
+    "name": "ТСЖ Янтарный берег-2",
+    "address": "ул Варшавская, д.23, корп.2, кв.1",
+    "area_sq_m": 132.30,
+    "residents_count": 1
+  },
+  "service_provider": {
+    "name": "СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО",
+    "address": null,
+    "phone": null
+  },
+  "payment_details": {
+    "personal_account": "7894853621268",
+    "total_to_pay": "6080,79",
+    "total_with_arrears": "0.00",
+    "recipient": {
+      "name": "СБЕРБАНК",
+      "bank_account": "301018105000000653",
+      "bank_name": "В СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО",
+      "correspondent_account": null,
+      "bik": "044030653"
+    }
+  },
+  "services": [
+    {
+      "name": "Электр.МОП однотарифная",
+      "unit": null,
+      "volume": 3.46,
+      "rate": 3.396,
+      "amount": 11.75
+    },
+    {
+      "name": "Уборка лесниц",
+      "unit": null,
+      "volume": 11,
+      "rate": 02,
+      "amount": 279.15
+    },
+    {
+      "name": "Холодная вода",
+      "unit": null,
+      "volume": 30.60,
+      "rate": 30.60,
+      "amount": 7.35
+    },
+    {
+      "name": "Текущий ремонт дома",
+      "unit": null,
+      "volume": 31,
+      "rate": 834.81,
+      "amount": 834.81
+    },
+    {
+      "name": "Горячая вода",
+      "unit": null,
+      "volume": 106.53,
+      "rate": 5.22,
+      "amount": 556.09
+    },
+    {
+      "name": "Сан.сод.территории",
+      "unit": "ПЗУ",
+      "volume": 252.69,
+      "rate": 44.98,
+      "amount": 252.69
+    },
+    {
+      "name": "В/отвед.ГВС",
+      "unit": null,
+      "volume": 1775.45,
+      "rate": 30.60,
+      "amount": 0.003246
+    },
+    {
+      "name": "АППЗ",
+      "unit": null,
+      "volume": 58.21,
+      "rate": 88.64,
+      "amount": 58.21
+    },
+    {
+      "name": "Антенна",
+      "unit": null,
+      "volume": 90.00,
+      "rate": 90.00,
+      "amount": 90.00
+    },
+    {
+      "name": "Лифт",
+      "unit": null,
+      "volume": 67,
+      "rate": 60,
+      "amount": 220.94
+    },
+    {
+      "name": "Радиоточка",
+      "unit": null,
+      "volume": 90.50,
+      "rate": 90.50,
+      "amount": 0.00
+    }
+  ]
+}
+2026-04-03 14:15:41,430 - diplom - WARNING -   Prompt: 8364 chars. Error: Ollama failure after 3 attempts: Expecting ',' delimiter: line 38 column 16 (char 886)
+2026-04-03 14:15:41,430 - diplom - WARNING -   Consecutive error 1/3 for model gemma4:e2b on file kvit.jpg-clean
+2026-04-03 14:15:41,434 - diplom - INFO - [38/53] Processing kvitantsija-zhkh.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:15:41,436 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:15:44,883 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:15:44,887 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:15:55,211 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:16:19,348 - diplom - WARNING - Ollama attempt 1/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:16:21,618 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:16:45,889 - diplom - WARNING - Ollama attempt 2/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:16:48,164 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:17:11,104 - diplom - WARNING - Ollama attempt 3/3 failed for gemma4:e2b: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:17:11,104 - diplom - ERROR - Ollama failure after 3 attempts for model gemma4:e2b.
+2026-04-03 14:17:11,104 - diplom - ERROR - LAST PROMPT:
+[
+  {
+    "role": "system",
+    "content": "You are a professional data extraction system. Extract data from OCR text according to the provided JSON schema. Return ONLY raw JSON object."
+  },
+  {
+    "role": "user",
+    "content": "### JSON SCHEMA TO FOLLOW:\n{\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### REFERENCE EXAMPLE:\nINPUT: для внесения платы за содержание жилого помещения и предоставление коммунальных услуг\nПЛАТЕЖНЫЙ ДОКУМЕНТ\nРаздел 1. Сведения о плательщике и исполнителе услуг\nРаздел 2. Сведения о показаниях ИПУ\nза Апрель 2020 г.\n(расчетный\nНаименование организации:\n113205, Москва г, Вавилова , дом № 65\nУК \"ЖилКом\"\nИПУ\nНаименование коммунальной\nПредыдущие показания\nМоск\nприборов учета\nТекущие показания\nприборов учета\nпериод)\nАдрес:\nтел.: 8 (836) 230-40-09\nуслуги\nком. услуг\nком. услуг\nФ.И.О. (наименование) плательщика собственника/нанимателя\nДиспетчерская: 8 (836) 255-55-55\nГаз, кв.32\nГазовое снабжение\n112\n120\nЛебедев Юрий Викторович\nСайт управляющей компании: demo-jkh.otr-soft.ru\nЭлектрическая энергия,\nЭлектрическая энергия\n741\n752\nАдрес: Москва г, Вавилова ул, 67, Кв. 32\nКВ.32\nПлощадь помещ. : 75 кв.м.\nКол-во прожив. / зарег: 1 / 1 чел.\nГорячее водоснабжение,\nKB.32\nГорячее водоснабжение\n41.5\n47\nводоснабжение, кв.32\nХолодное\nХолодное водоснабжение\n38\n45\nРаздел 3. РАСЧЕТ РАЗМЕРА ПЛАТЫ ЗА СОДЕРЖАНИЕ И РЕМОНТ ЖИЛОГО ПОМЕЩЕНИЯ И КОММУНАЛЬНЫЕ УСЛУГИ\nОбъем коммуна-\nОбъем услуг\nн\nТариф/\nНачисл. за\n10.11.10\nрасчетный\nРазмер\nРазмер\nПерерас-\nчеты\nЛьготы,\nсубси-\nК оплате за\nЗадолженность\nНеустойка\n№\nВиды услуг\nЕд. изм.\n-\nльных услуг\nвсе лишь\nобщ.услуг\nСОИ или\nРазм.\nпл.\n.\nпериод\nкоэффициента\nповышающего\nпревыш.платы с уч.\nповыш.коэф\nвсего,\n-\nДИИ,\nрасчетный период,\nрублей\nм\n/Переплата(-),руб.\n(штраф, пеня)\nполучателя\n-\nплатежа\nИтого к оплате\n(подпись)\nру0.\nруб.\nруб.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nХолодное водоснабжение\nM3\n4,000\n0,000\n29,85\n119,40\n0,00\n0,00\n0,00\n119,40\n134,33\n0,00\n5\n119,40\nГорячее водоснабжение\nM3\n97,000\n4,745\n0,000\n123,58\n586,39\n0,00\n0,00\n0,00\n586,39\n586,39\n0,00\n5\n586,39\nЭлектрическая энергия\nКВТ.Ч\n0,000\n4,87\n472,39\n0,00\n0,00\n0,00\n472,39\n460,70\n510,57\n0,00\n5\n498,37\n472,39\nВодоснабжение\n20,425\nХ\n0,000\n24,4\n498,37\n0,00\n0,00\n0,00\n498,37\n150,00\n0,00\n5\n150,00\nВывоз мусора\nшт\nХ\n150\n150,00\n0,00\n0,00\n0,00\n150,00\n0,00\n5\nГазовое снабжение\nM3\n14,000\n0,000\n7.45\n104,30\n0,00\n0,00\n0,00\n104,30\n104,30\n0,00\n5\n104,30\nЗапирающее устройство\nшт\nХ\nХ\n142\n142,00\n0,00\n0,00\n0,00\n142,00\n142,00\n0,00\n5\n142,00\nОбслуживание лифта\nшт\nХ\nХ\n110\n110,00\n0,00\n0,00\n0,00\n110,00\n110,00\n0,00\n5\n110,00\nТелеантенна\nшт\nХ\nХ\n175\n175,00\n0,00\n0,00\n0,00\n175,00\n175,00\n0,00\n5\n175,00\nОтопление\nM2\n0,000\n25\n0,00\n1 875,00\n0,00\n0,00\n0,00\n0,00\n2 357,85\n4 248,29\n0,00\n2 357,85\nВнесено оплат от 02.04.2020\n4 248,29\nИтого к оплате\n2 357,85\nСведения о получателях платежа\nполучателя\n№\nНаименование\nполучателя\nНомер банковского счета\n№ л/счета (иной\nидентификатор\nИтого к оплате за\nШтриховой\nплатежа\nплатежа\nи банковские реквизиты\nплательщика) / Идентификатор ЖКУ\nрасч. период руб.\nкод\n5\nУК \"Престиж\"\nР/с 40704820100320030032 в ОАО \"БАНК МОСКВЫ\", к/с 30201810500000300214, БИК 044525\nл/с №2011067048\n2 357,85\nOUTPUT: {\n  \"billing_period\": \"Апрель 2020 г.\",\n  \"payer\": {\n    \"name\": \"Лебедев Юрий Викторович\",\n    \"address\": \"Москва г, Вавилова ул, 67, Кв. 32\",\n    \"area_sq_m\": 75.0,\n    \"residents_count\": 1\n  },\n  \"service_provider\": {\n    \"name\": \"УК \\\"ЖилКом\\\"\",\n    \"address\": \"113205, Москва г, Вавилова , дом № 65\",\n    \"phone\": \"8 (836) 230-40-09\"\n  },\n  \"payment_details\": {\n    \"personal_account\": \"2011067048\",\n    \"total_to_pay\": 2357.85,\n    \"total_with_arrears\": 4248.29,\n    \"recipient\": {\n      \"name\": \"УК \\\"Престиж\\\"\",\n      \"bank_account\": \"40704820100320030032\",\n      \"bank_name\": \"ОАО \\\"БАНК МОСКВЫ\\\"\",\n      \"correspondent_account\": \"30201810500000030214\",\n      \"bik\": \"044525219\"\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"Холодное водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.0,\n      \"rate\": 29.85,\n      \"amount\": 119.4\n    },\n    {\n      \"name\": \"Горячее водоснабжение\",\n      \"unit\": \"м3\",\n      \"volume\": 4.745,\n      \"rate\": 123.58,\n      \"amount\": 586.39\n    },\n    {\n      \"name\": \"Электрическая энергия\",\n      \"unit\": \"кВт.ч\",\n      \"volume\": 97.0,\n      \"rate\": 4.87,\n      \"amount\": 472.39\n    },\n    {\n      \"name\": \"Водоснабжение\",\n      \"volume\": 20.425,\n      \"rate\": 24.4,\n      \"amount\": 498.37\n    },\n    {\n      \"name\": \"Вывоз мусора\",\n      \"unit\": \"шт\",\n      \"rate\": 150.0,\n      \"amount\": 150.0\n    },\n    {\n      \"name\": \"Запирающее устройство\",\n      \"unit\": \"шт\",\n      \"rate\": 142.0,\n      \"amount\": 142.0\n    },\n    {\n      \"name\": \"Обслуживание лифта\",\n      \"unit\": \"шт\",\n      \"rate\": 110.0,\n      \"amount\": 110.0\n    },\n    {\n      \"name\": \"Телеантенна\",\n      \"unit\": \"шт\",\n      \"rate\": 175.0,\n      \"amount\": 175.0\n    }\n  ]\n}\n\n### TARGET OCR TEXT TO PROCESS:\nдля внесения платы за содержание и ремонт жилого помещения и предоставления комунальных услуг\nПЛАТЕЖНЫЙ ДОКУМЕНТ (СЧЕТ) № 1000432362\nРаздел 2\nНаименование\nИнформация для внесения платы получателю платежа (получателям платежей)\n№ лицевого счета\nСумма к оплате\nполучателя\nНомер банковского счета и банковские\nреквизиты\n(иной идентификатор\nВид платы\nза расчетный\nOBRC4561000432362313664\nплатежа\nр/с 124523464567858789 к/с\nплательщика)\nпериод руб.\nР подошел 1\nСведения о платильщике и исполнителе услуг\n30101810400000000952 БИК 046577952\n1000432362\nЗа\n2032.72\nза сентябрь 2012 (расчетный период)\nФ.И.О. (наименование) плательщика собственника/нанимателя\nФИЛИАЛ ОАО БАНК ВТБ В Г.\nкоммунальные\nуслуги\nЧибирск Вашерий Михайловны\nЕКАТЕРИНБУРГЕ\nАдрес помещения: сЕкатеринбург ул.Викуловна д.321/1 кв.36\nПлощадь помещения 58.60 кв.м\nКоличество противающих 2 чел\nСправочно:\nЗадолженность за предыдущие периоды 1223.92\nНаименование организации - исполнителя услуг.\nАдрес:\nАванс на начало расчетного периода 0.00\n(учтены платежи, 2 числа следующего периода за расчетным )\nТелефон, факс, адрес электронной почты, адресдата в сети Интернет:\nРеким работы:\nТелефонс\nДата последней поступившей оплаты 30.08.2012\nИтого к оплате: 3136.64 руб.\nР подошел 3\nРАСЧЕТ РАЗМЕРАПЛАТЫ ЗАСОДЕРЖАНИЕ И РЕМОНТ ЖИЛОГО ПОМЕЩЕНИЯ И КОММУНАЛЬНЫЕ УСЛУГИ\nИтого к оплате за\nРаздел 4\nНорматив\nСправочная информация\nТекущее\nкоммунальных\nОбъем\nТариф\nРазмер платы за\nm\nначислено\nBAR\nВсего\nПере-\nрасчетный период, руб.\nпотребления\nпоказания\nСуммарный объем\nВиды услуг\nЕдизм\nуслуг\"\nруб/ед.им.\nРазмер\nком.услуги, руб.\nмиссия\nза\nрасчеть\nЛьготы,\nm-\nсубсидии\nВ т.ч. за ком.\nуслуги\nкоммунальных\nуслуг\nприборов учета\nком.услуг\nком, услуг в доме\nMA\nна\nплаты на\nиндив.\nобuрдом\npH\nпериод\nасчетный\nвсего,\nруб.\nруб.\nВсего\nИНД,\nобшедом\nиндив.\nобшедом\nиндив.\nобшедом\n0\nна\nпотребл\nиндив.\nобщедом\nнужды\nкв.м. руб.\nпотребл\nmm\nнужды\nруб.\nЬаа\nпотребл\nнужды\nпотребл.\nнужды\nпотребп\nнужды\nповедения\nпомещениях\nдома\nобщедом\nМУЖДЫ\nСодержание Жил Фонда\n1\nКем\n2\n3\n58.6\n4\n5\n16.03\n939.36\n6\n7\n939.36\n8\n9\n10\n939,36\n11\n939.36\n12\n13\n1\n2\n3\n4\n5\n6\nКал. ремонт\nКв.м\n58.6\nE\n425\n249.05\n249.05\nE\n249.05\n249.05\nE\nE\nF\nE\nE\nF\nE\nКоммунальные услуги\nХолодная вода\nКубм\n9.7\n4\n20.80\n201.76\n4\n201.76\n-50.30\n151.46\n122.57\n28.89\n4.85\nГорячая вода по ПУ\nВодоотведение\nКуб.м\nКуб.м\n14.5387\n4.8387\nF\n67.00\n10.76\n324.19\n156.44\n324.19\n156,44\n-26.03\n324.19\n13041\n324.19\n115.48\n14,93\n10.34\n4.01\nE\n891\nЭлектроэнергия\nКотч\n88.0645\nE\n181\n159.40\n159.40\n4\n159.40\n159.40\n135\nF\nE\n3535.58\n8250\nИтого к оплате за расчетный период\nЭлектрон. Ночь\nКвтч\n93,871\nE\n084\n78.85\n78.85\n4\n2032.72\n78.85\n1988.9\n78.85\n43.82\nE\n2732.98\n(1) - нормативов потребления коммунальных услуг.\n- указывается объем коммунальных услуг, определенный исходя из\nРазред 6\nРасчет суммы к оплате с учетом рассрочки (отсрочки) платежа\nСумма платы с учетом рассрочки\nПроценты за\nСумма к оплате\n(3) - среднемесячного потребления коммунальных услуг;\n12\n) - нормативов индивидуальных (квартирных) приборов учета;\nВиды услуг\nплатежа\nрассрочку\nплатежа и процентов\nс учетом рассрочки\n(4) - изходя из показаний обшедомового прибора учета,\nР подошел 5\nСведения о перерасчетах (доначисления +, уменьшения -)\nрасчетный период\nот платы за\nот платы за предыдущие\nрасчетные периоды\n10140105\nLOVOL\nпатруб\n%\nплат\nза рассрочку руб.\nВид услуг\nОснования перерасчетов\nСумма,\nруб.\nХолодная вода\n1\n2\n3\n4\n5\n6\n1\nПерерасчет - входено корректиру которые показали ПУationФерсчет: наличие неоспособольного\n2\n3\nГорячая вода по ПУ\nВодоотведение\nХолодная вода\nПереросчет - воедямо корректиру которые показаний ПУДАвтоперерверстчет-наличие необработанного\nвлатоск,Всеменков осуществие)\n-5030\n-\nЭлектроэнергия\nВодоотводим\n(дляжи, Временные осуществые)\n-26.0С\nСодержание Жил Фонда\nЭлектроэн. Ночь\nКап. ремонт\nИтого к оплате за расчетный период с учетом рассрочки:\nУведомление\nУважаемые граждане!\nК сведению потребителей услуг:\nB\nквитанции оплата учтена по последнее число расчетного\nУважаемые граждане!\n11111\nДоводим до Вашего сведения, что доступен Сервис \"Кабинет\nАбонента\", с помощью которого вы можете предоставлять\nмесяца.\nПо вопросам начислений просим обращаться в Расчетный\nцентр по адресу: пр.Ленина, 555, тел. 555-55-55\nпоказания ПУ, оплачивать услуги, печатать квитанции и т.д.\n\n### FINAL RESULT (JSON ONLY):"
+  }
+]
+2026-04-03 14:17:11,104 - diplom - ERROR - LAST PARTIAL RESPONSE:
+```json
+{
+  "billing_period": "сентябрь 2012",
+  "payer": {
+    "name": "Чибирск Вашерий Михайловны",
+    "address": "сЕкатеринбург ул.Викуловна д.321/1 кв.36",
+    "area_sq_m": 58.6,
+    "residents_count": 2
+  },
+  "service_provider": {
+    "name": "ОАО БАНК ВТБ В Г.",
+    "address": null,
+    "phone": null
+  },
+  "payment_details": {
+    "personal_account": "124523464567858789",
+    "total_to_pay": 3136.64,
+    "total_with_arrears": 1223.92,
+    "recipient": {
+      "name": "ОАО \"БАНК ВТБ В Г.",
+      "bank_account": null,
+      "bank_name": "ОАО \"БАНК ВТБ В Г.",
+      "correspondent_account": null,
+      "bik": "046577952"
+    }
+  },
+  "services": [
+    {
+      "name": "Холодная вода",
+      "unit": "Кубм",
+      "volume": 9.7,
+      "rate": 20.80,
+      "amount": 201.76
+    },
+    {
+      "name": "Горячая вода по ПУ",
+      "unit": "Куб.м",
+      "volume": 14.5387,
+      "rate": 4.8387,
+      "amount": 324.19
+    },
+    {
+      "name": "Водоотведение",
+      "unit": "Куб.м",
+      "volume": 67.00,
+      "rate": 10.76,
+      "amount": 324.19
+    },
+    {
+      "name": "Электроэнергия",
+      "unit": "Котч",
+      "volume": 88.0645,
+      "rate": 159.40,
+      "amount": 159.40
+    }
+  ]
+}
+```
+2026-04-03 14:17:11,105 - diplom - WARNING -   Prompt: 10627 chars. Error: Ollama failure after 3 attempts: Expecting value: line 1 column 1 (char 0)
+2026-04-03 14:17:11,105 - diplom - WARNING -   Consecutive error 2/3 for model gemma4:e2b on file kvitantsija-zhkh.jpg-clean
+2026-04-03 14:17:11,106 - diplom - INFO - [39/53] Processing 152f6bcs-960.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:17:11,107 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:17:11,662 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:17:11,666 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:17:14,170 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:17:21,332 - diplom - INFO -   Prompt: 2195 chars. Success in 10.23s.
+2026-04-03 14:17:21,333 - diplom - INFO - [40/53] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:17:21,335 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:17:21,935 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:17:21,937 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:17:22,987 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:17:30,512 - diplom - INFO -   Prompt: 2103 chars. Success in 9.18s.
+2026-04-03 14:17:30,514 - diplom - INFO - [41/53] Processing 1647714700_02-min.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:17:30,515 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:17:31,151 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:17:31,154 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:17:32,688 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:17:40,843 - diplom - INFO -   Prompt: 2814 chars. Success in 10.33s.
+2026-04-03 14:17:40,844 - diplom - INFO - [42/53] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:17:40,846 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:17:41,400 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:17:41,404 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:17:42,825 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:17:53,349 - diplom - INFO -   Prompt: 2780 chars. Success in 12.50s.
+2026-04-03 14:17:53,350 - diplom - INFO - [43/53] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:17:53,352 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:17:53,941 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:17:53,944 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:17:55,068 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:03,207 - diplom - INFO -   Prompt: 2239 chars. Success in 9.86s.
+2026-04-03 14:18:03,209 - diplom - INFO - [44/53] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:03,210 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:03,494 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:03,497 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:04,031 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:07,844 - diplom - INFO -   Prompt: 1348 chars. Success in 4.64s.
+2026-04-03 14:18:07,846 - diplom - INFO - [45/53] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:07,849 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:08,093 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:08,096 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:08,388 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:11,969 - diplom - INFO -   Prompt: 1338 chars. Success in 4.12s.
+2026-04-03 14:18:11,971 - diplom - INFO - [46/53] Processing R3fp08pn_yI.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:11,973 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:12,250 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:12,253 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:12,551 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:16,402 - diplom - INFO -   Prompt: 1346 chars. Success in 4.43s.
+2026-04-03 14:18:16,403 - diplom - INFO - [47/53] Processing auSBK6ncH3c.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:16,406 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:16,644 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:16,646 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:16,935 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:21,744 - diplom - INFO -   Prompt: 1331 chars. Success in 5.34s.
+2026-04-03 14:18:21,745 - diplom - INFO - [48/53] Processing yoqWE8WFTe8.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:21,747 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:22,015 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:22,018 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:22,305 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:25,741 - diplom - INFO -   Prompt: 1331 chars. Success in 4.00s.
+2026-04-03 14:18:25,742 - diplom - INFO - [49/53] Processing снилс мой.png-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:25,744 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:25,993 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:25,995 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:26,295 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:30,187 - diplom - INFO -   Prompt: 1351 chars. Success in 4.44s.
+2026-04-03 14:18:30,188 - diplom - INFO - [50/53] Processing 1.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:30,190 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:30,860 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:30,862 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:32,397 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:41,370 - diplom - INFO -   Prompt: 3044 chars. Success in 11.18s.
+2026-04-03 14:18:41,371 - diplom - INFO - [51/53] Processing 196854.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:41,373 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:42,009 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:42,012 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:43,434 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:18:52,707 - diplom - INFO -   Prompt: 3036 chars. Success in 11.34s.
+2026-04-03 14:18:52,709 - diplom - INFO - [52/53] Processing bocharov_naebschik.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:18:52,710 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:18:54,856 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:18:54,860 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:18:56,433 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:19:04,994 - diplom - INFO -   Prompt: 2954 chars. Success in 12.29s.
+2026-04-03 14:19:04,997 - diplom - INFO - [53/53] Processing pgxcojsmr0vehqzv6zyr.jpg-clean for model gemma4:e2b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-03 14:19:04,999 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-03 14:19:05,670 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-03 14:19:05,673 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-03 14:19:07,149 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-03 14:19:16,069 - diplom - INFO -   Prompt: 3106 chars. Success in 11.07s.
+2026-04-03 14:19:16,078 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_gemma4_e2b_20260403_141916.json
+2026-04-03 16:29:00,591 - diplom - INFO - Task d6bff08a-7c0c-4a51-831b-af7373b1c9a6: Starting OCR

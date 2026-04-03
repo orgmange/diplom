@@ -125,6 +125,58 @@ def get_document_recognition_status(task_id: str):
     return status
 
 
+@router.post("/generate-ocr")
+async def generate_ocr(file: UploadFile = File(..., description="Изображение документа для запуска OCR-пайплайна")):
+    """
+    Загрузка изображения документа для запуска OCR-пайплайна.
+    Возвращает job_id, по которому потом можно поллить /result/{job_id}.
+    """
+    content = await file.read()
+    if not content:
+         raise HTTPException(status_code=400, detail="Empty file provided")
+         
+    image_base64 = base64.b64encode(content).decode('utf-8')
+    task_id = recognition_service.start_template_task(image_base64)
+    return {"job_id": task_id}
+
+
+@router.get("/result/{job_id}")
+def get_job_result(job_id: str):
+    """
+    Получение результата асинхронной задачи по её идентификатору.
+    """
+    result_data = recognition_service.get_task_result(job_id)
+    if not result_data:
+        raise HTTPException(status_code=404, detail="Job not found")
+    
+    internal_status = result_data["status"]
+    
+    # Map status: pending/processing -> pending, completed -> done, error -> error
+    if internal_status in ["pending", "processing"]:
+        status = "pending"
+    elif internal_status == "completed":
+        status = "done"
+    else:
+        status = "error"
+        
+    value = None
+    error = result_data.get("error")
+    
+    if status == "done":
+        raw_value = result_data.get("result")
+        if isinstance(raw_value, dict):
+            import json
+            value = json.dumps(raw_value, ensure_ascii=False)
+        else:
+            value = str(raw_value) if raw_value is not None else ""
+            
+    return {
+        "status": status,
+        "value": value,
+        "error": error
+    }
+
+
 @router.get("/recognize/{task_id}/result")
 def get_document_recognition_result(
     task_id: str,

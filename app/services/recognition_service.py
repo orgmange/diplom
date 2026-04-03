@@ -55,6 +55,12 @@ class RecognitionService:
         if task_id not in self._tasks:
             return None
         task = self._tasks[task_id]
+        if task["status"] == "error":
+            return {
+                "status": "error",
+                "error": task.get("error", "Unknown error occurred")
+            }
+        
         if task["status"] != "completed":
             return {"status": task["status"]}
             

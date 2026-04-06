@@ -19,9 +19,10 @@ from app.core.config import settings
 
 # --- API Endpoints Tests ---
 
-def test_index_documents(mocker):
+@pytest.mark.asyncio
+async def test_index_documents(mocker):
     mocker.patch.object(vector_service, "index_examples", return_value=["doc1.xml"])
-    assert index_documents() == {"indexed_files": ["doc1.xml"], "count": 1}
+    assert await index_documents() == {"indexed_files": ["doc1.xml"], "count": 1}
 
 def test_search_documents(mocker):
     mocker.patch.object(
@@ -77,10 +78,25 @@ async def test_recognition_flow(mocker):
     # Mocking dependencies
     mock_ocr = mocker.patch("app.services.recognition_service.OCRService")
     mock_cleaner = mocker.patch("app.services.recognition_service.CleanerService")
+    # Mock Database session
+    mock_session = mocker.AsyncMock()
+    mocker.patch("app.services.recognition_service.async_session_local", return_value=mock_session)
+    mock_session.__aenter__.return_value = mock_session
+    
+    # Mock Task result for get_task_result
+    mock_task = MagicMock()
+    mock_task.status = "completed"
+    mock_task.result = {"structured": "data"}
+    mock_task.error = None
+    
+    mock_execute_result = MagicMock()
+    mock_execute_result.scalar_one_or_none.return_value = mock_task
+    mock_session.execute.return_value = mock_execute_result
+    
     # StructuringService.structure is async, use AsyncMock
     mock_structuring = mocker.patch("app.services.recognition_service.StructuringService")
     mock_structuring.return_value.structure = mocker.AsyncMock(return_value={"result": {"structured": "data"}})
-    
+
     service = RecognitionService(
         ocr_service=mock_ocr.return_value,
         cleaner_service=mock_cleaner.return_value,
@@ -93,14 +109,14 @@ async def test_recognition_flow(mocker):
     mock_cleaner.return_value.parse_xml_bytes.return_value = "cleaned text"
     
     request = RecognitionRequest(image_base64="YmFzZTY0")
-    task_id = service.start_recognition_task(request.image_base64)
+    task_id = await service.start_recognition_task(request.image_base64)
     
     assert task_id is not None
     
     import asyncio
     await asyncio.sleep(0.1) # Give it some time to run
     
-    result = service.get_task_result(task_id)
+    result = await service.get_task_result(task_id)
     assert result is not None
     if result["status"] == "error":
         print(f"Error: {result.get('error')}")

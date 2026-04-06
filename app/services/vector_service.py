@@ -141,66 +141,60 @@ class VectorService:
             return
         self.client.upsert(collection_name=collection_name or settings.COLLECTION_NAME, points=points)
 
-    def index_examples(self, embedding_model: Optional[str] = None, collection_name: Optional[str] = None) -> List[str]:
-        """Индексирует примеры из data/examples."""
-        self.ensure_collection(collection_name=collection_name, embedding_model=embedding_model)
+    async def migrate_examples_to_db(self):
+        """Переносит примеры из data/examples в PostgreSQL, если их там ещё нет."""
         examples_dir = settings.DATA_DIR / "examples"
         if not examples_dir.exists():
-            return []
+            return
 
-        indexed: List[str] = []
-        points: List[models.PointStruct] = []
-        for input_path in examples_dir.glob("*_input.txt"):
-            base_name = input_path.name.replace("_input.txt", "")
-            output_path = examples_dir / f"{base_name}_output.json"
-            if not output_path.exists():
-                continue
-            
-            raw_text = input_path.read_text(encoding="utf-8").strip()
-            if not raw_text:
-                continue
-                
-            json_output = output_path.read_text(encoding="utf-8").strip()
-            vector = self.vectorize_text(raw_text, embedding_model=embedding_model)
-            
-            # Определяем тип из имени файла или метаданных
-            doc_type = detect_doc_type(input_path.name)
-            
-            points.append(
-                models.PointStruct(
-                    id=self.generate_id(f"example_{base_name}"),
-                    vector=vector,
-                    payload={
-                        "filename": input_path.name,
-                        "text": raw_text,
-                        "json_output": json_output,
-                        "doc_type": doc_type,
-                        "is_example": True,
-                        "is_cleaned": True,
-                    },
+        async with async_session_local() as session:
+            # Получаем список уже существующих текстов для простейшей проверки на дубликаты
+            stmt = select(Example.text)
+            result = await session.execute(stmt)
+            existing_texts = set(result.scalars().all())
+
+            added_count = 0
+            for input_path in examples_dir.glob("*_input.txt"):
+                raw_text = input_path.read_text(encoding="utf-8").strip()
+                if not raw_text or raw_text in existing_texts:
+                    continue
+
+                base_name = input_path.name.replace("_input.txt", "")
+                output_path = examples_dir / f"{base_name}_output.json"
+                if not output_path.exists():
+                    continue
+
+                json_output = output_path.read_text(encoding="utf-8").strip()
+                doc_type = detect_doc_type(input_path.name)
+
+                new_example = Example(
+                    id=str(uuid.uuid4()),
+                    text=raw_text,
+                    json_output=json_output,
+                    doc_type=doc_type
                 )
-            )
-            indexed.append(input_path.name)
-        
-        self._upsert_points(points, collection_name=collection_name)
-        return indexed
+                session.add(new_example)
+                added_count += 1
+                existing_texts.add(raw_text)
 
-    async def reindex_all(self, embedding_model: Optional[str] = None) -> Dict[str, Any]:
-        """Полностью очищает и переиндексирует базу, используя только примеры."""
+            if added_count > 0:
+                await session.commit()
+                logger.info(f"Migrated {added_count} examples from disk to DB")
+
+    async def index_examples(self, embedding_model: Optional[str] = None, collection_name: Optional[str] = None) -> List[str]:
+        """Индексирует примеры из базы данных (предварительно мигрируя из файлов)."""
+        # Сначала мигрируем новые файлы в базу
+        await self.migrate_examples_to_db()
+
+        self.ensure_collection(collection_name=collection_name, embedding_model=embedding_model)
         model_name = embedding_model or self._load_state()
-        vector_size = self.get_embedding_size(embedding_model=model_name)
-        self.reset_collection(vector_size=vector_size)
-        
-        # 1. Индексируем примеры из файлов (data/examples)
-        indexed_examples = self.index_examples(embedding_model=model_name)
-        
-        # 2. Индексируем примеры из базы данных
-        indexed_db_examples = 0
+
+        indexed_ids: List[str] = []
         async with async_session_local() as session:
             stmt = select(Example)
             result = await session.execute(stmt)
             db_examples = result.scalars().all()
-            
+
             points = []
             for ex in db_examples:
                 vector = self.vectorize_text(ex.text, embedding_model=model_name)
@@ -209,7 +203,6 @@ class VectorService:
                         id=self.generate_id(f"example_{ex.id}"),
                         vector=vector,
                         payload={
-                            "filename": f"db_{ex.id}",
                             "text": ex.text,
                             "json_output": ex.json_output,
                             "doc_type": ex.doc_type,
@@ -218,18 +211,28 @@ class VectorService:
                         },
                     )
                 )
-                indexed_db_examples += 1
-            
+                indexed_ids.append(ex.id)
+
             if points:
-                self._upsert_points(points)
+                self._upsert_points(points, collection_name=collection_name)
+
+        return indexed_ids
+
+    async def reindex_all(self, embedding_model: Optional[str] = None) -> Dict[str, Any]:
+        """Полностью очищает и переиндексирует базу, используя только примеры из БД."""
+        model_name = embedding_model or self._load_state()
+        vector_size = self.get_embedding_size(embedding_model=model_name)
+        self.reset_collection(vector_size=vector_size)
+        
+        # Индексируем примеры (включая миграцию из файлов)
+        indexed_names = await self.index_examples(embedding_model=model_name)
         
         self._save_state(model_name)
         
         return {
             "embedding_model": model_name,
-            "indexed_files": len(indexed_examples),
-            "indexed_db": indexed_db_examples,
-            "total": len(indexed_examples) + indexed_db_examples
+            "total_indexed": len(indexed_names),
+            "indexed_names": indexed_names
         }
 
     def search(
@@ -304,7 +307,6 @@ class VectorService:
             id=self.generate_id(f"example_{example_id}"),
             vector=vector,
             payload={
-                "filename": f"db_{example_id}",
                 "text": raw_text,
                 "json_output": json_output,
                 "doc_type": doc_type,

@@ -16296,3 +16296,694 @@ FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace
 WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
 2026-04-03 22:17:09,299 - sqlalchemy.engine.Engine - INFO - [cached since 0.00196s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
 2026-04-03 22:17:09,299 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-06 12:24:44,430 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-06 12:24:44,430 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 12:24:44,442 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-06 12:24:44,442 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 12:24:44,444 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-06 12:24:44,444 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 12:24:44,445 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-06 12:24:44,447 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-06 12:24:44,447 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-06 12:24:44,461 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-06 12:24:44,461 - sqlalchemy.engine.Engine - INFO - [cached since 0.01416s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-06 12:24:44,462 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-06 12:24:47,153 - diplom - INFO - Accessing root index.html
+2026-04-06 12:24:47,279 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-06 12:24:47,287 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 404 Not Found"
+2026-04-06 12:25:08,622 - diplom - INFO - Accessing root index.html
+2026-04-06 12:25:08,638 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 404 Not Found"
+2026-04-06 12:25:18,390 - diplom - INFO - Accessing root index.html
+2026-04-06 12:25:18,692 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 404 Not Found"
+2026-04-06 12:25:57,911 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:57,911 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:57,911 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:58,628 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:58,628 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:58,629 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:58,629 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:25:58,629 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 12:26:14,881 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 404 Not Found"
+2026-04-06 12:26:26,514 - diplom - INFO - Starting benchmark for model: qwen3.5:9b
+2026-04-06 12:26:26,514 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-06 12:26:26,517 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:9b
+2026-04-06 12:26:26,517 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:26:26,518 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-06 12:26:27,535 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:27,537 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-04-06 12:26:27,678 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:26:28,559 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:28,563 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:26:36,871 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:26:36,975 - diplom - INFO -   Prompt: 1212 chars. Success in 10.46s.
+2026-04-06 12:26:36,981 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:26:36,984 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:26:38,030 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:38,033 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:26:38,602 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:26:38,667 - diplom - INFO -   Prompt: 1224 chars. Success in 1.69s.
+2026-04-06 12:26:38,669 - diplom - INFO - [3/53] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:26:38,674 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:26:39,368 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:39,371 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:26:39,880 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:26:39,939 - diplom - INFO -   Prompt: 1125 chars. Success in 1.27s.
+2026-04-06 12:26:39,941 - diplom - INFO - [4/53] Processing _____________-_-________-001.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:26:39,943 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:26:40,834 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:40,837 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:26:41,468 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:26:41,541 - diplom - INFO -   Prompt: 1204 chars. Success in 1.60s.
+2026-04-06 12:26:41,543 - diplom - INFO - [5/53] Processing c38edbcs-960.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:26:41,545 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:26:42,495 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:26:42,498 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:26:43,055 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:01,075 - diplom - INFO -   Prompt: 1242 chars. Success in 19.53s.
+2026-04-06 12:27:01,079 - diplom - INFO - [6/53] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:01,082 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:01,911 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:01,914 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:02,618 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:02,688 - diplom - INFO -   Prompt: 1204 chars. Success in 1.61s.
+2026-04-06 12:27:02,689 - diplom - INFO - [7/53] Processing certn120766.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:02,691 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:03,384 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:03,387 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:03,874 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:16,716 - diplom - INFO -   Prompt: 1030 chars. Success in 14.03s.
+2026-04-06 12:27:16,721 - diplom - INFO - [8/53] Processing diplom_bakalavra_mgtu_im._baumana.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:16,724 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:17,332 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:17,335 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:17,961 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:30,936 - diplom - INFO -   Prompt: 1104 chars. Success in 14.21s.
+2026-04-06 12:27:30,938 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-04-06 12:27:30,941 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_9b_20260406_122730.json
+2026-04-06 12:27:38,695 - diplom - INFO - Starting benchmark for model: qwen3.5:9b
+2026-04-06 12:27:38,695 - diplom - INFO - Re-indexing unified examples for benchmark (Target: nomic-embed-text-v2-moe:latest)
+2026-04-06 12:27:38,696 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:9b
+2026-04-06 12:27:38,696 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:38,696 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-06 12:27:40,417 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:40,419 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:40,419 - diplom - WARNING - Vector size mismatch in documents (expected 768, got 1024). Resetting collection.
+2026-04-06 12:27:40,423 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:40,424 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-04-06 12:27:40,547 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:40,764 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:40,767 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:41,554 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:41,621 - diplom - INFO -   Prompt: 1212 chars. Success in 2.92s.
+2026-04-06 12:27:41,622 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:41,623 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:41,861 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:41,864 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:42,424 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:42,492 - diplom - INFO -   Prompt: 1224 chars. Success in 0.87s.
+2026-04-06 12:27:42,492 - diplom - INFO - [3/53] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:42,495 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:42,707 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:42,709 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:43,231 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:43,290 - diplom - INFO -   Prompt: 1125 chars. Success in 0.80s.
+2026-04-06 12:27:43,291 - diplom - INFO - [4/53] Processing _____________-_-________-001.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:43,293 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:43,536 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:43,538 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:44,123 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:27:44,184 - diplom - INFO -   Prompt: 1204 chars. Success in 0.89s.
+2026-04-06 12:27:44,185 - diplom - INFO - [5/53] Processing c38edbcs-960.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 12:27:44,191 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 12:27:44,425 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:27:44,428 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:27:45,020 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 12:28:03,330 - diplom - INFO -   Prompt: 1242 chars. Success in 19.14s.
+2026-04-06 12:28:03,331 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-04-06 12:28:03,332 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_9b_20260406_122803.json
+2026-04-06 12:28:09,964 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:09,965 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 404 Not Found"
+2026-04-06 12:28:10,068 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:10,069 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:10,872 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:11,750 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:12,344 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:13,106 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:16,442 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:18,030 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:18,357 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:20,593 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:20,920 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:21,175 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:21,691 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:22,029 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:22,581 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:24,798 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:25,296 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:25,316 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/benchmark_documents/points?wait=true "HTTP/1.1 200 OK"
+2026-04-06 12:28:25,318 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:26,129 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:26,133 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:26,134 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:27,508 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:27,512 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:27,513 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:28,313 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:28,316 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:28,318 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,122 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,126 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,127 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,974 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,977 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:29,979 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:30,851 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:30,854 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:30,856 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:31,582 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:31,585 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:31,587 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:32,455 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:32,458 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:32,460 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:33,294 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:33,297 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:33,299 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,064 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,068 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,071 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,884 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,886 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:34,889 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:37,193 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:37,196 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:37,199 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:39,872 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:39,875 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:39,878 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:42,385 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:42,388 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:42,390 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:44,909 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:44,912 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:44,915 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:47,748 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:47,751 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:47,753 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:50,068 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:50,070 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:50,074 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:52,217 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:52,220 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:52,222 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:55,084 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:55,087 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:55,090 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:56,983 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:56,986 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:56,988 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:28:58,734 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:28:58,738 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:28:58,740 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:00,903 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:00,906 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:00,908 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,265 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,268 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,271 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,630 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,633 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,636 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,959 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,962 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:01,965 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,357 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,360 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,363 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,801 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,804 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:02,807 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:03,233 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:03,236 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:03,237 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:04,426 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:04,429 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:04,432 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:05,631 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:05,634 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:05,637 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:06,794 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:06,797 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:06,800 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:07,399 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:07,401 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:07,403 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:08,416 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:08,419 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:08,420 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:12,226 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:12,228 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:12,230 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:13,919 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:13,922 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:13,924 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:17,673 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:17,676 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:17,678 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:20,463 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:20,466 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:20,468 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:23,565 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:23,568 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:23,571 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,175 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,178 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,181 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,718 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,721 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:24,723 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,271 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,274 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,277 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,834 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,837 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:25,839 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,539 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,542 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,544 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,884 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,887 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:26,888 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,227 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,230 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,231 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,572 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,575 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,577 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,841 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,844 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:27,845 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,120 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,123 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,125 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,388 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,390 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:28,393 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,048 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,050 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,053 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,768 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,770 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:29,772 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:30,527 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:30,530 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:30,532 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/benchmark_documents "HTTP/1.1 200 OK"
+2026-04-06 12:29:31,295 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 12:29:31,297 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 12:29:31,304 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-06 12:31:35,150 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-06 14:26:05,590 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-06 14:26:05,592 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 14:26:05,593 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-06 14:26:05,594 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 14:26:05,595 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-06 14:26:05,595 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-06 14:26:05,596 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-06 14:26:05,598 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-06 14:26:05,598 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-06 14:26:05,603 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-06 14:26:05,603 - sqlalchemy.engine.Engine - INFO - [cached since 0.00469s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-06 14:26:05,604 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-06 14:26:14,087 - diplom - INFO - Accessing root index.html
+2026-04-06 14:26:14,139 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 14:26:14,176 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-06 14:26:14,188 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-06 14:26:14,204 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-06 14:26:19,537 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:19,544 - httpx - INFO - HTTP Request: DELETE http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:26:19,546 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 404 Not Found"
+2026-04-06 14:26:19,675 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:26:19,676 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-06 14:26:19,677 - sqlalchemy.engine.Engine - INFO - SELECT examples.text 
+FROM examples
+2026-04-06 14:26:19,677 - sqlalchemy.engine.Engine - INFO - [generated in 0.00015s] ()
+2026-04-06 14:26:19,688 - sqlalchemy.engine.Engine - INFO - INSERT INTO examples (id, text, json_output, doc_type) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR), ($5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::VARCHAR), ($9::VARCHAR, $10::VARCHAR, $11::VARCHAR, $12::VARCHAR), ($13::VARCHAR, $14::VAR ... 614 characters truncated ...  ($57::VARCHAR, $58::VARCHAR, $59::VARCHAR, $60::VARCHAR) RETURNING examples.created_at, examples.id
+2026-04-06 14:26:19,688 - sqlalchemy.engine.Engine - INFO - [generated in 0.00006s (insertmanyvalues) 1/1 (ordered)] ('0af32358-3346-4c10-81b5-e2f1d4aa8c8d', 'Cущ\nBy Operator Запол\nРОССИЙСКАЯ ФЕДЕРАЦИЯ\n"\nBy Operator Запол\nRUSSIAN FEDERATION\nP\nПодпись владельца\nHolder\'s signature\nØ\n0\nРОССИЙСКАЯ Ф ... (597 characters truncated) ... \nПодпись владельца / Holder\'s signature\n06.10.2021\nЛЯ\nP < RUSIVANOVA << ANNA <<<<<<<< <<<<\n<<<<\n7028932827RUS8209153F21100611 <<<<<<<<<<<<<<04', '{\n  "surname": "ИВАНОВА",\n  "surname_latin": "IVANOVA",\n  "given_names": "АННА ВАЛЕРЬЕВНА",\n  "given_names_latin": "ANNA",\n  "nationality": "РОС ... (324 characters truncated) ... S",\n  "mrz": {\n    "line1": "P<RUSIVANOVA<<ANNA<<<<<<<<<<<<<<<<<<<<<<<<<<<<",\n    "line2": "7028932827RUS8209153F21100611<<<<<<<<<<<<<<04"\n  }\n}', 'zagran_passport', '2e481f10-215a-48d2-a9ec-beedea23b440', 'Настоящий диплом свидетельствует о том, что\nИванов\nИван Иванович\nосвоил(а) основную образовательную программу\nвысшего профессионального образован ... (548 characters truncated) ... \nГосударственной\nРегистрационный номер\nаттестационной комиссии\nИванов А.А.\n12-345-678\nРектор\nПетров А.А.\nДата выдачи\nМ.П.\n20 июня 2012 года', '{\n  "series": "000000",\n  "number": "0000000",\n  "registration_number": "12-345-678",\n  "date_of_issue": "20.06.2012",\n  "graduate": {\n    "sur ... (378 characters truncated) ... 00",\n    "specialty_name": "ИНФОРМАТИКА И ВЫЧИСЛИТЕЛЬНАЯ ТЕХНИКА",\n    "special_rank": "БАКАЛАВР-ИНЖЕНЕР"\n  },\n  "decision_date": "16.06.2012"\n}', 'diplom_bakalavra', '495fe4a1-d372-4a62-93e9-a74cc56b83ef', 'шиш\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nC.\nИсматов\nДмитрий Антонович\nфамилия\nродился(лась)\nчисло, месяц, год (тифрами и прописью)\n27.02.2010\nдвадцать  ... (640 characters truncated) ... \nКВА\n484\nЛ.Н.\nскол\nТадиси\nОГРН\nмарта\n2010г.\nАста оставим\nсост\n{\nО. Г. Воронкова\n*\nиюля\nII-РУ № 602386\nГомас, МПФ, Москва,\nCECTERTARC', '{\n  "child": {\n    "surname": "Исматов",\n    "name": "Дмитрий",\n    "patronymic": "Антонович",\n    "date_of_birth": "27.02.2010",\n    "place_of ... (389 characters truncated) ...     "date": "25.03.2010"\n  },\n  "registration_place": "отдел ЗАГС по Ленинскому району г. Саратова",\n  "series": "II-РУ",\n  "number": "602386"\n}', 'birth_certificate', 'db3fe95e-e14d-4110-8403-ad67542cdad1', 'информация\n900,0000,\nСВИДЕТЕЛЬСТВО\nО РОЖДЕНИИ\nНигмедзянов\nИльназ Фанисович\nродился(лась)\nимя, отчес\n20.04.2003\nдвадцатого апреля\nдве тысячи ... (819 characters truncated) ... ель органа\nзаписи актов гражданского состояния\nM\nneas\n60%\nдруг\nПлюснина О.А.\n19\nИМЧ\n116\nИ\n2\nPPRO\nдаже\nФd\nAMA\nI-КБ № 781872\nMTC, 1998', '{\n  "child": {\n    "surname": "Нигмедзянов",\n    "name": "Ильназ",\n    "patronymic": "Фанисович",\n    "date_of_birth": "20.04.2003",\n    "place ... (414 characters truncated) ... 003"\n  },\n  "registration_place": "Отдел ЗАГС адм. Кировского района г. Казани Республики Татарстан",\n  "series": "I-КБ",\n  "number": "781872"\n}', 'birth_certificate', '5e6c9fe2-16f1-4a3a-9590-fb8c4cdfb238', 'для внесения платы за содержание жилого помещения и предоставление коммунальных услуг\nПЛАТЕЖНЫЙ ДОКУМЕНТ\nРаздел 1. Сведения о плательщике и исполни ... (2753 characters truncated) ... асч. период руб.\nкод\n5\nУК "Престиж"\nР/с 40704820100320030032 в ОАО "БАНК МОСКВЫ", к/с 30201810500000300214, БИК 044525\nл/с №2011067048\n2 357,85', '{\n  "billing_period": "Апрель 2020 г.",\n  "payer": {\n    "name": "Лебедев Юрий Викторович",\n    "address": "Москва г, Вавилова ул, 67, Кв. 32",\n ... (1471 characters truncated) ... \n      "amount": 110.0\n    },\n    {\n      "name": "Телеантенна",\n      "unit": "шт",\n      "rate": 175.0,\n      "amount": 175.0\n    }\n  ]\n}', 'kvitancia', '4434bc7f-6b13-4611-87ce-c6040e09bf39', 'Договор купли-продажи автомобиля\n(автомототранспортного средства, прицепа,\nномерного агрегата)\nг.\nМосква\n"23" марта\n2025 г.\nместо заключения д ... (1829 characters truncated) ...  получил.\nМедведев Дмитрий Алексеевич\nС\nКудрин Сергей Михайлович\n(подпись и ФИО)\n(подпись и ФИО)\nТел.\n+7 912 222 22 22\nТел.\n+7 901 777 77 77', '{\n  "location": "г. Москва",\n  "date": "23.03.2025",\n  "seller": {\n    "surname": "Медведев",\n    "name": "Дмитрий",\n    "patronymic": "Алексее ... (1280 characters truncated) ... f_issue": "10.01.2014",\n        "issued_by": "МРЭО 1 г. Москва"\n      }\n    }\n  },\n  "financial_conditions": {\n    "price_rub": 5000000\n  }\n}', 'dogovor_prodagi_machini', 'cb984237-a03c-42f8-9474-1fe8fb0f14f1', "ВОДИТЕЛЬСКОЕ УДОСТОВЕРЕНИЕ\n1.\nИВАНОВ\nIVANOV\n2.\nСЕРГЕЙ\nSERGEJ\n3.\n22.05.1955\nТУВИНСКАЯ АВТ. ОБЛ.\nTUVINSKAYA AVTONOMNAYA OBLAST'\n4a)\n01.02.2020\n4b)\n01.02.2030\n4c)\nГИБДД 7701\nGIBDD 7701\n5.\n77 07 123456\n8.\nГ.МОСКВА\nG. MOSKVA\n9.\nВ\nB1\nМ", '{\n  "number": "77 07 123456",\n  "surname": "ИВАНОВ",\n  "name_patronymic": "СЕРГЕЙ",\n  "date_of_birth": "22.05.1955",\n  "place_of_birth": "ТУВИНС ... (48 characters truncated) ... ,\n  "date_of_expiry": "01.02.2030",\n  "issued_by": "ГИБДД 7701",\n  "region": "Г. МОСКВА",\n  "categories": [\n    "B",\n    "B1",\n    "M"\n  ]\n}', 'driver_license', 'b6d28cbe-a310-4c65-80c8-253a8d44c8ba', 'Договор\nкупли-продажи квартиры\nг. Энск\n«01» июня 2023 г.\nПэпэтэшин Петр Петрович, 05.12.1982 г.р., проживающий по адресу: Энская область, г. Энск ... (3126 characters truncated) ... ли вопросы, связанные с расчетами по коммунальным услугам и плате за\nэлектроэнергию в отношении квартиры и не имеют в этой связи взаимных претензий.', '{\n  "location": "г. Энск",\n  "date": "01.06.2023",\n  "seller": {\n    "surname": "Пэпэтэшин",\n    "name": "Петр",\n    "patronymic": "Петрович",\ ... (768 characters truncated) ... г. Энск, ул. Мира, д. 12, кв. 34",\n    "cadastral_number": "11:22:3333333:4444"\n  },\n  "financial_conditions": {\n    "price_rub": 3500000\n  }\n}', 'dogovor_kupli_prodazhi_kv', '25feab98-0402-4435-a22f-dd7d3ac0dd1a', 'Российская Федерация\nСТРАХОВОЕ СВИДЕТЕЛЬСТВО\nОБЯЗАТЕЛЬНОГО ПЕНСИОННОГО СТРАХОВАНИЯ\n163-648-56496\nКОЛПАКОВА\nФ.И.О.\nНАДЕЖДА\nСЕРГЕЕВНА\n2 ноября 1995 года\nДата и место рождения\nБАИГУЛОВО\nКОЗЛОВСКИЙ\nЧУВАШСКАЯ РЕСПУБЛИКА\nженский\nПол\n21 января 2011 года\n4\nДата регистрации', '{\n  "number": "163-648-56496",\n  "surname": "КОЛПАКОВА",\n  "name": "НАДЕЖДА",\n  "patronymic": "СЕРГЕЕВНА",\n  "date_of_birth": "2 ноября 1995 года",\n  "place_of_birth": "БАИГУЛОВО, КОЗЛОВСКИЙ, ЧУВАШСКАЯ РЕСПУБЛИКА",\n  "gender": "женский",\n  "registration_date": "21 января 2011 года"\n}', 'snils', '0ee0b92d-c903-4d68-b867-d9b6090abf01', 'Российская Федерация\nСТРАХОВОЕ СВИДЕТЕЛЬСТВО\n10.99.94.2511111ного шансионного страхования\n129-436-436 82\nСТЕПАНОВ\nФИО\nВЛАДИМИР\nИВАНОВИН\nДата и младен, выказания\n15 сентября 1951 года\nКАНДАЛАКША\nМУРМАНСКАЯ ОБЛАСТЬ\nЛих\nмужской', '{\n  "number": "129-436-436 82",\n  "surname": "СТЕПАНОВ",\n  "name": "ВЛАДИМИР",\n  "patronymic": "ИВАНОВИЧ",\n  "date_of_birth": "15.09.1951",\n  "place_of_birth": "КАНДАЛАКША МУРМАНСКАЯ ОБЛАСТЬ",\n  "gender": "МУЖСКОЙ",\n  "registration_date": ""\n}', 'snils', '9c6a7ffc-3efc-4496-b593-749e01c53bad', 'Федеральная налоговая служба\nСВИДЕТЕЛЬСТВО\nО ПОСТАНОВКЕ НА УЧЕТ ФИЗИЧЕСКОГО ЛИЦА\nВ НАЛОГОВОМ ОРГАНЕ НА ТЕРРИТОРИИ РОССИЙСКОЙ ФЕДЕРАЦИИ\nНастоящее  ... (323 characters truncated) ...  ИНН\n7\n8\n0\n2\n0\n4\n8\n9\n3\n1\n8\n3\nналоговым органом\nМежрайонная инспекция Федеральной\nналоговой службы № 17 по Санкт-Петербургу\n7\n8\n0\n2', '{\n  "fio": {\n    "surname": "Королькова",\n    "name": "Екатерина",\n    "patronymic": "Олеговна"\n  },\n  "gender": "Женский",\n  "date_of_birth": ... (114 characters truncated) ... 93183",\n  "tax_authority": {\n    "name": "Межрайонная инспекция Федеральной налоговой службы № 17 по Санкт-Петербургу",\n    "code": "7802"\n  }\n}', 'inn', '9761fc3d-c802-4aba-8fc4-311f848e355a', 'ВОДИТЕЛЬСКОЕ УДОСТОВЕРЕНИЕ\n1. АНАШКИН\nANASHKIN\n2. АНАТОЛИЙ ДМИТРИЕВИЧ\nANATOLIY DMITRIYEVICH\n3. 07.11.1960\nКЕМЕРОВСКАЯ ОБЛ.\nKEMEROVSKAYA OBL\n4a) 04.06.2014\n4b) 04.06.2024\n4c) ГИБДД 4203\nGIBDD 4203\n5.\n42 17 619190\n8.\nКЕМЕРОВСКАЯ ОБЛ.\nKEMEROVSKAYA OBL.\n9.\nA\nA1\nВ\nB1\nM', '{\n  "number": "42 17 619190",\n  "surname": "АНАШКИН",\n  "name_patronymic": "АНАТОЛИЙ ДМИТРИЕВИЧ",\n  "date_of_birth": "07.11.1960",\n  "place_of_b ... (87 characters truncated) ... 6.2024",\n  "issued_by": "ГИБДД 4203",\n  "region": "КЕМЕРОВСКАЯ ОБЛ.",\n  "categories": [\n    "A",\n    "A1",\n    "B",\n    "B1",\n    "M"\n  ]\n}', 'driver_license', '738085fa-a213-435c-9e49-da6372c14399', 'с с и й с к л я\nФЕДЕРАЦИЯ\nГУ МВД РОССИИ ПО СВЕРДЛОВСКОЙ\nПаспорт выдан\nОБЛАСТИ\n155\n28.05.2025\n660-001\n69177.2.097\nДата вы\nКод подразделения\ ... (261 characters truncated) ... 005\nМесто\n68LVZ\nрождь\nГ. УФА\nРЕСП.\nБАШКОРТОСТАН\nРОССИЯ\nPNRUSMALY4EV<<GEORGIQ<VALENT INOVI3<<<<<<\n6522747890RUS0503073M<<<<<<5250528660001<02', '{\n  "series": "6525",\n  "number": "274789",\n  "surname": "МАЛЫШЕВ",\n  "name": "ГЕОРГИЙ",\n  "patronymic": "ВАЛЕНТИНОВИЧ",\n  "gender": "МУЖ",\n   ... (203 characters truncated) ... -001",\n  "mrz": {\n    "line1": "PNRUSMALY4EV<<GEORGIQ<VALENTINOVI3<<<<<<<<<<",\n    "line2": "6522747890RUS0503073M<<<<<<<5250528660001<02"\n  }\n}', 'passport', '87eda7f4-dc5d-49ad-a28a-7c0dd1b5ce3e', 'Договор аренды квартиры\nг.\nСанкт-Петербург\n" 03 " сентября\n2022 г.\nМы, Арендодатель\nИванова Алёна Ивановна\nдата рождения\n03.09.1955\nзарегист ... (3398 characters truncated) ... ли Арендатор нарушил свои\nобязанности по настоящему договору аренды квартиры.\nАрендодатель\nАрендатор\n(подпись и ФИО)\n(подпись и ФИО)\nТел.\nТел.', '{\n  "location": "г. Санкт-Петербург",\n  "date": "03.09.2022",\n  "lessor": {\n    "surname": "Иванова",\n    "name": "Алёна",\n    "patronymic": "И ... (842 characters truncated) ... e": "11.09.2019",\n    "end_date": "11.08.2020",\n    "monthly_payment_rub": 22000,\n    "deposit_rub": 7000,\n    "payment_day_of_month": 15\n  }\n}', 'dogovor_arendi_kv', 'e3351f78-8437-415d-bf54-40e6b839a7ea', 'РОССИЙСКАЯ ФЕДЕРАЦИЯ\nУМВД РОССИИ ПО ЛИПЕЦКОЙ ОБЛАСТИ\nПаспорт выдан\nBy Operator Запол\n30.05.2018\n480-005\nата выдачи\nКод подразделения\n(подпись ... (176 characters truncated) ... ол\nрождения\nМесто\nг. ДЗЕРЖИНСК\nCtrl\nрождения\nДОНЕЦКАЯ ОБЛАСТЬ\nPNRUSKORNEQ3UK<<SEMEN<DMITRIEVI3<<<<<<<<\n71563RUS9501164M<<<<<<8180530480005<04', '{\n  "series": "4218",\n  "number": "127156",\n  "surname": "КОРНЕЙЧУК",\n  "name": "СЕМЕН",\n  "patronymic": "ДМИТРИЕВИЧ",\n  "gender": "МУЖ",\n  "d ... (186 characters truncated) ... : "480-005",\n  "mrz": {\n    "line1": "PNRUSKORNEQ3UK<<SEMEN<DMITRIEVI3<<<<<<<<<<<",\n    "line2": "71563RUS9501164M<<<<<<<8180530480005<04"\n  }\n}', 'passport')
+2026-04-06 14:26:19,699 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-06 14:26:19,701 - diplom - INFO - Migrated 15 examples from disk to DB
+2026-04-06 14:26:19,703 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:26:19,704 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-06 14:26:19,704 - sqlalchemy.engine.Engine - INFO - SELECT examples.id, examples.text, examples.json_output, examples.doc_type, examples.created_at 
+FROM examples
+2026-04-06 14:26:19,704 - sqlalchemy.engine.Engine - INFO - [generated in 0.00016s] ()
+2026-04-06 14:26:20,386 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:21,121 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:21,737 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:22,566 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:25,910 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:27,599 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:27,955 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:30,272 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:30,571 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:30,851 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:31,399 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:31,802 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:32,417 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:34,551 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:35,167 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:26:35,188 - httpx - INFO - HTTP Request: PUT http://localhost:6333/collections/documents/points?wait=true "HTTP/1.1 200 OK"
+2026-04-06 14:26:35,189 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-06 14:26:35,195 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-06 14:27:02,105 - diplom - INFO - Starting benchmark for model: qwen3.5:9b
+2026-04-06 14:27:02,105 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-06 14:27:02,107 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:9b
+2026-04-06 14:27:02,108 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:27:02,108 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-06 14:27:02,110 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:27:03,009 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:27:03,015 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:27:04,676 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:27:20,509 - diplom - INFO -   Prompt: 3514 chars. Success in 18.40s.
+2026-04-06 14:27:20,516 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:27:20,520 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:27:21,499 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:27:21,503 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:27:23,137 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:27:40,679 - diplom - INFO -   Prompt: 3706 chars. Success in 20.16s.
+2026-04-06 14:27:40,682 - diplom - INFO - [3/53] Processing 7e05691483401ae2b94275bbd9091245.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:27:40,686 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:27:41,513 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:27:41,517 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:27:42,923 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:28:00,965 - diplom - INFO -   Prompt: 3427 chars. Success in 20.28s.
+2026-04-06 14:28:00,969 - diplom - INFO - [4/53] Processing _____________-_-________-001.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:28:00,971 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:28:01,897 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:28:01,902 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:28:03,509 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:28:21,123 - diplom - INFO -   Prompt: 3686 chars. Success in 20.15s.
+2026-04-06 14:28:21,125 - diplom - INFO - [5/53] Processing c38edbcs-960.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:28:21,133 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:28:22,077 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:28:22,081 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:28:23,606 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:28:41,636 - diplom - INFO -   Prompt: 3544 chars. Success in 20.51s.
+2026-04-06 14:28:41,639 - diplom - INFO - [6/53] Processing свидетельство-о-рождении-001.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:28:41,643 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:28:42,653 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:28:42,658 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:28:44,971 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:29:01,322 - diplom - INFO -   Prompt: 3686 chars. Success in 19.68s.
+2026-04-06 14:29:01,324 - diplom - INFO - [7/53] Processing certn120766.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:29:01,328 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:29:02,145 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:29:02,149 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:29:03,530 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:29:19,877 - diplom - INFO -   Prompt: 3187 chars. Success in 18.55s.
+2026-04-06 14:29:19,879 - diplom - INFO - [8/53] Processing diplom_bakalavra_mgtu_im._baumana.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:29:19,882 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:29:20,804 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:29:20,808 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:29:21,777 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:29:36,386 - diplom - INFO -   Prompt: 3261 chars. Success in 16.51s.
+2026-04-06 14:29:36,390 - diplom - INFO - [9/53] Processing diploma (1).jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:29:36,392 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:29:37,315 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:29:37,320 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:29:38,271 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:29:54,148 - diplom - INFO -   Prompt: 3284 chars. Success in 17.76s.
+2026-04-06 14:29:54,150 - diplom - INFO - [10/53] Processing diploma.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:29:54,154 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:29:55,066 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:29:55,071 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:29:56,108 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:30:11,941 - diplom - INFO -   Prompt: 3184 chars. Success in 17.79s.
+2026-04-06 14:30:11,943 - diplom - INFO - [11/53] Processing i.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:30:11,949 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:30:12,929 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:30:12,933 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:30:13,839 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:30:29,852 - diplom - INFO -   Prompt: 3236 chars. Success in 17.91s.
+2026-04-06 14:30:29,855 - diplom - INFO - [12/53] Processing word-image-102.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:30:29,858 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:30:32,381 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:30:32,385 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:30:35,512 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:31:05,372 - diplom - INFO -   Prompt: 8593 chars. Success in 35.52s.
+2026-04-06 14:31:05,374 - diplom - INFO - [13/53] Processing word-image-216.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:31:05,378 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:31:07,986 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:31:07,990 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:31:11,032 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:31:40,231 - diplom - INFO -   Prompt: 9168 chars. Success in 34.86s.
+2026-04-06 14:31:40,235 - diplom - INFO - [14/53] Processing word-image-93.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:31:40,238 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:31:42,764 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:31:42,769 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:31:45,536 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:32:17,094 - diplom - INFO -   Prompt: 9774 chars. Success in 36.86s.
+2026-04-06 14:32:17,096 - diplom - INFO - [15/53] Processing договор найма 1.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:32:17,100 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:32:19,864 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:32:19,868 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:32:23,198 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:32:50,380 - diplom - INFO -   Prompt: 9683 chars. Success in 33.28s.
+2026-04-06 14:32:50,384 - diplom - INFO - [16/53] Processing dogovor_kupli_prodazhi_kv2.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:32:50,388 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:32:53,291 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:32:53,295 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:32:56,718 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:33:30,761 - diplom - INFO -   Prompt: 8861 chars. Success in 40.38s.
+2026-04-06 14:33:30,767 - diplom - INFO - [17/53] Processing dogovor_kupli_prodazhi_kv3.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:33:30,771 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:33:33,348 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:33:33,352 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:33:36,009 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:34:06,010 - diplom - INFO -   Prompt: 8998 chars. Success in 35.24s.
+2026-04-06 14:34:06,013 - diplom - INFO - [18/53] Processing dogovor_kupli_prodazhi_kv4.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:34:06,017 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:34:08,300 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:34:08,303 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:34:10,856 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:35:16,725 - diplom - INFO -   Prompt: 8180 chars. Success in 70.71s.
+2026-04-06 14:35:16,728 - diplom - INFO - [19/53] Processing dogovor_kupli_prodazhi_kv5.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:35:16,731 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:35:20,365 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:35:20,368 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:35:23,554 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:35:55,632 - diplom - INFO -   Prompt: 10421 chars. Success in 38.90s.
+2026-04-06 14:35:55,634 - diplom - INFO - [20/53] Processing 47a665a1d240f4dfdf602b454ae6749b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:35:55,638 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:35:57,667 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:35:57,671 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:36:00,889 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:36:48,514 - diplom - INFO -   Prompt: 7284 chars. Success in 52.88s.
+2026-04-06 14:36:48,518 - diplom - INFO - [21/53] Processing dogovor(4).jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:36:48,521 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:36:50,641 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:36:50,645 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:36:53,737 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:37:41,326 - diplom - INFO -   Prompt: 7482 chars. Success in 52.81s.
+2026-04-06 14:37:41,331 - diplom - INFO - [22/53] Processing orig.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:37:41,335 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:37:43,382 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:37:43,387 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:37:45,886 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:38:29,484 - diplom - INFO -   Prompt: 7295 chars. Success in 48.15s.
+2026-04-06 14:38:29,488 - diplom - INFO - [23/53] Processing 1385315836_1578903606.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:38:29,492 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:38:29,965 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:38:29,969 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:38:30,903 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:38:42,893 - diplom - INFO -   Prompt: 1580 chars. Success in 13.40s.
+2026-04-06 14:38:42,897 - diplom - INFO - [24/53] Processing 2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:38:42,899 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:38:43,342 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:38:43,346 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:38:43,941 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:38:56,115 - diplom - INFO -   Prompt: 1537 chars. Success in 13.22s.
+2026-04-06 14:38:56,117 - diplom - INFO - [25/53] Processing 780416_900.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:38:56,120 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:38:56,525 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:38:56,529 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:38:56,966 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:39:07,640 - diplom - INFO -   Prompt: 1519 chars. Success in 11.52s.
+2026-04-06 14:39:07,644 - diplom - INFO - [26/53] Processing LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:39:07,646 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:39:08,099 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:39:08,103 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:39:08,998 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:39:20,569 - diplom - INFO -   Prompt: 1603 chars. Success in 12.92s.
+2026-04-06 14:39:20,571 - diplom - INFO - [27/53] Processing ______________2026-02-24_162115.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:39:20,574 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:39:20,979 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:39:20,984 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:39:21,489 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:39:33,602 - diplom - INFO -   Prompt: 1630 chars. Success in 13.03s.
+2026-04-06 14:39:33,603 - diplom - INFO - [28/53] Processing Снимок экрана 2026-02-24 162115.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:39:33,607 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:39:34,043 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:39:34,047 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:39:34,559 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:39:46,019 - diplom - INFO -   Prompt: 1630 chars. Success in 12.42s.
+2026-04-06 14:39:46,021 - diplom - INFO - [29/53] Processing 1637856537256.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:39:46,025 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:39:47,359 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:39:47,363 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:39:48,733 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:40:01,616 - diplom - INFO -   Prompt: 3250 chars. Success in 15.59s.
+2026-04-06 14:40:01,619 - diplom - INFO - [30/53] Processing 5c5f8.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:40:01,623 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:40:02,817 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:40:02,821 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:40:03,815 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:40:14,532 - diplom - INFO -   Prompt: 3204 chars. Success in 12.91s.
+2026-04-06 14:40:14,536 - diplom - INFO - [31/53] Processing _1.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:40:14,539 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:40:15,741 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:40:15,744 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:40:16,565 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:40:27,139 - diplom - INFO -   Prompt: 3148 chars. Success in 12.60s.
+2026-04-06 14:40:27,141 - diplom - INFO - [32/53] Processing inn-fizlica-724x570.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:40:27,144 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:40:27,742 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:40:27,746 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:40:28,308 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:40:40,710 - diplom - INFO -   Prompt: 2166 chars. Success in 13.57s.
+2026-04-06 14:40:40,714 - diplom - INFO - [33/53] Processing inn.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:40:40,717 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:40:41,759 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:40:41,762 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:40:42,556 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:40:53,447 - diplom - INFO -   Prompt: 2920 chars. Success in 12.73s.
+2026-04-06 14:40:53,450 - diplom - INFO - [34/53] Processing 28426.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:40:53,454 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:40:57,426 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:40:57,430 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:41:04,679 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:41:42,700 - diplom - INFO -   Prompt: 13308 chars. Success in 49.25s.
+2026-04-06 14:41:42,704 - diplom - INFO - [35/53] Processing 4d5c39e55844da80efe8af6755de558f.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:41:42,708 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:41:44,480 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:41:44,484 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:41:46,323 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:42:16,928 - diplom - INFO -   Prompt: 7759 chars. Success in 34.22s.
+2026-04-06 14:42:16,931 - diplom - INFO - [36/53] Processing i.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:42:16,935 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:42:21,208 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:42:21,212 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:42:24,409 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:43:11,748 - diplom - INFO -   Prompt: 10553 chars. Success in 54.82s.
+2026-04-06 14:43:11,751 - diplom - INFO - [37/53] Processing kvit.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:43:11,755 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:43:14,782 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:43:14,786 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:43:17,771 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:44:42,214 - diplom - INFO -   Prompt: 8364 chars. Success in 90.46s.
+2026-04-06 14:44:42,219 - diplom - INFO - [38/53] Processing kvitantsija-zhkh.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:44:42,223 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:44:46,009 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:44:46,013 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:44:48,880 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:45:39,405 - diplom - INFO -   Prompt: 10627 chars. Success in 57.19s.
+2026-04-06 14:45:39,409 - diplom - INFO - [39/53] Processing 152f6bcs-960.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:45:39,412 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:45:40,122 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:45:40,126 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:45:41,439 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:45:59,614 - diplom - INFO -   Prompt: 2195 chars. Success in 20.20s.
+2026-04-06 14:45:59,615 - diplom - INFO - [40/53] Processing 1551114833_Qkr8HprHdtA.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:45:59,618 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:46:00,328 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:46:00,331 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:46:02,292 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:46:19,387 - diplom - INFO -   Prompt: 2103 chars. Success in 19.77s.
+2026-04-06 14:46:19,391 - diplom - INFO - [41/53] Processing 1647714700_02-min.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:46:19,395 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:46:20,155 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:46:20,159 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:46:21,677 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:46:43,742 - diplom - INFO -   Prompt: 2814 chars. Success in 24.35s.
+2026-04-06 14:46:43,744 - diplom - INFO - [42/53] Processing hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:46:43,748 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:46:44,451 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:46:44,469 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:46:45,472 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:47:08,185 - diplom - INFO -   Prompt: 2780 chars. Success in 24.44s.
+2026-04-06 14:47:08,187 - diplom - INFO - [43/53] Processing vqxkqp1sp23nwwshszdk.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:47:08,191 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:47:08,873 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:47:08,888 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:47:10,173 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:47:26,866 - diplom - INFO -   Prompt: 2239 chars. Success in 18.68s.
+2026-04-06 14:47:26,869 - diplom - INFO - [44/53] Processing -vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:47:26,872 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:47:27,264 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:47:27,267 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:47:28,043 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:47:36,359 - diplom - INFO -   Prompt: 1348 chars. Success in 9.49s.
+2026-04-06 14:47:36,361 - diplom - INFO - [45/53] Processing 1ca950819c74c99f143476956442d6a8.jpeg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:47:36,365 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:47:36,694 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:47:36,699 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:47:37,430 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:47:46,131 - diplom - INFO -   Prompt: 1338 chars. Success in 9.77s.
+2026-04-06 14:47:46,135 - diplom - INFO - [46/53] Processing R3fp08pn_yI.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:47:46,139 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:47:46,521 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:47:46,525 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:47:47,265 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:47:55,721 - diplom - INFO -   Prompt: 1346 chars. Success in 9.59s.
+2026-04-06 14:47:55,723 - diplom - INFO - [47/53] Processing auSBK6ncH3c.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:47:55,727 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:47:56,116 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:47:56,120 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:47:56,879 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:48:04,351 - diplom - INFO -   Prompt: 1331 chars. Success in 8.63s.
+2026-04-06 14:48:04,354 - diplom - INFO - [48/53] Processing yoqWE8WFTe8.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:48:04,357 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:48:04,708 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:48:04,713 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:48:05,432 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:48:12,778 - diplom - INFO -   Prompt: 1331 chars. Success in 8.42s.
+2026-04-06 14:48:12,781 - diplom - INFO - [49/53] Processing снилс мой.png-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:48:12,784 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:48:13,965 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:48:13,968 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:48:14,734 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:48:23,610 - diplom - INFO -   Prompt: 1351 chars. Success in 10.83s.
+2026-04-06 14:48:23,614 - diplom - INFO - [50/53] Processing 1.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:48:23,617 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:48:24,392 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:48:24,397 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:48:25,796 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:48:44,653 - diplom - INFO -   Prompt: 3044 chars. Success in 21.04s.
+2026-04-06 14:48:44,655 - diplom - INFO - [51/53] Processing 196854.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:48:44,658 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:48:45,425 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:48:45,428 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:48:47,203 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:49:06,204 - diplom - INFO -   Prompt: 3036 chars. Success in 21.55s.
+2026-04-06 14:49:06,205 - diplom - INFO - [52/53] Processing bocharov_naebschik.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:49:06,209 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:49:07,074 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:49:07,078 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:49:08,087 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:49:28,262 - diplom - INFO -   Prompt: 2954 chars. Success in 22.06s.
+2026-04-06 14:49:28,264 - diplom - INFO - [53/53] Processing pgxcojsmr0vehqzv6zyr.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-06 14:49:28,268 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-06 14:49:29,073 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-06 14:49:29,077 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-06 14:49:30,043 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-06 14:49:48,889 - diplom - INFO -   Prompt: 3106 chars. Success in 20.63s.
+2026-04-06 14:49:48,913 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_9b_20260406_144948.json
+2026-04-06 19:36:49,817 - diplom - INFO - Deleted benchmark report: report_qwen3.5_9b_20260304_193403.json
+2026-04-06 19:36:51,751 - diplom - INFO - Deleted benchmark report: report_qwen3.5_9b_20260305_130944.json

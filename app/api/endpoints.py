@@ -249,24 +249,24 @@ def clear_structuring_reports():
     return {"status": "cleared", "deleted_count": count}
 
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])
-def index_examples():
-    """Векторизует примеры из data/examples и сохраняет их в Qdrant."""
-    indexed = vector_service.index_examples()
+async def index_examples():
+    """Векторизует примеры из базы данных (предварительно мигрируя из файлов)."""
+    indexed = await vector_service.index_examples()
     return {"indexed_examples": indexed}
 
 @router.post("/rag/index", response_model=Dict[str, Any])
-def index_documents():
-    """Векторизует примеры из data/examples (теперь это единый источник)."""
-    indexed = vector_service.index_examples()
+async def index_documents():
+    """Векторизует примеры из базы данных (единый источник)."""
+    indexed = await vector_service.index_examples()
     return {"indexed_files": indexed, "count": len(indexed)}
 
 @router.post("/rag/reindex", response_model=Dict[str, Any])
-def reindex_database(request: Dict[str, str]):
+async def reindex_database(request: Dict[str, str]):
     """Полная переиндексация базы с выбранной моделью."""
     model_name = request.get("model_name")
     if not model_name:
         raise HTTPException(status_code=400, detail="model_name is required")
-    return vector_service.reindex_all(embedding_model=model_name)
+    return await vector_service.reindex_all(embedding_model=model_name)
 
 @router.post("/rag/search", response_model=List[Dict[str, Any]])
 def search_documents(query: SearchQuery):

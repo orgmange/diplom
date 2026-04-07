@@ -173,9 +173,9 @@ def list_benchmark_models():
 
 
 @router.post("/rag/benchmark/run", response_model=BenchmarkRunResponse)
-def run_benchmark(request: BenchmarkRunRequest):
+async def run_benchmark(request: BenchmarkRunRequest):
     """Запускает полный цикл тестирования retrieval для embedding-модели."""
-    return benchmark_service.run(request.embedding_model)
+    return await benchmark_service.run(request.embedding_model)
 
 @router.post("/rag/benchmark/structuring/run", response_model=StructuringBenchmarkRunResponse)
 async def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):

@@ -121,11 +121,10 @@ class VectorService:
 
     def vectorize_text(self, text: str, embedding_model: Optional[str] = None) -> List[float]:
         """Преобразует текст в вектор с выбранной embedding-моделью (используя порт 11435)."""
-        truncated_text = text[:3000]
         model = embedding_model or self._load_state()
         response = self.ollama_embed_client.embeddings(
             model=model,
-            prompt=truncated_text,
+            prompt=text,
         )
         return response["embedding"]
 
@@ -206,8 +205,6 @@ class VectorService:
                             "text": ex.text,
                             "json_output": ex.json_output,
                             "doc_type": ex.doc_type,
-                            "is_example": True,
-                            "is_cleaned": True,
                         },
                     )
                 )
@@ -310,8 +307,6 @@ class VectorService:
                 "text": raw_text,
                 "json_output": json_output,
                 "doc_type": doc_type,
-                "is_example": True,
-                "is_cleaned": True,
             },
         )
         

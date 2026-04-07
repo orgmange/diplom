@@ -19,13 +19,8 @@ async def test_discrepancy():
     
     model = "embeddinggemma"
     
-    # Фильтр как в бенчмарке (Clean только, без примеров)
-    query_filter = models.Filter(
-        must=[
-            models.FieldCondition(key="is_cleaned", match=models.MatchValue(value=True)),
-            models.FieldCondition(key="is_example", match=models.MatchValue(value=False)),
-        ]
-    )
+    # Фильтр (без мета-фильтров по примеру/очистке)
+    query_filter = None
 
     print(f"--- ТЕСТ МОДЕЛИ: {model} ---")
     

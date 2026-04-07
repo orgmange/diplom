@@ -150,7 +150,7 @@ class BenchmarkService:
             "items": [item.to_dict() for item in items],
         }
 
-    def run(self, embedding_model: str) -> Dict[str, Any]:
+    async def run(self, embedding_model: str) -> Dict[str, Any]:
         """Запускает бенчмарк поиска по единому хранилищу примеров."""
         self._stop_requested = False
         docs_dir = settings.DOCS_DIR
@@ -169,7 +169,7 @@ class BenchmarkService:
             return self._format_run_result(embedding_model, indexed, clean_report)
 
         # Индексируем только примеры (теперь это единый источник)
-        indexed_files = self.vector_service.index_examples(
+        indexed_files = await self.vector_service.index_examples(
             embedding_model=embedding_model,
             collection_name=benchmark_collection
         )

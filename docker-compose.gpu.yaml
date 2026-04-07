@@ -1,0 +1,21 @@
+# GPU override for Ollama containers.
+# To enable, set in .env:
+#   COMPOSE_FILE=docker-compose.yaml:docker-compose.gpu.yaml
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  ollama-embed:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

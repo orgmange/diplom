@@ -29,8 +29,8 @@ class Settings:
     # Ollama Settings
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     OLLAMA_EMBED_BASE_URL: str = os.getenv("OLLAMA_EMBED_BASE_URL", "http://localhost:11435")
-    EMBEDDING_MODEL: str = "nomic-embed-text:latest"
-    DEFAULT_MODEL: str = "qwen3.5:9b"
+    EMBEDDING_MODEL: str = "qwen-embedding3:0.6b"
+    DEFAULT_MODEL: str = "qwen3.5:4b"
 
     # Database Settings
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "diplom_user")

@@ -296,7 +296,7 @@ ollama pull nomic-embed-text:latest   # embedding-модель
 ollama pull qwen3:8b                  # LLM-модель
 
 # 8. Запустить приложение
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+./.venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Откройте http://localhost:8000 в браузере.

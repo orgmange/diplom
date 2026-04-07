@@ -17141,3 +17141,480 @@ WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind 
 2026-04-06 19:39:03,810 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
 2026-04-06 19:39:03,823 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
 2026-04-06 19:39:03,831 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:11:16,259 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-07 16:11:16,259 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:11:16,271 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-07 16:11:16,271 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:11:16,273 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-07 16:11:16,273 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:11:16,275 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:11:16,277 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 16:11:16,277 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 16:11:16,292 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 16:11:16,293 - sqlalchemy.engine.Engine - INFO - [cached since 0.01577s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 16:11:16,294 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:16:00,886 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:16:04,131 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:16:21,245 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 16:16:21,258 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-07 16:30:50,994 - diplom - INFO - Accessing root index.html
+2026-04-07 16:30:51,013 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:30:51,018 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-07 16:30:51,035 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:36:29,384 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-07 16:36:29,385 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:36:29,387 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-07 16:36:29,387 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:36:29,388 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-07 16:36:29,388 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 16:36:29,389 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:36:29,391 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 16:36:29,391 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 16:36:29,393 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 16:36:29,394 - sqlalchemy.engine.Engine - INFO - [cached since 0.002625s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 16:36:29,394 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:40:48,075 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:40:48,076 - sqlalchemy.engine.Engine - INFO - INSERT INTO tasks (id, status, error, updated_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::TIMESTAMP WITH TIME ZONE) RETURNING tasks.created_at
+2026-04-07 16:40:48,076 - sqlalchemy.engine.Engine - INFO - [generated in 0.00020s] ('de2fc6c2-e38f-4c81-a313-8b602a143eb7', 'pending', None, None)
+2026-04-07 16:40:48,082 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:40:48,086 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:40:48,088 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:40:48,088 - sqlalchemy.engine.Engine - INFO - [generated in 0.00030s] ('processing', 'null', None, 'de2fc6c2-e38f-4c81-a313-8b602a143eb7')
+2026-04-07 16:40:48,092 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:40:48,094 - diplom - INFO - Task de2fc6c2-e38f-4c81-a313-8b602a143eb7: Starting OCR
+2026-04-07 16:40:48,408 - diplom - ERROR - Task de2fc6c2-e38f-4c81-a313-8b602a143eb7 failed: API Error: {'code': 3, 'status': 'error'}
+2026-04-07 16:40:48,408 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:40:48,408 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:40:48,409 - sqlalchemy.engine.Engine - INFO - [cached since 0.3207s ago] ('error', 'null', "API Error: {'code': 3, 'status': 'error'}", 'de2fc6c2-e38f-4c81-a313-8b602a143eb7')
+2026-04-07 16:40:48,409 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:40:55,483 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:40:55,484 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:40:55,484 - sqlalchemy.engine.Engine - INFO - [generated in 0.00017s] ('de2fc6c2-e38f-4c81-a313-8b602a143eb7',)
+2026-04-07 16:40:55,486 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:40:57,953 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:40:57,953 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:40:57,953 - sqlalchemy.engine.Engine - INFO - [cached since 2.47s ago] ('de2fc6c2-e38f-4c81-a313-8b602a143eb7',)
+2026-04-07 16:40:57,954 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:44:00,259 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:00,259 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:44:00,259 - sqlalchemy.engine.Engine - INFO - [cached since 166.9s ago] ('de2fc6c2-e38f-4c81-a313-8b602a143eb7',)
+2026-04-07 16:44:00,261 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:44:04,268 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:04,268 - sqlalchemy.engine.Engine - INFO - INSERT INTO tasks (id, status, error, updated_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::TIMESTAMP WITH TIME ZONE) RETURNING tasks.created_at
+2026-04-07 16:44:04,268 - sqlalchemy.engine.Engine - INFO - [cached since 178.3s ago] ('ca573a64-046c-44d4-ba25-fd5d50dde64a', 'pending', None, None)
+2026-04-07 16:44:04,269 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:44:04,272 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:04,272 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:44:04,273 - sqlalchemy.engine.Engine - INFO - [cached since 178.3s ago] ('processing', 'null', None, 'ca573a64-046c-44d4-ba25-fd5d50dde64a')
+2026-04-07 16:44:04,273 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:44:04,275 - diplom - INFO - Task ca573a64-046c-44d4-ba25-fd5d50dde64a: Starting OCR
+2026-04-07 16:44:04,483 - diplom - ERROR - Task ca573a64-046c-44d4-ba25-fd5d50dde64a failed: API Error: {'code': 3, 'status': 'error'}
+2026-04-07 16:44:04,484 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:04,484 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:44:04,484 - sqlalchemy.engine.Engine - INFO - [cached since 178.5s ago] ('error', 'null', "API Error: {'code': 3, 'status': 'error'}", 'ca573a64-046c-44d4-ba25-fd5d50dde64a')
+2026-04-07 16:44:04,485 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:44:09,522 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:09,522 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:44:09,522 - sqlalchemy.engine.Engine - INFO - [cached since 176.1s ago] ('ca573a64-046c-44d4-ba25-fd5d50dde64a',)
+2026-04-07 16:44:09,523 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:44:11,404 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:11,405 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:44:11,405 - sqlalchemy.engine.Engine - INFO - [cached since 178s ago] ('ca573a64-046c-44d4-ba25-fd5d50dde64a',)
+2026-04-07 16:44:11,406 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:44:11,830 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:44:11,830 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:44:11,831 - sqlalchemy.engine.Engine - INFO - [cached since 178.4s ago] ('ca573a64-046c-44d4-ba25-fd5d50dde64a',)
+2026-04-07 16:44:11,832 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:06,459 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:06,460 - sqlalchemy.engine.Engine - INFO - INSERT INTO tasks (id, status, error, updated_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::TIMESTAMP WITH TIME ZONE) RETURNING tasks.created_at
+2026-04-07 16:50:06,460 - sqlalchemy.engine.Engine - INFO - [cached since 504.6s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d', 'pending', None, None)
+2026-04-07 16:50:06,461 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:50:06,463 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:06,464 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:50:06,464 - sqlalchemy.engine.Engine - INFO - [cached since 504.6s ago] ('processing', 'null', None, '9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d')
+2026-04-07 16:50:06,465 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:50:06,467 - diplom - INFO - Task 9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d: Starting OCR
+2026-04-07 16:50:09,127 - diplom - INFO - Task 9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d: Extracting text from XML
+2026-04-07 16:50:09,127 - diplom - INFO - Task 9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d: Standardizing via LLM
+2026-04-07 16:50:10,213 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:50:10,239 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 16:50:10,246 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 16:50:10,997 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:50:11,020 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 16:50:21,077 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:21,077 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:21,077 - sqlalchemy.engine.Engine - INFO - [cached since 508.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:21,079 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:23,293 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:23,293 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:23,294 - sqlalchemy.engine.Engine - INFO - [cached since 510.5s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:23,295 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:24,454 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:24,455 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:24,455 - sqlalchemy.engine.Engine - INFO - [cached since 511.6s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:24,456 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:26,517 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:26,517 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:26,517 - sqlalchemy.engine.Engine - INFO - [cached since 513.7s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:26,518 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:28,345 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:28,346 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:28,346 - sqlalchemy.engine.Engine - INFO - [cached since 515.5s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:28,347 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:30,468 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:30,469 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:30,469 - sqlalchemy.engine.Engine - INFO - [cached since 517.6s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:30,470 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:33,105 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:33,105 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:33,105 - sqlalchemy.engine.Engine - INFO - [cached since 520.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:33,106 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:35,283 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:35,284 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:35,284 - sqlalchemy.engine.Engine - INFO - [cached since 522.5s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:35,285 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:37,429 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 16:50:37,501 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:37,501 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:37,502 - sqlalchemy.engine.Engine - INFO - [cached since 524.7s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:37,503 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:40,415 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:40,416 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:40,416 - sqlalchemy.engine.Engine - INFO - [cached since 527.6s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:40,418 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:42,093 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:42,093 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:42,094 - sqlalchemy.engine.Engine - INFO - [cached since 529.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:42,095 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:47,911 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:47,912 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:47,912 - sqlalchemy.engine.Engine - INFO - [cached since 535.1s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:47,914 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:48,750 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:48,751 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:48,751 - sqlalchemy.engine.Engine - INFO - [cached since 535.9s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:48,753 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:53,730 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:53,731 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:53,731 - sqlalchemy.engine.Engine - INFO - [cached since 537.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:53,734 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:54,807 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:54,807 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:54,807 - sqlalchemy.engine.Engine - INFO - [cached since 538.4s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:54,809 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:56,221 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:56,222 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:56,222 - sqlalchemy.engine.Engine - INFO - [cached since 539.8s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:56,223 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:56,712 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:56,713 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:56,713 - sqlalchemy.engine.Engine - INFO - [cached since 540.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:56,714 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:57,155 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:57,155 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:57,155 - sqlalchemy.engine.Engine - INFO - [cached since 540.7s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:57,157 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:57,512 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:57,513 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:57,513 - sqlalchemy.engine.Engine - INFO - [cached since 541.1s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:57,516 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:57,667 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:57,667 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:57,668 - sqlalchemy.engine.Engine - INFO - [cached since 541.3s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:57,669 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:57,804 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:57,804 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:57,805 - sqlalchemy.engine.Engine - INFO - [cached since 541.4s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:57,806 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:57,934 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:57,935 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:57,935 - sqlalchemy.engine.Engine - INFO - [cached since 541.5s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:57,936 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:50:58,074 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:50:58,075 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:50:58,075 - sqlalchemy.engine.Engine - INFO - [cached since 541.7s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:50:58,077 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:51:01,801 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:51:01,802 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:51:01,802 - sqlalchemy.engine.Engine - INFO - [cached since 545.4s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:51:01,803 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:51:04,426 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:51:04,426 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:51:04,426 - sqlalchemy.engine.Engine - INFO - [cached since 548s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:51:04,427 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:51:06,880 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:51:06,880 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:51:06,880 - sqlalchemy.engine.Engine - INFO - [cached since 550.5s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:51:06,882 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:51:09,435 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:51:09,435 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 16:51:09,435 - sqlalchemy.engine.Engine - INFO - [cached since 560.4s ago] ('completed', '{"surname": "\\u041e\\u0411\\u0420\\u0410\\u0417\\u0415\\u0426", "surname_latin": "OBRAZETS", "given_names": "\\u0422\\u0415\\u0421\\u0422\\u0415\\u0 ... (660 characters truncated) ... , "issuing_state_code": "RUS", "mrz": {"line1": "P<RUSOBRAZETS<<TEST ER<<<<<<<<<<<<<<<<<<<<", "line2": "5200360198RUS5608087M2002156<<<<<<<<<<<<08"}}', None, '9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d')
+2026-04-07 16:51:09,437 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 16:51:10,311 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 16:51:10,312 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 16:51:10,312 - sqlalchemy.engine.Engine - INFO - [cached since 553.9s ago] ('9195a7a0-4c8b-4a1b-bb5b-e9ab74d9bd5d',)
+2026-04-07 16:51:10,313 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 16:54:02,358 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:54:02,369 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-07 16:54:02,374 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 16:54:02,391 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-07 16:54:06,113 - diplom - INFO - Starting benchmark for model: qwen3.5:4b
+2026-04-07 16:54:06,113 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-07 16:54:06,117 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:4b
+2026-04-07 16:54:06,117 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:4b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 16:54:06,117 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-07 16:54:07,142 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:54:07,144 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 16:54:08,109 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:54:08,115 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 16:54:34,649 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 16:55:00,251 - diplom - INFO -   Prompt: 3514 chars. Success in 54.13s.
+2026-04-07 16:55:00,259 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:4b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 16:55:00,264 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 16:55:04,884 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:55:04,890 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 16:55:25,728 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 16:55:53,922 - diplom - INFO -   Prompt: 3706 chars. Success in 53.66s.
+2026-04-07 16:55:53,922 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-04-07 16:55:53,925 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_4b_20260407_165553.json
+2026-04-07 19:42:27,380 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-07 19:42:27,381 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:42:27,392 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-07 19:42:27,393 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:42:27,395 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-07 19:42:27,395 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:42:27,396 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:42:27,398 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 19:42:27,398 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 19:42:27,413 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 19:42:27,413 - sqlalchemy.engine.Engine - INFO - [cached since 0.01502s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 19:42:27,413 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 19:42:32,241 - diplom - INFO - Accessing root index.html
+2026-04-07 19:42:32,277 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 19:42:32,303 - httpx - INFO - HTTP Request: GET http://127.0.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-07 19:42:32,320 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 19:42:32,343 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-07 19:42:33,573 - diplom - INFO - Starting benchmark for model: qwen3.5:4b
+2026-04-07 19:42:33,573 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-07 19:42:33,575 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:4b
+2026-04-07 19:42:33,576 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:4b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 19:42:33,576 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-07 19:42:53,634 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:42:53,637 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 19:42:53,904 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:42:53,924 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 19:43:39,623 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 19:43:51,329 - diplom - INFO -   Prompt: 3514 chars. Success in 77.75s.
+2026-04-07 19:43:51,335 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:4b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 19:43:51,339 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 19:43:51,487 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:43:51,493 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 19:43:55,614 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 19:44:07,128 - diplom - INFO -   Prompt: 3706 chars. Success in 15.79s.
+2026-04-07 19:44:07,130 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-04-07 19:44:07,132 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_4b_20260407_194407.json
+2026-04-07 19:46:38,755 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-07 19:46:38,755 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:46:38,757 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-07 19:46:38,757 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:46:38,759 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-07 19:46:38,759 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 19:46:38,760 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:46:38,762 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 19:46:38,762 - sqlalchemy.engine.Engine - INFO - [generated in 0.00018s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 19:46:38,765 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-07 19:46:38,765 - sqlalchemy.engine.Engine - INFO - [cached since 0.003617s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-07 19:46:38,766 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 19:46:44,459 - diplom - INFO - Accessing root index.html
+2026-04-07 19:46:44,492 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-07 19:46:44,515 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"
+2026-04-07 19:46:44,526 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 19:46:44,539 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-07 19:46:55,330 - diplom - INFO - Starting benchmark for model: qwen3.5:9b
+2026-04-07 19:46:55,330 - diplom - INFO - Re-indexing unified examples for benchmark (Target: qwen3-embedding:0.6b)
+2026-04-07 19:46:55,331 - diplom - INFO - Starting structuring benchmark for 53 files using model qwen3.5:9b
+2026-04-07 19:46:55,331 - diplom - INFO - [1/53] Processing 1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 19:46:55,331 - diplom - INFO - First file: allowing model to load into memory...
+2026-04-07 19:46:56,642 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:46:56,644 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 19:46:57,481 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:46:57,486 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 19:47:06,451 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 19:47:23,317 - diplom - INFO -   Prompt: 3514 chars. Success in 27.99s.
+2026-04-07 19:47:23,318 - diplom - INFO - [2/53] Processing 718b.jpg-clean for model qwen3.5:9b (T=0.0, Ctx=16383, TO=60, Struct=True)...
+2026-04-07 19:47:23,322 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 19:47:26,927 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:47:26,931 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 19:47:28,348 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 19:47:45,558 - diplom - INFO -   Prompt: 3706 chars. Success in 22.24s.
+2026-04-07 19:47:45,559 - diplom - INFO - Structuring benchmark stopped by user request.
+2026-04-07 19:47:45,560 - diplom - INFO - Benchmark report saved to /home/orgmange/diplom/data/benchmark/reports/report_qwen3.5_9b_20260407_194745.json
+2026-04-07 19:50:58,985 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:50:58,986 - sqlalchemy.engine.Engine - INFO - INSERT INTO tasks (id, status, error, updated_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::TIMESTAMP WITH TIME ZONE) RETURNING tasks.created_at
+2026-04-07 19:50:58,987 - sqlalchemy.engine.Engine - INFO - [generated in 0.00019s] ('7572a2bc-c96f-4d09-812f-7675f0a06577', 'pending', None, None)
+2026-04-07 19:50:58,990 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 19:50:58,993 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:50:58,995 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 19:50:58,995 - sqlalchemy.engine.Engine - INFO - [generated in 0.00027s] ('processing', 'null', None, '7572a2bc-c96f-4d09-812f-7675f0a06577')
+2026-04-07 19:50:58,998 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 19:50:59,000 - diplom - INFO - Task 7572a2bc-c96f-4d09-812f-7675f0a06577: Starting OCR
+2026-04-07 19:51:01,966 - diplom - INFO - Task 7572a2bc-c96f-4d09-812f-7675f0a06577: Extracting text from XML
+2026-04-07 19:51:01,967 - diplom - INFO - Task 7572a2bc-c96f-4d09-812f-7675f0a06577: Standardizing via LLM
+2026-04-07 19:51:02,031 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:51:02,062 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-07 19:51:02,068 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-07 19:51:02,765 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-07 19:51:02,771 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/query "HTTP/1.1 200 OK"
+2026-04-07 19:51:04,265 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-07 19:51:05,773 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:05,774 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:05,774 - sqlalchemy.engine.Engine - INFO - [generated in 0.00024s] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:05,778 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:08,167 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:08,168 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:08,168 - sqlalchemy.engine.Engine - INFO - [cached since 2.394s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:08,169 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:10,349 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:10,350 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:10,350 - sqlalchemy.engine.Engine - INFO - [cached since 4.576s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:10,351 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:12,450 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:12,451 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:12,451 - sqlalchemy.engine.Engine - INFO - [cached since 6.677s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:12,453 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:14,100 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:14,100 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:14,101 - sqlalchemy.engine.Engine - INFO - [cached since 8.327s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:14,103 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:15,775 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:15,775 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:15,776 - sqlalchemy.engine.Engine - INFO - [cached since 10s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:15,777 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:17,652 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:17,652 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:17,652 - sqlalchemy.engine.Engine - INFO - [cached since 11.88s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:17,654 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:20,036 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:20,036 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:20,036 - sqlalchemy.engine.Engine - INFO - [cached since 14.26s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:20,037 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:21,850 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:21,851 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:21,851 - sqlalchemy.engine.Engine - INFO - [cached since 16.08s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:21,852 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:23,190 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:23,191 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:23,191 - sqlalchemy.engine.Engine - INFO - [cached since 17.42s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:23,193 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-07 19:51:23,595 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:23,595 - sqlalchemy.engine.Engine - INFO - UPDATE tasks SET status=$1::VARCHAR, result=$2::JSON, error=$3::VARCHAR, updated_at=now() WHERE tasks.id = $4::VARCHAR
+2026-04-07 19:51:23,595 - sqlalchemy.engine.Engine - INFO - [cached since 24.6s ago] ('completed', '{"surname": "\\u041e\\u0411\\u0420\\u0410\\u0417\\u0415\\u0426", "surname_latin": "OBRAZETS", "given_names": "\\u0422\\u0415\\u0421\\u0422\\u0415\\u0 ... (657 characters truncated) ... "P", "issuing_state_code": "RUS", "mrz": {"line1": "P<RUSOBRAZETS<<TESTER<<<<<<<<<<<<<<<<<<<<", "line2": "5200360198RUS5608087M2002156<<<<<<<<<<08"}}', None, '7572a2bc-c96f-4d09-812f-7675f0a06577')
+2026-04-07 19:51:23,597 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 19:51:24,502 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 19:51:24,502 - sqlalchemy.engine.Engine - INFO - SELECT tasks.id, tasks.status, tasks.result, tasks.error, tasks.created_at, tasks.updated_at 
+FROM tasks 
+WHERE tasks.id = $1::VARCHAR
+2026-04-07 19:51:24,503 - sqlalchemy.engine.Engine - INFO - [cached since 18.73s ago] ('7572a2bc-c96f-4d09-812f-7675f0a06577',)
+2026-04-07 19:51:24,504 - sqlalchemy.engine.Engine - INFO - ROLLBACK

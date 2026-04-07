@@ -20,41 +20,41 @@ services:
       - postgres_data:/var/lib/postgresql
     restart: always
 
-  ollama:
-    image: ollama/ollama:latest
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    environment:
-      - OLLAMA_HOST=0.0.0.0:11434
-    entrypoint: ["/bin/sh", "-c"]
-    command:
-      - |
-        ollama serve &
-        sleep 5
-        ollama pull qwen3.5:4b
-        wait
-    restart: unless-stopped
-
-  ollama-embed:
-    image: ollama/ollama:latest
-    ports:
-      - "11435:11434"
-    volumes:
-      - ollama_embed_data:/root/.ollama
-    environment:
-      - OLLAMA_HOST=0.0.0.0:11434
-    entrypoint: ["/bin/sh", "-c"]
-    command:
-      - |
-        ollama serve &
-        sleep 5
-        ollama pull qwen-embedding3:0.6b
-        wait
-    restart: unless-stopped
+#  ollama:
+#    image: ollama/ollama:latest
+#    ports:
+#      - "11434:11434"
+#    volumes:
+#      - ollama_data:/root/.ollama
+#    environment:
+#      - OLLAMA_HOST=0.0.0.0:11434
+#    entrypoint: ["/bin/sh", "-c"]
+#    command:
+#      - |
+#        ollama serve &
+#        sleep 5
+#        ollama pull qwen3.5:4b
+#        wait
+#    restart: unless-stopped
+#
+#  ollama-embed:
+#    image: ollama/ollama:latest
+#    ports:
+#      - "11435:11434"
+#    volumes:
+#      - ollama_embed_data:/root/.ollama
+#    environment:
+#      - OLLAMA_HOST=0.0.0.0:11434
+#    entrypoint: ["/bin/sh", "-c"]
+#    command:
+#      - |
+#        ollama serve &
+#        sleep 5
+#        ollama pull qwen3-embedding:0.6b
+#        wait
+#    restart: unless-stopped
 
 volumes:
   postgres_data:
-  ollama_data:
-  ollama_embed_data:
+#  ollama_data:
+#  ollama_embed_data:

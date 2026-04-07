@@ -29,8 +29,23 @@ class Settings:
     # Ollama Settings
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     OLLAMA_EMBED_BASE_URL: str = os.getenv("OLLAMA_EMBED_BASE_URL", "http://localhost:11435")
-    EMBEDDING_MODEL: str = "qwen-embedding3:0.6b"
-    DEFAULT_MODEL: str = "qwen3.5:4b"
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "qwen3-embedding:0.6b")
+    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "qwen3.5:9b")
+    
+    # Редиректы моделей (если в названии есть ключ, заменяем на значение)
+    MODEL_REPLACEMENTS: dict = {
+        "llama3": "qwen3.5:9b"
+    }
+
+    def get_actual_model(self, model_name: str) -> str:
+        if not model_name:
+            return self.DEFAULT_MODEL
+        
+        m_lower = model_name.lower()
+        for key, replacement in self.MODEL_REPLACEMENTS.items():
+            if key in m_lower:
+                return replacement
+        return model_name
 
     # Database Settings
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "diplom_user")

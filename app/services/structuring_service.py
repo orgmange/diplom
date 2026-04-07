@@ -100,10 +100,8 @@ class StructuringService:
         
         logger.debug(f"MESSAGES SENT TO LLM (Type: {doc_type}, Chars: {len(user_content)})")
         
-        # Определяем модель (по умолчанию qwen3:8b если передано llama3)
-        actual_model = model_name
-        if "llama3" in model_name.lower():
-            actual_model = "qwen3.5:9b"
+        # Определяем модель через конфиг (например, редирект llama3 -> qwen3.5:9b)
+        actual_model = settings.get_actual_model(model_name)
             
         max_retries = 3
         last_error = ""

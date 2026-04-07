@@ -17137,3 +17137,7 @@ WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind 
 2026-04-07 10:54:35,385 - httpcore.http11 - DEBUG - receive_response_body.complete
 2026-04-07 10:54:35,385 - httpcore.http11 - DEBUG - response_closed.started
 2026-04-07 10:54:35,386 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-06 19:39:03,771 - diplom - INFO - Accessing root index.html
+2026-04-06 19:39:03,810 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-06 19:39:03,823 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-06 19:39:03,831 - httpx - INFO - HTTP Request: GET http://172.25.0.1:11435/api/tags "HTTP/1.1 200 OK"

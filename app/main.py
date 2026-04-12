@@ -28,12 +28,23 @@ logger.setLevel(getattr(logging, log_level, logging.DEBUG))
 
 from contextlib import asynccontextmanager
 from app.db.database import engine, Base
+from app.services.vector_service import VectorService
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Create tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+    
+    # Auto-index examples on startup
+    try:
+        logger.info("Running automatic indexation of examples...")
+        vs = VectorService()
+        indexed = await vs.index_examples()
+        logger.info(f"Successfully checked and indexed examples: {indexed}")
+    except Exception as e:
+        logger.error(f"Error during initial indexing: {e}")
+
     yield
 
 app = FastAPI(

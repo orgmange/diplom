@@ -26,6 +26,7 @@ root_logger.addHandler(console_handler)
 logger = logging.getLogger("diplom")
 logger.setLevel(getattr(logging, log_level, logging.DEBUG))
 
+import asyncio
 from contextlib import asynccontextmanager
 from app.db.database import engine, Base
 from app.services.vector_service import VectorService
@@ -36,14 +37,17 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     
-    # Auto-index examples on startup
-    try:
-        logger.info("Running automatic indexation of examples...")
-        vs = VectorService()
-        indexed = await vs.index_examples()
-        logger.info(f"Successfully checked and indexed examples: {indexed}")
-    except Exception as e:
-        logger.error(f"Error during initial indexing: {e}")
+    # Auto-index examples on startup (background)
+    async def run_indexing():
+        try:
+            logger.info("Running automatic indexation of examples in background...")
+            vs = VectorService()
+            indexed = await vs.index_examples()
+            logger.info(f"Successfully checked and indexed examples: {len(indexed)}")
+        except Exception as e:
+            logger.error(f"Error during initial indexing: {e}")
+
+    asyncio.create_task(run_indexing())
 
     yield
 

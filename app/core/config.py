@@ -30,7 +30,7 @@ class Settings:
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     OLLAMA_EMBED_BASE_URL: str = os.getenv("OLLAMA_EMBED_BASE_URL", "http://localhost:11435")
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "qwen3-embedding:0.6b")
-    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "qwen3.5:9b")
+    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "qwen3.5:4b")
     
     # Редиректы моделей (если в названии есть ключ, заменяем на значение)
     MODEL_REPLACEMENTS: dict = {

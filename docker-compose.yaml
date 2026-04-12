@@ -1,4 +1,22 @@
 services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - QDRANT_HOST=qdrant
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_EMBED_BASE_URL=http://ollama-embed:11434
+      - OCR_API_KEY=${OCR_API_KEY}
+    depends_on:
+      - postgres
+      - qdrant
+      - ollama
+      - ollama-embed
+    restart: always
+
   qdrant:
     image: qdrant/qdrant:v1.16.3
     ports:
@@ -20,41 +38,42 @@ services:
       - postgres_data:/var/lib/postgresql
     restart: always
 
-#  ollama:
-#    image: ollama/ollama:latest
-#    ports:
-#      - "11434:11434"
-#    volumes:
-#      - ollama_data:/root/.ollama
-#    environment:
-#      - OLLAMA_HOST=0.0.0.0:11434
-#    entrypoint: ["/bin/sh", "-c"]
-#    command:
-#      - |
-#        ollama serve &
-#        sleep 5
-#        ollama pull qwen3.5:4b
-#        wait
-#    restart: unless-stopped
-#
-#  ollama-embed:
-#    image: ollama/ollama:latest
-#    ports:
-#      - "11435:11434"
-#    volumes:
-#      - ollama_embed_data:/root/.ollama
-#    environment:
-#      - OLLAMA_HOST=0.0.0.0:11434
-#    entrypoint: ["/bin/sh", "-c"]
-#    command:
-#      - |
-#        ollama serve &
-#        sleep 5
-#        ollama pull qwen3-embedding:0.6b
-#        wait
-#    restart: unless-stopped
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        ollama serve &
+        sleep 5
+        ollama pull qwen3.5:4b
+        wait
+    restart: unless-stopped
+
+  ollama-embed:
+    image: ollama/ollama:latest
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_embed_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        ollama serve &
+        sleep 5
+        ollama pull qwen3-embedding:0.6b
+        wait
+    restart: unless-stopped
 
 volumes:
   postgres_data:
-#  ollama_data:
-#  ollama_embed_data:
+  ollama_data:
+  ollama_embed_data:
+

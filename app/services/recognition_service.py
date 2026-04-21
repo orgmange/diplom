@@ -93,7 +93,7 @@ class RecognitionService:
             
             # 1. OCR
             logger.info(f"Task {task_id}: Starting OCR")
-            ocr_task_id = self.ocr_service.create_task(image_path)
+            ocr_task_id = await asyncio.to_thread(self.ocr_service.create_task, image_path)
             
             status = await asyncio.to_thread(self.ocr_service.wait_for_task, ocr_task_id)
             

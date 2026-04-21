@@ -276,18 +276,16 @@ class VectorService:
         """Добавляет новый пример в базу данных и индексирует его в Qdrant."""
         example_id = str(uuid.uuid4())
         
-        # 1. Детектируем doc_type
+        # Пытаемся извлечь doc_type из json_output, если не передан явно
         if not doc_type:
             try:
                 data = json.loads(json_output)
                 if isinstance(data, dict):
                     doc_type = data.get("doc_type")
-            except:
+            except (json.JSONDecodeError, TypeError):
                 pass
-            if not doc_type:
-                doc_type = detect_doc_type(example_id)
 
-        # 2. Сохраняем в PostgreSQL
+        # Сохраняем в PostgreSQL
         async with async_session_local() as session:
             new_example = Example(
                 id=example_id,
@@ -298,17 +296,107 @@ class VectorService:
             session.add(new_example)
             await session.commit()
             
-        # 3. Индексируем в Qdrant
-        vector = self.vectorize_text(raw_text)
+        # Индексируем в Qdrant
+        self._index_example_point(example_id, raw_text, json_output, doc_type)
+        return example_id
+
+    def _index_example_point(self, example_id: str, text: str, json_output: str, doc_type: Optional[str]):
+        """Создаёт/обновляет точку примера в Qdrant."""
+        vector = self.vectorize_text(text)
         point = models.PointStruct(
             id=self.generate_id(f"example_{example_id}"),
             vector=vector,
             payload={
-                "text": raw_text,
+                "text": text,
                 "json_output": json_output,
                 "doc_type": doc_type,
             },
         )
-        
         self._upsert_points([point])
-        return example_id
+
+    async def get_examples(self) -> List[Dict[str, Any]]:
+        """Возвращает список всех примеров (краткая информация)."""
+        async with async_session_local() as session:
+            stmt = select(Example).order_by(Example.created_at.desc())
+            result = await session.execute(stmt)
+            examples = result.scalars().all()
+            return [
+                {
+                    "id": ex.id,
+                    "doc_type": ex.doc_type,
+                    "text_preview": ex.text[:120] + "..." if len(ex.text) > 120 else ex.text,
+                    "created_at": ex.created_at.isoformat() if ex.created_at else None,
+                }
+                for ex in examples
+            ]
+
+    async def get_example(self, example_id: str) -> Optional[Dict[str, Any]]:
+        """Возвращает полный пример по ID."""
+        async with async_session_local() as session:
+            stmt = select(Example).where(Example.id == example_id)
+            result = await session.execute(stmt)
+            ex = result.scalar_one_or_none()
+            if not ex:
+                return None
+            return {
+                "id": ex.id,
+                "text": ex.text,
+                "json_output": ex.json_output,
+                "doc_type": ex.doc_type,
+                "created_at": ex.created_at.isoformat() if ex.created_at else None,
+            }
+
+    async def update_example(
+        self, example_id: str, json_output: Optional[str] = None, doc_type: Optional[str] = None
+    ) -> Optional[Dict[str, Any]]:
+        """Обновляет пример в PostgreSQL и переиндексирует в Qdrant."""
+        async with async_session_local() as session:
+            stmt = select(Example).where(Example.id == example_id)
+            result = await session.execute(stmt)
+            ex = result.scalar_one_or_none()
+            if not ex:
+                return None
+
+            if json_output is not None:
+                ex.json_output = json_output
+            if doc_type is not None:
+                ex.doc_type = doc_type
+            
+            await session.commit()
+            await session.refresh(ex)
+
+            # Переиндексируем в Qdrant (вектор не меняется — text тот же)
+            self._index_example_point(ex.id, ex.text, ex.json_output, ex.doc_type)
+
+            return {
+                "id": ex.id,
+                "text": ex.text,
+                "json_output": ex.json_output,
+                "doc_type": ex.doc_type,
+                "created_at": ex.created_at.isoformat() if ex.created_at else None,
+            }
+
+    async def delete_example(self, example_id: str) -> bool:
+        """Удаляет пример из PostgreSQL и Qdrant."""
+        async with async_session_local() as session:
+            stmt = select(Example).where(Example.id == example_id)
+            result = await session.execute(stmt)
+            ex = result.scalar_one_or_none()
+            if not ex:
+                return False
+
+            await session.delete(ex)
+            await session.commit()
+
+        # Удаляем из Qdrant
+        qdrant_id = self.generate_id(f"example_{example_id}")
+        try:
+            self.client.delete(
+                collection_name=settings.COLLECTION_NAME,
+                points_selector=models.PointIdsList(points=[qdrant_id]),
+            )
+        except Exception as e:
+            logger.warning(f"Failed to delete point {qdrant_id} from Qdrant: {e}")
+
+        return True
+

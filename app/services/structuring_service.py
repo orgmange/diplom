@@ -28,26 +28,31 @@ class StructuringService:
             logger.error(f"Error listing models: {e}")
             raise e
 
-    def _get_template_for_type(self, doc_type: str) -> str:
-        template_map = {
-            "passport": "passport_ru.json",
-            "driver_license": "driver_license_ru.json",
-            "snils": "snils.json",
-            "birth_certificate": "birth_certificate_ru.json",
-            "diplom_bakalavra": "diplom.json",
-            "dogovor_kupli_prodazhi_kv": "dogovor_kupli_kv.json",
-            "dogovor_prodagi_machini": "dogovor_kupli.json",
-            "dogovor_arendi_kv": "renal.json",
-            "inn": "inn.json",
-            "kvitancia": "kvit.json",
-            "zagran_passport": "zagran.json"
-        }
-        filename = template_map.get(doc_type)
-        if not filename: return "{}"
+    def _extract_schema(self, json_output_str: Optional[str]) -> str:
+        """Извлекает структуру ключей из json_output примера, заменяя значения на описание типов."""
+        if not json_output_str:
+            return "{}"
         try:
-            path = settings.BASE_DIR / "templates" / filename
-            return path.read_text(encoding="utf-8")
-        except: return "{}"
+            data = json.loads(json_output_str)
+            return json.dumps(self._schema_from_value(data), ensure_ascii=False, indent=2)
+        except (json.JSONDecodeError, TypeError):
+            return "{}"
+
+    def _schema_from_value(self, value: Any) -> Any:
+        """Рекурсивно создаёт «пустой шаблон» из заполненного JSON."""
+        if isinstance(value, dict):
+            return {k: self._schema_from_value(v) for k, v in value.items()}
+        if isinstance(value, list):
+            if value:
+                return [self._schema_from_value(value[0])]
+            return []
+        if isinstance(value, bool):
+            return False
+        if isinstance(value, int):
+            return 0
+        if isinstance(value, float):
+            return 0.0
+        return ""
 
     async def structure(
         self,
@@ -77,7 +82,8 @@ class StructuringService:
         doc_type = best_match.get('doc_type') if best_match else (expected_type or "unknown")
         
         # 2. Подготовка промпта
-        template_json = self._get_template_for_type(doc_type)
+        # Схема выводится динамически из json_output найденного примера
+        template_json = self._extract_schema(best_match.get('json_output')) if best_match else "{}"
         system_msg = (
             "You are a professional data extraction system. "
             "Extract data from OCR text according to the provided JSON schema. "

@@ -36,19 +36,6 @@ async def lifespan(app: FastAPI):
     # Create tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    
-    # Auto-index examples on startup (background)
-    async def run_indexing():
-        try:
-            logger.info("Running automatic indexation of examples in background...")
-            vs = VectorService()
-            indexed = await vs.index_examples()
-            logger.info(f"Successfully checked and indexed examples: {len(indexed)}")
-        except Exception as e:
-            logger.error(f"Error during initial indexing: {e}")
-
-    asyncio.create_task(run_indexing())
-
     yield
 
 app = FastAPI(

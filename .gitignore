@@ -7,3 +7,4 @@ data/rag/
 *.log
 .env
 .pytest_cache/
+app.log

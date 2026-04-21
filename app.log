@@ -18041,3 +18041,186 @@ FROM examples
 2026-04-07 22:06:35,917 - httpx - INFO - HTTP Request: POST http://172.25.0.1:11435/api/embeddings "HTTP/1.1 200 OK"
 2026-04-07 22:06:35,922 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/benchmark_documents/points/query "HTTP/1.1 200 OK"
 2026-04-07 22:06:35,931 - httpx - INFO - HTTP Request: POST http://localhost:6333/collections/documents/points/count "HTTP/1.1 200 OK"
+2026-04-21 10:34:04,582 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-21 10:34:04,583 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:04,595 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-21 10:34:04,596 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:04,608 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-21 10:34:04,608 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:04,613 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-21 10:34:04,622 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-21 10:34:04,623 - sqlalchemy.engine.Engine - INFO - [generated in 0.00164s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-21 10:34:04,655 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-21 10:34:04,656 - sqlalchemy.engine.Engine - INFO - [cached since 0.03363s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-21 10:34:04,658 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-21 10:34:04,660 - diplom - INFO - Running automatic indexation of examples in background...
+2026-04-21 10:34:04,662 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-21 10:34:04,666 - sqlalchemy.engine.Engine - INFO - SELECT examples.text 
+FROM examples
+2026-04-21 10:34:04,666 - sqlalchemy.engine.Engine - INFO - [generated in 0.00053s] ()
+2026-04-21 10:34:46,636 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-04-21 10:34:46,636 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:46,639 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-04-21 10:34:46,640 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:46,643 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-04-21 10:34:46,643 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-21 10:34:46,647 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-21 10:34:46,654 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-21 10:34:46,654 - sqlalchemy.engine.Engine - INFO - [generated in 0.00059s] ('tasks', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-21 10:34:46,661 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-04-21 10:34:46,661 - sqlalchemy.engine.Engine - INFO - [cached since 0.007183s ago] ('examples', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-04-21 10:34:46,664 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-21 10:34:46,666 - diplom - INFO - Running automatic indexation of examples in background...
+2026-04-21 10:34:46,671 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-21 10:34:46,676 - sqlalchemy.engine.Engine - INFO - SELECT examples.text 
+FROM examples
+2026-04-21 10:34:46,678 - sqlalchemy.engine.Engine - INFO - [generated in 0.00219s] ()
+2026-04-21 10:34:46,734 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2026-04-21 10:34:46,820 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=11435 local_address=None timeout=None socket_options=None
+2026-04-21 10:34:46,824 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x743ea8177f80>
+2026-04-21 10:34:46,825 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:34:46,825 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:34:46,826 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:34:46,826 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:34:46,826 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:34:47,428 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:34:47 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:34:47,429 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:34:47,430 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:34:47,432 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:34:47,433 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:34:47,434 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:34:47,639 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=6333 local_address=None timeout=5.0 socket_options=None
+2026-04-21 10:34:47,640 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x743ea81ad3a0>
+2026-04-21 10:34:47,640 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2026-04-21 10:34:47,641 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:34:47,641 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2026-04-21 10:34:47,641 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:34:47,642 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2026-04-21 10:34:47,654 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'content-encoding', b'gzip'), (b'content-type', b'application/json'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'date', b'Tue, 21 Apr 2026 07:34:47 GMT')])
+2026-04-21 10:34:47,655 - httpx - INFO - HTTP Request: GET http://localhost:6333 "HTTP/1.1 200 OK"
+2026-04-21 10:34:47,656 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2026-04-21 10:34:47,657 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:34:47,658 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:34:47,659 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:34:47,660 - httpcore.connection - DEBUG - close.started
+2026-04-21 10:34:47,660 - httpcore.connection - DEBUG - close.complete
+2026-04-21 10:34:47,675 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=6333 local_address=None timeout=5.0 socket_options=None
+2026-04-21 10:34:47,676 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x743ea81ad940>
+2026-04-21 10:34:47,677 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2026-04-21 10:34:47,678 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:34:47,679 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2026-04-21 10:34:47,680 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:34:47,680 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2026-04-21 10:34:47,686 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'transfer-encoding', b'chunked'), (b'content-type', b'application/json'), (b'content-encoding', b'gzip'), (b'vary', b'accept-encoding, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'), (b'date', b'Tue, 21 Apr 2026 07:34:47 GMT')])
+2026-04-21 10:34:47,686 - httpx - INFO - HTTP Request: GET http://localhost:6333/collections/documents "HTTP/1.1 200 OK"
+2026-04-21 10:34:47,687 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2026-04-21 10:34:47,687 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:34:47,688 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:34:47,688 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:34:47,688 - httpcore.connection - DEBUG - close.started
+2026-04-21 10:34:47,688 - httpcore.connection - DEBUG - close.complete
+2026-04-21 10:34:47,703 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-21 10:34:47,707 - sqlalchemy.engine.Engine - INFO - SELECT examples.id, examples.text, examples.json_output, examples.doc_type, examples.created_at 
+FROM examples
+2026-04-21 10:34:47,719 - sqlalchemy.engine.Engine - INFO - [generated in 0.01168s] ()
+2026-04-21 10:34:47,725 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:34:47,726 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:34:47,726 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:34:47,726 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:34:47,726 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:34:50,497 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:34:50 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:34:50,498 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:34:50,498 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:34:50,499 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:34:50,499 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:34:50,499 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:34:50,501 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:34:50,501 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:34:50,502 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:34:50,503 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:34:50,505 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:03,418 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:35:03 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:35:03,419 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:35:03,420 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:35:03,420 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:35:03,420 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:35:03,420 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:35:03,424 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:03,429 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:35:03,429 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:35:03,429 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:35:03,430 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:39,367 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:35:39 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:35:39,368 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:35:39,369 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:35:39,370 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:35:39,371 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:35:39,373 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:35:39,380 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:39,381 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:35:39,381 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:35:39,382 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:35:39,382 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:51,186 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:35:51 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:35:51,187 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:35:51,187 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:35:51,188 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:35:51,188 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:35:51,189 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:35:51,191 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:35:51,191 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:35:51,191 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:35:51,192 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:35:51,192 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:37,462 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:36:37 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:36:37,462 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:36:37,462 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:36:37,463 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:36:37,463 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:36:37,464 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:36:37,465 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:37,466 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:36:37,466 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:36:37,466 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:36:37,466 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:45,207 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:36:45 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:36:45,208 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:36:45,208 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:36:45,209 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:36:45,209 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:36:45,209 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:36:45,211 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:45,211 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:36:45,212 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:36:45,212 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:36:45,212 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:49,020 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:36:49 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:36:49,020 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:36:49,021 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:36:49,021 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:36:49,021 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:36:49,021 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:36:49,023 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:36:49,024 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:36:49,025 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:36:49,025 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:36:49,025 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2026-04-21 10:37:24,480 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 21 Apr 2026 07:37:24 GMT'), (b'Transfer-Encoding', b'chunked')])
+2026-04-21 10:37:24,481 - httpx - INFO - HTTP Request: POST http://localhost:11435/api/embeddings "HTTP/1.1 200 OK"
+2026-04-21 10:37:24,482 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2026-04-21 10:37:24,482 - httpcore.http11 - DEBUG - receive_response_body.complete
+2026-04-21 10:37:24,483 - httpcore.http11 - DEBUG - response_closed.started
+2026-04-21 10:37:24,483 - httpcore.http11 - DEBUG - response_closed.complete
+2026-04-21 10:37:24,484 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2026-04-21 10:37:24,485 - httpcore.http11 - DEBUG - send_request_headers.complete
+2026-04-21 10:37:24,485 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2026-04-21 10:37:24,486 - httpcore.http11 - DEBUG - send_request_body.complete
+2026-04-21 10:37:24,486 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>

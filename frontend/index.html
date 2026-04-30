@@ -126,6 +126,10 @@
                     <input type="checkbox" id="bench-structured" checked>
                     <label for="bench-structured">Structured output</label>
                 </div>
+                <div class="model-select" style="display: flex; align-items: center; gap: 10px; margin-top: 20px;">
+                    <input type="checkbox" id="bench-use-rag" checked>
+                    <label for="bench-use-rag" title="Если выключено, модель получит только схему без примеров">Использовать RAG (Few-shot)</label>
+                </div>
             </div>
             <div id="struct-benchmark-progress" class="progress-container hidden">
                 <div class="progress-info">
@@ -175,6 +179,17 @@
                 </div>
             </div>
             <div id="benchmark-summary" class="result-box"></div>
+            
+            <div id="retrieval-benchmark-history" class="history-panel">
+                <div class="history-header">
+                    <h3>История запусков (Retrieval)</h3>
+                    <div class="history-controls">
+                        <button onclick="clearRetrievalHistory()" class="small-btn warning-btn">Очистить историю</button>
+                    </div>
+                </div>
+                <div id="retrieval-history-list" class="history-list" style="overflow-x: auto;">Загрузка истории...</div>
+            </div>
+
             <div class="benchmark-single">
                 <h3>Результаты поиска (Unified Clean RAG)</h3>
                 <div id="benchmark-clean" class="result-box full-width"></div>

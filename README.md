@@ -48,9 +48,9 @@
 ```
 
 **Технологический стек:**
-- **Backend**: Python 3, FastAPI, SQLAlchemy (PostgreSQL)
+- **Backend**: Python 3.12, FastAPI, SQLAlchemy (PostgreSQL / asyncpg)
 - **Database**: PostgreSQL (хранение задач и Few-Shot примеров)
-- **LLM**: Ollama (локальный сервер, порт 11434 для генерации, порт 11435 для эмбеддингов)
+- **LLM**: Ollama (внутри Docker, `qwen3.5:4b` для генерации, `qwen3-embedding:0.6b` для эмбеддингов)
 - **Векторная БД**: Qdrant (Docker, порт 6333)
 - **OCR**: Внешний API [ocrbot.ru](https://ocrbot.ru)
 - **Frontend**: Vanilla HTML/CSS/JS (SPA)
@@ -64,9 +64,9 @@
 ### Таблица `tasks` (Асинхронные задачи)
 Хранит состояние и результаты OCR/распознавания.
 
-| Колонку | Тип | Описание |
+| Колонка | Тип | Описание |
 |---------|-----|----------|
-| `id` | String (PK) | Уникальный ID задачи (генерируется на бэкенде) |
+| `id` | String (PK) | Уникальный ID задачи (UUID) |
 | `status` | String | Текущий статус: `pending`, `processing`, `completed`, `error` |
 | `result` | JSON | Результат: XML-строка или структурированный JSON-объект |
 | `error` | Text | Описание ошибки в случае сбоя |
@@ -76,7 +76,7 @@
 ### Таблица `examples` (Few-Shot примеры)
 Единый источник правды для RAG-системы.
 
-| Колонку | Тип | Описание |
+| Колонка | Тип | Описание |
 |---------|-----|----------|
 | `id` | String (PK) | Уникальный ID примера |
 | `text` | Text | Очищенный OCR-текст документа |
@@ -94,25 +94,15 @@
 
 2. **Очистка (Cleaning)** — XML-ответ парсится, извлекаются текстовые строки. Строки сортируются по вертикали (Y-координата), группируются близкие по высоте строки в одну логическую строку, затем сортируются по горизонтали (X). Результат — чистый текст без XML-разметки.
 
-3. **RAG-поиск (Retrieval)** — Очищенный текст превращается в вектор через embedding-модель (Ollama, порт 11435, модель `nomic-embed-text`). Вектор используется для поиска ближайшего примера в Qdrant. При этом определяется **тип документа** (паспорт, СНИЛС и т.д.) из метаданных найденного примера. **Единым источником правды для примеров является PostgreSQL.**
+3. **RAG-поиск (Retrieval)** — Очищенный текст превращается в вектор через embedding-модель (`qwen3-embedding:0.6b`). Вектор используется для поиска ближайшего примера в Qdrant. При этом определяется **тип документа** из метаданных найденного примера. **Единым источником правды для примеров является PostgreSQL.**
 
 4. **Структурирование (Generation)** — Формируется промпт для LLM:
    - Системное сообщение: роль «data extraction system»
    - JSON-шаблон для определённого типа документа (из `templates/`)
    - Few-Shot пример: найденный через RAG ближайший пример (вход + выход из БД)
    - Целевой OCR-текст для обработки
-   
+
    LLM возвращает структурированный JSON с полями документа.
-
-### Хранение данных (Single Source of Truth)
-В системе реализован переход от файлового хранения к использованию **PostgreSQL** как единственного источника правды:
-- Все Few-Shot примеры хранятся в таблице `examples`.
-- Новые примеры, добавленные через API, сразу попадают в БД и индексируются в Qdrant.
-- При запуске индексации система автоматически мигрирует новые файлы из `data/examples` в БД (если они там отсутствуют).
-
-### Система бенчмаркинга
-- **Embedding-бенчмарк** — Проверяет точность поиска типа документа по эмбеддингам. Использует примеры из PostgreSQL.
-- **Structuring-бенчмарк** — Полный цикл от OCR до JSON. Метрики: Accuracy, F1, CER, Fuzzy Score.
 
 ---
 
@@ -123,82 +113,112 @@ diplom/
 ├── app/                          # Бэкенд (FastAPI)
 │   ├── main.py                   # Точка входа приложения
 │   ├── api/
-│   │   ├── endpoints.py          # Внутренние API-эндпоинты
-│   │   └── external.py           # Внешнее API (распознавание)
+│   │   ├── endpoints.py          # Внутренние API-эндпоинты (системные)
+│   │   └── external.py           # Внешнее API (распознавание и примеры)
 │   ├── db/
 │   │   ├── database.py           # Настройка SQLAlchemy (Async)
 │   │   └── models.py             # Модели Example и Task
 │   ├── core/
-│   │   └── config.py             # Конфигурация
+│   │   └── config.py             # Конфигурация (Pydantic settings)
 │   └── services/
 │       ├── vector_service.py     # Qdrant + DB Indexing
-│       ├── ...                   # Другие сервисы
+│       ├── ocr_service.py        # Интеграция с OCR API
+│       ├── cleaner_service.py    # Парсинг XML → Text
+│       ├── structuring_service.py # LLM взаимодействие
+│       └── recognition_service.py # Координация асинхронных задач
 ├── data/                         # Данные
-│   ├── examples/                 # Исходные примеры (только для миграции)
-│   ├── rag/                      # Хранилище Qdrant
-│   └── ...
+│   ├── docs/                     # Тестовые документы (image/xml/clean)
+│   ├── examples/                 # Исходные примеры (только для начальной миграции)
+│   ├── references/               # Эталоны для бенчмарков
+│   └── benchmark/                # Отчёты тестирования
+├── frontend/                     # Веб-интерфейс
 ├── cli.py                        # CLI-интерфейс
-├── docker-compose.yaml           # Qdrant + PostgreSQL
-└── ...
+├── docker-compose.yaml           # API + Qdrant + PostgreSQL + Ollama
+└── Dockerfile                    # Сборка бэкенда
 ```
-
----
-
-## API Endpoints
-
-| Эндпоинт | Описание |
-|----------|----------|
-| `/rag/index` | Мигрирует новые файлы из `data/examples` в БД и индексирует всё из БД в Qdrant |
-| `/rag/reindex` | Полный сброс Qdrant и переиндексация на основе PostgreSQL |
-| `/api/v1/learn` | Принимает новый пример (текст + JSON), сохраняет в БД и сразу индексирует |
-| `/recognize` | Асинхронное распознавание с сохранением прогресса в БД |
 
 ---
 
 ## Установка и запуск
 
-1. **Docker**: `docker-compose up -d` (запускает Qdrant и PostgreSQL).
-2. **Environment**: Создайте `.env` на основе `.env.example` (укажите ключи и URL).
-3. **Ollama**: Запустите Ollama на портах 11434 и 11435.
-4. **Backend**: `uvicorn app.main:app --host 0.0.0.0 --port 8000`.
-5. **Initial Data**: При первом запуске вызовите `/api/v1/rag/index`, чтобы перенести примеры из папки `data/examples` в базу данных.
- Для каждого файла: Clean → RAG → LLM → JSON
-  3. Сравнивает с эталоном из `data/references/`
-- **Метрики**: Accuracy, Precision, Recall, F1, CER (Levenshtein), Fuzzy Score (token_sort_ratio)
-- `_flatten_dict()` — Рекурсивное разворачивание вложенных словарей для поэлементного сравнения
-- `_calculate_field_metrics()` — Нормализация значений (uppercase, без пробелов и пунктуации) и поэлементное сравнение
-- `run_multi()` — Последовательный запуск по нескольким моделям
-- **Прогресс**: Live-отслеживание через `get_progress()` (текущий файл, стрим LLM-ответа)
-- **Управление**: `stop()` для полной остановки, `skip_model()` для пропуска текущей модели, авто-пропуск при 3 ошибках подряд
-- **Отчёты**: Сохранение в JSON (`data/benchmark/reports/`), CRUD операции (list, get, delete, clear)
+### С использованием Docker (Рекомендуется)
+
+1. **Environment**: Создайте `.env` на основе `.env.example`:
+   ```bash
+   OCR_API_KEY=ваш_ключ_ocrbot_ru
+   ```
+2. **Запуск**:
+   ```bash
+   docker-compose up -d --build
+   ```
+   *Это запустит все сервисы, включая PostgreSQL, Qdrant и два инстанса Ollama (один для генерации, другой для эмбеддингов).*
+
+3. **Инициализация**: При первом запуске выполните индексацию примеров из файлов в БД и Qdrant:
+   ```bash
+   curl -X POST http://localhost:8000/api/v1/rag/index
+   ```
+
+### Локальный запуск (для разработки)
+
+1. **Зависимости**: `pip install -r requirements.txt`
+2. **Docker для БД**: `docker-compose up -d postgres qdrant`
+3. **Ollama**: Установите локально и запустите модели:
+   ```bash
+   ollama pull qwen3.5:4b
+   ollama pull qwen3-embedding:0.6b
+   ```
+4. **App**: `uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload`
 
 ---
 
-### frontend/ — Веб-интерфейс
+## API Endpoints
 
-#### `frontend/index.html`
-Одностраничное HTML-приложение с 5 панелями:
-1. **Статус системы** — Количество OCR-файлов, очищенных файлов, векторов, текущая embedding-модель
-2. **Пайплайн** — Кнопки для запуска OCR, очистки и индексации + конфигурация RAG (выбор модели, переиндексация)
-3. **Поиск** — Текстовое поле для семантического поиска по документам
-4. **Бенчмарк структурирования (LLM)** — Выбор моделей (чекбоксы), настройка параметров (temperature, context size, timeout), прогресс-бар, live-стрим ответа LLM, таблица результатов, история отчётов
-5. **Бенчмарк Embedding** — Выбор embedding-модели, запуск, таблица результатов
+Все эндпоинты имеют префикс `/api/v1`.
 
-#### `frontend/app.js`
-JavaScript-логика UI (781 строка):
-- Взаимодействие со всеми API-эндпоинтами через `fetch()`
-- Рендеринг таблиц бенчмарков с цветовой индикацией (зелёный — OK, красный — ERR)
-- Tooltips с подробным сравнением полей (expected vs actual)
-- Polling прогресса LLM-бенчмарка (каждую секунду)
-- Управление историей отчётов (загрузка, удаление, очистка, сортировка)
-- Динамическая загрузка списков моделей при старте
+### Публичное API (External)
 
-#### `frontend/styles.css`
-Стили UI (528 строк): сетка карточек, таблицы бенчмарков, прогресс-бар, tooltips, история отчётов, цветовое кодирование результатов.
+| Эндпоинт | Метод | Описание |
+|----------|-------|----------|
+| `/recognize` | POST | Полный цикл: Image (base64) → JSON. Возвращает `job_id`. |
+| `/generate-ocr` | POST | Только OCR: Image (upload) → XML. Возвращает `job_id`. |
+| `/result/{job_id}` | GET | Статус и результат асинхронной задачи. |
+| `/learn` | POST | Добавление нового примера в базу (XML + JSON). |
+| `/examples` | GET | Список всех примеров из базы знаний. |
+| `/examples/{id}` | GET | Детальная информация о примере. |
+| `/examples/{id}` | PUT | Обновление примера (тип, JSON). |
+| `/examples/{id}` | DELETE| Удаление примера. |
+
+### Системное API (Internal)
+
+| Эндпоинт | Метод | Описание |
+|----------|-------|----------|
+| `/rag/index` | POST | Миграция новых файлов из `data/examples` в БД и индексация. |
+| `/rag/reindex` | POST | Полная переиндексация Qdrant на основе PostgreSQL. |
+| `/rag/models` | GET | Список доступных моделей в Ollama. |
+| `/ocr/scan` | POST | Поиск новых изображений в `data/docs` и запуск OCR для них. |
+| `/ocr/clean` | POST | Очистка всех XML файлов в папках `data/docs`. |
+| `/status` | GET | Статистика: кол-во файлов, векторов и текущая модель. |
+
+### Бенчмарки
+
+| Эндпоинт | Метод | Описание |
+|----------|-------|----------|
+| `/rag/benchmark/run` | POST | Тестирование качества поиска (Retrieval Accuracy). |
+| `/rag/benchmark/structuring/run` | POST | Полный тест структурирования для конкретной LLM. |
+| `/rag/benchmark/structuring/reports` | GET | Список сохраненных отчетов. |
 
 ---
 
-### templates/ — JSON-шаблоны документов
+## Веб-интерфейс
+Доступен по адресу [http://localhost:8000](http://localhost:8000). Позволяет:
+- Мониторить состояние систем.
+- Запускать пакетную обработку и индексацию.
+- Управлять базой знаний примеров.
+- Запускать бенчмарки и просматривать детальные отчёты с визуализацией ошибок.
+
+---
+
+## JSON-шаблоны документов
 
 JSON-схемы, определяющие структуру данных для каждого типа документа. Используются LLM как инструкция для заполнения.
 
@@ -211,109 +231,24 @@ JSON-схемы, определяющие структуру данных для
 
 ---
 
-### scripts/ — Утилиты
+## Утилиты (Scripts)
 
-#### `scripts/ocr_fetcher.py`
-Standalone-скрипт для пакетной отправки изображений на OCR. Содержит класс `ProtonOCR` — самодостаточный клиент для `ocrbot.ru`. Сканирует `data/ocr/`, находит изображения без corresponding XML, обрабатывает их и сохраняет результат.
-
-#### `scripts/ocr_cleaner.py`
-Standalone-скрипт для очистки XML-результатов OCR. Дублирует логику `CleanerService`, но работает напрямую с файлами в `data/ocr/`. Парсит XML, извлекает строки, сортирует по координатам, сохраняет чистый текст.
-
-#### `scripts/generate_references.py`
-Генерирует эталонные JSON-файлы для бенчмарков. Проходит по всем документам в `data/docs/*/clean/`, прогоняет через RAG + LLM и сохраняет результат в `data/references/` как `*-reference.json`. Используется для создания «золотого стандарта» при тестировании.
-
-#### `scripts/check_vectors.py`
-Диагностический скрипт для инспекции содержимого Qdrant: выводит количество точек в коллекции `documents`, фильтрует по `is_example`, показывает ID и filename каждой точки.
-
-#### `scripts/debug_search.py`
-Скрипт для отладки семантического поиска. Сравнивает результаты поиска по оригинальному тексту (с переносами строк) и по «схлопнутому» тексту (в одну строку). Помогает выявить проблемы с качеством embedding.
+| Скрипт | Описание |
+|--------|----------|
+| `scripts/generate_references.py` | Генерирует эталонные JSON-файлы для бенчмарков. |
+| `scripts/analyze_report.py` | Помощник для анализа результатов бенчмарка. |
+| `scripts/check_vectors.py` | Диагностика содержимого Qdrant. |
+| `scripts/debug_search.py` | Отладка качества семантического поиска. |
 
 ---
 
-### data/ — Данные
+## Тестирование
 
-| Директория | Содержание |
-|------------|------------|
-| `data/docs/` | Документы, организованные по типам: `passport/`, `snils/`, `driver_license/`, `birth_certificate/`. Каждый тип содержит поддиректории: `image/` (сканы), `xml/` (результаты OCR), `clean/` (очищенный текст) |
-| `data/examples/` | Few-Shot примеры для RAG. Пары файлов: `*_input.txt` (очищенный OCR-текст) + `*_output.json` (эталонный JSON). По 2 примера для каждого типа документа |
-| `data/references/` | Эталонные JSON для бенчмарков (генерируются через `scripts/generate_references.py`) |
-| `data/ocr/` | Исторические OCR-файлы (альтернативное хранилище) |
-| `data/rag/` | Хранилище Qdrant (том Docker) + `state.json` (текущая embedding-модель) |
-| `data/benchmark/reports/` | Сохранённые JSON-отчёты бенчмарков |
-| `data/temp/` | Временные файлы (base64 → изображения при обработке) |
-
----
-
-### tests/ — Тесты
+Запуск тестов: `pytest tests/`
 
 | Файл | Что тестирует |
 |------|---------------|
-| `test_api.py` | API-эндпоинты (OCR scan, clean, index, search, status) |
-| `test_benchmark_service.py` | Embedding-бенчмарк (run, stop, evaluate) |
-| `test_structuring_benchmark_service.py` | LLM-бенчмарк (метрики, field_metrics, flatten, CER, fuzzy, прогресс) |
-| `test_structuring_service.py` | RAG + LLM структурирование |
-| `test_vector_service.py` | Qdrant операции (index, search, reindex) |
-| `test_cleaner.py` | Парсинг XML → чистый текст |
-| `test_docs_pipeline.py` | Полный пайплайн (docs directory processing) |
-
----
-
-## Установка и запуск
-
-### Предварительные требования
-- Python 3.10+
-- Docker (для Qdrant)
-- Ollama (установлен и запущен)
-- API-ключ для [ocrbot.ru](https://ocrbot.ru)
-
-### Шаги
-
-```bash
-# 1. Клонировать репозиторий
-git clone <repo-url>
-cd diplom
-
-# 2. Создать виртуальное окружение
-python -m venv .venv
-source .venv/bin/activate
-
-# 3. Установить зависимости
-pip install -r requirements.txt
-
-# 4. Настроить переменные окружения
-cp .env.example .env
-# Отредактировать .env: добавить OCR_API_KEY
-
-# 5. Запустить Qdrant
-docker-compose up -d
-
-# 6. Запустить Ollama (два инстанса)
-ollama serve                          # порт 11434 (генерация)
-OLLAMA_HOST=0.0.0.0:11435 ollama serve  # порт 11435 (эмбеддинги)
-
-# 7. Загрузить модели в Ollama
-ollama pull nomic-embed-text:latest   # embedding-модель
-ollama pull qwen3:8b                  # LLM-модель
-
-# 8. Запустить приложение
-./.venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-Откройте http://localhost:8000 в браузере.
-
-### CLI
-
-```bash
-python cli.py ocr                    # Запуск OCR для новых изображений
-python cli.py clean                  # Очистка XML файлов
-python cli.py index                  # Индексация в Qdrant
-python cli.py search --query "текст" # Семантический поиск
-```
-
----
-
-## API Endpoints
-
-Полная документация доступна по адресу: http://localhost:8000/api/v1/openapi.json
-
-Swagger UI: http://localhost:8000/docs
+| `test_api.py` | Основные API-эндпоинты. |
+| `test_cleaner.py` | Логику очистки XML. |
+| `test_vector_service.py` | Интеграцию с Qdrant и БД. |
+| `test_structuring_service.py` | Процесс генерации JSON через LLM. |

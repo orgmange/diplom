@@ -47,6 +47,7 @@ class StructuringBenchmarkRunRequest(BaseModel):
     num_ctx: int = 16384
     timeout: int = 60
     structured_output: bool = True
+    use_rag: bool = True
 
 
 class StructuringBenchmarkMultiRunRequest(BaseModel):
@@ -56,6 +57,7 @@ class StructuringBenchmarkMultiRunRequest(BaseModel):
     num_ctx: int = 16384
     timeout: int = 60
     structured_output: bool = True
+    use_rag: bool = True
 
 
 class BenchmarkItemResponse(BaseModel):
@@ -186,7 +188,8 @@ async def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):
         temperature=request.temperature,
         num_ctx=request.num_ctx,
         timeout=request.timeout,
-        structured_output=request.structured_output
+        structured_output=request.structured_output,
+        use_rag=request.use_rag
     )
     return report.to_dict()
 
@@ -199,7 +202,8 @@ async def run_structuring_benchmark_multi(request: StructuringBenchmarkMultiRunR
         temperature=request.temperature,
         num_ctx=request.num_ctx,
         timeout=request.timeout,
-        structured_output=request.structured_output
+        structured_output=request.structured_output,
+        use_rag=request.use_rag
     )
     return [report.to_dict() for report in reports]
 
@@ -246,6 +250,33 @@ def delete_structuring_report(filename: str):
 def clear_structuring_reports():
     """Удаляет всю историю отчетов структурирования."""
     count = structuring_benchmark_service.clear_reports()
+    return {"status": "cleared", "deleted_count": count}
+
+@router.get("/rag/benchmark/retrieval/reports", response_model=List[Dict[str, Any]])
+def list_retrieval_reports():
+    """Возвращает список сохраненных отчетов retrieval."""
+    return benchmark_service.list_reports()
+
+@router.get("/rag/benchmark/retrieval/reports/{filename}", response_model=Dict[str, Any])
+def get_retrieval_report(filename: str):
+    """Возвращает детали конкретного отчета retrieval."""
+    report = benchmark_service.get_report(filename)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
+@router.delete("/rag/benchmark/retrieval/reports/{filename}")
+def delete_retrieval_report(filename: str):
+    """Удаляет конкретный отчет retrieval."""
+    success = benchmark_service.delete_report(filename)
+    if not success:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return {"status": "deleted", "filename": filename}
+
+@router.delete("/rag/benchmark/retrieval/reports")
+def clear_retrieval_reports():
+    """Удаляет всю историю отчетов retrieval."""
+    count = benchmark_service.clear_reports()
     return {"status": "cleared", "deleted_count": count}
 
 @router.post("/rag/index_examples", response_model=Dict[str, List[str]])

@@ -1,3 +1,4 @@
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -7,6 +8,7 @@ from qdrant_client.http import models
 from app.core.config import settings
 from app.services.vector_service import VectorService
 
+logger = logging.getLogger("diplom")
 
 @dataclass
 class BenchmarkItem:
@@ -191,11 +193,15 @@ class BenchmarkService:
         if hasattr(self.vector_service, "_save_state"):
             self.vector_service._save_state(embedding_model)
             
-        return self._format_run_result(embedding_model, indexed, clean_report)
+        result = self._format_run_result(embedding_model, indexed, clean_report)
+        self._save_report(result)
+        return result
 
     def _format_run_result(self, embedding_model, indexed, clean_report):
+        import time
         return {
             "embedding_model": embedding_model,
+            "timestamp": time.time(),
             "indexed": indexed,
             "overall": {
                 "total": clean_report.get("total", 0),
@@ -204,3 +210,82 @@ class BenchmarkService:
             },
             "clean_tests": clean_report,
         }
+
+    def _save_report(self, report_data: Dict[str, Any]):
+        """Сохраняет отчет в JSON файл."""
+        import datetime
+        import json
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "retrieval_reports"
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        model_safe = report_data["embedding_model"].replace(":", "_").replace("/", "_")
+        filename = f"retrieval_report_{model_safe}_{timestamp}.json"
+        filepath = reports_dir / filename
+        
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(report_data, f, ensure_ascii=False, indent=2)
+            logger.info(f"Retrieval benchmark report saved to {filepath}")
+        except Exception as e:
+            logger.error(f"Failed to save retrieval benchmark report: {e}")
+
+    def list_reports(self) -> List[Dict[str, Any]]:
+        """Возвращает список сохраненных отчетов (метаданные)."""
+        import json
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "retrieval_reports"
+        if not reports_dir.exists():
+            return []
+            
+        reports = []
+        for file in sorted(reports_dir.glob("retrieval_report_*.json"), reverse=True):
+            try:
+                with open(file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    reports.append({
+                        "filename": file.name,
+                        "embedding_model": data.get("embedding_model"),
+                        "total_files": data.get("overall", {}).get("total"),
+                        "accuracy": data.get("overall", {}).get("accuracy"),
+                        "indexed_count": data.get("indexed", {}).get("total_count"),
+                        "timestamp": data.get("timestamp") or file.stat().st_mtime
+                    })
+            except: continue
+        return reports
+
+    def get_report(self, filename: str) -> Optional[Dict[str, Any]]:
+        """Загружает полный отчет из файла."""
+        import json
+        filepath = settings.BASE_DIR / "data" / "benchmark" / "retrieval_reports" / filename
+        if not filepath.exists():
+            return None
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except: return None
+
+    def delete_report(self, filename: str) -> bool:
+        """Удаляет конкретный отчет."""
+        filepath = settings.BASE_DIR / "data" / "benchmark" / "retrieval_reports" / filename
+        if filepath.exists():
+            filepath.unlink()
+            logger.info(f"Deleted retrieval benchmark report: {filename}")
+            return True
+        return False
+
+    def clear_reports(self) -> int:
+        """Удаляет все отчеты."""
+        reports_dir = settings.BASE_DIR / "data" / "benchmark" / "retrieval_reports"
+        if not reports_dir.exists():
+            return 0
+            
+        count = 0
+        for file in reports_dir.glob("retrieval_report_*.json"):
+            try:
+                file.unlink()
+                count += 1
+            except Exception as e:
+                logger.error(f"Failed to delete retrieval report {file.name}: {e}")
+        
+        logger.info(f"Cleared {count} retrieval benchmark reports")
+        return count

@@ -91,6 +91,7 @@ class StructuringBenchmarkReport:
     num_ctx: int = 16384
     timeout: int = 60
     structured_output: bool = True
+    use_rag: bool = True
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -111,6 +112,7 @@ class StructuringBenchmarkReport:
             "num_ctx": self.num_ctx,
             "timeout": self.timeout,
             "structured_output": self.structured_output,
+            "use_rag": self.use_rag,
             "items": [item.to_dict() for item in self.items],
         }
 
@@ -247,7 +249,8 @@ class StructuringBenchmarkService:
         temperature: float = 0.0,
         num_ctx: int = 16384,
         timeout: int = 60,
-        structured_output: bool = True
+        structured_output: bool = True,
+        use_rag: bool = True
     ) -> StructuringBenchmarkReport:
         """Запускает прогон всех доступных документов через выбранную LLM модель."""
         self._stop_requested = False
@@ -359,7 +362,9 @@ class StructuringBenchmarkService:
                     temperature=temperature,
                     num_ctx=num_ctx,
                     timeout=timeout,
-                    structured_output=structured_output
+                    structured_output=structured_output,
+                    use_rag=use_rag,
+                    expected_type=doc_type
                 )
                 
                 prompt_size = struct_data.get("prompt_size", 0)
@@ -466,6 +471,7 @@ class StructuringBenchmarkService:
             num_ctx=num_ctx,
             timeout=timeout,
             structured_output=structured_output,
+            use_rag=use_rag,
             items=items
         )
 
@@ -480,7 +486,8 @@ class StructuringBenchmarkService:
         temperature: float = 0.0,
         num_ctx: int = 16383,
         timeout: int = 60,
-        structured_output: bool = True
+        structured_output: bool = True,
+        use_rag: bool = True
     ) -> List[StructuringBenchmarkReport]:
         """Поочерёдно запускает бенчмарк структурирования для каждой модели из списка."""
         self._stop_requested = False
@@ -509,7 +516,8 @@ class StructuringBenchmarkService:
                     temperature=temperature,
                     num_ctx=num_ctx,
                     timeout=timeout,
-                    structured_output=structured_output
+                    structured_output=structured_output,
+                    use_rag=use_rag
                 )
                 reports.append(report)
                 self._current_progress["completed_models"].append(model_name)
@@ -556,6 +564,8 @@ class StructuringBenchmarkService:
                         "f1": data.get("avg_f1"),
                         "fuzzy": data.get("avg_fuzzy_score"),
                         "template_accuracy": data.get("template_accuracy"),
+                        "avg_processing_time": data.get("avg_processing_time"),
+                        "use_rag": data.get("use_rag", True),
                         "timestamp": file.stat().st_mtime
                     })
             except: continue

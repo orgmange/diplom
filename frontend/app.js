@@ -180,6 +180,7 @@ async function runStructuringBenchmark() {
     const numCtx = parseInt(document.getElementById("bench-ctx")?.value || 16383);
     const timeout = parseInt(document.getElementById("bench-timeout")?.value || 60);
     const structuredOutput = document.getElementById("bench-structured")?.checked ?? true;
+    const useRag = document.getElementById("bench-use-rag")?.checked ?? true;
 
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/structuring/run-multi`, {
@@ -191,7 +192,8 @@ async function runStructuringBenchmark() {
                 temperature: temperature,
                 num_ctx: numCtx,
                 timeout: timeout,
-                structured_output: structuredOutput
+                structured_output: structuredOutput,
+                use_rag: useRag
             })
         });
         const reports = await response.json();
@@ -205,7 +207,7 @@ async function runStructuringBenchmark() {
 
         let summaryHtml = `<h3>Сводка по ${reports.length} модел${reports.length === 1 ? "и" : "ям"}</h3>`;
         summaryHtml += `<table class="benchmark-table"><thead><tr>
-            <th>Модель</th><th>Параметры</th><th>Файлов</th><th>Шаблон</th>
+            <th>Модель</th><th>RAG</th><th>Параметры</th><th>Файлов</th><th>Шаблон</th>
             <th>Precision</th><th>Recall</th><th>F1</th>
             <th>Fuzzy</th><th>Время (с)</th>
         </tr></thead><tbody>`;
@@ -213,6 +215,7 @@ async function runStructuringBenchmark() {
             const paramsText = `T=${report.temperature}, Ctx=${report.num_ctx}, TO=${report.timeout}, Struct=${report.structured_output ? 'ON' : 'OFF'}`;
             summaryHtml += `<tr>
                 <td><b>${report.model_name}</b></td>
+                <td>${report.use_rag ? '✅' : '❌'}</td>
                 <td><small>${paramsText}</small></td>
                 <td>${report.total_files}</td>
                 <td>${(report.template_accuracy * 100).toFixed(1)}% (${report.correct_templates_count}/${report.total_files})</td>
@@ -220,7 +223,7 @@ async function runStructuringBenchmark() {
                 <td>${(report.avg_recall * 100).toFixed(1)}%</td>
                 <td><b>${(report.avg_f1 * 100).toFixed(1)}%</b></td>
                 <td>${(report.avg_fuzzy_score * 100).toFixed(1)}%</td>
-                <td>${report.avg_processing_time}</td>
+                <td>${(report.avg_processing_time || 0).toFixed(2)}</td>
             </tr>`;
         });
         summaryHtml += `</tbody></table>`;
@@ -309,7 +312,7 @@ async function updateBenchmarkHistory() {
                     <th style="cursor: pointer;" onclick="setHistorySort('precision')">Precision${getSortIcon('precision')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('recall')">Recall${getSortIcon('recall')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('f1')">F1${getSortIcon('f1')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('fuzzy')">Fuzzy${getSortIcon('fuzzy')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('avg_processing_time')">Время${getSortIcon('avg_processing_time')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('timestamp')">Дата${getSortIcon('timestamp')}</th>
                     <th></th>
                 </tr>
@@ -321,16 +324,19 @@ async function updateBenchmarkHistory() {
             const prec = ((r.precision || 0) * 100).toFixed(1);
             const rec = ((r.recall || 0) * 100).toFixed(1);
             const f1 = ((r.f1 || 0) * 100).toFixed(1);
-            const fuzzy = ((r.fuzzy || 0) * 100).toFixed(1);
+            const time = (r.avg_processing_time || 0).toFixed(1);
 
             return `
                 <tr class="history-item" style="cursor: pointer;" onclick="loadReport('${r.filename}')">
-                    <td style="text-align: left; padding: 10px;"><b>${r.model_name}</b></td>
+                    <td style="text-align: left; padding: 10px;">
+                        <b>${r.model_name}</b>
+                        <small style="display:block; color:#888">${r.use_rag ? 'RAG ON' : 'RAG OFF'}</small>
+                    </td>
                     <td style="padding: 10px;">${r.total_files}</td>
                     <td style="padding: 10px;">${prec}%</td>
                     <td style="padding: 10px;">${rec}%</td>
                     <td style="padding: 10px;"><b>${f1}%</b></td>
-                    <td style="padding: 10px;">${fuzzy}%</td>
+                    <td style="padding: 10px;">${time}с</td>
                     <td style="padding: 10px;"><small>${date}</small></td>
                     <td style="padding: 10px; text-align: right;">
                         <button class="delete-history-btn" style="position: static; display: inline-block;" onclick="deleteReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
@@ -365,6 +371,7 @@ async function loadReport(filename) {
             С эталоном: ${report.files_with_reference}<br>
             Точность шаблона: <b>${(report.template_accuracy * 100).toFixed(1)}%</b> (${report.correct_templates_count}/${report.total_files})<br>
             Среднее время: ${report.avg_processing_time} сек.<br>
+            RAG (Few-shot): <b>${report.use_rag ? 'ВКЛ' : 'ВЫКЛ'}</b><br>
             Параметры: <small>T=${report.temperature}, Ctx=${report.num_ctx}, TO=${report.timeout}, Struct=${report.structured_output ? 'ON' : 'OFF'}</small><br>
             <b>Precision: ${((report.avg_precision || 0) * 100).toFixed(1)}% | 
             Recall: ${((report.avg_recall || 0) * 100).toFixed(1)}% | 
@@ -764,6 +771,7 @@ async function runEmbeddingBenchmark() {
         if (rawBox) rawBox.innerHTML = "<i>Поиск по 'raw' данным (OCR XML) больше не поддерживается. Система перешла на Unified Clean RAG.</i>";
         renderBenchmarkTable("benchmark-clean", report.clean_tests);
         updateStatus();
+        updateRetrievalBenchmarkHistory();
     } catch (error) {
         summary.innerText = `Ошибка бенчмарка: ${error.message}`;
     } finally {
@@ -773,8 +781,111 @@ async function runEmbeddingBenchmark() {
     }
 }
 
+async function updateRetrievalBenchmarkHistory() {
+    const listDiv = document.getElementById("retrieval-history-list");
+    if (!listDiv) return;
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/retrieval/reports`);
+        const reports = await response.json();
+
+        if (reports.length === 0) {
+            listDiv.innerText = "История пуста";
+            return;
+        }
+
+        let tableHtml = `<table class="benchmark-table" style="width: 100%; text-align: center; margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Модель</th>
+                    <th>Файлов</th>
+                    <th>Индексировано</th>
+                    <th>Accuracy</th>
+                    <th>Дата</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+        tableHtml += reports.map(r => {
+            const date = new Date(r.timestamp * 1000).toLocaleString();
+            const acc = ((r.accuracy || 0) * 100).toFixed(1);
+
+            return `
+                <tr class="history-item" style="cursor: pointer;" onclick="loadRetrievalReport('${r.filename}')">
+                    <td style="text-align: left; padding: 10px;"><b>${r.embedding_model}</b></td>
+                    <td style="padding: 10px;">${r.total_files}</td>
+                    <td style="padding: 10px;">${r.indexed_count}</td>
+                    <td style="padding: 10px;"><b>${acc}%</b></td>
+                    <td style="padding: 10px;"><small>${date}</small></td>
+                    <td style="padding: 10px; text-align: right;">
+                        <button class="delete-history-btn" style="position: static; display: inline-block;" onclick="deleteRetrievalReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
+                    </td>
+                </tr>
+            `;
+        }).join("");
+
+        tableHtml += `</tbody></table>`;
+        listDiv.innerHTML = tableHtml;
+    } catch (error) {
+        console.error("Error loading retrieval history:", error);
+        listDiv.innerText = "Ошибка загрузки истории";
+    }
+}
+
+async function loadRetrievalReport(filename) {
+    const summary = document.getElementById("benchmark-summary");
+    const cleanBox = document.getElementById("benchmark-clean");
+
+    summary.innerHTML = `<span class="loading">Загрузка отчета ${filename}...</span>`;
+    
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/retrieval/reports/${filename}`);
+        const report = await response.json();
+
+        summary.innerHTML = `
+            <i>Исторический отчет: ${filename}</i><br>
+            Модель: <b>${report.embedding_model}</b><br>
+            Индексировано примеров: ${report.indexed ? report.indexed.total_count : 'н/д'}<br>
+            <b>Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})</b>
+        `;
+
+        renderBenchmarkTable("benchmark-clean", report.clean_tests);
+    } catch (error) {
+        summary.innerText = `Ошибка загрузки отчета: ${error.message}`;
+    }
+}
+
+async function deleteRetrievalReport(filename, event) {
+    if (event) event.stopPropagation();
+    if (!confirm(`Удалить этот отчет (${filename})?`)) return;
+
+    try {
+        const response = await fetch(`${API_URL}/rag/benchmark/retrieval/reports/${filename}`, {
+            method: "DELETE"
+        });
+        if (response.ok) {
+            updateRetrievalBenchmarkHistory();
+        }
+    } catch (error) {
+        console.error("Error deleting report:", error);
+    }
+}
+
+async function clearRetrievalHistory() {
+    if (!confirm("Удалить ВСЮ историю retrieval?")) return;
+
+    try {
+        await fetch(`${API_URL}/rag/benchmark/retrieval/reports`, { method: "DELETE" });
+        updateRetrievalBenchmarkHistory();
+    } catch (error) {
+        console.error("Error clearing history:", error);
+    }
+}
+
 // Initial load
 updateStatus();
 updateModels();
 updateBenchmarkModels();
 updateBenchmarkHistory();
+updateRetrievalBenchmarkHistory();

@@ -65,20 +65,29 @@ class StructuringService:
         temperature: float = 0.0,
         num_ctx: int = 16383,
         timeout: int = 60,
-        structured_output: bool = True
+        structured_output: bool = True,
+        use_rag: bool = True
     ) -> Dict[str, Any]:
         """
         Стабильный асинхронный метод с настраиваемыми параметрами.
         """
         # 1. RAG (Поиск типа документа и примера для LLM)
-        # Ищем по единой базе примеров
-        all_results = self.vector_service.search(
-            cleaned_text, limit=1, embedding_model=embedding_model
-        )
-        
-        best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
-        
-        # Тип документа берем из метаданных найденного примера
+        best_match = None
+        if use_rag:
+            # Ищем по смыслу (Few-shot)
+            all_results = self.vector_service.search(
+                cleaned_text, limit=1, embedding_model=embedding_model
+            )
+            best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
+        elif expected_type:
+            # Если RAG отключен, но есть тип - ищем шаблон для этого типа
+            # Используем пустую строку как запрос, но фильтруем по doc_type
+            type_results = self.vector_service.search(
+                "", limit=1, embedding_model=embedding_model, doc_type=expected_type
+            )
+            best_match = type_results[0] if type_results else None
+
+        # Тип документа берем из метаданных найденного примера или из ожидаемого
         doc_type = best_match.get('doc_type') if best_match else (expected_type or "unknown")
         
         # 2. Подготовка промпта
@@ -91,8 +100,8 @@ class StructuringService:
         )
         
         user_content = f"### JSON SCHEMA TO FOLLOW:\n{template_json}\n\n"
-        if best_match:
-            # Используем текст и JSON найденного примера для Few-Shot обучения
+        if best_match and use_rag:
+            # Используем текст и JSON найденного примера для Few-Shot обучения только если RAG включен
             user_content += f"### REFERENCE EXAMPLE:\nINPUT: {best_match.get('text')}\nOUTPUT: {best_match.get('json_output')}\n\n"
         
         # Передаем очищенный текст OCR

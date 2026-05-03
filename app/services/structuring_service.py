@@ -72,18 +72,17 @@ class StructuringService:
         Стабильный асинхронный метод с настраиваемыми параметрами.
         """
         # 1. RAG (Поиск типа документа и примера для LLM)
-        best_match = None
-        if use_rag:
-            # Ищем по смыслу (Few-shot)
-            all_results = self.vector_service.search(
-                cleaned_text, limit=1, embedding_model=embedding_model
-            )
-            best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
-        elif expected_type:
-            # Если RAG отключен, но есть тип - ищем шаблон для этого типа
-            # Используем пустую строку как запрос, но фильтруем по doc_type
+        # Мы всегда сначала ищем лучший пример по смыслу, чтобы определить тип и схему
+        all_results = self.vector_service.search(
+            cleaned_text, limit=1, embedding_model=embedding_model
+        )
+        best_match = all_results[0] if all_results and all_results[0].get('score', 0) > 0.4 else None
+
+        # Если поиск по смыслу не дал результатов, но мы знаем ожидаемый тип (бенчмарк), 
+        # ищем любой пример этого типа для извлечения схемы.
+        if not best_match and expected_type:
             type_results = self.vector_service.search(
-                "", limit=1, embedding_model=embedding_model, doc_type=expected_type
+                "template", limit=1, embedding_model=embedding_model, doc_type=expected_type
             )
             best_match = type_results[0] if type_results else None
 
@@ -100,8 +99,9 @@ class StructuringService:
         )
         
         user_content = f"### JSON SCHEMA TO FOLLOW:\n{template_json}\n\n"
+        
+        # Используем текст и JSON найденного примера для Few-Shot обучения только если RAG ВКЛЮЧЕН в интерфейсе
         if best_match and use_rag:
-            # Используем текст и JSON найденного примера для Few-Shot обучения только если RAG включен
             user_content += f"### REFERENCE EXAMPLE:\nINPUT: {best_match.get('text')}\nOUTPUT: {best_match.get('json_output')}\n\n"
         
         # Передаем очищенный текст OCR

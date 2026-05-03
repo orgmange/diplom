@@ -197,7 +197,29 @@ class BenchmarkService:
         self._save_report(result)
         return result
 
-    def _format_run_result(self, embedding_model, indexed, clean_report):
+    async def run_multi(self, embedding_models: List[str]) -> List[Dict[str, Any]]:
+        """Поочерёдно запускает бенчмарк для списка моделей."""
+        reports = []
+        for model in embedding_models:
+            if self._stop_requested:
+                break
+            logger.info(f"Starting retrieval benchmark for model: {model}")
+            try:
+                report = await self.run(model)
+                reports.append(report)
+            except Exception as e:
+                logger.error(f"Error running benchmark for {model}: {e}")
+                # Create a failure report
+                failed_report = self._format_run_result(
+                    model, 
+                    {"total_count": 0, "files": []}, 
+                    {"total": 0, "correct": 0, "accuracy": 0.0, "items": []},
+                    error=str(e)
+                )
+                reports.append(failed_report)
+        return reports
+
+    def _format_run_result(self, embedding_model, indexed, clean_report, error=None):
         import time
         return {
             "embedding_model": embedding_model,
@@ -209,6 +231,7 @@ class BenchmarkService:
                 "accuracy": clean_report.get("accuracy", 0.0)
             },
             "clean_tests": clean_report,
+            "error": error
         }
 
     def _save_report(self, report_data: Dict[str, Any]):

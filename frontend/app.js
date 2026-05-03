@@ -76,6 +76,16 @@ function getSelectedBenchmarkModels() {
     return Array.from(boxes).map(cb => cb.value);
 }
 
+function toggleAllEmbeddingModelCheckboxes(checked) {
+    const boxes = document.querySelectorAll("#embedding-benchmark-model-checkboxes .model-checkbox");
+    boxes.forEach(cb => cb.checked = checked);
+}
+
+function getSelectedEmbeddingBenchmarkModels() {
+    const boxes = document.querySelectorAll("#embedding-benchmark-model-checkboxes .model-checkbox:checked");
+    return Array.from(boxes).map(cb => cb.value);
+}
+
 async function cancelBenchmark() {
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/cancel`, { method: "POST" });
@@ -209,7 +219,7 @@ async function runStructuringBenchmark() {
         summaryHtml += `<table class="benchmark-table"><thead><tr>
             <th>Модель</th><th>RAG</th><th>Параметры</th><th>Файлов</th><th>Шаблон</th>
             <th>Precision</th><th>Recall</th><th>F1</th>
-            <th>Fuzzy</th><th>Время (с)</th>
+            <th>F1 (Strict)</th><th>Fuzzy</th><th>Время (с)</th>
         </tr></thead><tbody>`;
         reports.forEach(report => {
             const paramsText = `T=${report.temperature}, Ctx=${report.num_ctx}, TO=${report.timeout}, Struct=${report.structured_output ? 'ON' : 'OFF'}`;
@@ -221,7 +231,8 @@ async function runStructuringBenchmark() {
                 <td>${(report.template_accuracy * 100).toFixed(1)}% (${report.correct_templates_count}/${report.total_files})</td>
                 <td>${(report.avg_precision * 100).toFixed(1)}%</td>
                 <td>${(report.avg_recall * 100).toFixed(1)}%</td>
-                <td><b>${(report.avg_f1 * 100).toFixed(1)}%</b></td>
+                <td>${(report.avg_f1 * 100).toFixed(1)}%</td>
+                <td><b>${(report.avg_f1_strict * 100).toFixed(1)}%</b></td>
                 <td>${(report.avg_fuzzy_score * 100).toFixed(1)}%</td>
                 <td>${(report.avg_processing_time || 0).toFixed(2)}</td>
             </tr>`;
@@ -309,22 +320,27 @@ async function updateBenchmarkHistory() {
                 <tr>
                     <th style="text-align: left; cursor: pointer;" onclick="setHistorySort('model_name')">Модель${getSortIcon('model_name')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('total_files')">Файлов${getSortIcon('total_files')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('precision')">Precision${getSortIcon('precision')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('recall')">Recall${getSortIcon('recall')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('precision')">Prec${getSortIcon('precision')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('recall')">Rec${getSortIcon('recall')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('f1')">F1${getSortIcon('f1')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('f1_strict')">F1 (S)${getSortIcon('f1_strict')}</th>
+                    <th style="cursor: pointer;" onclick="setHistorySort('fuzzy')">Fuzzy${getSortIcon('fuzzy')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('avg_processing_time')">Время${getSortIcon('avg_processing_time')}</th>
                     <th style="cursor: pointer;" onclick="setHistorySort('timestamp')">Дата${getSortIcon('timestamp')}</th>
                     <th></th>
                 </tr>
-            </thead>
+</thead>
             <tbody>`;
 
         tableHtml += reports.map(r => {
             const date = new Date(r.timestamp * 1000).toLocaleString();
-            const prec = ((r.precision || 0) * 100).toFixed(1);
-            const rec = ((r.recall || 0) * 100).toFixed(1);
-            const f1 = ((r.f1 || 0) * 100).toFixed(1);
-            const time = (r.avg_processing_time || 0).toFixed(1);
+            const acc = ((r.accuracy || 0) * 100).toFixed(0);
+            const prec = ((r.precision || 0) * 100).toFixed(0);
+            const rec = ((r.recall || 0) * 100).toFixed(0);
+            const f1 = ((r.f1 || 0) * 100).toFixed(0);
+            const f1_s = ((r.f1_strict || 0) * 100).toFixed(0);
+            const fuzzy = ((r.fuzzy || 0) * 100).toFixed(0);
+            const time = (r.avg_processing_time || 1).toFixed(1);
 
             return `
                 <tr class="history-item" style="cursor: pointer;" onclick="loadReport('${r.filename}')">
@@ -335,7 +351,9 @@ async function updateBenchmarkHistory() {
                     <td style="padding: 10px;">${r.total_files}</td>
                     <td style="padding: 10px;">${prec}%</td>
                     <td style="padding: 10px;">${rec}%</td>
-                    <td style="padding: 10px;"><b>${f1}%</b></td>
+                    <td style="padding: 10px;">${f1}%</td>
+                    <td style="padding: 10px;"><b>${f1_s}%</b></td>
+                    <td style="padding: 10px;">${fuzzy}%</td>
                     <td style="padding: 10px;">${time}с</td>
                     <td style="padding: 10px;"><small>${date}</small></td>
                     <td style="padding: 10px; text-align: right;">
@@ -376,6 +394,9 @@ async function loadReport(filename) {
             <b>Precision: ${((report.avg_precision || 0) * 100).toFixed(1)}% | 
             Recall: ${((report.avg_recall || 0) * 100).toFixed(1)}% | 
             F1: ${((report.avg_f1 || 0) * 100).toFixed(1)}%</b><br>
+            <i>Строгие метрики (без неверных типов): Precision: ${((report.avg_precision_strict || 0) * 100).toFixed(1)}% | 
+            Recall: ${((report.avg_recall_strict || 0) * 100).toFixed(1)}% | 
+            F1: ${((report.avg_f1_strict || 0) * 100).toFixed(1)}%</i><br>
             Fuzzy: ${((report.avg_fuzzy_score || 0) * 100).toFixed(1)}%
         `;
 
@@ -707,20 +728,27 @@ function renderBenchmarkTable(containerId, group) {
 }
 
 async function updateBenchmarkModels() {
-    const selector = document.getElementById("embedding-model-selector");
+    const checkboxContainer = document.getElementById("embedding-benchmark-model-checkboxes");
     const llmEmbedSelector = document.getElementById("llm-benchmark-embedding-selector");
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/models`);
         const data = await response.json();
-        if (selector) {
-            selector.innerHTML = "";
+        
+        if (checkboxContainer) {
+            checkboxContainer.innerHTML = "";
             data.models.forEach(model => {
-                const opt = document.createElement("option");
-                opt.value = model;
-                opt.innerText = model;
-                selector.appendChild(opt);
+                const label = document.createElement("label");
+                label.className = "checkbox-label";
+                const cb = document.createElement("input");
+                cb.type = "checkbox";
+                cb.value = model;
+                cb.className = "model-checkbox";
+                label.appendChild(cb);
+                label.appendChild(document.createTextNode(" " + model));
+                checkboxContainer.appendChild(label);
             });
         }
+
         if (llmEmbedSelector) {
             llmEmbedSelector.innerHTML = "";
             data.models.forEach(model => {
@@ -731,45 +759,78 @@ async function updateBenchmarkModels() {
             });
         }
     } catch (error) {
-        if (selector) selector.innerHTML = `<option value="">Ошибка загрузки: ${error.message}</option>`;
+        if (checkboxContainer) checkboxContainer.innerText = `Ошибка загрузки: ${error.message}`;
     }
 }
 
 async function runEmbeddingBenchmark() {
     const btn = document.getElementById("run-benchmark-btn");
     const cancelBtn = document.getElementById("cancel-embedding-benchmark-btn");
-    const selector = document.getElementById("embedding-model-selector");
     const summary = document.getElementById("benchmark-summary");
-    const rawBox = document.getElementById("benchmark-raw");
     const cleanBox = document.getElementById("benchmark-clean");
-    const embeddingModel = selector.value;
-    if (!embeddingModel) {
-        alert("Выбери embedding-модель");
+    
+    const embeddingModels = getSelectedEmbeddingBenchmarkModels();
+    if (embeddingModels.length === 0) {
+        alert("Выбери хотя бы одну embedding-модель");
         return;
     }
+
     btn.disabled = true;
     btn.innerText = "Тестируется...";
     if (cancelBtn) cancelBtn.classList.remove("hidden");
-    summary.innerText = "Запуск пайплайна...";
-    rawBox.innerText = "";
+    
+    summary.innerHTML = `Запуск бенчмарка для ${embeddingModels.length} модел${embeddingModels.length === 1 ? "и" : "ей"}: ${embeddingModels.join(", ")}...`;
     cleanBox.innerText = "";
+    
     try {
-        const response = await fetch(`${API_URL}/rag/benchmark/run`, {
+        const response = await fetch(`${API_URL}/rag/benchmark/run-multi`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ embedding_model: embeddingModel })
+            body: JSON.stringify({ embedding_models: embeddingModels })
         });
-        const report = await response.json();
+        const reports = await response.json();
 
-        // ВАЖНО: Убеждаемся, что мы не обращаемся к report.prepared
-        summary.innerHTML = `
-            Модель: <b>${report.embedding_model}</b><br>
-            Индексировано примеров: ${report.indexed ? report.indexed.total_count : 'н/д'}<br>
-            <b>Clean accuracy: ${(report.clean_tests.accuracy * 100).toFixed(1)}% (${report.clean_tests.correct}/${report.clean_tests.total})</b>
-        `;
+        if (!Array.isArray(reports) || reports.length === 0) {
+            summary.innerText = "Нет результатов.";
+            return;
+        }
 
-        if (rawBox) rawBox.innerHTML = "<i>Поиск по 'raw' данным (OCR XML) больше не поддерживается. Система перешла на Unified Clean RAG.</i>";
-        renderBenchmarkTable("benchmark-clean", report.clean_tests);
+        // Рендерим сводную таблицу
+        let summaryHtml = `<h3>Сводка по ${reports.length} модел${reports.length === 1 ? "и" : "ям"}</h3>`;
+        summaryHtml += `<table class="benchmark-table"><thead><tr>
+            <th>Модель</th><th>Индексировано</th><th>Всего файлов</th><th>Correct</th><th>Accuracy</th>
+        </tr></thead><tbody>`;
+        
+        reports.forEach(report => {
+            const accText = report.error 
+                ? `<span style="color: #ff6b6b;" title="${report.error}">❌ Ошибка</span>` 
+                : `<b>${(report.clean_tests.accuracy * 100).toFixed(1)}%</b>`;
+            
+            summaryHtml += `<tr>
+                <td><b>${report.embedding_model}</b></td>
+                <td>${report.indexed ? report.indexed.total_count : 'н/д'}</td>
+                <td>${report.clean_tests.total}</td>
+                <td>${report.clean_tests.correct}</td>
+                <td>${accText}</td>
+            </tr>`;
+        });
+        summaryHtml += `</tbody></table>`;
+        summary.innerHTML = summaryHtml;
+
+        // Детальные результаты для каждой модели
+        let detailsHtml = "";
+        reports.forEach(report => {
+            detailsHtml += `<h3>Детали: ${report.embedding_model}</h3>`;
+            const containerId = `emb-detail-${report.embedding_model.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            detailsHtml += `<div id="${containerId}"></div>`;
+        });
+        cleanBox.innerHTML = detailsHtml;
+
+        reports.forEach(report => {
+            const containerId = `emb-detail-${report.embedding_model.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            renderBenchmarkTable(containerId, report.clean_tests);
+        });
+
         updateStatus();
         updateRetrievalBenchmarkHistory();
     } catch (error) {

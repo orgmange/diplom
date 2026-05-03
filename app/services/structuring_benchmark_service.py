@@ -87,6 +87,11 @@ class StructuringBenchmarkReport:
     avg_cer: float
     avg_fuzzy_score: float
     items: List[StructuringBenchmarkItem]
+    # Strict metrics (excluding incorrectly classified types)
+    avg_precision_strict: float = 0.0
+    avg_recall_strict: float = 0.0
+    avg_f1_strict: float = 0.0
+    avg_fuzzy_strict: float = 0.0
     temperature: float = 0.0
     num_ctx: int = 16384
     timeout: int = 60
@@ -108,6 +113,10 @@ class StructuringBenchmarkReport:
             "avg_f1": round(self.avg_f1, 4),
             "avg_cer": round(self.avg_cer, 4),
             "avg_fuzzy_score": round(self.avg_fuzzy_score, 4),
+            "avg_precision_strict": round(self.avg_precision_strict, 4),
+            "avg_recall_strict": round(self.avg_recall_strict, 4),
+            "avg_f1_strict": round(self.avg_f1_strict, 4),
+            "avg_fuzzy_strict": round(self.avg_fuzzy_strict, 4),
             "temperature": self.temperature,
             "num_ctx": self.num_ctx,
             "timeout": self.timeout,
@@ -453,6 +462,20 @@ class StructuringBenchmarkService:
         avg_cer = sum(item.avg_cer for item in ref_items) / n_ref
         avg_fuzzy = sum(item.avg_fuzzy_score for item in ref_items) / n_ref
         
+        # Calculate strict metrics (only for correctly classified types)
+        strict_items = [item for item in ref_items if item.is_type_correct]
+        n_strict = len(strict_items)
+        if n_strict > 0:
+            avg_precision_strict = sum(item.precision for item in strict_items) / n_strict
+            avg_recall_strict = sum(item.recall for item in strict_items) / n_strict
+            avg_f1_strict = sum(item.f1 for item in strict_items) / n_strict
+            avg_fuzzy_strict = sum(item.avg_fuzzy_score for item in strict_items) / n_strict
+        else:
+            avg_precision_strict = 0.0
+            avg_recall_strict = 0.0
+            avg_f1_strict = 0.0
+            avg_fuzzy_strict = 0.0
+
         report = StructuringBenchmarkReport(
             model_name=model_name,
             embedding_model=embedding_model or "default",
@@ -467,6 +490,10 @@ class StructuringBenchmarkService:
             avg_f1=avg_f1,
             avg_cer=avg_cer,
             avg_fuzzy_score=avg_fuzzy,
+            avg_precision_strict=avg_precision_strict,
+            avg_recall_strict=avg_recall_strict,
+            avg_f1_strict=avg_f1_strict,
+            avg_fuzzy_strict=avg_fuzzy_strict,
             temperature=temperature,
             num_ctx=num_ctx,
             timeout=timeout,
@@ -562,6 +589,7 @@ class StructuringBenchmarkService:
                         "precision": data.get("avg_precision"),
                         "recall": data.get("avg_recall"),
                         "f1": data.get("avg_f1"),
+                        "f1_strict": data.get("avg_f1_strict"),
                         "fuzzy": data.get("avg_fuzzy_score"),
                         "template_accuracy": data.get("template_accuracy"),
                         "avg_processing_time": data.get("avg_processing_time"),

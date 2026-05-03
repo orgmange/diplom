@@ -166,11 +166,13 @@
             <h2>Бенчмарк Embedding</h2>
             <p>Полный цикл: очистка коллекции, индексация raw/clean шаблонов и проверка на raw/clean тестах.</p>
             <div class="config-row">
-                <div class="model-select">
-                    <label for="embedding-model-selector">Embedding-модель:</label>
-                    <select id="embedding-model-selector">
-                        <option value="">Загрузка...</option>
-                    </select>
+                <div class="model-select" style="flex: 2;">
+                    <label>Embedding Модели (выбери одну или несколько):</label>
+                    <div class="checkbox-actions">
+                        <button onclick="toggleAllEmbeddingModelCheckboxes(true)" class="small-btn">Выбрать все</button>
+                        <button onclick="toggleAllEmbeddingModelCheckboxes(false)" class="small-btn">Снять все</button>
+                    </div>
+                    <div id="embedding-benchmark-model-checkboxes" class="checkbox-list">Загрузка...</div>
                 </div>
                 <div class="filename-select">
                     <button id="run-benchmark-btn" onclick="runEmbeddingBenchmark()">Запустить бенчмарк</button>

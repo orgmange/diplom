@@ -1,0 +1,1097 @@
+{
+  "embedding_model": "qwen3-embedding:4b",
+  "timestamp": 1777545447.8361907,
+  "indexed": {
+    "total_count": 15,
+    "files": [
+      "0af32358-3346-4c10-81b5-e2f1d4aa8c8d",
+      "2e481f10-215a-48d2-a9ec-beedea23b440",
+      "495fe4a1-d372-4a62-93e9-a74cc56b83ef",
+      "db3fe95e-e14d-4110-8403-ad67542cdad1",
+      "5e6c9fe2-16f1-4a3a-9590-fb8c4cdfb238",
+      "4434bc7f-6b13-4611-87ce-c6040e09bf39",
+      "cb984237-a03c-42f8-9474-1fe8fb0f14f1",
+      "b6d28cbe-a310-4c65-80c8-253a8d44c8ba",
+      "25feab98-0402-4435-a22f-dd7d3ac0dd1a",
+      "0ee0b92d-c903-4d68-b867-d9b6090abf01",
+      "9c6a7ffc-3efc-4496-b593-749e01c53bad",
+      "9761fc3d-c802-4aba-8fc4-311f848e355a",
+      "738085fa-a213-435c-9e49-da6372c14399",
+      "87eda7f4-dc5d-49ad-a28a-7c0dd1b5ce3e",
+      "e3351f78-8437-415d-bf54-40e6b839a7ea"
+    ]
+  },
+  "overall": {
+    "total": 53,
+    "correct": 51,
+    "accuracy": 0.9623
+  },
+  "clean_tests": {
+    "total": 53,
+    "correct": 51,
+    "accuracy": 0.9623,
+    "items": [
+      {
+        "filename": "birth_certificate/1670237606_grizly-club-p-shablon-svidetelstvo-o-rozhdenii-42.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.6682055,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.5787312
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.54599094
+          }
+        ]
+      },
+      {
+        "filename": "birth_certificate/718b.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.6603395,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.6069142
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.55363655
+          }
+        ]
+      },
+      {
+        "filename": "birth_certificate/7e05691483401ae2b94275bbd9091245.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.62606907,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.58670926
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.5190986
+          }
+        ]
+      },
+      {
+        "filename": "birth_certificate/_____________-_-________-001.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.629578,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.6175864
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.53596705
+          }
+        ]
+      },
+      {
+        "filename": "birth_certificate/c38edbcs-960.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.7012979,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.69867456
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.5618348
+          }
+        ]
+      },
+      {
+        "filename": "birth_certificate/свидетельство-о-рождении-001.jpg-clean",
+        "expected_type": "birth_certificate",
+        "predicted_type": "birth_certificate",
+        "predicted_filename": null,
+        "score": 0.629578,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.6175864
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.53596705
+          }
+        ]
+      },
+      {
+        "filename": "diplom_bakalavra/certn120766.jpg-clean",
+        "expected_type": "diplom_bakalavra",
+        "predicted_type": "diplom_bakalavra",
+        "predicted_filename": null,
+        "score": 0.70831233,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.4244975
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.42158833
+          }
+        ]
+      },
+      {
+        "filename": "diplom_bakalavra/diplom_bakalavra_mgtu_im._baumana.jpg-clean",
+        "expected_type": "diplom_bakalavra",
+        "predicted_type": "diplom_bakalavra",
+        "predicted_filename": null,
+        "score": 0.71074915,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.48686576
+          },
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.47361797
+          }
+        ]
+      },
+      {
+        "filename": "diplom_bakalavra/diploma (1).jpg-clean",
+        "expected_type": "diplom_bakalavra",
+        "predicted_type": "diplom_bakalavra",
+        "predicted_filename": null,
+        "score": 0.65236974,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.45571995
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.4125222
+          }
+        ]
+      },
+      {
+        "filename": "diplom_bakalavra/diploma.jpg-clean",
+        "expected_type": "diplom_bakalavra",
+        "predicted_type": "diplom_bakalavra",
+        "predicted_filename": null,
+        "score": 0.68166965,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.44300073
+          },
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.41713548
+          }
+        ]
+      },
+      {
+        "filename": "diplom_bakalavra/i.jpg-clean",
+        "expected_type": "diplom_bakalavra",
+        "predicted_type": "diplom_bakalavra",
+        "predicted_filename": null,
+        "score": 0.65128994,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.4418534
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.4351071
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_arendi_kv/word-image-102.png-clean",
+        "expected_type": "dogovor_arendi_kv",
+        "predicted_type": "dogovor_arendi_kv",
+        "predicted_filename": null,
+        "score": 0.66957116,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.6045865
+          },
+          {
+            "filename": null,
+            "type": "kvitancia",
+            "score": 0.47570142
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_arendi_kv/word-image-216.png-clean",
+        "expected_type": "dogovor_arendi_kv",
+        "predicted_type": "dogovor_arendi_kv",
+        "predicted_filename": null,
+        "score": 0.679692,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.5688057
+          },
+          {
+            "filename": null,
+            "type": "kvitancia",
+            "score": 0.53367686
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_arendi_kv/word-image-93.png-clean",
+        "expected_type": "dogovor_arendi_kv",
+        "predicted_type": "dogovor_arendi_kv",
+        "predicted_filename": null,
+        "score": 0.6719278,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.5621798
+          },
+          {
+            "filename": null,
+            "type": "kvitancia",
+            "score": 0.48847923
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_arendi_kv/договор найма 1.jpg-clean",
+        "expected_type": "dogovor_arendi_kv",
+        "predicted_type": "dogovor_arendi_kv",
+        "predicted_filename": null,
+        "score": 0.64321876,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.5326646
+          },
+          {
+            "filename": null,
+            "type": "kvitancia",
+            "score": 0.47362307
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_kupli_prodazhi_kv/dogovor_kupli_prodazhi_kv2.jpg-clean",
+        "expected_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_filename": null,
+        "score": 0.68241215,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_prodagi_machini",
+            "score": 0.6261506
+          },
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.5476551
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_kupli_prodazhi_kv/dogovor_kupli_prodazhi_kv3.png-clean",
+        "expected_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_filename": null,
+        "score": 0.6936647,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_prodagi_machini",
+            "score": 0.57361686
+          },
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.55913115
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_kupli_prodazhi_kv/dogovor_kupli_prodazhi_kv4.png-clean",
+        "expected_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_filename": null,
+        "score": 0.6363269,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_prodagi_machini",
+            "score": 0.4765446
+          },
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.45806897
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_kupli_prodazhi_kv/dogovor_kupli_prodazhi_kv5.png-clean",
+        "expected_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_type": "dogovor_kupli_prodazhi_kv",
+        "predicted_filename": null,
+        "score": 0.70223296,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_prodagi_machini",
+            "score": 0.6193673
+          },
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.5731883
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_prodagi_machini/47a665a1d240f4dfdf602b454ae6749b.jpg-clean",
+        "expected_type": "dogovor_prodagi_machini",
+        "predicted_type": "dogovor_prodagi_machini",
+        "predicted_filename": null,
+        "score": 0.9389769,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.53846943
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.50718945
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_prodagi_machini/dogovor(4).jpg-clean",
+        "expected_type": "dogovor_prodagi_machini",
+        "predicted_type": "dogovor_prodagi_machini",
+        "predicted_filename": null,
+        "score": 0.81405157,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.55306673
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.5476159
+          }
+        ]
+      },
+      {
+        "filename": "dogovor_prodagi_machini/orig.jpg-clean",
+        "expected_type": "dogovor_prodagi_machini",
+        "predicted_type": "dogovor_prodagi_machini",
+        "predicted_filename": null,
+        "score": 0.79467887,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.5427713
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.52500093
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/1385315836_1578903606.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.6774852,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.6658912
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.57958096
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/2c1e6114b0fd5e6a3f714ce0e6028b14.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.68529975,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.65461826
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.5683496
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/780416_900.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.7399245,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.68433815
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6332705
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/LbqgbUFqov1NqhJA407YG7QE4il57R7W.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.7228302,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.7139921
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.5611708
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/______________2026-02-24_162115.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.75105447,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.73142064
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.5592526
+          }
+        ]
+      },
+      {
+        "filename": "driver_license/Снимок экрана 2026-02-24 162115.jpg-clean",
+        "expected_type": "driver_license",
+        "predicted_type": "driver_license",
+        "predicted_filename": null,
+        "score": 0.75105447,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.73142064
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.5592526
+          }
+        ]
+      },
+      {
+        "filename": "inn/1637856537256.jpg-clean",
+        "expected_type": "inn",
+        "predicted_type": "inn",
+        "predicted_filename": null,
+        "score": 0.75642043,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.5252566
+          },
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.48873848
+          }
+        ]
+      },
+      {
+        "filename": "inn/5c5f8.jpg-clean",
+        "expected_type": "inn",
+        "predicted_type": "inn",
+        "predicted_filename": null,
+        "score": 0.75490946,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.5282364
+          },
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.52322984
+          }
+        ]
+      },
+      {
+        "filename": "inn/_1.jpg-clean",
+        "expected_type": "inn",
+        "predicted_type": "inn",
+        "predicted_filename": null,
+        "score": 0.7489861,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.5210676
+          },
+          {
+            "filename": null,
+            "type": "birth_certificate",
+            "score": 0.5045354
+          }
+        ]
+      },
+      {
+        "filename": "inn/inn-fizlica-724x570.jpg-clean",
+        "expected_type": "inn",
+        "predicted_type": "inn",
+        "predicted_filename": null,
+        "score": 0.7216294,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.54751503
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.49729064
+          }
+        ]
+      },
+      {
+        "filename": "inn/inn.jpg-clean",
+        "expected_type": "inn",
+        "predicted_type": "inn",
+        "predicted_filename": null,
+        "score": 0.7484621,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.5282424
+          },
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.50468814
+          }
+        ]
+      },
+      {
+        "filename": "kvitancia/28426.jpg-clean",
+        "expected_type": "kvitancia",
+        "predicted_type": "kvitancia",
+        "predicted_filename": null,
+        "score": 0.64622957,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.5112256
+          },
+          {
+            "filename": null,
+            "type": "driver_license",
+            "score": 0.46304205
+          }
+        ]
+      },
+      {
+        "filename": "kvitancia/4d5c39e55844da80efe8af6755de558f.jpg-clean",
+        "expected_type": "kvitancia",
+        "predicted_type": "kvitancia",
+        "predicted_filename": null,
+        "score": 0.5807351,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.39031482
+          },
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.37529516
+          }
+        ]
+      },
+      {
+        "filename": "kvitancia/i.jpg-clean",
+        "expected_type": "kvitancia",
+        "predicted_type": "kvitancia",
+        "predicted_filename": null,
+        "score": 0.65555364,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.45051917
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.3859089
+          }
+        ]
+      },
+      {
+        "filename": "kvitancia/kvit.jpg-clean",
+        "expected_type": "kvitancia",
+        "predicted_type": "kvitancia",
+        "predicted_filename": null,
+        "score": 0.69238377,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.43687686
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.3987534
+          }
+        ]
+      },
+      {
+        "filename": "kvitancia/kvitantsija-zhkh.jpg-clean",
+        "expected_type": "kvitancia",
+        "predicted_type": "kvitancia",
+        "predicted_filename": null,
+        "score": 0.756276,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "dogovor_arendi_kv",
+            "score": 0.49283147
+          },
+          {
+            "filename": null,
+            "type": "dogovor_kupli_prodazhi_kv",
+            "score": 0.43396133
+          }
+        ]
+      },
+      {
+        "filename": "passport/152f6bcs-960.jpg-clean",
+        "expected_type": "passport",
+        "predicted_type": "passport",
+        "predicted_filename": null,
+        "score": 0.6788398,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.654619
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6513957
+          }
+        ]
+      },
+      {
+        "filename": "passport/1551114833_Qkr8HprHdtA.jpg-clean",
+        "expected_type": "passport",
+        "predicted_type": "passport",
+        "predicted_filename": null,
+        "score": 0.66354454,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6235813
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.59617007
+          }
+        ]
+      },
+      {
+        "filename": "passport/1647714700_02-min.jpg-clean",
+        "expected_type": "passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.68804324,
+        "is_correct": false,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.63892245
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6103064
+          }
+        ]
+      },
+      {
+        "filename": "passport/hxg1U6ddeZjq3HVQ1puEHxNNukCdTNNbCFb20mfaOgb9SdM41nY6IPk5hddztnXBFBS4dLty.jpg-clean",
+        "expected_type": "passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.69663644,
+        "is_correct": false,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6934807
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.60650873
+          }
+        ]
+      },
+      {
+        "filename": "passport/vqxkqp1sp23nwwshszdk.jpg-clean",
+        "expected_type": "passport",
+        "predicted_type": "passport",
+        "predicted_filename": null,
+        "score": 0.88242745,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.6997029
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6790762
+          }
+        ]
+      },
+      {
+        "filename": "snils/-vwKy7823k69qnNIFOIkH9_y3kKmWPWuA-IEZTnaFK9fkVQgdTQs6vdC21di2aJ9nNlUZx7XflC6e0rA-gPQdOxD.jpg-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.72847104,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.6585121
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.5806211
+          }
+        ]
+      },
+      {
+        "filename": "snils/1ca950819c74c99f143476956442d6a8.jpeg-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.744122,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.65727746
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.57793474
+          }
+        ]
+      },
+      {
+        "filename": "snils/R3fp08pn_yI.jpg-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.77826685,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.67805004
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.5430882
+          }
+        ]
+      },
+      {
+        "filename": "snils/auSBK6ncH3c.jpg-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.7561508,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.6830073
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.57375586
+          }
+        ]
+      },
+      {
+        "filename": "snils/yoqWE8WFTe8.jpg-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.78272223,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.6553415
+          },
+          {
+            "filename": null,
+            "type": "zagran_passport",
+            "score": 0.567099
+          }
+        ]
+      },
+      {
+        "filename": "snils/снилс мой.png-clean",
+        "expected_type": "snils",
+        "predicted_type": "snils",
+        "predicted_filename": null,
+        "score": 0.7693243,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.7077315
+          },
+          {
+            "filename": null,
+            "type": "snils",
+            "score": 0.68907213
+          }
+        ]
+      },
+      {
+        "filename": "zagran_passport/1.jpg-clean",
+        "expected_type": "zagran_passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.7117525,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6873195
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6284528
+          }
+        ]
+      },
+      {
+        "filename": "zagran_passport/196854.jpg-clean",
+        "expected_type": "zagran_passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.72663885,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.66927934
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.62187433
+          }
+        ]
+      },
+      {
+        "filename": "zagran_passport/bocharov_naebschik.jpg-clean",
+        "expected_type": "zagran_passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.6882659,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6790017
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.62019587
+          }
+        ]
+      },
+      {
+        "filename": "zagran_passport/pgxcojsmr0vehqzv6zyr.jpg-clean",
+        "expected_type": "zagran_passport",
+        "predicted_type": "zagran_passport",
+        "predicted_filename": null,
+        "score": 0.7566376,
+        "is_correct": true,
+        "alternatives": [
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6830761
+          },
+          {
+            "filename": null,
+            "type": "passport",
+            "score": 0.6230027
+          }
+        ]
+      }
+    ]
+  },
+  "error": null
+}

@@ -40,6 +40,10 @@ class BenchmarkRunRequest(BaseModel):
     embedding_model: str
 
 
+class BenchmarkMultiRunRequest(BaseModel):
+    embedding_models: List[str]
+
+
 class StructuringBenchmarkRunRequest(BaseModel):
     model_name: str
     embedding_model: str | None = None
@@ -123,6 +127,7 @@ class BenchmarkRunResponse(BaseModel):
     indexed: BenchmarkIndexedResponse
     overall: BenchmarkOverallResponse
     clean_tests: BenchmarkGroupResponse
+    error: str | None = None
 
 
 class StructuringBenchmarkRunResponse(BaseModel):
@@ -139,10 +144,15 @@ class StructuringBenchmarkRunResponse(BaseModel):
     avg_f1: float
     avg_cer: float
     avg_fuzzy_score: float
+    avg_precision_strict: float
+    avg_recall_strict: float
+    avg_f1_strict: float
+    avg_fuzzy_strict: float
     temperature: float
     num_ctx: int
     timeout: int
     structured_output: bool
+    use_rag: bool
     items: List[StructuringBenchmarkItemResponse]
 
 
@@ -178,6 +188,11 @@ def list_benchmark_models():
 async def run_benchmark(request: BenchmarkRunRequest):
     """Запускает полный цикл тестирования retrieval для embedding-модели."""
     return await benchmark_service.run(request.embedding_model)
+
+@router.post("/rag/benchmark/run-multi", response_model=List[BenchmarkRunResponse])
+async def run_benchmark_multi(request: BenchmarkMultiRunRequest):
+    """Поочерёдно запускает бенчмарк retrieval для списка embedding-моделей."""
+    return await benchmark_service.run_multi(request.embedding_models)
 
 @router.post("/rag/benchmark/structuring/run", response_model=StructuringBenchmarkRunResponse)
 async def run_structuring_benchmark(request: StructuringBenchmarkRunRequest):

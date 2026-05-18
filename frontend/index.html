@@ -152,8 +152,39 @@
                 <div class="history-header">
                     <h3>История запусков</h3>
                     <div class="history-controls">
+                        <button onclick="copyTableToClipboard('struct-history-table')" class="small-btn" style="background:#28a745;">📋 Копировать</button>
                         <button onclick="clearBenchmarkHistory()" class="small-btn warning-btn">Очистить
                             историю</button>
+                    </div>
+                </div>
+                <div class="config-row" style="margin-bottom: 10px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; font-size: 0.9em;">
+                    <div class="model-select">
+                        <label>Модель:</label>
+                        <input type="text" id="filter-model" placeholder="Например, llama" oninput="applyHistoryFilters()" style="width: 120px; padding: 5px;">
+                    </div>
+                    <div class="model-select">
+                        <label>Emb Модель:</label>
+                        <input type="text" id="filter-embed-model" placeholder="Например, bge" oninput="applyHistoryFilters()" style="width: 120px; padding: 5px;">
+                    </div>
+                    <div class="model-select">
+                        <label>RAG:</label>
+                        <select id="filter-rag" onchange="applyHistoryFilters()" style="padding: 5px;">
+                            <option value="all">Все</option>
+                            <option value="on">Только с RAG</option>
+                            <option value="off">Без RAG</option>
+                        </select>
+                    </div>
+                    <div class="model-select">
+                        <label>Мин. F1 (S) %:</label>
+                        <input type="number" id="filter-f1" placeholder="0" min="0" max="100" oninput="applyHistoryFilters()" style="width: 80px; padding: 5px;">
+                    </div>
+                    <div class="model-select">
+                        <label>Мин. файлов:</label>
+                        <input type="number" id="filter-files" placeholder="0" min="0" oninput="applyHistoryFilters()" style="width: 80px; padding: 5px;">
+                    </div>
+                    <div class="model-select" style="display: flex; flex-direction: row; align-items: center; gap: 5px;">
+                        <input type="checkbox" id="filter-strict-metrics" onchange="applyHistoryFilters()">
+                        <label for="filter-strict-metrics" style="cursor:pointer;" title="Расчет метрик только для правильно определенных шаблонов">Без неверных шаблонов</label>
                     </div>
                 </div>
                 <div id="history-list" class="history-list" style="overflow-x: auto;">Загрузка истории...</div>
@@ -186,7 +217,22 @@
                 <div class="history-header">
                     <h3>История запусков (Retrieval)</h3>
                     <div class="history-controls">
+                        <button onclick="copyTableToClipboard('retrieval-history-table')" class="small-btn" style="background:#28a745;">📋 Копировать</button>
                         <button onclick="clearRetrievalHistory()" class="small-btn warning-btn">Очистить историю</button>
+                    </div>
+                </div>
+                <div class="config-row" style="margin-bottom: 10px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; font-size: 0.9em;">
+                    <div class="model-select">
+                        <label>Модель:</label>
+                        <input type="text" id="filter-retrieval-model" placeholder="Например, bge" oninput="applyRetrievalHistoryFilters()" style="width: 120px; padding: 5px;">
+                    </div>
+                    <div class="model-select">
+                        <label>Мин. Accuracy %:</label>
+                        <input type="number" id="filter-retrieval-acc" placeholder="0" min="0" max="100" oninput="applyRetrievalHistoryFilters()" style="width: 80px; padding: 5px;">
+                    </div>
+                    <div class="model-select">
+                        <label>Мин. файлов:</label>
+                        <input type="number" id="filter-retrieval-files" placeholder="0" min="0" oninput="applyRetrievalHistoryFilters()" style="width: 80px; padding: 5px;">
                     </div>
                 </div>
                 <div id="retrieval-history-list" class="history-list" style="overflow-x: auto;">Загрузка истории...</div>

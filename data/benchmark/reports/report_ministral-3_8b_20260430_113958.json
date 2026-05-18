@@ -10914,5 +10914,9 @@
         }
       ]
     }
-  ]
+  ],
+  "avg_precision_strict": 0.676714,
+  "avg_recall_strict": 0.677822,
+  "avg_f1_strict": 0.676388,
+  "avg_fuzzy_strict": 0.816952
 }

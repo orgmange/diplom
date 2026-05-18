@@ -54,6 +54,48 @@ class StructuringService:
             return 0.0
         return ""
 
+    def _parse_json_robust(self, text: str) -> Dict[str, Any]:
+        """
+        Пытается распарсить JSON, очищая его от markdown-разметки (```json ... ```) 
+        и извлекая его границы { ... } или [ ... ] при необходимости.
+        """
+        text = text.strip()
+        if not text:
+            raise ValueError("Empty response from Ollama")
+
+        # 1. Если текст обернут в markdown (```json ... ``` или ``` ... ```)
+        if text.startswith("```"):
+            # Находим конец первой строки с тройными кавычками
+            first_newline = text.find("\n")
+            if first_newline != -1:
+                text = text[first_newline:].strip()
+            else:
+                text = text[3:].strip()
+            
+            # Убираем закрывающие тройные кавычки
+            if text.endswith("```"):
+                text = text[:-3].strip()
+
+        # 2. Находим границы JSON объекта или массива
+        start_idx_dict = text.find("{")
+        start_idx_list = text.find("[")
+        
+        # Определяем, что идет раньше: { или [
+        if start_idx_dict != -1 and (start_idx_list == -1 or start_idx_dict < start_idx_list):
+            start_idx = start_idx_dict
+            end_idx = text.rfind("}")
+        elif start_idx_list != -1:
+            start_idx = start_idx_list
+            end_idx = text.rfind("]")
+        else:
+            start_idx = -1
+            end_idx = -1
+
+        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+            text = text[start_idx:end_idx + 1]
+
+        return json.loads(text)
+
     async def structure(
         self,
         raw_text: str,
@@ -172,7 +214,7 @@ class StructuringService:
                 logger.debug(f"RAW LLM RESPONSE (Len: {len(full_content)})")
                 
                 return {
-                    "result": json.loads(full_content),
+                    "result": self._parse_json_robust(full_content),
                     "doc_type": doc_type,
                     "model": actual_model,
                     "prompt_size": sum(len(m['content']) for m in messages)

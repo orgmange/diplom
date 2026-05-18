@@ -10,6 +10,45 @@ function renderResultItem(filename, text, subtext = "") {
     return item;
 }
 
+function copyTableToClipboard(tableId) {
+    const tableElement = document.getElementById(tableId);
+    if (!tableElement) {
+        alert("Таблица не найдена");
+        return;
+    }
+
+    const noCopyElements = tableElement.querySelectorAll('.no-copy');
+    const originalDisplays = [];
+    noCopyElements.forEach(el => {
+        originalDisplays.push(el.style.display);
+        el.style.display = 'none';
+    });
+
+    const range = document.createRange();
+    range.selectNode(tableElement);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    try {
+        document.execCommand('copy');
+        const btn = event && event.currentTarget;
+        if (btn) {
+            const originalText = btn.innerText;
+            btn.innerText = "✅ Скопировано!";
+            setTimeout(() => { btn.innerText = originalText; }, 2000);
+        }
+    } catch (err) {
+        console.error("Не удалось скопировать", err);
+        alert("Ошибка при копировании");
+    }
+
+    sel.removeAllRanges();
+    noCopyElements.forEach((el, index) => {
+        el.style.display = originalDisplays[index];
+    });
+}
+
 async function updateStatus() {
     try {
         const response = await fetch(`${API_URL}/status`);
@@ -267,6 +306,7 @@ async function runStructuringBenchmark() {
 
 let currentHistorySort = "timestamp";
 let currentHistorySortDesc = true;
+let allHistoryReports = [];
 
 function setHistorySort(column) {
     if (currentHistorySort === column) {
@@ -275,7 +315,7 @@ function setHistorySort(column) {
         currentHistorySort = column;
         currentHistorySortDesc = true;
     }
-    updateBenchmarkHistory();
+    applyHistoryFilters();
 }
 
 async function updateBenchmarkHistory() {
@@ -284,63 +324,103 @@ async function updateBenchmarkHistory() {
 
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/structuring/reports`);
-        let reports = await response.json();
+        allHistoryReports = await response.json();
+        applyHistoryFilters();
+    } catch (error) {
+        console.error("Error loading history:", error);
+        listDiv.innerText = "Ошибка загрузки истории";
+    }
+}
 
-        if (reports.length === 0) {
-            listDiv.innerText = "История пуста";
-            return;
+function applyHistoryFilters() {
+    const listDiv = document.getElementById("history-list");
+    if (!listDiv) return;
+
+    if (!allHistoryReports || allHistoryReports.length === 0) {
+        listDiv.innerText = "История пуста";
+        return;
+    }
+
+    const filterModel = (document.getElementById("filter-model")?.value || "").toLowerCase();
+    const filterEmbedModel = (document.getElementById("filter-embed-model")?.value || "").toLowerCase();
+    const filterRag = document.getElementById("filter-rag")?.value || "all";
+    const filterF1Str = document.getElementById("filter-f1")?.value;
+    const filterF1 = filterF1Str ? parseFloat(filterF1Str) : 0;
+    const filterFilesStr = document.getElementById("filter-files")?.value;
+    const filterFiles = filterFilesStr ? parseInt(filterFilesStr) : 0;
+    const useStrictMetrics = document.getElementById("filter-strict-metrics")?.checked;
+
+    let filtered = allHistoryReports.filter(r => {
+        if (filterModel && !(r.model_name || "").toLowerCase().includes(filterModel)) return false;
+        if (filterEmbedModel && !(r.embedding_model || "").toLowerCase().includes(filterEmbedModel)) return false;
+        
+        if (filterRag === "on" && !r.use_rag) return false;
+        if (filterRag === "off" && r.use_rag) return false;
+
+        const f1_s = (r.f1_strict || 0) * 100;
+        if (filterF1 > 0 && f1_s < filterF1) return false;
+
+        if (filterFiles > 0 && (r.total_files || 0) < filterFiles) return false;
+
+        return true;
+    });
+
+    filtered.sort((a, b) => {
+        if (currentHistorySort === "model_name" || currentHistorySort === "embedding_model") {
+            let valA = a[currentHistorySort] || "";
+            let valB = b[currentHistorySort] || "";
+            if (valA < valB) return currentHistorySortDesc ? 1 : -1;
+            if (valA > valB) return currentHistorySortDesc ? -1 : 1;
+            return 0;
         }
 
-        // Client-side sorting
-        reports.sort((a, b) => {
-            let valA = a[currentHistorySort];
-            let valB = b[currentHistorySort];
+        let sortKey = currentHistorySort;
+        if (useStrictMetrics) {
+            if (sortKey === "precision") sortKey = "precision_strict";
+            if (sortKey === "recall") sortKey = "recall_strict";
+            if (sortKey === "f1") sortKey = "f1_strict";
+            if (sortKey === "fuzzy") sortKey = "fuzzy_strict";
+        }
 
-            if (currentHistorySort === "model_name") {
-                valA = valA || "";
-                valB = valB || "";
-                if (valA < valB) return currentHistorySortDesc ? 1 : -1;
-                if (valA > valB) return currentHistorySortDesc ? -1 : 1;
-                return 0;
-            }
+        let valA = a[sortKey] === undefined ? 0 : a[sortKey];
+        let valB = b[sortKey] === undefined ? 0 : b[sortKey];
 
-            if (valA === undefined) valA = 0;
-            if (valB === undefined) valB = 0;
+        return currentHistorySortDesc ? (valB - valA) : (valA - valB);
+    });
 
-            return currentHistorySortDesc ? (valB - valA) : (valA - valB);
-        });
+    const getSortIcon = (col) => {
+        if (currentHistorySort !== col) return "";
+        return currentHistorySortDesc ? " ↓" : " ↑";
+    };
 
-        const getSortIcon = (col) => {
-            if (currentHistorySort !== col) return "";
-            return currentHistorySortDesc ? " ↓" : " ↑";
-        };
+    let tableHtml = `<table class="benchmark-table" id="struct-history-table" style="width: 100%; text-align: center; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th style="text-align: left; cursor: pointer;" onclick="setHistorySort('model_name')">LLM Модель${getSortIcon('model_name')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('embedding_model')">Emb Модель${getSortIcon('embedding_model')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('total_files')">Файлов${getSortIcon('total_files')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('precision')">Prec${getSortIcon('precision')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('recall')">Rec${getSortIcon('recall')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('f1')">F1${getSortIcon('f1')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('fuzzy')">Fuzzy${getSortIcon('fuzzy')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('avg_processing_time')">Время${getSortIcon('avg_processing_time')}</th>
+                <th style="cursor: pointer;" onclick="setHistorySort('timestamp')">Дата${getSortIcon('timestamp')}</th>
+                <th class="no-copy"></th>
+            </tr>
+        </thead>
+        <tbody>`;
 
-        let tableHtml = `<table class="benchmark-table" style="width: 100%; text-align: center; margin-top: 10px;">
-            <thead>
-                <tr>
-                    <th style="text-align: left; cursor: pointer;" onclick="setHistorySort('model_name')">Модель${getSortIcon('model_name')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('total_files')">Файлов${getSortIcon('total_files')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('precision')">Prec${getSortIcon('precision')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('recall')">Rec${getSortIcon('recall')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('f1')">F1${getSortIcon('f1')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('f1_strict')">F1 (S)${getSortIcon('f1_strict')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('fuzzy')">Fuzzy${getSortIcon('fuzzy')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('avg_processing_time')">Время${getSortIcon('avg_processing_time')}</th>
-                    <th style="cursor: pointer;" onclick="setHistorySort('timestamp')">Дата${getSortIcon('timestamp')}</th>
-                    <th></th>
-                </tr>
-</thead>
-            <tbody>`;
-
-        tableHtml += reports.map(r => {
+    if (filtered.length === 0) {
+        tableHtml += `<tr><td colspan="10">Не найдено записей по текущим фильтрам</td></tr>`;
+    } else {
+        tableHtml += filtered.map(r => {
             const date = new Date(r.timestamp * 1000).toLocaleString();
-            const acc = ((r.accuracy || 0) * 100).toFixed(0);
-            const prec = ((r.precision || 0) * 100).toFixed(0);
-            const rec = ((r.recall || 0) * 100).toFixed(0);
-            const f1 = ((r.f1 || 0) * 100).toFixed(0);
-            const f1_s = ((r.f1_strict || 0) * 100).toFixed(0);
-            const fuzzy = ((r.fuzzy || 0) * 100).toFixed(0);
+            const prec = (((useStrictMetrics ? r.precision_strict : r.precision) || 0) * 100).toFixed(0);
+            const rec = (((useStrictMetrics ? r.recall_strict : r.recall) || 0) * 100).toFixed(0);
+            const f1 = (((useStrictMetrics ? r.f1_strict : r.f1) || 0) * 100).toFixed(0);
+            const fuzzy = (((useStrictMetrics ? r.fuzzy_strict : r.fuzzy) || 0) * 100).toFixed(0);
             const time = (r.avg_processing_time || 1).toFixed(1);
+            const embModel = r.embedding_model || "-";
 
             return `
                 <tr class="history-item" style="cursor: pointer;" onclick="loadReport('${r.filename}')">
@@ -348,27 +428,24 @@ async function updateBenchmarkHistory() {
                         <b>${r.model_name}</b>
                         <small style="display:block; color:#888">${r.use_rag ? 'RAG ON' : 'RAG OFF'}</small>
                     </td>
+                    <td style="padding: 10px;"><small>${embModel}</small></td>
                     <td style="padding: 10px;">${r.total_files}</td>
                     <td style="padding: 10px;">${prec}%</td>
                     <td style="padding: 10px;">${rec}%</td>
-                    <td style="padding: 10px;">${f1}%</td>
-                    <td style="padding: 10px;"><b>${f1_s}%</b></td>
+                    <td style="padding: 10px;"><b>${f1}%</b></td>
                     <td style="padding: 10px;">${fuzzy}%</td>
                     <td style="padding: 10px;">${time}с</td>
                     <td style="padding: 10px;"><small>${date}</small></td>
-                    <td style="padding: 10px; text-align: right;">
+                    <td class="no-copy" style="padding: 10px; text-align: right;">
                         <button class="delete-history-btn" style="position: static; display: inline-block;" onclick="deleteReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
                     </td>
                 </tr>
             `;
         }).join("");
-
-        tableHtml += `</tbody></table>`;
-        listDiv.innerHTML = tableHtml;
-    } catch (error) {
-        console.error("Error loading history:", error);
-        listDiv.innerText = "Ошибка загрузки истории";
     }
+
+    tableHtml += `</tbody></table>`;
+    listDiv.innerHTML = tableHtml;
 }
 
 async function loadReport(filename) {
@@ -842,33 +919,62 @@ async function runEmbeddingBenchmark() {
     }
 }
 
+let allRetrievalHistoryReports = [];
+
 async function updateRetrievalBenchmarkHistory() {
     const listDiv = document.getElementById("retrieval-history-list");
     if (!listDiv) return;
 
     try {
         const response = await fetch(`${API_URL}/rag/benchmark/retrieval/reports`);
-        const reports = await response.json();
+        allRetrievalHistoryReports = await response.json();
+        applyRetrievalHistoryFilters();
+    } catch (error) {
+        console.error("Error loading retrieval history:", error);
+        listDiv.innerText = "Ошибка загрузки истории";
+    }
+}
 
-        if (reports.length === 0) {
-            listDiv.innerText = "История пуста";
-            return;
-        }
+function applyRetrievalHistoryFilters() {
+    const listDiv = document.getElementById("retrieval-history-list");
+    if (!listDiv) return;
 
-        let tableHtml = `<table class="benchmark-table" style="width: 100%; text-align: center; margin-top: 10px;">
-            <thead>
-                <tr>
-                    <th style="text-align: left;">Модель</th>
-                    <th>Файлов</th>
-                    <th>Индексировано</th>
-                    <th>Accuracy</th>
-                    <th>Дата</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>`;
+    if (!allRetrievalHistoryReports || allRetrievalHistoryReports.length === 0) {
+        listDiv.innerText = "История пуста";
+        return;
+    }
 
-        tableHtml += reports.map(r => {
+    const filterModel = (document.getElementById("filter-retrieval-model")?.value || "").toLowerCase();
+    const filterAccStr = document.getElementById("filter-retrieval-acc")?.value;
+    const filterAcc = filterAccStr ? parseFloat(filterAccStr) : 0;
+    const filterFilesStr = document.getElementById("filter-retrieval-files")?.value;
+    const filterFiles = filterFilesStr ? parseInt(filterFilesStr) : 0;
+
+    let filtered = allRetrievalHistoryReports.filter(r => {
+        if (filterModel && !(r.embedding_model || "").toLowerCase().includes(filterModel)) return false;
+        const acc = (r.accuracy || 0) * 100;
+        if (filterAcc > 0 && acc < filterAcc) return false;
+        if (filterFiles > 0 && (r.total_files || 0) < filterFiles) return false;
+        return true;
+    });
+
+    let tableHtml = `<table class="benchmark-table" id="retrieval-history-table" style="width: 100%; text-align: center; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Модель</th>
+                <th>Файлов</th>
+                <th>Индексировано</th>
+                <th>Accuracy</th>
+                <th>Дата</th>
+                <th class="no-copy"></th>
+            </tr>
+        </thead>
+        <tbody>`;
+
+    if (filtered.length === 0) {
+        tableHtml += `<tr><td colspan="6">Не найдено записей по текущим фильтрам</td></tr>`;
+    } else {
+        tableHtml += filtered.map(r => {
             const date = new Date(r.timestamp * 1000).toLocaleString();
             const acc = ((r.accuracy || 0) * 100).toFixed(1);
 
@@ -879,19 +985,16 @@ async function updateRetrievalBenchmarkHistory() {
                     <td style="padding: 10px;">${r.indexed_count}</td>
                     <td style="padding: 10px;"><b>${acc}%</b></td>
                     <td style="padding: 10px;"><small>${date}</small></td>
-                    <td style="padding: 10px; text-align: right;">
+                    <td class="no-copy" style="padding: 10px; text-align: right;">
                         <button class="delete-history-btn" style="position: static; display: inline-block;" onclick="deleteRetrievalReport('${r.filename}', event)" title="Удалить этот отчет">×</button>
                     </td>
                 </tr>
             `;
         }).join("");
-
-        tableHtml += `</tbody></table>`;
-        listDiv.innerHTML = tableHtml;
-    } catch (error) {
-        console.error("Error loading retrieval history:", error);
-        listDiv.innerText = "Ошибка загрузки истории";
     }
+
+    tableHtml += `</tbody></table>`;
+    listDiv.innerHTML = tableHtml;
 }
 
 async function loadRetrievalReport(filename) {
